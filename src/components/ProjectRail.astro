@@ -1,11 +1,12 @@
 ---
-import { projects, tagLabel } from '../lib/content';
+import { useContent } from '../lib/context';
 import Filters from './Filters.astro';
 
 interface Props {
   filters?: boolean;
 }
 const { filters = true } = Astro.props;
+const { projects, tagLabel, asset } = useContent(Astro.locals);
 const id = `rail-${Math.random().toString(36).slice(2, 8)}`;
 ---
 
@@ -23,7 +24,7 @@ const id = `rail-${Math.random().toString(36).slice(2, 8)}`;
           data-slug={p.slug}
           data-tags={[...p.discipline, ...p.engine].join(' ')}
         >
-          <div class="cover" style={`background-image:url('${p.cover}')`} aria-hidden="true" />
+          <div class="cover" style={`background-image:url('${asset(p.cover)}')`} aria-hidden="true" />
           <div class="spine">
             <span class="spine-title">{p.title}</span>
             <span class="spine-year">{p.year}</span>
@@ -36,7 +37,7 @@ const id = `rail-${Math.random().toString(36).slice(2, 8)}`;
               </p>
               <p>{p.summary}</p>
               <ul class="highlights">
-                {p.highlights.slice(0, 4).map((h) => (
+                {p.highlights.filter((h) => h.trim()).slice(0, 4).map((h) => (
                   <li>{h}</li>
                 ))}
               </ul>

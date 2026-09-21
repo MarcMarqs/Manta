@@ -41,12 +41,15 @@ Astro with the Cloudflare adapter. Content pages prerendered as static HTML; `/a
 - `public/images/…` — uploaded images, committed to the repo
 - Video is never stored in git: provider + id (YouTube / Vimeo / itch.io)
 
-## Current blockers
-1. **The `MarcMarqs/Manta` repo is empty.** Cloudflare's "error occurred while fetching
-   repository" is just that — nothing to clone. Fixed by the first push.
-2. **The local project folder is empty.** Nothing to push yet.
-3. **The Cloudflare project is a Worker, not Pages.** Preview URLs and build config differ
-   from the original plan; the draft/preview flow must be adapted.
+## Status (2026-09-21)
+- [x] Site scaffold: block renderer, both home layouts, theme from JSON
+- [x] Editor at `/admin`: all v1 blocks, projects, tags, site & theme, pages (create / rename /
+      delete), live preview, click-to-select, undo/redo, image upload, draft → publish
+- [x] Worker adapted: draft branch gets a preview URL via `preview_urls`; secrets server-side
+- [ ] First push to GitHub (the repo is still empty, which is the whole Cloudflare clone error)
+- [ ] Set `ADMIN_PASSWORD` + `GITHUB_TOKEN` secrets and build settings in Cloudflare
+- [ ] Fill in `LIVE_URL` / `PREVIEW_URL` in `wrangler.jsonc` after the first deploy
+- [ ] Pick rail or grid for the home page, delete the other block
 
 ## Still undecided (defaults assumed unless you say otherwise)
 - About page depth: bio + contact only

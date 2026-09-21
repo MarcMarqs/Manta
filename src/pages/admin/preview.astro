@@ -1,0 +1,103 @@
+---
+// Renders a page from the editor's current (unsaved) content through the same
+// components the built site uses, so the preview is exactly what will ship.
+import Base from '../../layouts/Base.astro';
+import BlockList from '../../components/blocks/BlockList.astro';
+import type { PreviewData } from '../../lib/context';
+import type { Block } from '../../lib/types';
+
+export const prerender = false;
+
+if (Astro.request.method !== 'POST') {
+  return new Response('Method not allowed', { status: 405 });
+}
+
+const body = (await Astro.request.json()) as PreviewData & {
+  path: string;
+  page: { title: string; description?: string; blocks: Block[] };
+};
+
+Astro.locals.preview = { site: body.site, projects: body.projects, tags: body.tags };
+const { page, path } = body;
+---
+
+<Base title={page.title || 'Untitled'} description={page.description} path={path}>
+  <BlockList blocks={page.blocks ?? []} />
+
+  <style is:global>
+    .pv-block {
+      position: relative;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .pv-block:hover {
+      outline: 1px dashed color-mix(in srgb, var(--accent) 70%, transparent);
+      outline-offset: 4px;
+    }
+    .pv-block.pv-selected {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+    .pv-block .pv-block.pv-selected {
+      outline-offset: 2px;
+    }
+  </style>
+
+  <script is:inline>
+    // Clicking a block selects it in the editor; clicking a site link opens that page
+    // in the editor instead of navigating the preview away.
+    document.addEventListener(
+      'click',
+      (event) => {
+        const link = event.target.closest('a[href]');
+        if (link) {
+          event.preventDefault();
+          const url = new URL(link.getAttribute('href'), location.origin);
+          if (url.origin === location.origin || link.getAttribute('href').startsWith('/')) {
+            parent.postMessage({ type: 'manta:navigate', path: url.pathname }, '*');
+          }
+          return;
+        }
+        // Inside the rail, clicks open cards; don't also steal them for selection.
+        if (event.target.closest('.rail-card, [data-filter]')) {
+          const block = event.target.closest('[data-block-id]');
+          if (block) parent.postMessage({ type: 'manta:select', id: block.dataset.blockId }, '*');
+          return;
+        }
+        const block = event.target.closest('[data-block-id]');
+        if (block) {
+          event.preventDefault();
+          parent.postMessage({ type: 'manta:select', id: block.dataset.blockId }, '*');
+        }
+      },
+      true,
+    );
+
+    // Keyboard focus is often inside this frame after clicking a block, so pass the
+    // editor's shortcuts (save, undo, redo) up instead of swallowing them.
+    document.addEventListener('keydown', (event) => {
+      if (!(event.ctrlKey || event.metaKey)) return;
+      const key = event.key.toLowerCase();
+      if (key !== 's' && key !== 'z' && key !== 'y') return;
+      event.preventDefault();
+      parent.postMessage({ type: 'manta:key', key, shift: event.shiftKey }, '*');
+    });
+
+    window.addEventListener('message', (event) => {
+      if (event.source !== parent) return;
+      const msg = event.data || {};
+      if (msg.type === 'manta:highlight') {
+        document.querySelectorAll('.pv-selected').forEach((el) => el.classList.remove('pv-selected'));
+        const el = msg.id && document.querySelector(`[data-block-id="${CSS.escape(msg.id)}"]`);
+        if (el) {
+          el.classList.add('pv-selected');
+          if (msg.scroll) el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        }
+      }
+      if (msg.type === 'manta:theme') {
+        if (msg.theme === 'auto') delete document.documentElement.dataset.theme;
+        else document.documentElement.dataset.theme = msg.theme;
+      }
+    });
+  </script>
+</Base>

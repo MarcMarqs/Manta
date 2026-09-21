@@ -18,8 +18,8 @@
     "mutedDark": "#98a1b0",
     "surfaceDark": "#171a20",
     "borderDark": "#262b34",
-    "fontHeading": "'Inter', system-ui, sans-serif",
-    "fontBody": "'Inter', system-ui, sans-serif",
+    "fontHeading": "Space Grotesk",
+    "fontBody": "Inter",
     "radius": "12px",
     "maxWidth": "1100px",
     "spacing": 1

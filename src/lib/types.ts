@@ -10,6 +10,7 @@ export interface Theme {
   mutedDark: string;
   surfaceDark: string;
   borderDark: string;
+  /** A family name from src/lib/fonts.ts, or "system-ui". */
   fontHeading: string;
   fontBody: string;
   radius: string;

@@ -1,5 +1,6 @@
 ---
-import { site } from '../lib/content';
+import { useContent } from '../lib/context';
+import { fontStack, googleFontsHref } from '../lib/fonts';
 import '../styles/global.css';
 
 interface Props {
@@ -9,8 +10,10 @@ interface Props {
 }
 
 const { title, description, path } = Astro.props;
+const { site } = useContent(Astro.locals);
 const t = site.theme;
 const pageTitle = title === site.name ? site.name : `${title} — ${site.name}`;
+const fontsHref = googleFontsHref([t.fontHeading, t.fontBody]);
 ---
 
 <!doctype html>
@@ -21,11 +24,20 @@ const pageTitle = title === site.name ? site.name : `${title} — ${site.name}`;
     <title>{pageTitle}</title>
     {description && <meta name="description" content={description} />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {
+      fontsHref && (
+        <>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link rel="stylesheet" href={fontsHref} />
+        </>
+      )
+    }
     <style is:inline set:html={`:root{
       --accent:${t.accent};
       --bg:${t.bg}; --fg:${t.fg}; --muted:${t.muted};
       --surface:${t.surface}; --border:${t.border};
-      --font-heading:${t.fontHeading}; --font-body:${t.fontBody};
+      --font-heading:${fontStack(t.fontHeading)}; --font-body:${fontStack(t.fontBody)};
       --radius:${t.radius}; --max-width:${t.maxWidth}; --spacing:${t.spacing};
     }
     :root[data-theme="dark"]{

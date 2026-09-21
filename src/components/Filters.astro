@@ -1,10 +1,11 @@
 ---
-import { tags } from '../lib/content';
+import { useContent } from '../lib/context';
 
 interface Props {
   scope: string;
 }
 const { scope } = Astro.props;
+const { tags } = useContent(Astro.locals);
 const all = [...tags.discipline, ...tags.engine];
 ---
 

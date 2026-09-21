@@ -1,11 +1,12 @@
 ---
-import { projects, tagLabel } from '../lib/content';
+import { useContent } from '../lib/context';
 import Filters from './Filters.astro';
 
 interface Props {
   filters?: boolean;
 }
 const { filters = false } = Astro.props;
+const { projects, tagLabel, asset } = useContent(Astro.locals);
 const id = `grid-${Math.random().toString(36).slice(2, 8)}`;
 ---
 
@@ -19,7 +20,7 @@ const id = `grid-${Math.random().toString(36).slice(2, 8)}`;
           href={`/work/${p.slug}`}
           data-tags={[...p.discipline, ...p.engine].join(' ')}
         >
-          <img src={p.cover} alt="" loading="lazy" />
+          <img src={asset(p.cover)} alt="" loading="lazy" />
           <div class="card-body">
             <h3>{p.title}</h3>
             <p class="muted card-meta">

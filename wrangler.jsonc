@@ -8,8 +8,18 @@
     "directory": "./dist",
     "binding": "ASSETS"
   },
+  // Gives every non-production branch (the editor's `draft` branch) its own URL.
+  "preview_urls": true,
   "observability": {
     "enabled": true
+  },
+  "vars": {
+    "GITHUB_REPO": "MarcMarqs/Manta",
+    // Fill these in once the first deploy tells you your workers.dev subdomain:
+    //   LIVE_URL    = https://manta.<subdomain>.workers.dev
+    //   PREVIEW_URL = https://draft-manta.<subdomain>.workers.dev
+    "LIVE_URL": "",
+    "PREVIEW_URL": ""
   }
   // Secrets are set in the Cloudflare dashboard, never committed:
   //   ADMIN_PASSWORD  - password for the /admin editor

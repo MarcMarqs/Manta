@@ -70,17 +70,53 @@ Every block needs a unique `id` (unique within its page) and a `type`.
 
 Set `"draft": true` on a project to keep it out of the build.
 
+## The editor (`/admin`)
+
+Pages, projects, tags and the theme are edited at `/admin`: forms on the left, a live
+preview on the right rendered by the site's own components, so what you see is what ships.
+
+- **Blocks:** add from the menu (or the `+` between blocks), drag the grip or use the arrows to
+  reorder, duplicate, delete. Click anything in the preview to jump to its settings.
+- **Save draft** (Ctrl+S) commits every changed file to the `draft` branch in one commit.
+  Cloudflare builds that branch at its own preview URL.
+- **Publish** makes the draft live: `main` moves to the draft, then the draft branch is deleted.
+  A fresh one is cut from `main` on the next save.
+- **Discard draft** (⋯ menu) throws away saved-but-unpublished changes.
+- **Undo / redo:** Ctrl+Z / Ctrl+Shift+Z, including deleted pages, until you reload.
+- **Images** are resized to 2000px and converted to WebP in the browser, then committed to
+  `public/images/uploads/` on the draft straight away, so the preview can show them.
+
+The editor can only write `content/**.json` and `public/images/**`, never code or config.
+
+### Running it locally
+
+```bash
+npm run dev      # then open http://localhost:4321/admin
+```
+
+Local dev reads secrets from `.dev.vars` (gitignored). With no `GITHUB_TOKEN` there, the editor
+works in **local mode**: saves write straight to the files on disk, and publishing is git's job.
+Add a token to `.dev.vars` to test against GitHub instead.
+
 ## Deploying
 
-Cloudflare builds and deploys the Worker (`manta`) on every push to `main`.
-Build command `npm run build`, deploy command `npx wrangler deploy`.
+Cloudflare builds and deploys the Worker (`manta`) on every push. In the Worker's
+**Settings → Build**:
 
-Two secrets are set in the Cloudflare dashboard, never in this repo:
+| Setting | Value |
+|---|---|
+| Build command | `npm run build` |
+| Deploy command | `npx wrangler deploy` |
+| Non-production branch deploy command | `npx wrangler versions upload` |
+| Builds for non-production branches | Enabled (this is what gives `draft` its preview URL) |
 
-- `ADMIN_PASSWORD` — the password for the `/admin` editor
-- `GITHUB_TOKEN` — fine-grained token, this repo only, contents read/write
+Secrets, set under **Settings → Variables and Secrets** as type *Secret*, never in this repo:
 
-## Not built yet
+- `ADMIN_PASSWORD` — the password for `/admin`. Changing it signs every session out.
+- `GITHUB_TOKEN` — fine-grained token: this repository only, **Contents: Read and write**.
 
-The `/admin` editor: block-based page editing with live preview, image upload,
-saves committed to a draft branch, and one Publish button that merges to `main`.
+After the first deploy, put your real URLs in `wrangler.jsonc` under `vars`
+(`LIVE_URL`, `PREVIEW_URL`) so the editor can link to them.
+
+`public/.assetsignore` keeps the Worker's server code out of the public static assets.
+Don't delete it.
