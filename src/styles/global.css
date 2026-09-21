@@ -198,3 +198,71 @@ hr.block-divider {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* --- block width & alignment (set per block in the editor) --- */
+
+/* Wide and full blocks size against <main> as a container. `cqw` is its width without the
+   scrollbar, where `vw` would include it and push the page into a horizontal scroll. */
+main {
+  container-type: inline-size;
+}
+
+.blk.a-center {
+  text-align: center;
+}
+.blk.a-right {
+  text-align: right;
+}
+
+.blk.w-narrow {
+  max-width: 640px;
+}
+.blk.w-narrow.a-center {
+  margin-inline: auto;
+}
+.blk.w-narrow.a-right {
+  margin-left: auto;
+}
+
+/* Wide reaches past the content column on both sides; full runs edge to edge. */
+.blk.w-wide {
+  --blk-width: min(calc(100cqw - 40px), calc(var(--max-width) + 320px));
+  width: var(--blk-width);
+  margin-left: calc((100% - var(--blk-width)) / 2);
+}
+.blk.w-full {
+  width: 100cqw;
+  margin-left: calc(50% - 50cqw);
+}
+
+/* Inside sections and columns there is no page edge to reach: wide/full fall back to normal. */
+.section .blk.w-wide,
+.section .blk.w-full,
+.columns .blk.w-wide,
+.columns .blk.w-full {
+  width: auto;
+  margin-left: 0;
+}
+
+/* Buttons follow text-align on their own; images are blocks, so they need margins. */
+.blk.a-center figure img {
+  margin-inline: auto;
+}
+.blk.a-right figure img {
+  margin-left: auto;
+}
+
+/* A full-width section is a coloured band; its content stays in the reading column. */
+.blk.w-full > .section {
+  border-radius: 0;
+  padding-inline: 0;
+}
+.blk.w-full > .section > .blocks {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+.blk.w-full figure img,
+.blk.w-full .embed iframe {
+  border-radius: 0;
+}

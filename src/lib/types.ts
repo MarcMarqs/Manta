@@ -59,11 +59,21 @@ export interface Project {
   links: ProjectLink[];
 }
 
+export type Align = 'left' | 'center' | 'right';
+/** normal = the content column; wide and full reach past it (top-level blocks only). */
+export type BlockWidth = 'narrow' | 'normal' | 'wide' | 'full';
+
+/** Placement options every block can carry. Both are optional; absent means left / normal. */
+export interface BlockLayout {
+  align?: Align;
+  width?: BlockWidth;
+}
+
 /** One entry in a page's block array. Nested blocks live in `section` and `columns`. */
-export type Block =
+export type Block = BlockLayout & (
   | { id: string; type: 'heading'; level: 1 | 2 | 3 | 4; text: string }
   | { id: string; type: 'text'; html: string }
-  | { id: string; type: 'image'; src: string; alt: string; caption?: string; width?: 'content' | 'wide' }
+  | { id: string; type: 'image'; src: string; alt: string; caption?: string }
   | { id: string; type: 'gallery'; images: { src: string; alt: string }[] }
   | { id: string; type: 'video'; provider: 'youtube' | 'vimeo' | 'itch'; videoId: string; title?: string }
   | { id: string; type: 'button'; label: string; href: string; style?: 'primary' | 'secondary' }
@@ -75,7 +85,8 @@ export type Block =
   | { id: string; type: 'section'; background?: 'none' | 'surface' | 'accent'; blocks: Block[] }
   | { id: string; type: 'projectRail'; filters?: boolean }
   | { id: string; type: 'projectGrid'; filters?: boolean }
-  | { id: string; type: 'html'; html: string };
+  | { id: string; type: 'html'; html: string }
+);
 
 export type BlockType = Block['type'];
 

@@ -62,6 +62,11 @@ Every block needs a unique `id` (unique within its page) and a `type`.
 
 `section` and `columns` nest other blocks, so layouts compose.
 
+Any block can also take `align` (`left` | `center` | `right`) and `width` (`narrow` | `normal`
+| `wide` | `full`). Wide reaches past the text column, full runs edge to edge. A full-width
+`section` becomes a coloured band whose content stays in the column. Inside sections and
+columns, wide and full fall back to normal. Every option collapses sensibly on a phone.
+
 ### Adding a project
 
 1. Add an entry to `content/projects.json`.
@@ -120,3 +125,20 @@ After the first deploy, put your real URLs in `wrangler.jsonc` under `vars`
 
 `public/.assetsignore` keeps the Worker's server code out of the public static assets.
 Don't delete it.
+
+### Keeping visitors out of Manta
+
+Set `ADMIN_HOST` in `wrangler.jsonc` to the one hostname the editor should live on. On every
+other hostname, `/admin` and `/api/*` answer with the site's normal 404 page, so a visitor
+can't even tell an editor exists.
+
+The usual setup, once you own a domain:
+
+1. Attach the domain to the Worker (**Settings → Domains & Routes → Add → Custom domain**).
+   That is the address you share.
+2. Set `"ADMIN_HOST": "manta.<subdomain>.workers.dev"`. That address becomes yours alone.
+3. Optional, stronger: put **Cloudflare Access** (Zero Trust, free) in front of that
+   workers.dev hostname and the `draft-` preview one, so only your email can even load them.
+
+While the site only has its workers.dev address, leave `ADMIN_HOST` empty: there is just one
+hostname, and blocking it would lock you out too.

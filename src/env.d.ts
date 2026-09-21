@@ -6,6 +6,12 @@ interface Env {
   GITHUB_TOKEN?: string;
   GITHUB_REPO?: string;
   LIVE_URL?: string;
+  /**
+   * Hostname the editor is served on, e.g. "manta.you.workers.dev". When set, /admin and
+   * /api/* answer 404 on every other hostname, so visitors to the public domain never
+   * see that Manta exists. Unset means the editor is available on every hostname.
+   */
+  ADMIN_HOST?: string;
   PREVIEW_URL?: string;
   /** Optional. Signs session cookies; falls back to ADMIN_PASSWORD. */
   SESSION_SECRET?: string;

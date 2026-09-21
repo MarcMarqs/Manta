@@ -25,7 +25,7 @@ export const BLOCKS: Record<BlockType, BlockSpec> = {
     label: 'Image',
     group: 'Text & media',
     hint: 'One picture with a caption',
-    create: () => ({ id: newId(), type: 'image', src: '', alt: '', caption: '', width: 'content' }),
+    create: () => ({ id: newId(), type: 'image', src: '', alt: '', caption: '' }),
   },
   gallery: {
     label: 'Gallery',

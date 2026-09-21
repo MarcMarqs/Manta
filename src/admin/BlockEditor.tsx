@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
-import type { Block, BlockType } from '../lib/types';
+import type { Align, Block, BlockType, BlockWidth } from '../lib/types';
 import { BLOCKS, GROUPS, cloneBlock, parseVideoInput, summarize } from './blocks';
 import { ImageField, LinkInput } from './media';
 import { expanded, newId, selectedBlock, toggleExpanded } from './store';
@@ -239,6 +239,7 @@ function BlockCard({
         </span>
         <span class="block-type">{spec?.label ?? block.type}</span>
         <span class="block-summary">{summarize(block)}</span>
+        {layoutLabel(block) && <span class="block-layout">{layoutLabel(block)}</span>}
         <span class="block-tools">
           <IconButton icon="up" label="Move up" onClick={() => onMove(-1)} disabled={first} />
           <IconButton icon="down" label="Move down" onClick={() => onMove(1)} disabled={last} />
@@ -256,9 +257,67 @@ function BlockCard({
       </div>
       {isOpen && (
         <div class="block-body">
+          <LayoutFields block={block} depth={depth} onChange={onChange} />
           <BlockFields block={block} depth={depth} onChange={onChange} />
         </div>
       )}
+    </div>
+  );
+}
+
+// --- width & alignment ---------------------------------------------------
+
+const WIDTHS: { value: BlockWidth; label: string }[] = [
+  { value: 'narrow', label: 'Narrow' },
+  { value: 'normal', label: 'Normal' },
+  { value: 'wide', label: 'Wide' },
+  { value: 'full', label: 'Full' },
+];
+
+// "content" is the old image-only name for normal.
+const widthOf = (block: Block): BlockWidth =>
+  (block.width as string) === 'content' || !block.width ? 'normal' : block.width;
+
+function layoutLabel(block: Block): string {
+  const w = widthOf(block);
+  return [w !== 'normal' && WIDTHS.find((x) => x.value === w)?.label, block.align && block.align !== 'left' && (block.align === 'center' ? 'Centered' : 'Right')]
+    .filter(Boolean)
+    .join(' · ');
+}
+
+/**
+ * Where a block sits on the page. Defaults (left, normal) are removed from the JSON rather
+ * than stored, so untouched blocks stay clean. Wide and full only make sense at the top
+ * level: inside a section or column there is no page edge to reach.
+ */
+function LayoutFields({ block, depth, onChange }: { block: Block; depth: number; onChange: (b: Block) => void }) {
+  if (block.type === 'spacer') return null;
+  const width = widthOf(block);
+  const widths = depth === 0 ? WIDTHS : WIDTHS.slice(0, 2);
+
+  const set = (patch: { align?: Align; width?: BlockWidth }) => {
+    const next = { ...block, ...patch } as Block;
+    if (next.align === 'left') delete next.align;
+    if (next.width === 'normal' || (next.width as string) === 'content') delete next.width;
+    onChange(next);
+  };
+
+  return (
+    <div class="layout-row">
+      <Field label="Align">
+        <Segmented
+          value={block.align ?? 'left'}
+          options={[
+            { value: 'left' as const, label: 'Left', icon: 'alignLeft' },
+            { value: 'center' as const, label: 'Center', icon: 'alignCenter' },
+            { value: 'right' as const, label: 'Right', icon: 'alignRight' },
+          ]}
+          onChange={(align) => set({ align })}
+        />
+      </Field>
+      <Field label="Width">
+        <Segmented value={widths.some((w) => w.value === width) ? width : 'normal'} options={widths} onChange={(w) => set({ width: w })} />
+      </Field>
     </div>
   );
 }
@@ -297,16 +356,6 @@ function BlockFields({ block, depth, onChange }: { block: Block; depth: number; 
           </Field>
           <Field label="Caption" wide>
             <TextInput value={block.caption ?? ''} onChange={(v) => onChange({ ...block, caption: v })} />
-          </Field>
-          <Field label="Width">
-            <Segmented
-              value={block.width ?? 'content'}
-              options={[
-                { value: 'content', label: 'Content' },
-                { value: 'wide', label: 'Wide' },
-              ]}
-              onChange={(v) => onChange({ ...block, width: v })}
-            />
           </Field>
         </div>
       );

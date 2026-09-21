@@ -36,6 +36,9 @@ const paths: Record<string, string> = {
   list: 'M6 4h7.5M6 8h7.5M6 12h7.5M2.5 4h.01M2.5 8h.01M2.5 12h.01',
   olist: 'M6.5 4h7M6.5 8h7M6.5 12h7M2.5 3l1-.5V6M2.5 10.5c0-1.5 2-1.5 2 0 0 .8-2 1.5-2 2.5h2',
   clear: 'M3 13h10M6 3h7M9.5 3L7 11M4 5l6 6',
+  alignLeft: 'M2.5 4h11M2.5 8h7M2.5 12h9',
+  alignCenter: 'M2.5 4h11M4.5 8h7M3.5 12h9',
+  alignRight: 'M2.5 4h11M6.5 8h7M4.5 12h9',
 };
 
 export function Icon({ name, size = 16 }: { name: keyof typeof paths | string; size?: number }) {

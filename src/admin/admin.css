@@ -1631,3 +1631,28 @@ form.tag-row {
     grid-template-columns: 1fr;
   }
 }
+
+/* --- block layout row --- */
+
+.layout-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px dashed var(--e-border);
+}
+
+.layout-row .field {
+  flex: none;
+}
+
+.block-layout {
+  flex: none;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--e-accent-soft);
+  color: var(--e-accent);
+  font-size: 11px;
+  font-weight: 600;
+}

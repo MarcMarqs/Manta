@@ -15,6 +15,10 @@
   },
   "vars": {
     "GITHUB_REPO": "MarcMarqs/Manta",
+    // Where the editor lives. Once the site has its own domain, set this to the
+    // workers.dev hostname (e.g. "manta.<subdomain>.workers.dev") and /admin will
+    // 404 on the public domain. Empty = editor reachable on every hostname.
+    "ADMIN_HOST": "",
     // Fill these in once the first deploy tells you your workers.dev subdomain:
     //   LIVE_URL    = https://manta.<subdomain>.workers.dev
     //   PREVIEW_URL = https://draft-manta.<subdomain>.workers.dev

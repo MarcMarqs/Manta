@@ -1,7 +1,11 @@
 ---
-// The editor shell. Static and public on purpose: it holds no content or secrets.
-// Everything it shows comes from /api/*, which requires the session cookie.
+// The editor shell. It holds no content or secrets: everything it shows comes from
+// /api/*, which requires the session cookie. Rendered by the Worker rather than
+// prebuilt, because Cloudflare serves static files before the Worker runs, and the
+// middleware must be able to hide this page on the public domain (see ADMIN_HOST).
 import App from '../../admin/App';
+
+export const prerender = false;
 ---
 
 <!doctype html>
