@@ -1,7 +1,7 @@
 # Manta
 
-A game-design portfolio site whose pages are built from content files, plus (soon) an
-editor at `/admin` for changing those files without touching code.
+A game-design portfolio site whose pages are built from content files, plus an editor
+at `/admin` for changing those files without touching code.
 
 Astro → static HTML → served by a Cloudflare Worker. See [MANTA-SPEC.md](MANTA-SPEC.md)
 for the decisions behind it.
@@ -46,7 +46,7 @@ Every block needs a unique `id` (unique within its page) and a `type`.
 |---|---|
 | `heading` | `level` 1–4, `text` |
 | `text` | `html` — rich text |
-| `image` | `src`, `alt`, `caption?`, `width?` (`content` \| `wide`) |
+| `image` | `src`, `alt`, `caption?` |
 | `gallery` | `images[]` of `{ src, alt }` |
 | `video` | `provider` (`youtube` \| `vimeo` \| `itch`), `videoId`, `title?` |
 | `button` | `label`, `href`, `style?` (`primary` \| `secondary`) |
