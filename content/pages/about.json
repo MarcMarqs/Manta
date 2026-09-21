@@ -1,0 +1,19 @@
+{
+  "title": "About",
+  "description": "Who I am and how to reach me.",
+  "blocks": [
+    { "id": "h", "type": "heading", "level": 1, "text": "About" },
+    {
+      "id": "bio",
+      "type": "text",
+      "html": "<p>Placeholder bio. Two or three sentences about how you work, what kind of problems you like, and what you are looking for.</p>"
+    },
+    {
+      "id": "contact",
+      "type": "button",
+      "label": "Get in touch",
+      "href": "mailto:you@example.com",
+      "style": "primary"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "title": "Lantern",
+  "description": "Case study: light as a resource.",
+  "project": "lantern",
+  "blocks": [
+    { "id": "h1", "type": "heading", "level": 1, "text": "Lantern" },
+    {
+      "id": "over",
+      "type": "text",
+      "html": "<p><strong>Overview.</strong> Twelve rooms that teach one rule each, with no tutorial text anywhere in the game.</p>"
+    },
+    {
+      "id": "cols",
+      "type": "columns",
+      "count": 2,
+      "columns": [
+        {
+          "id": "c1",
+          "blocks": [
+            { "id": "c1h", "type": "heading", "level": 3, "text": "Goals" },
+            { "id": "c1t", "type": "text", "html": "<p>Teach by consequence, never by popup.</p>" }
+          ]
+        },
+        {
+          "id": "c2",
+          "blocks": [
+            { "id": "c2h", "type": "heading", "level": 3, "text": "Outcome" },
+            { "id": "c2t", "type": "text", "html": "<p>Playtesters cleared room 6 unaided on the first try.</p>" }
+          ]
+        }
+      ]
+    }
+  ]
+}

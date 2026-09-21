@@ -1,0 +1,13 @@
+---
+import type { Block as BlockData } from '../../lib/types';
+import Block from './Block.astro';
+
+interface Props {
+  blocks: BlockData[];
+}
+const { blocks } = Astro.props;
+---
+
+<div class="blocks">
+  {blocks.map((block) => <Block block={block} />)}
+</div>

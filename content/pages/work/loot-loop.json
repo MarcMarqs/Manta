@@ -1,0 +1,51 @@
+{
+  "title": "Loot Loop",
+  "description": "Case study: rebuilding a roguelite reward loop.",
+  "project": "loot-loop",
+  "blocks": [
+    { "id": "h1", "type": "heading", "level": 1, "text": "Loot Loop" },
+    {
+      "id": "over",
+      "type": "text",
+      "html": "<p><strong>Overview.</strong> Players stopped caring about drops after their twentieth run. The loop was generous early and flat forever after.</p>"
+    },
+    { "id": "h-goals", "type": "heading", "level": 2, "text": "Goals" },
+    {
+      "id": "goals",
+      "type": "text",
+      "html": "<ul><li>Keep the twentieth run as tense as the second</li><li>Shorten runs without cutting content</li><li>Give the team numbers they can read without me</li></ul>"
+    },
+    { "id": "h-process", "type": "heading", "level": 2, "text": "Process" },
+    {
+      "id": "table",
+      "type": "table",
+      "caption": "Drop table before and after the pity timer",
+      "columns": ["Rarity", "Before", "After"],
+      "rows": [
+        ["Common", "72%", "61%"],
+        ["Rare", "23%", "29%"],
+        ["Epic", "4.5%", "8.5%"],
+        ["Legendary", "0.5%", "1.5%"]
+      ]
+    },
+    { "id": "h-outcome", "type": "heading", "level": 2, "text": "Outcome" },
+    {
+      "id": "chart",
+      "type": "chart",
+      "variant": "bar",
+      "title": "Median run length (minutes)",
+      "series": [
+        { "label": "Build 04", "value": 34 },
+        { "label": "Build 07", "value": 29 },
+        { "label": "Build 11", "value": 25 },
+        { "label": "Build 14", "value": 22 }
+      ]
+    },
+    { "id": "h-take", "type": "heading", "level": 2, "text": "Takeaways" },
+    {
+      "id": "take",
+      "type": "text",
+      "html": "<p>A pity timer is a design statement, not a safety net: it tells the player the game is keeping its promises.</p>"
+    }
+  ]
+}

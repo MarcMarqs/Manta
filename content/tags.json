@@ -1,0 +1,14 @@
+{
+  "discipline": [
+    { "id": "systems", "label": "Systems Design" },
+    { "id": "level", "label": "Level Design" },
+    { "id": "economy", "label": "Economy" },
+    { "id": "narrative", "label": "Narrative" }
+  ],
+  "engine": [
+    { "id": "unreal", "label": "Unreal" },
+    { "id": "unity", "label": "Unity" },
+    { "id": "godot", "label": "Godot" },
+    { "id": "tabletop", "label": "Tabletop" }
+  ]
+}

@@ -1,0 +1,226 @@
+---
+import type { Block } from '../../lib/types';
+import Chart from '../Chart.astro';
+import ProjectRail from '../ProjectRail.astro';
+import ProjectGrid from '../ProjectGrid.astro';
+// Self-import: `section` and `columns` hold nested blocks.
+import Self from './Block.astro';
+
+interface Props {
+  block: Block;
+}
+const { block } = Astro.props;
+
+const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
+  ({
+    youtube: `https://www.youtube-nocookie.com/embed/${b.videoId}`,
+    vimeo: `https://player.vimeo.com/video/${b.videoId}`,
+    itch: `https://itch.io/embed/${b.videoId}`,
+  })[b.provider];
+---
+
+{block.type === 'heading' && <Fragment set:html={`<h${block.level}>${block.text}</h${block.level}>`} />}
+
+{block.type === 'text' && <div class="rich" set:html={block.html} />}
+
+{
+  block.type === 'image' && (
+    <figure class={block.width === 'wide' ? 'img-wide' : undefined}>
+      <img src={block.src} alt={block.alt} loading="lazy" />
+      {block.caption && <figcaption>{block.caption}</figcaption>}
+    </figure>
+  )
+}
+
+{
+  block.type === 'gallery' && (
+    <div class="gallery">
+      {block.images.map((img) => (
+        <img src={img.src} alt={img.alt} loading="lazy" />
+      ))}
+    </div>
+  )
+}
+
+{
+  block.type === 'video' && (
+    <div class="embed">
+      <iframe
+        src={embedSrc(block)}
+        title={block.title ?? 'Embedded video'}
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture"
+        allowfullscreen
+      />
+    </div>
+  )
+}
+
+{
+  block.type === 'button' && (
+    <p>
+      <a class={`btn btn-${block.style ?? 'primary'}`} href={block.href}>
+        {block.label}
+      </a>
+    </p>
+  )
+}
+
+{block.type === 'divider' && <hr class="block-divider" />}
+
+{block.type === 'spacer' && <div class={`spacer spacer-${block.size ?? 'md'}`} />}
+
+{
+  block.type === 'table' && (
+    <figure class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            {block.columns.map((c) => (
+              <th scope="col">{c}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {block.rows.map((row) => (
+            <tr>
+              {row.map((cell) => (
+                <td>{cell}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {block.caption && <figcaption>{block.caption}</figcaption>}
+    </figure>
+  )
+}
+
+{
+  block.type === 'chart' && (
+    <Chart variant={block.variant} title={block.title} series={block.series} />
+  )
+}
+
+{
+  block.type === 'columns' && (
+    <div class="columns" style={`--cols:${block.count}`}>
+      {block.columns.map((col) => (
+        <div class="column blocks">
+          {col.blocks.map((child) => (
+            <Self block={child} />
+          ))}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+{
+  block.type === 'section' && (
+    <section class={`section bg-${block.background ?? 'none'}`}>
+      <div class="blocks">
+        {block.blocks.map((child) => (
+          <Self block={child} />
+        ))}
+      </div>
+    </section>
+  )
+}
+
+{block.type === 'projectRail' && <ProjectRail filters={block.filters} />}
+
+{block.type === 'projectGrid' && <ProjectGrid filters={block.filters} />}
+
+{block.type === 'html' && <div class="raw-html" set:html={block.html} />}
+
+<style>
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+    gap: 24px;
+  }
+  @media (max-width: 720px) {
+    .columns {
+      grid-template-columns: 1fr;
+    }
+  }
+  .section {
+    border-radius: var(--radius);
+  }
+  .section.bg-surface,
+  .section.bg-accent {
+    padding: calc(28px * var(--spacing));
+  }
+  .section.bg-surface {
+    background: var(--surface);
+  }
+  .section.bg-accent {
+    background: color-mix(in srgb, var(--accent) 12%, var(--bg));
+  }
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .gallery img {
+    border-radius: var(--radius);
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    width: 100%;
+  }
+  .img-wide img,
+  figure img {
+    border-radius: var(--radius);
+  }
+  .embed {
+    position: relative;
+    aspect-ratio: 16 / 9;
+  }
+  .embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: var(--radius);
+  }
+  .table-wrap {
+    overflow-x: auto;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.95rem;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  th {
+    font-family: var(--font-heading);
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .spacer-sm {
+    height: 16px;
+  }
+  .spacer-md {
+    height: 40px;
+  }
+  .spacer-lg {
+    height: 80px;
+  }
+  .rich :global(ul),
+  .rich :global(ol) {
+    padding-left: 20px;
+  }
+  .rich :global(:last-child) {
+    margin-bottom: 0;
+  }
+</style>

@@ -1,0 +1,27 @@
+{
+  "name": "Marcelo Marques",
+  "tagline": "Game designer — systems, economy, and level flow.",
+  "footer": "© 2026 Marcelo Marques",
+  "nav": [
+    { "label": "Work", "href": "/" },
+    { "label": "About", "href": "/about" }
+  ],
+  "theme": {
+    "accent": "#4f8cff",
+    "bg": "#ffffff",
+    "fg": "#14161a",
+    "muted": "#5c6470",
+    "surface": "#f4f5f7",
+    "border": "#e2e5ea",
+    "bgDark": "#0f1115",
+    "fgDark": "#e9ecf1",
+    "mutedDark": "#98a1b0",
+    "surfaceDark": "#171a20",
+    "borderDark": "#262b34",
+    "fontHeading": "'Inter', system-ui, sans-serif",
+    "fontBody": "'Inter', system-ui, sans-serif",
+    "radius": "12px",
+    "maxWidth": "1100px",
+    "spacing": 1
+  }
+}

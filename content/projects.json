@@ -1,0 +1,54 @@
+[
+  {
+    "slug": "loot-loop",
+    "title": "Loot Loop",
+    "genre": "Roguelite",
+    "year": 2026,
+    "role": "Systems & Economy Designer",
+    "summary": "A reward loop that stays tense after the twentieth run.",
+    "highlights": [
+      "Rebalanced drop tables around a pity timer",
+      "Cut median run length from 34 to 22 minutes",
+      "Shipped an in-game economy dashboard for the team"
+    ],
+    "discipline": ["systems", "economy"],
+    "engine": ["unreal"],
+    "cover": "/images/projects/loot-loop/cover.svg",
+    "coverVideo": null,
+    "featured": true,
+    "draft": false,
+    "links": [{ "type": "play", "label": "Play the demo", "href": "https://example.com" }]
+  },
+  {
+    "slug": "lantern",
+    "title": "Lantern",
+    "genre": "Puzzle Adventure",
+    "year": 2025,
+    "role": "Level Designer",
+    "summary": "Light as a resource, darkness as level geometry.",
+    "highlights": ["Twelve hand-built rooms", "Teaching without tutorials"],
+    "discipline": ["level"],
+    "engine": ["unity"],
+    "cover": "/images/projects/lantern/cover.svg",
+    "coverVideo": null,
+    "featured": false,
+    "draft": false,
+    "links": []
+  },
+  {
+    "slug": "dunes",
+    "title": "Dunes",
+    "genre": "Survival Strategy",
+    "year": 2024,
+    "role": "Designer",
+    "summary": "Resource scarcity that reshapes the map every season.",
+    "highlights": ["Seasonal terrain simulation", "Asymmetric faction goals"],
+    "discipline": ["systems", "narrative"],
+    "engine": ["godot"],
+    "cover": "/images/projects/dunes/cover.svg",
+    "coverVideo": null,
+    "featured": false,
+    "draft": false,
+    "links": []
+  }
+]

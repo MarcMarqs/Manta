@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#e8744f"/><stop offset="1" stop-color="#3d1f16"/>
+  </linearGradient></defs>
+  <rect width="800" height="500" fill="url(#g)"/>
+  <text x="400" y="262" text-anchor="middle" font-family="system-ui, sans-serif" font-size="54" font-weight="600" fill="#ffffff" opacity="0.92">Dunes</text>
+</svg>

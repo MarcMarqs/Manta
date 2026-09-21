@@ -1,0 +1,109 @@
+---
+// Inline SVG chart — no library, no client JS. Bars for comparison, line for trend.
+interface Props {
+  variant: 'bar' | 'line';
+  title?: string;
+  series: { label: string; value: number }[];
+}
+
+const { variant, title, series } = Astro.props;
+
+const W = 720;
+const H = 300;
+const PAD = { top: 20, right: 16, bottom: 40, left: 48 };
+const plotW = W - PAD.left - PAD.right;
+const plotH = H - PAD.top - PAD.bottom;
+
+const max = Math.max(...series.map((d) => d.value), 0);
+const niceMax = max === 0 ? 1 : Math.ceil(max / 5) * 5;
+const y = (v: number) => PAD.top + plotH - (v / niceMax) * plotH;
+const ticks = [0, niceMax / 2, niceMax];
+
+const bandW = plotW / Math.max(series.length, 1);
+const barW = Math.min(bandW * 0.55, 72);
+const cx = (i: number) => PAD.left + bandW * i + bandW / 2;
+
+const linePath = series.map((d, i) => `${i === 0 ? 'M' : 'L'}${cx(i)},${y(d.value)}`).join(' ');
+---
+
+<figure class="chart">
+  {title && <figcaption class="chart-title">{title}</figcaption>}
+  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={title ?? `${variant} chart`}>
+    {
+      ticks.map((t) => (
+        <g>
+          <line x1={PAD.left} x2={W - PAD.right} y1={y(t)} y2={y(t)} class="grid" />
+          <text x={PAD.left - 10} y={y(t) + 4} text-anchor="end" class="axis">
+            {t}
+          </text>
+        </g>
+      ))
+    }
+
+    {
+      variant === 'bar' &&
+        series.map((d, i) => (
+          <rect
+            x={cx(i) - barW / 2}
+            y={y(d.value)}
+            width={barW}
+            height={PAD.top + plotH - y(d.value)}
+            rx="4"
+            class="bar"
+          />
+        ))
+    }
+
+    {variant === 'line' && <path d={linePath} class="line" />}
+    {
+      variant === 'line' &&
+        series.map((d, i) => <circle cx={cx(i)} cy={y(d.value)} r="4" class="dot" />)
+    }
+
+    {
+      series.map((d, i) => (
+        <text x={cx(i)} y={H - 14} text-anchor="middle" class="axis">
+          {d.label}
+        </text>
+      ))
+    }
+  </svg>
+</figure>
+
+<style>
+  .chart {
+    margin: 0;
+  }
+  .chart-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .grid {
+    stroke: var(--border);
+    stroke-width: 1;
+  }
+  .axis {
+    fill: var(--muted);
+    font-size: 12px;
+    font-family: var(--font-body);
+  }
+  .bar {
+    fill: var(--accent);
+  }
+  .line {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 2.5;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+  .dot {
+    fill: var(--accent);
+  }
+</style>

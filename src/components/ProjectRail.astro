@@ -1,0 +1,249 @@
+---
+import { projects, tagLabel } from '../lib/content';
+import Filters from './Filters.astro';
+
+interface Props {
+  filters?: boolean;
+}
+const { filters = true } = Astro.props;
+const id = `rail-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<div class="rail-wrap" data-rail-root>
+  {filters && <Filters scope={id} />}
+
+  <div class="rail" role="list">
+    {
+      projects.map((p, i) => (
+        <article
+          class="rail-card"
+          role="listitem"
+          tabindex="0"
+          aria-expanded={i === 0 ? 'true' : 'false'}
+          data-slug={p.slug}
+          data-tags={[...p.discipline, ...p.engine].join(' ')}
+        >
+          <div class="cover" style={`background-image:url('${p.cover}')`} aria-hidden="true" />
+          <div class="spine">
+            <span class="spine-title">{p.title}</span>
+            <span class="spine-year">{p.year}</span>
+          </div>
+          <div class="panel">
+            <div class="panel-inner">
+              <h3>{p.title}</h3>
+              <p class="muted panel-meta">
+                {p.genre} · {p.year} · {p.role}
+              </p>
+              <p>{p.summary}</p>
+              <ul class="highlights">
+                {p.highlights.slice(0, 4).map((h) => (
+                  <li>{h}</li>
+                ))}
+              </ul>
+              <div class="chips">
+                {[...p.discipline, ...p.engine].map((t) => (
+                  <span class="tag-chip">{tagLabel(t)}</span>
+                ))}
+              </div>
+              <a class="btn btn-primary" href={`/work/${p.slug}`}>
+                Read the case study
+              </a>
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .rail {
+    display: flex;
+    gap: 12px;
+    height: 560px;
+  }
+
+  .rail-card {
+    position: relative;
+    flex: 0 0 92px;
+    min-width: 92px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--surface);
+    /* fast start, long settle, no bounce */
+    transition: flex-basis 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+      min-width 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .rail-card[aria-expanded='true'] {
+    flex: 1 1 auto;
+    min-width: 520px;
+    cursor: default;
+  }
+
+  .rail-card[hidden] {
+    display: none;
+  }
+
+  .rail-card:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .cover {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .rail-card[aria-expanded='true'] .cover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 20%, var(--surface) 62%);
+  }
+
+  .spine {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Under vertical-rl the inline axis runs top-to-bottom, so `row` is what
+       stacks these vertically; `column` would lay them out side by side. */
+    flex-direction: row-reverse;
+    padding: 18px 0;
+    writing-mode: vertical-rl;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.75);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.15));
+    transition: opacity 0.25s ease;
+  }
+
+  .spine-year {
+    font-weight: 400;
+    opacity: 0.8;
+    font-size: 0.85rem;
+  }
+
+  .rail-card[aria-expanded='true'] .spine {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .panel {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 420px;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease 0.25s;
+  }
+
+  .rail-card[aria-expanded='true'] .panel {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .panel-inner {
+    width: 420px;
+    max-height: 100%;
+    overflow-y: auto;
+    padding: 28px;
+  }
+
+  .panel-meta {
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+  }
+
+  .highlights {
+    padding-left: 18px;
+    margin: 0 0 14px;
+    font-size: 0.95rem;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+
+  /* Below 720px the rail becomes a vertical accordion with natural height. */
+  @media (max-width: 720px) {
+    .rail {
+      flex-direction: column;
+      height: auto;
+    }
+    .rail-card {
+      flex: 0 0 auto;
+      min-width: 0;
+      height: 84px;
+      transition: height 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .rail-card[aria-expanded='true'] {
+      min-width: 0;
+      height: auto;
+      min-height: 440px;
+    }
+    .spine {
+      writing-mode: horizontal-tb;
+      flex-direction: row;
+      align-items: center;
+      padding: 0 18px;
+    }
+    .rail-card[aria-expanded='true'] .cover::after {
+      background: linear-gradient(180deg, transparent 10%, var(--surface) 45%);
+    }
+    .panel {
+      position: relative;
+      inset: auto;
+      width: 100%;
+      align-items: flex-start;
+    }
+    .panel-inner {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-rail-root]').forEach((root) => {
+    const cards = [...root.querySelectorAll<HTMLElement>('.rail-card')];
+
+    const open = (card: HTMLElement) => {
+      cards.forEach((c) => c.setAttribute('aria-expanded', String(c === card)));
+    };
+
+    cards.forEach((card, i) => {
+      card.addEventListener('click', () => open(card));
+      card.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          open(card);
+        }
+        if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+          event.preventDefault();
+          cards[(i + 1) % cards.length].focus();
+        }
+        if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+          event.preventDefault();
+          cards[(i - 1 + cards.length) % cards.length].focus();
+        }
+      });
+    });
+
+    // ?open=<slug> deep-links straight to one project.
+    const wanted = new URLSearchParams(location.search).get('open');
+    const target = wanted && cards.find((c) => c.dataset.slug === wanted);
+    if (target) open(target);
+  });
+</script>

@@ -1,0 +1,13 @@
+{
+  "title": "Dunes",
+  "description": "Case study: a map that rewrites itself every season.",
+  "project": "dunes",
+  "blocks": [
+    { "id": "h1", "type": "heading", "level": 1, "text": "Dunes" },
+    {
+      "id": "over",
+      "type": "text",
+      "html": "<p><strong>Overview.</strong> Scarcity drives the strategy layer: every season the dunes move and last year's safe route is buried.</p>"
+    }
+  ]
+}

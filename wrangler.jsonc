@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "manta",
+  "main": "dist/_worker.js/index.js",
+  "compatibility_date": "2025-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  }
+  // Secrets are set in the Cloudflare dashboard, never committed:
+  //   ADMIN_PASSWORD  - password for the /admin editor
+  //   GITHUB_TOKEN    - fine-grained token, this repo only, contents read/write
+}

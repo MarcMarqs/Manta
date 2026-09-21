@@ -1,0 +1,92 @@
+---
+import { site } from '../lib/content';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  path?: string;
+}
+
+const { title, description, path } = Astro.props;
+const t = site.theme;
+const pageTitle = title === site.name ? site.name : `${title} — ${site.name}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <style is:inline set:html={`:root{
+      --accent:${t.accent};
+      --bg:${t.bg}; --fg:${t.fg}; --muted:${t.muted};
+      --surface:${t.surface}; --border:${t.border};
+      --font-heading:${t.fontHeading}; --font-body:${t.fontBody};
+      --radius:${t.radius}; --max-width:${t.maxWidth}; --spacing:${t.spacing};
+    }
+    :root[data-theme="dark"]{
+      --bg:${t.bgDark}; --fg:${t.fgDark}; --muted:${t.mutedDark};
+      --surface:${t.surfaceDark}; --border:${t.borderDark};
+    }
+    @media (prefers-color-scheme: dark){
+      :root:not([data-theme="light"]){
+        --bg:${t.bgDark}; --fg:${t.fgDark}; --muted:${t.mutedDark};
+        --surface:${t.surfaceDark}; --border:${t.borderDark};
+      }
+    }`} />
+    <script is:inline>
+      // Applied before paint so a remembered theme never flashes the wrong colors.
+      try {
+        const saved = localStorage.getItem('theme');
+        if (saved) document.documentElement.dataset.theme = saved;
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/">{site.name}</a>
+        <nav>
+          {
+            site.nav.map((item) => (
+              <a href={item.href} aria-current={item.href === path ? 'page' : undefined}>
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode">
+          Theme
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <div class="wrap">
+        <slot />
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">{site.footer}</div>
+    </footer>
+
+    <script is:inline>
+      document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
+        const root = document.documentElement;
+        const dark =
+          root.dataset.theme === 'dark' ||
+          (!root.dataset.theme && matchMedia('(prefers-color-scheme: dark)').matches);
+        const next = dark ? 'light' : 'dark';
+        root.dataset.theme = next;
+        try {
+          localStorage.setItem('theme', next);
+        } catch {}
+      });
+    </script>
+  </body>
+</html>

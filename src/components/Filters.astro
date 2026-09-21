@@ -1,0 +1,71 @@
+---
+import { tags } from '../lib/content';
+
+interface Props {
+  scope: string;
+}
+const { scope } = Astro.props;
+const all = [...tags.discipline, ...tags.engine];
+---
+
+<div class="filters" data-filters={scope} role="group" aria-label="Filter projects by tag">
+  <button type="button" class="tag-chip is-active" data-filter="">All</button>
+  {
+    all.map((t) => (
+      <button type="button" class="tag-chip" data-filter={t.id}>
+        {t.label}
+      </button>
+    ))
+  }
+</div>
+
+<style>
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .filters button {
+    background: none;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.78rem;
+    line-height: 1.6;
+  }
+  .filters button.is-active {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+</style>
+
+<script>
+  // Filters only the items inside its own wrapper, so a page can hold several
+  // project blocks without them fighting over each other.
+  document.querySelectorAll<HTMLElement>('[data-filters]').forEach((group) => {
+    const root = group.closest<HTMLElement>('[data-grid-root], [data-rail-root]');
+    if (!root) return;
+
+    group.addEventListener('click', (event) => {
+      const button = (event.target as HTMLElement).closest<HTMLButtonElement>('[data-filter]');
+      if (!button) return;
+
+      const tag = button.dataset.filter ?? '';
+      group
+        .querySelectorAll('[data-filter]')
+        .forEach((b) => b.classList.toggle('is-active', b === button));
+
+      const items = root.querySelectorAll<HTMLElement>('[data-tags]');
+      items.forEach((item) => {
+        const match = !tag || (item.dataset.tags ?? '').split(' ').includes(tag);
+        item.hidden = !match;
+      });
+
+      // If the open rail card just got filtered out, open the first one still visible.
+      const openCard = root.querySelector<HTMLElement>('.rail-card[aria-expanded="true"]');
+      if (openCard?.hidden) {
+        root.querySelector<HTMLElement>('.rail-card:not([hidden])')?.click();
+      }
+    });
+  });
+</script>
