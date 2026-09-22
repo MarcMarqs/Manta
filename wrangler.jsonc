@@ -8,6 +8,9 @@
     "directory": "./dist",
     "binding": "ASSETS"
   },
+  // Serve the site at manta.<subdomain>.workers.dev. Needs the account's workers.dev
+  // subdomain to be registered once (Workers & Pages → Settings or the overview sidebar).
+  "workers_dev": true,
   // Gives every non-production branch (the editor's `draft` branch) its own URL.
   "preview_urls": true,
   "observability": {
