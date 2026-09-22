@@ -169,41 +169,22 @@ code,
   place-items: center;
   width: 26px;
   height: 26px;
+  flex: none;
   border-radius: 7px;
-  background: var(--e-accent);
+  /* Same gradient as the tab icon (public/favicon.svg). */
+  background: linear-gradient(#5a95ff, #2f5fd6);
   color: #fff;
-  font-weight: 700;
-  font-size: 13px;
+}
+
+.brand-mark svg {
+  width: 100%;
+  height: 100%;
 }
 
 .brand-mark.big {
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  font-size: 20px;
-}
-
-.sidebar {
-  grid-area: side;
-  background: var(--e-panel);
-  border-right: 1px solid var(--e-border);
-  overflow-y: auto;
-  padding: 10px 8px;
-}
-
-.editor {
-  grid-area: editor;
-  overflow-y: auto;
-  background: var(--e-bg);
-  border-right: 1px solid var(--e-border);
-}
-
-.preview {
-  grid-area: preview;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  background: var(--e-sunken);
 }
 
 /* --- buttons --- */

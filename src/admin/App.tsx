@@ -26,7 +26,7 @@ import {
   view,
   type PageFile,
 } from './store';
-import { Icon, IconButton, Modal } from './ui';
+import { Icon, IconButton, Logo, Modal } from './ui';
 import './admin.css';
 
 // --- login ---------------------------------------------------------------
@@ -52,7 +52,7 @@ function Login({ onDone, configured }: { onDone: () => void; configured: boolean
   return (
     <div class="login">
       <form class="login-card" onSubmit={submit}>
-        <div class="brand-mark big">M</div>
+        <Logo big />
         <h1>Manta</h1>
         <p class="muted">Sign in to edit your site.</p>
         {configured ? (
@@ -197,7 +197,7 @@ function TopBar({ onPublish, onLogout }: { onPublish: () => void; onLogout: () =
   return (
     <header class="topbar">
       <div class="brand">
-        <div class="brand-mark">M</div>
+        <Logo />
         <span>Manta</span>
       </div>
       <div class="row">

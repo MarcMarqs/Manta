@@ -89,6 +89,23 @@ export function IconButton({
   );
 }
 
+// --- logo ----------------------------------------------------------------
+
+/** The Manta mark: the same ray as public/favicon.svg, so the tab and the editor match. */
+export function Logo({ big }: { big?: boolean }) {
+  return (
+    <div class={`brand-mark${big ? ' big' : ''}`} aria-hidden="true">
+      <svg viewBox="0 0 32 32">
+        <path
+          transform="translate(0.64 -1.76) scale(0.96)"
+          fill="currentColor"
+          d="M16 10.2C16.9 10.2 17.6 9.4 18.2 7.6C19.2 8.4 19.5 9.9 19.1 11.1C23.6 10.6 27.8 13.2 29.8 18.4C26.4 18.6 22.8 19.4 19.8 21.8C18.9 22.4 17.8 22.8 16.6 23L16.3 29.4L15.7 29.4L15.4 23C14.2 22.8 13.1 22.4 12.2 21.8C9.2 19.4 5.6 18.6 2.2 18.4C4.2 13.2 8.4 10.6 12.9 11.1C12.5 9.9 12.8 8.4 13.8 7.6C14.4 9.4 15.1 10.2 16 10.2Z"
+        />
+      </svg>
+    </div>
+  );
+}
+
 // --- fields --------------------------------------------------------------
 
 export function Field({
