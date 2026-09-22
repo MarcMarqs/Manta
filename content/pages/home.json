@@ -7,16 +7,28 @@
       "type": "section",
       "background": "none",
       "blocks": [
-        { "id": "hero-h", "type": "heading", "level": 1, "text": "Marcelo Marques" },
+        {
+          "id": "hero-h",
+          "type": "heading",
+          "level": 1,
+          "text": "Marcelo Marques"
+        },
         {
           "id": "hero-t",
           "type": "text",
-          "html": "<p>Game designer working on systems, economy and level flow. Below: three case studies, from the first whiteboard to the shipped numbers.</p>"
+          "html": "<p>Hey There!</p><p>Game designer working on systems, economy and level flow. Below: three case studies, from the first whiteboard to the shipped numbers.</p>"
         }
       ]
     },
-    { "id": "rail", "type": "projectRail", "filters": true },
-    { "id": "sep", "type": "divider" },
+    {
+      "id": "rail",
+      "type": "projectRail",
+      "filters": true
+    },
+    {
+      "id": "sep",
+      "type": "divider"
+    },
     {
       "id": "grid-note",
       "type": "heading",
@@ -28,6 +40,10 @@
       "type": "text",
       "html": "<p>Both layouts are live so you can compare them, then keep whichever you prefer and delete the other block.</p>"
     },
-    { "id": "grid", "type": "projectGrid", "filters": false }
+    {
+      "id": "grid",
+      "type": "projectGrid",
+      "filters": false
+    }
   ]
 }
