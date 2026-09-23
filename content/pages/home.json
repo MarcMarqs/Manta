@@ -23,7 +23,7 @@
     {
       "id": "rail",
       "type": "projectRail",
-      "filters": true
+      "filters": false
     },
     {
       "id": "sep",
@@ -44,6 +44,13 @@
       "id": "grid",
       "type": "projectGrid",
       "filters": false
+    },
+    {
+      "id": "b-pwgg0a",
+      "type": "image",
+      "src": "/images/uploads/screenshot-2026-09-03-210829-f341f5.webp",
+      "alt": "",
+      "caption": ""
     }
   ]
 }
