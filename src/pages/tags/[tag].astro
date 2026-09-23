@@ -1,0 +1,43 @@
+---
+// One page per tag in content/tags.json, listing the projects that carry it.
+import Base from '../../layouts/Base.astro';
+import ProjectGrid from '../../components/ProjectGrid.astro';
+import { projects, site, tags } from '../../lib/content';
+
+export function getStaticPaths() {
+  return [...tags.discipline, ...tags.engine]
+    .filter((tag) => projects.some((p) => [...p.discipline, ...p.engine].includes(tag.id)))
+    .map((tag) => ({ params: { tag: tag.id }, props: { tag } }));
+}
+
+const { tag } = Astro.props;
+const count = projects.filter((p) => [...p.discipline, ...p.engine].includes(tag.id)).length;
+const others = [...tags.discipline, ...tags.engine].filter((t) => t.id !== tag.id);
+---
+
+<Base
+  title={tag.label}
+  description={`${count} ${count === 1 ? 'project' : 'projects'} tagged ${tag.label} by ${site.name}.`}
+  path={`/tags/${tag.id}`}
+>
+  <div class="blocks">
+    <div>
+      <p class="muted">Tagged</p>
+      <h1>{tag.label}</h1>
+      <p class="muted">{count} {count === 1 ? 'project' : 'projects'}</p>
+    </div>
+    <ProjectGrid tag={tag.id} />
+    <div>
+      <p class="muted">Other tags</p>
+      <div class="tag-links">
+        {
+          others.map((t) => (
+            <a class="tag-chip" href={`/tags/${t.id}`}>
+              {t.label}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</Base>

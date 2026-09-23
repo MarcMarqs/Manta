@@ -15,6 +15,10 @@ export function orderProjects(list: Project[]): Project[] {
 
 export const projects: Project[] = orderProjects(projectsJson as Project[]);
 
+/** Human label for a tag id, for pages that render outside the preview context. */
+export const tagLabel = (id: string) =>
+  [...tags.discipline, ...tags.engine].find((t) => t.id === id)?.label ?? id;
+
 const pageModules = import.meta.glob<Record<string, unknown>>('../../content/pages/**/*.json', {
   eager: true,
   import: 'default',

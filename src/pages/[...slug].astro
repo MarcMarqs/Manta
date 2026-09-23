@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import BlockList from '../components/blocks/BlockList.astro';
-import { pages, projects, site } from '../lib/content';
+import { pages, projects, site, tagLabel } from '../lib/content';
 
 // One route for the whole site: every file in content/pages/ becomes a page.
 // home.json is the root, work/dunes.json is /work/dunes, and so on.
@@ -13,10 +13,41 @@ export function getStaticPaths() {
 }
 
 const { page } = Astro.props;
-const cover = page.project ? projects.find((p) => p.slug === page.project)?.cover : undefined;
-const image = page.image || cover || site.socialImage;
+const current = page.project ? projects.find((p) => p.slug === page.project) : undefined;
+const image = page.image || current?.cover || site.socialImage;
+
+// After a case study, point at the next project in the same order the home page uses,
+// wrapping round at the end so there is always somewhere to go.
+const index = current ? projects.indexOf(current) : -1;
+const next = index >= 0 && projects.length > 1 ? projects[(index + 1) % projects.length] : undefined;
+const tagsOf = current ? [...current.discipline, ...current.engine] : [];
 ---
 
 <Base title={page.title} description={page.description} path={page.path} image={image}>
   <BlockList blocks={page.blocks} />
+
+  {
+    tagsOf.length > 0 && (
+      <div class="tag-links" style="margin-top: calc(2rem * var(--spacing))">
+        {tagsOf.map((id) => (
+          <a class="tag-chip" href={`/tags/${id}`}>
+            {tagLabel(id)}
+          </a>
+        ))}
+      </div>
+    )
+  }
+
+  {
+    next && (
+      <a class="next-project" href={`/work/${next.slug}`}>
+        <img src={next.cover} alt="" loading="lazy" />
+        <span>
+          <span class="eyebrow">Next case study</span>
+          <h2>{next.title}</h2>
+          <p>{next.summary}</p>
+        </span>
+      </a>
+    )
+  }
 </Base>

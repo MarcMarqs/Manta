@@ -1,6 +1,7 @@
 ---
 import { useContent } from '../lib/context';
 import { fontStack, googleFontsHref } from '../lib/fonts';
+import SiteScripts from '../components/SiteScripts.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -104,6 +105,8 @@ const shareText = description || site.tagline;
         <slot />
       </div>
     </main>
+
+    <SiteScripts />
 
     <footer class="site-footer">
       <div class="wrap">{site.footer}</div>

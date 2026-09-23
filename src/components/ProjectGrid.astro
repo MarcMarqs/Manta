@@ -4,9 +4,12 @@ import Filters from './Filters.astro';
 
 interface Props {
   filters?: boolean;
+  /** Show only projects carrying this tag id. */
+  tag?: string;
 }
-const { filters = false } = Astro.props;
-const { projects, tagLabel, asset } = useContent(Astro.locals);
+const { filters = false, tag } = Astro.props;
+const { projects: all, tagLabel, asset } = useContent(Astro.locals);
+const projects = tag ? all.filter((p) => [...p.discipline, ...p.engine].includes(tag)) : all;
 const id = `grid-${Math.random().toString(36).slice(2, 8)}`;
 ---
 
@@ -20,7 +23,20 @@ const id = `grid-${Math.random().toString(36).slice(2, 8)}`;
           href={`/work/${p.slug}`}
           data-tags={[...p.discipline, ...p.engine].join(' ')}
         >
-          <img src={asset(p.cover)} alt="" loading="lazy" />
+          {p.coverVideo ? (
+            <video
+              src={p.coverVideo}
+              poster={asset(p.cover)}
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="none"
+              aria-hidden="true"
+            />
+          ) : (
+            <img src={asset(p.cover)} alt="" loading="lazy" />
+          )}
           <div class="card-body">
             <h3>{p.title}</h3>
             <p class="muted card-meta">
@@ -60,10 +76,12 @@ const id = `grid-${Math.random().toString(36).slice(2, 8)}`;
     transform: translateY(-3px);
     border-color: var(--accent);
   }
-  .card img {
+  .card img,
+  .card video {
     aspect-ratio: 16 / 10;
     object-fit: cover;
     width: 100%;
+    display: block;
   }
   .card-body {
     padding: 16px;

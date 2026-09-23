@@ -1,13 +1,16 @@
 import type { APIRoute } from 'astro';
-import { pages, site } from '../lib/content';
+import { pages, projects, site, tags } from '../lib/content';
 
 /** Every page the editor knows about. Built with the site, so it can never go stale. */
 export const GET: APIRoute = () => {
   const base = site.url?.replace(/\/$/, '');
   if (!base) return new Response('Set the site address in Site & theme first.', { status: 404 });
 
-  const urls = pages
-    .map((page) => page.path)
+  const tagPaths = [...tags.discipline, ...tags.engine]
+    .filter((tag) => projects.some((p) => [...p.discipline, ...p.engine].includes(tag.id)))
+    .map((tag) => `/tags/${tag.id}`);
+
+  const urls = [...pages.map((page) => page.path), ...tagPaths]
     .sort()
     .map((path) => `  <url><loc>${base}${path}</loc></url>`)
     .join('\n');

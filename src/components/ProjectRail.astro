@@ -24,7 +24,11 @@ const id = `rail-${Math.random().toString(36).slice(2, 8)}`;
           data-slug={p.slug}
           data-tags={[...p.discipline, ...p.engine].join(' ')}
         >
-          <div class="cover" style={`background-image:url('${asset(p.cover)}')`} aria-hidden="true" />
+          <div class="cover" style={`background-image:url('${asset(p.cover)}')`} aria-hidden="true">
+            {p.coverVideo && (
+              <video src={p.coverVideo} autoplay muted loop playsinline preload="none" aria-hidden="true" />
+            )}
+          </div>
           <div class="spine">
             <span class="spine-title">{p.title}</span>
             <span class="spine-year">{p.year}</span>
@@ -98,6 +102,19 @@ const id = `rail-${Math.random().toString(36).slice(2, 8)}`;
     inset: 0;
     background-size: cover;
     background-position: center;
+  }
+
+  /* The still cover stays behind as the poster while the video loads. */
+  .cover video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cover video {
+      display: none;
+    }
   }
 
   .rail-card[aria-expanded='true'] .cover::after {
