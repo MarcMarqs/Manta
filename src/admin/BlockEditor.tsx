@@ -4,7 +4,7 @@ import { BLOCKS, GROUPS, cloneBlock, parseVideoInput, summarize } from './blocks
 import { assetUrl } from './api';
 import { ImageField, LinkInput } from './media';
 import { PROJECTS, expanded, newId, openView, projects, selectedBlock, toggleExpanded, updateFile } from './store';
-import { Field, Icon, IconButton, RichText, Segmented, TextArea, TextInput, Toggle } from './ui';
+import { Field, Icon, IconButton, RichText, Segmented, Select, TextArea, TextInput, Toggle } from './ui';
 
 const MAX_DEPTH = 2;
 
@@ -404,6 +404,38 @@ function BlockFields({ block, depth, onChange }: { block: Block; depth: number; 
           </Field>
           <Field label="Caption" wide>
             <TextInput value={block.caption ?? ''} onChange={(v) => onChange({ ...block, caption: v })} />
+          </Field>
+          <Field label={`Size · ${block.scale ?? 100}%`} hint="Of the space the block has.">
+            <input
+              type="range"
+              min="10"
+              max="100"
+              step="5"
+              value={block.scale ?? 100}
+              onInput={(e) => {
+                const scale = Number((e.target as HTMLInputElement).value);
+                // 100% is the default, so it isn't written to the file.
+                const { scale: _drop, ...rest } = block;
+                onChange(scale === 100 ? rest : { ...rest, scale });
+              }}
+            />
+          </Field>
+          <Field label="Shape" hint="Crops the picture to fixed proportions.">
+            <Select
+              value={block.aspect ?? 'auto'}
+              options={[
+                { value: 'auto' as const, label: 'Original' },
+                { value: '1:1' as const, label: 'Square' },
+                { value: '4:3' as const, label: 'Landscape 4:3' },
+                { value: '3:2' as const, label: 'Photo 3:2' },
+                { value: '16:9' as const, label: 'Wide 16:9' },
+                { value: '21:9' as const, label: 'Cinematic 21:9' },
+              ]}
+              onChange={(aspect) => {
+                const { aspect: _drop, ...rest } = block;
+                onChange(aspect === 'auto' ? rest : { ...rest, aspect });
+              }}
+            />
           </Field>
         </div>
       );

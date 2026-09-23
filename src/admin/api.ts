@@ -42,6 +42,7 @@ export const api = {
     call<{ ok: true; status: Status }>('POST', '/api/save', { changes, message }),
   upload: (name: string, type: string, data: string) =>
     call<{ src: string; status: Status }>('POST', '/api/upload', { name, type, data }),
+  deleteImage: (path: string) => call<{ ok: true; status: Status }>('DELETE', '/api/image', { path }),
   publish: () => call<{ ok: true; status: Status }>('POST', '/api/publish', {}),
   discard: () => call<{ ok: true }>('POST', '/api/discard', {}),
   preview: async (payload: unknown): Promise<string> => {

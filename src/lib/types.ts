@@ -73,7 +73,17 @@ export interface BlockLayout {
 export type Block = BlockLayout & (
   | { id: string; type: 'heading'; level: 1 | 2 | 3 | 4; text: string }
   | { id: string; type: 'text'; html: string }
-  | { id: string; type: 'image'; src: string; alt: string; caption?: string }
+  | {
+      id: string;
+      type: 'image';
+      src: string;
+      alt: string;
+      caption?: string;
+      /** Percentage of the block's width, 10-100. Absent means full width. */
+      scale?: number;
+      /** Crop shape. Absent or 'auto' keeps the picture's own proportions. */
+      aspect?: 'auto' | '1:1' | '4:3' | '3:2' | '16:9' | '21:9';
+    }
   | { id: string; type: 'gallery'; images: { src: string; alt: string }[] }
   | { id: string; type: 'video'; provider: 'youtube' | 'vimeo' | 'itch'; videoId: string; title?: string }
   | { id: string; type: 'button'; label: string; href: string; style?: 'primary' | 'secondary' }

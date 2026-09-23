@@ -276,6 +276,16 @@ export async function refreshStatus() {
   } catch {}
 }
 
+/** Page and project names that still reference an image, so it isn't deleted while in use. */
+export function imageUsage(src: string): string[] {
+  const used: string[] = [];
+  for (const [path, value] of Object.entries(files.value)) {
+    if (!JSON.stringify(value).includes(`"${src}"`)) continue;
+    used.push(path === PROJECTS ? 'Projects' : path === SITE ? 'Site settings' : fileToRoute(path));
+  }
+  return used;
+}
+
 export const newId = (prefix = 'b') => `${prefix}-${Math.random().toString(36).slice(2, 8)}`;
 
 // Dev-only handle for inspecting editor state from the browser console.

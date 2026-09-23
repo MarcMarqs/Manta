@@ -1,6 +1,6 @@
 import { useRef, useState } from 'preact/hooks';
 import { api, assetUrl } from './api';
-import { busy, fileToRoute, images, pagePaths, projects, status, toast } from './store';
+import { busy, fileToRoute, imageUsage, images, pagePaths, projects, status, toast } from './store';
 import { Icon, IconButton, Modal } from './ui';
 
 const MAX_EDGE = 2000;
@@ -55,6 +55,27 @@ export async function uploadImage(file: File): Promise<string | null> {
   }
 }
 
+async function deleteImage(src: string) {
+  const used = imageUsage(src);
+  if (used.length) {
+    toast(`Still used by ${used.join(', ')}. Remove it there first.`, 'error');
+    return;
+  }
+  if (!confirm(`Delete ${src.split('/').pop()}? It stays in the site's history, but goes from the library.`)) return;
+
+  busy.value = 'Deleting image…';
+  try {
+    const result = await api.deleteImage(`public${src}`);
+    images.value = images.value.filter((i) => i !== src);
+    status.value = result.status;
+    toast('Image deleted.', 'success');
+  } catch (err) {
+    toast(`Delete failed: ${(err as Error).message}`, 'error');
+  } finally {
+    busy.value = null;
+  }
+}
+
 function MediaLibrary({ onPick, onClose }: { onPick: (src: string) => void; onClose: () => void }) {
   const [filter, setFilter] = useState('');
   const list = images.value.filter((src) => src.toLowerCase().includes(filter.toLowerCase()));
@@ -70,12 +91,29 @@ function MediaLibrary({ onPick, onClose }: { onPick: (src: string) => void; onCl
         <p class="empty">No images yet. Upload one from any image field.</p>
       ) : (
         <div class="library">
-          {list.map((src) => (
-            <button type="button" class="library-item" onClick={() => onPick(src)} title={src}>
-              <img src={assetUrl(src)} alt="" loading="lazy" />
-              <span>{src.split('/').pop()}</span>
-            </button>
-          ))}
+          {list.map((src) => {
+            const used = imageUsage(src);
+            return (
+              <div class="library-item">
+                <button type="button" class="library-pick" onClick={() => onPick(src)} title={src}>
+                  <img src={assetUrl(src)} alt="" loading="lazy" />
+                  <span>{src.split('/').pop()}</span>
+                </button>
+                <span class="library-foot">
+                  <span class="muted small" title={used.join(', ')}>
+                    {used.length ? `Used in ${used.length}` : 'Unused'}
+                  </span>
+                  <IconButton
+                    icon="trash"
+                    tone="danger"
+                    label={used.length ? `Used by ${used.join(', ')}` : 'Delete image'}
+                    disabled={used.length > 0}
+                    onClick={() => deleteImage(src)}
+                  />
+                </span>
+              </div>
+            );
+          })}
         </div>
       )}
     </Modal>

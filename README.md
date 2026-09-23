@@ -46,7 +46,7 @@ Every block needs a unique `id` (unique within its page) and a `type`.
 |---|---|
 | `heading` | `level` 1–4, `text` |
 | `text` | `html` — rich text |
-| `image` | `src`, `alt`, `caption?` |
+| `image` | `src`, `alt`, `caption?`, `scale?` (10–100, % of the block), `aspect?` (`1:1` \| `4:3` \| `3:2` \| `16:9` \| `21:9`) |
 | `gallery` | `images[]` of `{ src, alt }` |
 | `video` | `provider` (`youtube` \| `vimeo` \| `itch`), `videoId`, `title?` |
 | `button` | `label`, `href`, `style?` (`primary` \| `secondary`) |
@@ -89,7 +89,8 @@ preview on the right rendered by the site's own components, so what you see is w
 - **Discard draft** (⋯ menu) throws away saved-but-unpublished changes.
 - **Undo / redo:** Ctrl+Z / Ctrl+Shift+Z, including deleted pages, until you reload.
 - **Images** are resized to 2000px and converted to WebP in the browser, then committed to
-  `public/images/uploads/` on the draft straight away, so the preview can show them.
+  `public/images/uploads/` on the draft straight away, so the preview can show them. An image
+  block can be scaled and cropped to a shape; the library deletes ones nothing uses any more.
 
 The editor can only write `content/**.json` and `public/images/**`, never code or config.
 

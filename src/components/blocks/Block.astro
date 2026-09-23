@@ -32,6 +32,15 @@ const wrapProps =
       }
     : {};
 
+// Per-image size: a width percentage and an optional crop shape.
+const imageStyle = (b: Extract<Block, { type: 'image' }>) =>
+  [
+    b.scale && b.scale !== 100 ? `width:${b.scale}%` : '',
+    b.aspect && b.aspect !== 'auto' ? `aspect-ratio:${b.aspect.replace(':', '/')};object-fit:cover` : '',
+  ]
+    .filter(Boolean)
+    .join(';') || undefined;
+
 const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
   ({
     youtube: `https://www.youtube-nocookie.com/embed/${b.videoId}`,
@@ -48,7 +57,7 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
   {
     block.type === 'image' && (
       <figure>
-        <img src={asset(block.src)} alt={block.alt} loading="lazy" />
+        <img src={asset(block.src)} alt={block.alt} loading="lazy" style={imageStyle(block)} />
         {block.caption && <figcaption>{block.caption}</figcaption>}
       </figure>
     )

@@ -1712,3 +1712,48 @@ form.tag-row {
 .cover-editor {
   grid-column: 1 / -1;
 }
+
+/* --- image library --- */
+
+.library-item {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  gap: 4px;
+  border: 1px solid var(--e-border);
+  border-radius: 8px;
+  background: var(--e-raised);
+}
+
+.library-pick {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--e-muted);
+  font: inherit;
+  font-size: 11.5px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.library-item:hover {
+  border-color: var(--e-accent);
+}
+
+.library-pick span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.library-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  border-top: 1px solid var(--e-border);
+  padding-top: 3px;
+}
