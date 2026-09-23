@@ -172,7 +172,7 @@ code,
   flex: none;
   border-radius: 7px;
   /* Same gradient as the tab icon (public/favicon.svg). */
-  background: linear-gradient(#5a95ff, #2f5fd6);
+  background: linear-gradient(#3fd39a, #0f8a5f);
   color: #fff;
 }
 
