@@ -187,6 +187,31 @@ code,
   border-radius: 12px;
 }
 
+.sidebar {
+  grid-area: side;
+  background: var(--e-panel);
+  border-right: 1px solid var(--e-border);
+  overflow-y: auto;
+  padding: 10px 8px;
+}
+
+.editor {
+  grid-area: editor;
+  overflow-y: auto;
+  background: var(--e-bg);
+  border-right: 1px solid var(--e-border);
+}
+
+/* Column layout: the toolbar keeps its height and the stage fills the rest.
+   Without this the preview frames collapse to zero height. */
+.preview {
+  grid-area: preview;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--e-sunken);
+}
+
 /* --- buttons --- */
 
 .btn {
