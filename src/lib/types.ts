@@ -19,6 +19,10 @@ export interface Theme {
 }
 
 export interface Site {
+  /** Public address of the site, used for canonical URLs, the sitemap and link previews. */
+  url?: string;
+  /** Default picture shown when a link to the site is shared. */
+  socialImage?: string;
   name: string;
   tagline: string;
   footer: string;
@@ -107,6 +111,8 @@ export interface Page {
   slug: string;
   title: string;
   description?: string;
+  /** Picture for this page's link previews. Falls back to the project cover, then the site's. */
+  image?: string;
   /** Slug of the project this page is a case study for, if any. */
   project?: string;
   blocks: Block[];

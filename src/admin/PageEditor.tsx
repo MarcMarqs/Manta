@@ -15,6 +15,7 @@ import {
   updateFile,
   type PageFile,
 } from './store';
+import { ImageField } from './media';
 import { Field, Icon, IconButton, Modal, Select, TextArea, TextInput, Toggle } from './ui';
 
 const RESERVED = ['admin', 'api', 'images', '_astro', '404'];
@@ -261,6 +262,13 @@ export function PageEditor({ path }: { path: string }) {
               {!isHome && <RouteField path={path} />}
               <Field label="Description" hint="Shown in search results and link previews." wide>
                 <TextInput value={page.description ?? ''} onChange={(description) => set({ description })} />
+              </Field>
+              <Field
+                label="Link preview image"
+                hint="Optional. Falls back to the project cover, then the site-wide one."
+                wide
+              >
+                <ImageField value={page.image ?? ''} onChange={(image) => set({ image: image || undefined })} />
               </Field>
               {path.startsWith(`${PAGES_DIR}work/`) && (
                 <Field label="Case study for">

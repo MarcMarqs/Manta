@@ -20,7 +20,7 @@ Nothing about a page lives in the code. Every page is a JSON file under `content
 
 | File | What it holds |
 |---|---|
-| `content/site.json` | Site name, tagline, footer, nav, and the whole theme (colors, fonts, radius, spacing) |
+| `content/site.json` | Site address, name, tagline, footer, nav, link-preview image, and the whole theme (colors, fonts, radius, spacing) |
 | `content/pages/**.json` | One file per page. `home.json` is `/`, `about.json` is `/about`, `work/dunes.json` is `/work/dunes` |
 | `content/projects.json` | The project index used by the rail and grid blocks |
 | `content/tags.json` | Allowed discipline/engine tags, so filters never break from a typo |
@@ -91,6 +91,12 @@ preview on the right rendered by the site's own components, so what you see is w
 - **Images** are resized to 2000px and converted to WebP in the browser, then committed to
   `public/images/uploads/` on the draft straight away, so the preview can show them. An image
   block can be scaled and cropped to a shape; the library deletes ones nothing uses any more.
+
+- **Link previews and search:** every page carries Open Graph and Twitter tags, a canonical
+  URL, and appears in `/sitemap.xml`; `/robots.txt` keeps crawlers out of `/admin`. A shared
+  link shows the page's own description and picture — a case study uses its project cover,
+  anything else falls back to the site-wide image in Site & theme. All of it hangs off the
+  **Site address** there, so update that when the domain changes.
 
 The editor can only write `content/**.json` and `public/images/**`, never code or config.
 

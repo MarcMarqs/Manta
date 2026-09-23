@@ -1,10 +1,18 @@
 {
+  "url": "https://manta.marcelo-rssi.workers.dev",
+  "socialImage": "",
   "name": "Marcelo Marques",
   "tagline": "Game designer — systems, economy, and level flow.",
   "footer": "© 2026 Marcelo Marques",
   "nav": [
-    { "label": "Work", "href": "/" },
-    { "label": "About", "href": "/about" }
+    {
+      "label": "Work",
+      "href": "/"
+    },
+    {
+      "label": "About",
+      "href": "/about"
+    }
   ],
   "theme": {
     "accent": "#4f8cff",

@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import BlockList from '../components/blocks/BlockList.astro';
-import { pages } from '../lib/content';
+import { pages, projects, site } from '../lib/content';
 
 // One route for the whole site: every file in content/pages/ becomes a page.
 // home.json is the root, work/dunes.json is /work/dunes, and so on.
@@ -13,8 +13,10 @@ export function getStaticPaths() {
 }
 
 const { page } = Astro.props;
+const cover = page.project ? projects.find((p) => p.slug === page.project)?.cover : undefined;
+const image = page.image || cover || site.socialImage;
 ---
 
-<Base title={page.title} description={page.description} path={page.path}>
+<Base title={page.title} description={page.description} path={page.path} image={image}>
   <BlockList blocks={page.blocks} />
 </Base>

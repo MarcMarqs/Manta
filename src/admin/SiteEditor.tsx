@@ -1,6 +1,6 @@
 import type { Site, Theme } from '../lib/types';
 import { FONTS, SYSTEM_FONT } from '../lib/fonts';
-import { LinkInput } from './media';
+import { ImageField, LinkInput } from './media';
 import { SITE, site, updateFile } from './store';
 import { Field, Icon, IconButton, Select, TextInput } from './ui';
 
@@ -61,6 +61,26 @@ export function SiteEditor() {
           </Field>
           <Field label="Tagline" wide>
             <TextInput value={s.tagline} onChange={(tagline) => set({ tagline })} />
+          </Field>
+        </div>
+      </section>
+
+      <section class="subsection">
+        <h3>Sharing & search</h3>
+        <div class="fields">
+          <Field
+            label="Site address"
+            hint="Used for link previews, the sitemap and search engines. Update it when you add a domain."
+            wide
+          >
+            <TextInput value={s.url ?? ''} onChange={(url) => set({ url })} placeholder="https://example.com" />
+          </Field>
+          <Field
+            label="Link preview image"
+            hint="Shown when someone shares a link to your site. Use a PNG, JPG or WebP around 1200×630; chat apps ignore SVG."
+            wide
+          >
+            <ImageField value={s.socialImage ?? ''} onChange={(socialImage) => set({ socialImage })} />
           </Field>
         </div>
       </section>

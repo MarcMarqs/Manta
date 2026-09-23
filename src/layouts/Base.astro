@@ -7,13 +7,23 @@ interface Props {
   title: string;
   description?: string;
   path?: string;
+  /** Picture for link previews, as a site path or a full URL. */
+  image?: string;
 }
 
-const { title, description, path } = Astro.props;
+const { title, description, path, image } = Astro.props;
 const { site } = useContent(Astro.locals);
 const t = site.theme;
 const pageTitle = title === site.name ? site.name : `${title} — ${site.name}`;
 const fontsHref = googleFontsHref([t.fontHeading, t.fontBody]);
+
+// Chat apps and search engines need absolute URLs, which only site.url can give.
+const base = site.url?.replace(/\/$/, '');
+const absolute = (value?: string) =>
+  !value ? undefined : /^https?:\/\//.test(value) ? value : base ? `${base}${value}` : undefined;
+const canonical = base && path ? `${base}${path === '/' ? '/' : path}` : undefined;
+const shareImage = absolute(image || site.socialImage);
+const shareText = description || site.tagline;
 ---
 
 <!doctype html>
@@ -23,6 +33,18 @@ const fontsHref = googleFontsHref([t.fontHeading, t.fontBody]);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     {description && <meta name="description" content={description} />}
+    {canonical && <link rel="canonical" href={canonical} />}
+
+    <meta property="og:type" content={path === '/' ? 'website' : 'article'} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={pageTitle} />
+    {shareText && <meta property="og:description" content={shareText} />}
+    {canonical && <meta property="og:url" content={canonical} />}
+    {shareImage && <meta property="og:image" content={shareImage} />}
+    <meta name="twitter:card" content={shareImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={pageTitle} />
+    {shareText && <meta name="twitter:description" content={shareText} />}
+    {shareImage && <meta name="twitter:image" content={shareImage} />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     {
       fontsHref && (

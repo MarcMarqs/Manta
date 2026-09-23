@@ -11,6 +11,8 @@ export const HOME = `${PAGES_DIR}home.json`;
 export interface PageFile {
   title: string;
   description?: string;
+  /** Picture for this page's link previews. */
+  image?: string;
   project?: string;
   blocks: Block[];
 }
