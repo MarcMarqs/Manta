@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
-import type { Align, Block, BlockType, BlockWidth } from '../lib/types';
+import type { Align, Block, BlockType, BlockWidth, Project } from '../lib/types';
 import { BLOCKS, GROUPS, cloneBlock, parseVideoInput, summarize } from './blocks';
+import { assetUrl } from './api';
 import { ImageField, LinkInput } from './media';
-import { expanded, newId, selectedBlock, toggleExpanded } from './store';
+import { PROJECTS, expanded, newId, openView, projects, selectedBlock, toggleExpanded, updateFile } from './store';
 import { Field, Icon, IconButton, RichText, Segmented, TextArea, TextInput, Toggle } from './ui';
 
 const MAX_DEPTH = 2;
@@ -322,6 +323,53 @@ function LayoutFields({ block, depth, onChange }: { block: Block; depth: number;
   );
 }
 
+// --- project covers ------------------------------------------------------
+
+/**
+ * The rail and the grid both draw their pictures from the projects, so the covers are
+ * editable here too. Otherwise you have to guess that they live in the Projects tab.
+ */
+function CoverList() {
+  const [openSlug, setOpenSlug] = useState<string | null>(null);
+  const list = projects.value;
+
+  if (!list.length) return <p class="empty small">No projects yet. Add them in the Projects tab.</p>;
+
+  const setCover = (slug: string, cover: string) =>
+    updateFile<Project[]>(PROJECTS, (all) => all.map((p) => (p.slug === slug ? { ...p, cover } : p)));
+
+  return (
+    <div class="cover-list">
+      {list.map((p) => (
+        <div class="cover-row">
+          <button
+            type="button"
+            class="cover-thumb"
+            title="Change this cover"
+            onClick={() => setOpenSlug(openSlug === p.slug ? null : p.slug)}
+          >
+            {p.cover ? <img src={assetUrl(p.cover)} alt="" /> : <Icon name="image" />}
+          </button>
+          <span class="cover-title">{p.title || p.slug}</span>
+          <button type="button" class="btn small ghost" onClick={() => setOpenSlug(openSlug === p.slug ? null : p.slug)}>
+            Change image
+          </button>
+          <IconButton
+            icon="external"
+            label={`Open ${p.title} in Projects`}
+            onClick={() => openView({ kind: 'projects', slug: p.slug })}
+          />
+          {openSlug === p.slug && (
+            <div class="cover-editor">
+              <ImageField value={p.cover} onChange={(cover) => setCover(p.slug, cover)} />
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 // --- per-type settings ---------------------------------------------------
 
 function BlockFields({ block, depth, onChange }: { block: Block; depth: number; onChange: (b: Block) => void }) {
@@ -611,7 +659,11 @@ function BlockFields({ block, depth, onChange }: { block: Block; depth: number; 
             label="Show tag filters above"
             onChange={(v) => onChange({ ...block, filters: v })}
           />
-          <p class="field-hint">Lists every non-draft project. Edit them in the Projects tab.</p>
+          <p class="field-hint">
+            Shows every project that isn't hidden, newest first. Covers can be swapped here; everything else about
+            a project lives in the Projects tab.
+          </p>
+          <CoverList />
         </div>
       );
 
