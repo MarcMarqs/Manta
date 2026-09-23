@@ -72,8 +72,12 @@ export function Preview() {
         if (!next) return;
         const scroll = current?.contentWindow?.scrollY ?? 0;
         const sameDoc = current?.dataset.path === path;
-        next.onload = () => {
-          if (id !== request.current) return;
+
+        let shown = false;
+        const show = () => {
+          if (shown || id !== request.current) return;
+          shown = true;
+          clearTimeout(watchdog);
           // Keep the reader's place when the same page re-renders.
           if (sameDoc) next.contentWindow?.scrollTo(0, scroll);
           post(next, { type: 'manta:theme', theme: theme.value });
@@ -83,6 +87,28 @@ export function Preview() {
           setLoading(false);
           setError(null);
         };
+
+        // Some browsers and privacy extensions never fire `load` for a srcdoc frame, or
+        // refuse srcdoc altogether, which would otherwise leave the preview blank for
+        // ever. Show it as soon as the document has content; if it stayed empty, load the
+        // same HTML from a blob URL instead, and only then admit defeat.
+        const watchdog = setTimeout(() => {
+          if (next.contentDocument?.body?.childElementCount) return show();
+          if (id !== request.current) return;
+
+          const blob = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+          next.removeAttribute('srcdoc');
+          next.src = blob;
+          setTimeout(() => {
+            URL.revokeObjectURL(blob);
+            if (next.contentDocument?.body?.childElementCount) return show();
+            if (id !== request.current) return;
+            setLoading(false);
+            setError('the browser blocked the preview frame. Try turning off shields or blockers for this site.');
+          }, 4000);
+        }, 4000);
+
+        next.onload = show;
         next.srcdoc = html;
       } catch (err) {
         if (id !== request.current) return;
