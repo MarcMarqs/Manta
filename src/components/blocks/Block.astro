@@ -1,6 +1,7 @@
 ---
 import type { Block } from '../../lib/types';
 import { useContent } from '../../lib/context';
+import { srcsetFor } from '../../lib/media';
 import Chart from '../Chart.astro';
 import ProjectRail from '../ProjectRail.astro';
 import ProjectGrid from '../ProjectGrid.astro';
@@ -57,7 +58,14 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
   {
     block.type === 'image' && (
       <figure>
-        <img src={asset(block.src)} alt={block.alt} loading="lazy" style={imageStyle(block)} />
+        <img
+          src={asset(block.src)}
+          srcset={preview ? undefined : srcsetFor(block.src)}
+          sizes="(max-width: 760px) 92vw, 760px"
+          alt={block.alt}
+          loading="lazy"
+          style={imageStyle(block)}
+        />
         {block.caption && <figcaption>{block.caption}</figcaption>}
       </figure>
     )
@@ -67,7 +75,13 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
     block.type === 'gallery' && (
       <div class="gallery">
         {block.images.map((img) => (
-          <img src={asset(img.src)} alt={img.alt} loading="lazy" />
+          <img
+            src={asset(img.src)}
+            srcset={preview ? undefined : srcsetFor(img.src)}
+            sizes="(max-width: 720px) 45vw, 260px"
+            alt={img.alt}
+            loading="lazy"
+          />
         ))}
       </div>
     )

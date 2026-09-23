@@ -30,6 +30,9 @@ export interface LoadedState {
   status: Status;
 }
 
+/** content/media.json: which widths exist for each uploaded image. */
+export type MediaManifest = Record<string, { w: number; sizes: number[] }>;
+
 export type SaveChange = { path: string; content: string } | { path: string; delete: true };
 
 export const api = {
@@ -40,9 +43,10 @@ export const api = {
   status: () => call<Status>('GET', '/api/status'),
   save: (changes: SaveChange[], message: string) =>
     call<{ ok: true; status: Status }>('POST', '/api/save', { changes, message }),
-  upload: (name: string, type: string, data: string) =>
-    call<{ src: string; status: Status }>('POST', '/api/upload', { name, type, data }),
-  deleteImage: (path: string) => call<{ ok: true; status: Status }>('DELETE', '/api/image', { path }),
+  upload: (name: string, image: { type: string; data: string; width?: number; variants: { width: number; data: string }[] }) =>
+    call<{ src: string; manifest?: MediaManifest; status: Status }>('POST', '/api/upload', { name, ...image }),
+  deleteImage: (path: string) =>
+    call<{ ok: true; manifest?: MediaManifest; status: Status }>('DELETE', '/api/image', { path }),
   publish: () => call<{ ok: true; status: Status }>('POST', '/api/publish', {}),
   discard: () => call<{ ok: true }>('POST', '/api/discard', {}),
   preview: async (payload: unknown): Promise<string> => {

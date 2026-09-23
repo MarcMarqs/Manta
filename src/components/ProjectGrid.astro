@@ -1,5 +1,6 @@
 ---
 import { useContent } from '../lib/context';
+import { srcsetFor } from '../lib/media';
 import Filters from './Filters.astro';
 
 interface Props {
@@ -8,7 +9,7 @@ interface Props {
   tag?: string;
 }
 const { filters = false, tag } = Astro.props;
-const { projects: all, tagLabel, asset } = useContent(Astro.locals);
+const { projects: all, tagLabel, asset, preview } = useContent(Astro.locals);
 const projects = tag ? all.filter((p) => [...p.discipline, ...p.engine].includes(tag)) : all;
 const id = `grid-${Math.random().toString(36).slice(2, 8)}`;
 ---
@@ -35,7 +36,13 @@ const id = `grid-${Math.random().toString(36).slice(2, 8)}`;
               aria-hidden="true"
             />
           ) : (
-            <img src={asset(p.cover)} alt="" loading="lazy" />
+            <img
+              src={asset(p.cover)}
+              srcset={preview ? undefined : srcsetFor(p.cover)}
+              sizes="(max-width: 720px) 92vw, 320px"
+              alt=""
+              loading="lazy"
+            />
           )}
           <div class="card-body">
             <h3>{p.title}</h3>

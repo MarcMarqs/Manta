@@ -1,9 +1,11 @@
 import { useRef, useState } from 'preact/hooks';
 import { api, assetUrl } from './api';
-import { busy, fileToRoute, imageUsage, images, pagePaths, projects, status, toast } from './store';
+import { MEDIA, busy, fileToRoute, imageUsage, images, pagePaths, projects, setSavedFile, status, toast } from './store';
 import { Icon, IconButton, Modal } from './ui';
 
 const MAX_EDGE = 2000;
+/** Copies made for phones and tablets; anything wider than the original is skipped. */
+const VARIANT_WIDTHS = [480, 960, 1440];
 
 function readAsBase64(blob: Blob): Promise<string> {
   return new Promise((resolve, reject) => {
@@ -14,25 +16,47 @@ function readAsBase64(blob: Blob): Promise<string> {
   });
 }
 
-/**
- * Photos are scaled to at most 2000px and re-encoded as WebP before upload, so a
- * 12 MB phone picture lands in the repo at a few hundred KB. SVGs and GIFs are kept
- * as-is: re-encoding would rasterise one and freeze the other.
- */
-async function prepare(file: File): Promise<{ type: string; data: string }> {
-  if (file.type === 'image/svg+xml' || file.type === 'image/gif') {
-    return { type: file.type, data: await readAsBase64(file) };
-  }
-  const bitmap = await createImageBitmap(file);
-  const scale = Math.min(1, MAX_EDGE / Math.max(bitmap.width, bitmap.height));
+interface Prepared {
+  type: string;
+  data: string;
+  width?: number;
+  variants: { width: number; data: string }[];
+}
+
+/** Draws the bitmap at a given width and returns it as base64 WebP. */
+async function encodeAt(bitmap: ImageBitmap, width: number): Promise<string> {
   const canvas = document.createElement('canvas');
-  canvas.width = Math.round(bitmap.width * scale);
-  canvas.height = Math.round(bitmap.height * scale);
+  canvas.width = width;
+  canvas.height = Math.round((bitmap.height / bitmap.width) * width);
   canvas.getContext('2d')!.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-  bitmap.close();
   const blob = await new Promise<Blob | null>((r) => canvas.toBlob(r, 'image/webp', 0.85));
   if (!blob) throw new Error('This browser could not convert the image.');
-  return { type: 'image/webp', data: await readAsBase64(blob) };
+  return readAsBase64(blob);
+}
+
+/**
+ * Photos are scaled to at most 2000px and re-encoded as WebP before upload, so a
+ * 12 MB phone picture lands in the repo at a few hundred KB. Smaller copies are made at
+ * the same time, so phones don't download the desktop-sized one. SVGs and GIFs are kept
+ * as-is: re-encoding would rasterise one and freeze the other.
+ */
+async function prepare(file: File): Promise<Prepared> {
+  if (file.type === 'image/svg+xml' || file.type === 'image/gif') {
+    return { type: file.type, data: await readAsBase64(file), variants: [] };
+  }
+  const bitmap = await createImageBitmap(file);
+  const width = Math.min(MAX_EDGE, bitmap.width);
+  try {
+    const data = await encodeAt(bitmap, width);
+    const variants = [];
+    for (const w of VARIANT_WIDTHS) {
+      // No point storing a copy that isn't meaningfully smaller than the original.
+      if (w < width * 0.9) variants.push({ width: w, data: await encodeAt(bitmap, w) });
+    }
+    return { type: 'image/webp', data, width, variants };
+  } finally {
+    bitmap.close();
+  }
 }
 
 export async function uploadImage(file: File): Promise<string | null> {
@@ -42,10 +66,12 @@ export async function uploadImage(file: File): Promise<string | null> {
   }
   busy.value = 'Uploading image…';
   try {
-    const { type, data } = await prepare(file);
-    const result = await api.upload(file.name, type, data);
+    const prepared = await prepare(file);
+    const result = await api.upload(file.name, prepared);
     images.value = [...images.value, result.src].sort();
     status.value = result.status;
+    // The server committed the manifest already, so hold it without marking it unsaved.
+    if (result.manifest) setSavedFile(MEDIA, result.manifest);
     return result.src;
   } catch (err) {
     toast(`Upload failed: ${(err as Error).message}`, 'error');
@@ -68,6 +94,7 @@ async function deleteImage(src: string) {
     const result = await api.deleteImage(`public${src}`);
     images.value = images.value.filter((i) => i !== src);
     status.value = result.status;
+    if (result.manifest) setSavedFile(MEDIA, result.manifest);
     toast('Image deleted.', 'success');
   } catch (err) {
     toast(`Delete failed: ${(err as Error).message}`, 'error');

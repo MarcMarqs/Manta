@@ -5,6 +5,7 @@ import { api, type Status } from './api';
 export const SITE = 'content/site.json';
 export const PROJECTS = 'content/projects.json';
 export const TAGS = 'content/tags.json';
+export const MEDIA = 'content/media.json';
 export const PAGES_DIR = 'content/pages/';
 export const HOME = `${PAGES_DIR}home.json`;
 
@@ -286,6 +287,14 @@ export function imageUsage(src: string): string[] {
     used.push(path === PROJECTS ? 'Projects' : path === SITE ? 'Site settings' : fileToRoute(path));
   }
   return used;
+}
+
+/** Replaces a file the server just committed itself, so it doesn't show up as unsaved. */
+export function setSavedFile(path: string, value: unknown) {
+  batch(() => {
+    files.value = { ...files.value, [path]: value };
+    saved.value = { ...saved.value, [path]: serialize(value) };
+  });
 }
 
 export const newId = (prefix = 'b') => `${prefix}-${Math.random().toString(36).slice(2, 8)}`;
