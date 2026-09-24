@@ -79,6 +79,7 @@ export const historyTick = signal(0);
  * undo step, so undo removes a burst of typing rather than one character.
  */
 export function setFiles(next: Files, { coalesce = true } = {}) {
+  rememberUnsaved();
   const now = Date.now();
   if (!coalesce || now - lastChange > 1000 || !past.length) {
     past.push(files.value);
@@ -182,6 +183,19 @@ export async function loadAll() {
       toast(`${path} isn't valid JSON and was skipped.`, 'error');
     }
   }
+  // Anything left unsaved in this browser from a previous visit is offered back,
+  // as long as it belongs to the same branch and still differs from what's stored.
+  loadedBranch = state.branch;
+  try {
+    const stored = localStorage.getItem(BACKUP_KEY);
+    const backup: Backup | null = stored ? JSON.parse(stored) : null;
+    const differs = backup && JSON.stringify(backup.files) !== JSON.stringify(parsed);
+    recovery.value = backup && backup.branch === state.branch && differs ? backup : null;
+    if (!recovery.value) localStorage.removeItem(BACKUP_KEY);
+  } catch {
+    recovery.value = null;
+  }
+
   batch(() => {
     files.value = parsed;
     saved.value = normalised;
@@ -259,6 +273,7 @@ export async function save() {
       saved.value = nextSaved;
       status.value = result.status;
     });
+    forgetUnsaved();
     if (result.status.backend === 'local') toast('Saved to your project files.', 'success');
     else
       toast(
@@ -287,6 +302,52 @@ export function imageUsage(src: string): string[] {
     used.push(path === PROJECTS ? 'Projects' : path === SITE ? 'Site settings' : fileToRoute(path));
   }
   return used;
+}
+
+// --- crash recovery -------------------------------------------------------
+
+const BACKUP_KEY = 'manta:unsaved';
+
+export interface Backup {
+  at: number;
+  branch: string;
+  files: Record<string, unknown>;
+}
+
+/** Unsaved work found in this browser from a previous visit, waiting to be restored. */
+export const recovery = signal<Backup | null>(null);
+let backupTimer: ReturnType<typeof setTimeout> | undefined;
+let loadedBranch = '';
+
+/** Keeps a copy of unsaved edits in this browser, so closing the tab doesn't lose them. */
+export function rememberUnsaved() {
+  clearTimeout(backupTimer);
+  backupTimer = setTimeout(() => {
+    try {
+      if (!dirtyPaths.value.length) localStorage.removeItem(BACKUP_KEY);
+      else
+        localStorage.setItem(
+          BACKUP_KEY,
+          JSON.stringify({ at: Date.now(), branch: loadedBranch, files: files.value } satisfies Backup),
+        );
+    } catch {}
+  }, 800);
+}
+
+export function forgetUnsaved() {
+  clearTimeout(backupTimer);
+  recovery.value = null;
+  try {
+    localStorage.removeItem(BACKUP_KEY);
+  } catch {}
+}
+
+export function applyRecovery() {
+  const backup = recovery.value;
+  if (!backup) return;
+  setFiles(backup.files, { coalesce: false });
+  recovery.value = null;
+  toast('Unsaved changes restored. Save them when you are happy.', 'success');
 }
 
 /** Replaces a file the server just committed itself, so it doesn't show up as unsaved. */

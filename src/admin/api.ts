@@ -1,6 +1,6 @@
-import type { Status } from '../server/backend';
+import type { Status, Version } from '../server/backend';
 
-export type { Status };
+export type { Status, Version };
 
 export class ApiError extends Error {
   constructor(
@@ -47,6 +47,8 @@ export const api = {
     call<{ src: string; manifest?: MediaManifest; status: Status }>('POST', '/api/upload', { name, ...image }),
   deleteImage: (path: string) =>
     call<{ ok: true; manifest?: MediaManifest; status: Status }>('DELETE', '/api/image', { path }),
+  history: () => call<{ versions: Version[] }>('GET', '/api/history'),
+  restore: (sha: string) => call<{ ok: true; status: Status }>('POST', '/api/history', { sha }),
   publish: () => call<{ ok: true; status: Status }>('POST', '/api/publish', {}),
   discard: () => call<{ ok: true }>('POST', '/api/discard', {}),
   preview: async (payload: unknown): Promise<string> => {

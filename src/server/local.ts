@@ -2,7 +2,7 @@
 // under `astro dev` when no GITHUB_TOKEN is set, so it never ships to the Worker.
 import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { dirname, join, relative, sep } from 'node:path';
-import type { Backend, ContentState, FileChange, Status } from './backend';
+import type { Backend, ContentState, FileChange, Status, Version } from './backend';
 import { isContentPath, isImagePath } from './paths';
 
 const root = process.cwd();
@@ -61,6 +61,14 @@ export class LocalBackend implements Backend {
       previewUrl: null,
       liveUrl: null,
     };
+  }
+
+  async history(): Promise<Version[]> {
+    return [];
+  }
+
+  async restore(): Promise<void> {
+    throw new Error('Local mode has no version history. Use git to go back.');
   }
 
   async publish(): Promise<void> {

@@ -1,4 +1,4 @@
-import type { Backend, ContentState, FileChange, Status } from './backend';
+import type { Backend, ContentState, FileChange, Status, Version } from './backend';
 import { isContentPath, isImagePath } from './paths';
 
 const LIVE = 'main';
@@ -202,6 +202,46 @@ export class GitHubBackend implements Backend {
 
     // A fresh draft is cut from live on the next save, so it always starts current.
     await this.request('DELETE', `/git/refs/heads/${DRAFT}`);
+  }
+
+  async history(): Promise<Version[]> {
+    const branch = (await this.head(DRAFT)) ? DRAFT : LIVE;
+    const commits = await this.request<
+      {
+        sha: string;
+        commit: { message: string; author: { name: string; date: string } };
+      }[]
+    >('GET', `/commits?sha=${branch}&path=content&per_page=25`);
+
+    return commits.map((c) => ({
+      sha: c.sha,
+      // Just the summary line; the editor writes one-line messages anyway.
+      message: c.commit.message.split('\n')[0],
+      date: c.commit.author.date,
+      author: c.commit.author.name,
+    }));
+  }
+
+  /** Copies that commit's content files onto the draft, removing any added since. */
+  async restore(sha: string): Promise<void> {
+    const commit = await this.request<{ tree: { sha: string } }>('GET', `/git/commits/${sha}`);
+    const tree = await this.request<{ tree: TreeEntry[] }>('GET', `/git/trees/${commit.tree.sha}?recursive=1`);
+    const wanted = tree.tree.filter((e) => e.type === 'blob' && isContentPath(e.path));
+
+    const changes: FileChange[] = await Promise.all(
+      wanted.map(async (entry) => {
+        const blob = await this.request<{ content: string }>('GET', `/git/blobs/${entry.sha}`);
+        return { path: entry.path, content: decodeBase64Utf8(blob.content), encoding: 'utf-8' as const };
+      }),
+    );
+
+    const current = await this.load();
+    const keep = new Set(wanted.map((e) => e.path));
+    for (const path of Object.keys(current.files)) {
+      if (!keep.has(path)) changes.push({ path, delete: true });
+    }
+
+    await this.commit(changes, `Restore content from ${sha.slice(0, 7)}`);
   }
 
   async discard(): Promise<void> {

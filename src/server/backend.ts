@@ -25,12 +25,23 @@ export interface Status {
   liveUrl: string | null;
 }
 
+export interface Version {
+  sha: string;
+  message: string;
+  date: string;
+  author: string;
+}
+
 export interface Backend {
   kind: 'github' | 'local';
   load(): Promise<ContentState>;
   commit(changes: FileChange[], message: string): Promise<void>;
   status(): Promise<Status>;
   publish(): Promise<void>;
+  /** Recent commits that touched content, newest first. */
+  history(): Promise<Version[]>;
+  /** Puts the content from an earlier commit back on the draft branch. */
+  restore(sha: string): Promise<void>;
   discard(): Promise<void>;
   readAsset(path: string): Promise<ArrayBuffer | null>;
 }

@@ -1,5 +1,5 @@
 import type { ComponentChildren } from 'preact';
-import { useEffect, useRef } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 
 // --- icons (16px, stroke = currentColor) ---------------------------------
 
@@ -244,8 +244,24 @@ export function Toggle({ checked, onChange, label }: { checked: boolean; onChang
  * Minimal rich text: bold, italic, links, lists. The DOM is only rewritten when the
  * value changes from outside (undo, switching blocks), so typing never loses the caret.
  */
-export function RichText({ value, onChange }: { value: string; onChange: (html: string) => void }) {
+export interface LinkOption {
+  label: string;
+  href: string;
+}
+
+export function RichText({
+  value,
+  onChange,
+  links = [],
+}: {
+  value: string;
+  onChange: (html: string) => void;
+  /** Pages and projects offered in the link dialog. */
+  links?: LinkOption[];
+}) {
   const ref = useRef<HTMLDivElement>(null);
+  const savedRange = useRef<Range | null>(null);
+  const [linking, setLinking] = useState<{ href: string; text: string } | null>(null);
 
   useEffect(() => {
     if (ref.current && ref.current.innerHTML !== value) ref.current.innerHTML = value;
@@ -265,9 +281,38 @@ export function RichText({ value, onChange }: { value: string; onChange: (html: 
     emit();
   };
 
-  const link = () => {
-    const href = prompt('Link to (a page like /about, or a full URL):', 'https://');
-    if (href) exec('createLink', href);
+  // The dialog steals focus, so the selection is stored before it opens and put back after.
+  const openLink = () => {
+    const selection = getSelection();
+    const range = selection && selection.rangeCount ? selection.getRangeAt(0) : null;
+    savedRange.current = range && ref.current?.contains(range.commonAncestorContainer) ? range.cloneRange() : null;
+    setLinking({ href: '', text: savedRange.current?.toString() ?? '' });
+  };
+
+  const applyLink = (href: string, text: string) => {
+    setLinking(null);
+    if (!href) return;
+    const selection = getSelection();
+    ref.current?.focus();
+    if (savedRange.current && selection) {
+      selection.removeAllRanges();
+      selection.addRange(savedRange.current);
+    }
+    // With nothing selected there is no text to turn into a link, so write some first.
+    if (!savedRange.current || savedRange.current.collapsed) {
+      document.execCommand('insertText', false, text || href);
+      const node = getSelection()?.focusNode;
+      const end = getSelection()?.focusOffset ?? 0;
+      const range = document.createRange();
+      if (node) {
+        range.setStart(node, Math.max(0, end - (text || href).length));
+        range.setEnd(node, end);
+        const selection2 = getSelection();
+        selection2?.removeAllRanges();
+        selection2?.addRange(range);
+      }
+    }
+    exec('createLink', href);
   };
 
   return (
@@ -275,11 +320,19 @@ export function RichText({ value, onChange }: { value: string; onChange: (html: 
       <div class="richtext-toolbar">
         <IconButton icon="bold" label="Bold" onClick={() => exec('bold')} />
         <IconButton icon="italic" label="Italic" onClick={() => exec('italic')} />
-        <IconButton icon="link" label="Link" onClick={link} />
+        <IconButton icon="link" label="Link" onClick={openLink} />
         <IconButton icon="list" label="Bullet list" onClick={() => exec('insertUnorderedList')} />
         <IconButton icon="olist" label="Numbered list" onClick={() => exec('insertOrderedList')} />
         <IconButton icon="clear" label="Clear formatting" onClick={() => exec('removeFormat')} />
       </div>
+      {linking && (
+        <LinkDialog
+          initial={linking}
+          links={links}
+          onCancel={() => setLinking(null)}
+          onApply={applyLink}
+        />
+      )}
       <div
         ref={ref}
         class="richtext-body"
@@ -293,6 +346,68 @@ export function RichText({ value, onChange }: { value: string; onChange: (html: 
         }}
       />
     </div>
+  );
+}
+
+function LinkDialog({
+  initial,
+  links,
+  onApply,
+  onCancel,
+}: {
+  initial: { href: string; text: string };
+  links: LinkOption[];
+  onApply: (href: string, text: string) => void;
+  onCancel: () => void;
+}) {
+  const [href, setHref] = useState(initial.href);
+  const [text, setText] = useState(initial.text);
+  const [filter, setFilter] = useState('');
+  const matches = links.filter((l) => `${l.label} ${l.href}`.toLowerCase().includes(filter.toLowerCase()));
+
+  return (
+    <Modal
+      title="Add a link"
+      onClose={onCancel}
+      footer={
+        <>
+          <button type="button" class="btn ghost" onClick={onCancel}>
+            Cancel
+          </button>
+          <button type="button" class="btn primary" disabled={!href.trim()} onClick={() => onApply(href.trim(), text)}>
+            Add link
+          </button>
+        </>
+      }
+    >
+      <div class="stack">
+        {!initial.text && (
+          <Field label="Text to show">
+            <TextInput value={text} onChange={setText} placeholder="Read the case study" />
+          </Field>
+        )}
+        <Field label="Address" hint="A page below, or any URL, or mailto:you@example.com">
+          <TextInput value={href} onChange={setHref} autoFocus placeholder="https://…" />
+        </Field>
+        <Field label="Pages on this site">
+          <TextInput value={filter} onChange={setFilter} placeholder="Filter…" />
+        </Field>
+        <div class="link-list">
+          {matches.map((l) => (
+            <button
+              type="button"
+              class={`link-option${l.href === href ? ' on' : ''}`}
+              onClick={() => setHref(l.href)}
+              onDblClick={() => onApply(l.href, text)}
+            >
+              <span>{l.label}</span>
+              <span class="mono muted small">{l.href}</span>
+            </button>
+          ))}
+          {!matches.length && <p class="empty small">No pages match.</p>}
+        </div>
+      </div>
+    </Modal>
   );
 }
 

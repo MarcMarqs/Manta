@@ -3,10 +3,29 @@ import type { Align, Block, BlockType, BlockWidth, Project } from '../lib/types'
 import { BLOCKS, GROUPS, cloneBlock, parseVideoInput, summarize } from './blocks';
 import { assetUrl } from './api';
 import { ImageField, LinkInput } from './media';
-import { PROJECTS, expanded, newId, openView, projects, selectedBlock, toggleExpanded, updateFile } from './store';
+import { PROJECTS, expanded, fileToRoute, files, newId, openView, pagePaths, projects, selectedBlock, toggleExpanded, updateFile } from './store';
 import { Field, Icon, IconButton, RichText, Segmented, Select, TextArea, TextInput, Toggle } from './ui';
 
 const MAX_DEPTH = 2;
+
+/** Every page, plus any case study that doesn't have one yet, offered when adding a link. */
+const linkOptions = () => {
+  const pages = pagePaths.value.map((path) => ({
+    label: (files.value[path] as { title?: string }).title || fileToRoute(path),
+    href: fileToRoute(path),
+  }));
+  const known = new Set(pages.map((p) => p.href));
+  const missing = projects.value
+    .map((p) => ({ label: `${p.title} (case study)`, href: `/work/${p.slug}` }))
+    .filter((p) => !known.has(p.href));
+  return [...pages, ...missing];
+};
+
+/**
+ * Actions for the selected block, so the keyboard shortcuts in App.tsx can reach whichever
+ * card is selected without threading callbacks through every list.
+ */
+export const blockActions = new Map<string, { duplicate: () => void; remove: () => void; move: (dir: -1 | 1) => void }>();
 
 // Drag state lives outside components: a drag only reorders within the list it started in.
 let drag: { list: string; index: number } | null = null;
@@ -200,6 +219,19 @@ function BlockCard({
   const spec = BLOCKS[block.type];
   const [draggable, setDraggable] = useState(false);
 
+  const confirmRemove = () => {
+    const nested = block.type === 'section' || block.type === 'columns';
+    if (!nested || confirm(`Delete this ${spec.label.toLowerCase()} and everything inside it?`)) onRemove();
+  };
+
+  // Keyboard shortcuts act on the selected block, wherever it is nested.
+  useEffect(() => {
+    blockActions.set(block.id, { duplicate: onDuplicate, remove: confirmRemove, move: onMove });
+    return () => {
+      blockActions.delete(block.id);
+    };
+  });
+
   return (
     <div
       class={`block-card${isOpen ? ' open' : ''}${isSelected ? ' selected' : ''}`}
@@ -242,18 +274,10 @@ function BlockCard({
         <span class="block-summary">{summarize(block)}</span>
         {layoutLabel(block) && <span class="block-layout">{layoutLabel(block)}</span>}
         <span class="block-tools">
-          <IconButton icon="up" label="Move up" onClick={() => onMove(-1)} disabled={first} />
-          <IconButton icon="down" label="Move down" onClick={() => onMove(1)} disabled={last} />
-          <IconButton icon="copy" label="Duplicate" onClick={onDuplicate} />
-          <IconButton
-            icon="trash"
-            label="Delete"
-            tone="danger"
-            onClick={() => {
-              const nested = block.type === 'section' || block.type === 'columns';
-              if (!nested || confirm(`Delete this ${spec.label.toLowerCase()} and everything inside it?`)) onRemove();
-            }}
-          />
+          <IconButton icon="up" label="Move up (Alt+↑)" onClick={() => onMove(-1)} disabled={first} />
+          <IconButton icon="down" label="Move down (Alt+↓)" onClick={() => onMove(1)} disabled={last} />
+          <IconButton icon="copy" label="Duplicate (Ctrl+D)" onClick={onDuplicate} />
+          <IconButton icon="trash" label="Delete (Del)" tone="danger" onClick={confirmRemove} />
         </span>
       </div>
       {isOpen && (
@@ -391,7 +415,13 @@ function BlockFields({ block, depth, onChange }: { block: Block; depth: number; 
       );
 
     case 'text':
-      return <RichText value={block.html} onChange={(v) => onChange({ ...block, html: v })} />;
+      return (
+        <RichText
+          value={block.html}
+          links={linkOptions()}
+          onChange={(v) => onChange({ ...block, html: v })}
+        />
+      );
 
     case 'image':
       return (

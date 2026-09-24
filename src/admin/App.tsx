@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'preact/hooks';
-import { api, ApiError } from './api';
+import { api, ApiError, type Version } from './api';
 import { LinkSuggestions } from './media';
 import { NewPageDialog, PageEditor } from './PageEditor';
 import { Preview } from './Preview';
@@ -8,6 +8,7 @@ import { SiteEditor } from './SiteEditor';
 import { TagsEditor } from './TagsEditor';
 import {
   HOME,
+  applyRecovery,
   busy,
   canRedo,
   canUndo,
@@ -17,8 +18,11 @@ import {
   loadAll,
   openView,
   pagePaths,
+  forgetUnsaved,
+  recovery,
   redo,
   save,
+  selectedBlock,
   status,
   toast,
   toasts,
@@ -26,6 +30,7 @@ import {
   view,
   type PageFile,
 } from './store';
+import { blockActions } from './BlockEditor';
 import { Icon, IconButton, Logo, Modal } from './ui';
 import './admin.css';
 
@@ -151,6 +156,112 @@ function PublishDialog({ onClose }: { onClose: () => void }) {
   );
 }
 
+// --- version history -----------------------------------------------------
+
+function HistoryDialog({ onClose }: { onClose: () => void }) {
+  const [versions, setVersions] = useState<Version[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    api
+      .history()
+      .then((r) => setVersions(r.versions))
+      .catch((err) => setError(err.message));
+  }, []);
+
+  const restore = async (version: Version) => {
+    if (
+      !confirm(
+        `Put the content back as it was at "${version.message}"? It becomes a new draft change, so nothing is lost and you can still undo by restoring a later version.`,
+      )
+    )
+      return;
+    busy.value = 'Restoring…';
+    try {
+      const result = await api.restore(version.sha);
+      await loadAll();
+      status.value = result.status;
+      toast('Content restored. Check the preview, then publish when ready.', 'success');
+      onClose();
+    } catch (err) {
+      toast(`Restore failed: ${(err as Error).message}`, 'error');
+    } finally {
+      busy.value = null;
+    }
+  };
+
+  const when = (iso: string) => {
+    const date = new Date(iso);
+    const mins = Math.round((Date.now() - date.getTime()) / 60000);
+    if (mins < 60) return `${Math.max(1, mins)} min ago`;
+    if (mins < 1440) return `${Math.round(mins / 60)} h ago`;
+    return date.toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
+  };
+
+  return (
+    <Modal title="Version history" onClose={onClose} wide>
+      {error && <p class="error-text">{error}</p>}
+      {!versions && !error && (
+        <p class="empty">
+          <span class="spinner" /> Loading versions…
+        </p>
+      )}
+      {versions?.length === 0 && <p class="empty">No saved versions yet.</p>}
+      {versions && versions.length > 0 && (
+        <>
+          <p class="muted">Every save and publish is a version. Restoring one adds it as a new change.</p>
+          <div class="version-list">
+            {versions.map((v, i) => (
+              <div class="version-row">
+                <span class="version-main">
+                  <strong>{v.message}</strong>
+                  <span class="muted small">
+                    {when(v.date)} · {v.author} · <span class="mono">{v.sha.slice(0, 7)}</span>
+                  </span>
+                </span>
+                {i === 0 ? (
+                  <span class="pill ok">Current</span>
+                ) : (
+                  <button type="button" class="btn small" onClick={() => restore(v)} disabled={Boolean(busy.value)}>
+                    Restore
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
+        </>
+      )}
+    </Modal>
+  );
+}
+
+function RecoveryDialog() {
+  const backup = recovery.value;
+  if (!backup) return null;
+  const when = new Date(backup.at).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
+  return (
+    <Modal
+      title="Unsaved changes found"
+      onClose={forgetUnsaved}
+      footer={
+        <>
+          <button type="button" class="btn ghost" onClick={forgetUnsaved}>
+            Discard them
+          </button>
+          <button type="button" class="btn primary" onClick={applyRecovery}>
+            Restore my changes
+          </button>
+        </>
+      }
+    >
+      <p>
+        This browser still holds edits from {when} that were never saved. They were kept when the tab closed.
+      </p>
+      <p class="muted">Restoring brings them back into the editor, where you can save or undo them as usual.</p>
+    </Modal>
+  );
+}
+
 // --- top bar -------------------------------------------------------------
 
 function StatusPill() {
@@ -163,7 +274,7 @@ function StatusPill() {
   return <span class="pill ok">Everything is live</span>;
 }
 
-function TopBar({ onPublish, onLogout }: { onPublish: () => void; onLogout: () => void }) {
+function TopBar({ onPublish, onLogout, onHistory }: { onPublish: () => void; onLogout: () => void; onHistory: () => void }) {
   const dirty = dirtyPaths.value.length > 0;
   const s = status.value;
   const [menu, setMenu] = useState(false);
@@ -242,6 +353,15 @@ function TopBar({ onPublish, onLogout }: { onPublish: () => void; onLogout: () =
                   Open live site
                 </a>
               )}
+              <button
+                type="button"
+                onClick={() => {
+                  setMenu(false);
+                  onHistory();
+                }}
+              >
+                Version history…
+              </button>
               <button type="button" onClick={reload}>
                 Reload from repository
               </button>
@@ -333,6 +453,7 @@ export default function App() {
   const [phase, setPhase] = useState<Phase>({ kind: 'checking' });
   const [newPage, setNewPage] = useState(false);
   const [publishing, setPublishing] = useState(false);
+  const [history, setHistory] = useState(false);
 
   const start = async () => {
     setPhase({ kind: 'loading' });
@@ -355,6 +476,33 @@ export default function App() {
   // Keyboard shortcuts and the unsaved-changes guard.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement | null;
+      const typing =
+        target?.isContentEditable ||
+        ['INPUT', 'TEXTAREA', 'SELECT'].includes(target?.tagName ?? '') ||
+        document.querySelector('.modal');
+      const actions = selectedBlock.value ? blockActions.get(selectedBlock.value) : undefined;
+
+      // Block shortcuts only make sense when a block is selected and you aren't typing.
+      if (!typing && actions) {
+        if (e.altKey && (e.key === 'ArrowUp' || e.key === 'ArrowDown')) {
+          e.preventDefault();
+          actions.move(e.key === 'ArrowUp' ? -1 : 1);
+          return;
+        }
+        if ((e.key === 'Delete' || e.key === 'Backspace') && !e.ctrlKey && !e.metaKey) {
+          e.preventDefault();
+          actions.remove();
+          return;
+        }
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'd') {
+          e.preventDefault();
+          actions.duplicate();
+          return;
+        }
+      }
+      if (e.key === 'Escape' && !typing) selectedBlock.value = null;
+
       if (!(e.ctrlKey || e.metaKey)) return;
       const key = e.key.toLowerCase();
       if (key === 's') {
@@ -410,7 +558,11 @@ export default function App() {
   const v = view.value;
   return (
     <div class="app">
-      <TopBar onPublish={() => setPublishing(true)} onLogout={logout} />
+      <TopBar
+        onPublish={() => setPublishing(true)}
+        onLogout={logout}
+        onHistory={() => setHistory(true)}
+      />
       <Sidebar onNewPage={() => setNewPage(true)} />
       <main class="editor">
         {v.kind === 'page' && <PageEditor path={v.path} />}
@@ -423,6 +575,8 @@ export default function App() {
       <Toasts />
       {newPage && <NewPageDialog onClose={() => setNewPage(false)} />}
       {publishing && <PublishDialog onClose={() => setPublishing(false)} />}
+      {history && <HistoryDialog onClose={() => setHistory(false)} />}
+      <RecoveryDialog />
     </div>
   );
 }

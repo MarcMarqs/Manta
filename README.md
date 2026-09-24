@@ -23,7 +23,8 @@ Nothing about a page lives in the code. Every page is a JSON file under `content
 | `content/site.json` | Site address, name, tagline, footer, nav, link-preview image, and the whole theme (colors, fonts, radius, spacing) |
 | `content/pages/**.json` | One file per page. `home.json` is `/`, `about.json` is `/about`, `work/dunes.json` is `/work/dunes` |
 | `content/projects.json` | The project index used by the rail and grid blocks |
-| `content/tags.json` | Allowed discipline/engine tags, so filters never break from a typo |
+| `content/tags.json` | Allowed discipline/engine tags, so filters never break from a typo. Each one gets a `/tags/<id>` page |
+| `content/media.json` | Written by the editor: which sizes exist for each uploaded image, used to build a `srcset` |
 | `public/images/…` | Images, committed to the repo |
 
 A page is a title plus an ordered array of blocks:
@@ -88,6 +89,12 @@ preview on the right rendered by the site's own components, so what you see is w
   A fresh one is cut from `main` on the next save.
 - **Discard draft** (⋯ menu) throws away saved-but-unpublished changes.
 - **Undo / redo:** Ctrl+Z / Ctrl+Shift+Z, including deleted pages, until you reload.
+- **Block shortcuts** with a block selected: Ctrl+D duplicates, Alt+↑/↓ moves, Delete removes,
+  Escape deselects.
+- **Version history** (⋯ menu) lists every save and publish, and restores one as a new change,
+  so going back is itself undoable.
+- **Unsaved work** is kept in the browser: close the tab by accident and the editor offers it
+  back next time.
 - **Images** are resized to 2000px and converted to WebP in the browser, then committed to
   `public/images/uploads/` on the draft straight away, so the preview can show them. An image
   block can be scaled and cropped to a shape; the library deletes ones nothing uses any more.

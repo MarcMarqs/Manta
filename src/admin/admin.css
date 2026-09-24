@@ -1757,3 +1757,58 @@ form.tag-row {
   border-top: 1px solid var(--e-border);
   padding-top: 3px;
 }
+
+/* --- version history & link picker --- */
+
+.version-list,
+.link-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.version-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 12px;
+  border: 1px solid var(--e-border);
+  border-radius: 8px;
+  background: var(--e-panel);
+}
+
+.version-main,
+.link-option {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.version-main strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.link-option {
+  padding: 7px 10px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background: none;
+  color: var(--e-fg);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.link-option:hover {
+  background: var(--e-sunken);
+}
+
+.link-option.on {
+  border-color: var(--e-accent);
+  background: var(--e-accent-soft);
+}
