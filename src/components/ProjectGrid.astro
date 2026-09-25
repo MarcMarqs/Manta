@@ -28,7 +28,6 @@ const id = `grid-${Math.random().toString(36).slice(2, 8)}`;
             <video
               src={p.coverVideo}
               poster={asset(p.cover)}
-              autoplay
               muted
               loop
               playsinline
@@ -79,16 +78,44 @@ const id = `grid-${Math.random().toString(36).slice(2, 8)}`;
     background: var(--surface);
     transition: transform 0.18s ease, border-color 0.18s ease;
   }
-  .card:hover {
+  .card:hover,
+  .card:focus-visible {
     transform: translateY(-3px);
     border-color: var(--accent);
   }
+  .card:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  /* The cover is clipped by the card, so it can grow past its own box. */
   .card img,
   .card video {
     aspect-ratio: 16 / 10;
     object-fit: cover;
     width: 100%;
     display: block;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .card:hover img,
+  .card:hover video,
+  .card:focus-visible img,
+  .card:focus-visible video {
+    transform: scale(1.045);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card,
+    .card img,
+    .card video {
+      transition: none;
+    }
+    .card:hover,
+    .card:focus-visible,
+    .card:hover img,
+    .card:hover video,
+    .card:focus-visible img,
+    .card:focus-visible video {
+      transform: none;
+    }
   }
   .card-body {
     padding: 16px;
@@ -112,3 +139,43 @@ const id = `grid-${Math.random().toString(36).slice(2, 8)}`;
     display: none;
   }
 </style>
+
+<script>
+  import { playWhenVisible, rewind } from '../lib/cover-video';
+
+  // A grid of cover videos all playing at once is a lot of decoding for something
+  // nobody is looking at, so each one waits for its card: hover or keyboard focus
+  // where there's a pointer, coming into view where there isn't (phones, tablets).
+  const stillOnly = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hoverable = matchMedia('(hover: hover)').matches;
+
+  document.querySelectorAll<HTMLElement>('[data-grid-root]').forEach((root) => {
+    const cards = [...root.querySelectorAll<HTMLElement>('.card')].filter((c) => c.querySelector('video'));
+    if (stillOnly || !cards.length) return;
+
+    const play = (card: HTMLElement) => {
+      const video = card.querySelector('video');
+      if (video) playWhenVisible(video);
+    };
+    const stop = (card: HTMLElement) => {
+      const video = card.querySelector('video');
+      if (video) rewind(video);
+    };
+
+    if (hoverable) {
+      cards.forEach((card) => {
+        card.addEventListener('pointerenter', () => play(card));
+        card.addEventListener('pointerleave', () => stop(card));
+        card.addEventListener('focusin', () => play(card));
+        card.addEventListener('focusout', () => stop(card));
+      });
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((e) => (e.isIntersecting ? play : stop)(e.target as HTMLElement)),
+      { threshold: 0.6 },
+    );
+    cards.forEach((card) => observer.observe(card));
+  });
+</script>

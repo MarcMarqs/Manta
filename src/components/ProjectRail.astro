@@ -26,7 +26,7 @@ const id = `rail-${Math.random().toString(36).slice(2, 8)}`;
         >
           <div class="cover" style={`background-image:url('${asset(p.cover)}')`} aria-hidden="true">
             {p.coverVideo && (
-              <video src={p.coverVideo} autoplay muted loop playsinline preload="none" aria-hidden="true" />
+              <video src={p.coverVideo} muted loop playsinline preload="none" aria-hidden="true" />
             )}
           </div>
           <div class="spine">
@@ -234,12 +234,27 @@ const id = `rail-${Math.random().toString(36).slice(2, 8)}`;
 </style>
 
 <script>
+  import { playWhenVisible, rewind } from '../lib/cover-video';
+
   document.querySelectorAll<HTMLElement>('[data-rail-root]').forEach((root) => {
     const cards = [...root.querySelectorAll<HTMLElement>('.rail-card')];
 
+    const stillOnly = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Only the open card's cover video runs; the collapsed spines are 92px of nothing.
     const open = (card: HTMLElement) => {
-      cards.forEach((c) => c.setAttribute('aria-expanded', String(c === card)));
+      cards.forEach((c) => {
+        c.setAttribute('aria-expanded', String(c === card));
+        const video = c.querySelector('video');
+        if (!video || stillOnly) return;
+        if (c === card) playWhenVisible(video);
+        else rewind(video);
+      });
     };
+
+    // The first card starts expanded in the markup, so start its video too.
+    const first = cards.find((c) => c.getAttribute('aria-expanded') === 'true');
+    if (first) open(first);
 
     cards.forEach((card, i) => {
       card.addEventListener('click', () => open(card));
