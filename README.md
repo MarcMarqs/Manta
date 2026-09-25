@@ -71,7 +71,9 @@ columns, wide and full fall back to normal. Every option collapses sensibly on a
 ### Adding a project
 
 1. Add an entry to `content/projects.json`.
-2. Drop a cover in `public/images/projects/<slug>/`.
+2. Drop a cover in `public/images/projects/<slug>/`. A `coverVideo` plays over it: in the
+   rail only while that card is open, in the grid only under the pointer (or when the card
+   scrolls into view on a touch screen), so a page of cards doesn't run every video at once.
 3. Create `content/pages/work/<slug>.json` for its case study.
 
 Set `"draft": true` on a project to keep it out of the build.
