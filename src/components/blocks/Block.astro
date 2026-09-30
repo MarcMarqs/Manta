@@ -198,7 +198,7 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
   {
     block.type === 'section' && (
       <section class={`section bg-${block.background ?? 'none'}`}>
-        <div class="blocks">
+        <div class={`blocks${block.arrange === 'row' ? ' as-row' : ''}`}>
           {block.blocks.map((child) => (
             <Self block={child} anchors={anchors} />
           ))}
@@ -227,6 +227,24 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
   }
   .section {
     border-radius: var(--radius);
+  }
+  /* Side by side, wrapping rather than shrinking, so a row of buttons becomes two rows
+     on a phone instead of a line of squeezed labels. The margin rule that separates
+     stacked blocks would fight the gap, so it is cancelled here. */
+  .blocks.as-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(0.9rem * var(--spacing));
+  }
+  .blocks.as-row > * + * {
+    margin-top: 0;
+  }
+  /* In a row a block is as wide as it needs to be; the width choices describe a column
+     of content and have nothing to say here. */
+  .blocks.as-row > .blk {
+    width: auto;
+    max-width: 100%;
   }
   .section.bg-surface,
   .section.bg-accent {

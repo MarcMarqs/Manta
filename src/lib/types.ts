@@ -106,7 +106,14 @@ export type Block = BlockLayout & (
   | { id: string; type: 'stats'; items: { value: string; label: string }[] }
   | { id: string; type: 'chart'; variant: 'bar' | 'line'; title?: string; series: { label: string; value: number }[] }
   | { id: string; type: 'columns'; count: 2 | 3; columns: { id: string; blocks: Block[] }[] }
-  | { id: string; type: 'section'; background?: 'none' | 'surface' | 'accent'; blocks: Block[] }
+  | {
+      id: string;
+      type: 'section';
+      background?: 'none' | 'surface' | 'accent';
+      /** 'row' lays the blocks inside side by side, wrapping when they run out of room. */
+      arrange?: 'stack' | 'row';
+      blocks: Block[];
+    }
   | { id: string; type: 'projectRail'; filters?: boolean; origin?: ProjectOrigin }
   | { id: string; type: 'projectGrid'; filters?: boolean; origin?: ProjectOrigin }
   | { id: string; type: 'html'; html: string }

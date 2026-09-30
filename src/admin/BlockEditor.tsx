@@ -768,6 +768,16 @@ function BlockFields({
     case 'section':
       return (
         <div class="stack">
+          <Field label="Arrange" hint="Side by side wraps onto the next line when it runs out of room.">
+            <Segmented
+              value={block.arrange ?? 'stack'}
+              options={[
+                { value: 'stack', label: 'Stacked' },
+                { value: 'row', label: 'Side by side' },
+              ]}
+              onChange={(v) => onChange({ ...block, arrange: v === 'stack' ? undefined : 'row' })}
+            />
+          </Field>
           <Field label="Background">
             <Segmented
               value={block.background ?? 'none'}

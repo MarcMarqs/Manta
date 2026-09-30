@@ -190,7 +190,11 @@ export function summarize(block: Block): string {
       return block.title || `${block.variant} chart, ${block.series.length} values`;
     case 'section': {
       const n = block.blocks.length;
-      return `${n} block${n === 1 ? '' : 's'}${block.background && block.background !== 'none' ? ` · ${block.background}` : ''}`;
+      const notes = [
+        block.arrange === 'row' ? 'side by side' : '',
+        block.background && block.background !== 'none' ? block.background : '',
+      ].filter(Boolean);
+      return `${n} block${n === 1 ? '' : 's'}${notes.length ? ` · ${notes.join(' · ')}` : ''}`;
     }
     case 'columns':
       return `${block.count} columns`;

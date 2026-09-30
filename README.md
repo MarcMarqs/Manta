@@ -58,12 +58,16 @@ Every block needs a unique `id` (unique within its page) and a `type`.
 | `stats` | `items[]` of `{ value, label }` — figures set large |
 | `chart` | `variant` (`bar` \| `line`), `series[]` of `{ label, value }`, `title?` |
 | `columns` | `count` 2–3, `columns[]` each `{ id, blocks[] }` |
-| `section` | `background?` (`none` \| `surface` \| `accent`), `blocks[]` |
+| `section` | `background?` (`none` \| `surface` \| `accent`), `arrange?` (`stack` \| `row`), `blocks[]` |
 | `projectRail` | `filters?` — the expandable carousel |
 | `projectGrid` | `filters?` — the plain card grid |
 | `html` | `html` — escape hatch for embeds the editor can't express |
 
-`section` and `columns` nest other blocks, so layouts compose.
+`section` and `columns` nest other blocks, so layouts compose. A section set to **Side by
+side** (`"arrange": "row"`) lays its blocks in a row instead of a stack, each as wide as it
+needs to be, wrapping onto the next line when it runs out of room — for a row of buttons
+or a few small things that belong together. Use `columns` instead when you want equal
+tracks of content that stay aligned.
 
 Any block can also take `align` (`left` | `center` | `right`) and `width` (`narrow` | `normal`
 | `wide` | `full`). Wide reaches past the text column, full runs edge to edge. A full-width
