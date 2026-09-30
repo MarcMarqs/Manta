@@ -1,5 +1,5 @@
 ---
-import type { ProjectGroup } from '../lib/types';
+import type { ProjectOrigin } from '../lib/types';
 import { useContent } from '../lib/context';
 import { srcsetFor } from '../lib/media';
 import Filters from './Filters.astro';
@@ -8,12 +8,12 @@ interface Props {
   filters?: boolean;
   /** Show only projects carrying this tag id. */
   tag?: string;
-  /** Which shelf to show. Omitted means the main one; 'all' ignores shelves entirely. */
-  group?: ProjectGroup | 'all';
+  /** Which shelf to show. Omitted means professional; 'all' ignores the split entirely. */
+  origin?: ProjectOrigin | 'all';
 }
-const { filters = false, tag, group } = Astro.props;
+const { filters = false, tag, origin } = Astro.props;
 const { projects: all, tagLabel, asset, preview } = useContent(Astro.locals);
-const shelf = group === 'all' ? all : all.filter((p) => (p.group ?? 'selected') === (group ?? 'selected'));
+const shelf = origin === 'all' ? all : all.filter((p) => (p.origin ?? 'professional') === (origin ?? 'professional'));
 const projects = tag ? shelf.filter((p) => [...p.discipline, ...p.engine].includes(tag)) : shelf;
 const id = `grid-${Math.random().toString(36).slice(2, 8)}`;
 ---

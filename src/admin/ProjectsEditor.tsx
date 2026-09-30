@@ -95,14 +95,16 @@ function ProjectForm({ project, index }: { project: Project; index: number }) {
     <div class="stack">
       <div class="row spread">
         <div class="row">
-          <Field label="Shelf" hint="Which list on the site this appears in.">
+          <Field label="Origin" hint="Which shelf on the home page this appears in.">
             <Select
-              value={project.group ?? 'selected'}
+              value={project.origin ?? 'professional'}
               options={[
-                { value: 'selected', label: 'Selected work' },
-                { value: 'personal', label: 'Personal work & studies' },
+                { value: 'professional', label: 'Professional work' },
+                { value: 'personal', label: 'Personal studies' },
               ]}
-              onChange={(group) => set({ group: group === 'selected' ? undefined : (group as 'personal') })}
+              onChange={(origin) =>
+                set({ origin: origin === 'professional' ? undefined : (origin as 'personal') })
+              }
             />
           </Field>
           <Toggle checked={!project.draft} onChange={(v) => set({ draft: !v })} label="Visible on the site" />

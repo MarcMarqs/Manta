@@ -73,7 +73,7 @@
     "featured": false,
     "draft": false,
     "links": [],
-    "group": "personal"
+    "origin": "personal"
   },
   {
     "slug": "plushland-curse",
@@ -94,7 +94,7 @@
     "featured": false,
     "draft": false,
     "links": [],
-    "group": "personal"
+    "origin": "personal"
   },
   {
     "slug": "far-away-orbital-space",
@@ -115,7 +115,7 @@
     "featured": false,
     "draft": false,
     "links": [],
-    "group": "personal"
+    "origin": "personal"
   },
   {
     "slug": "ascending-flags",
@@ -136,6 +136,6 @@
     "featured": false,
     "draft": false,
     "links": [],
-    "group": "personal"
+    "origin": "personal"
   }
 ]

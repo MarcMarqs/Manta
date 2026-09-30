@@ -718,13 +718,13 @@ function BlockFields({ block, depth, onChange }: { block: Block; depth: number; 
         <div class="stack">
           <Field label="Which projects">
             <Select
-              value={block.group ?? 'selected'}
+              value={block.origin ?? 'professional'}
               options={[
-                { value: 'selected', label: 'Selected work' },
-                { value: 'personal', label: 'Personal work & studies' },
+                { value: 'professional', label: 'Professional work' },
+                { value: 'personal', label: 'Personal studies' },
               ]}
-              onChange={(group) =>
-                onChange({ ...block, group: group === 'selected' ? undefined : (group as 'personal') })
+              onChange={(origin) =>
+                onChange({ ...block, origin: origin === 'professional' ? undefined : (origin as 'personal') })
               }
             />
           </Field>

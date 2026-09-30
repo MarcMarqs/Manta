@@ -82,7 +82,7 @@
       "id": "personal-h",
       "type": "heading",
       "level": 2,
-      "text": "Personal work & studies"
+      "text": "Personal studies"
     },
     {
       "id": "personal-t",
@@ -93,7 +93,7 @@
       "id": "personal-grid",
       "type": "projectGrid",
       "filters": false,
-      "group": "personal"
+      "origin": "personal"
     }
   ]
 }

@@ -68,13 +68,16 @@ Any block can also take `align` (`left` | `center` | `right`) and `width` (`narr
 `section` becomes a coloured band whose content stays in the column. Inside sections and
 columns, wide and full fall back to normal. Every option collapses sensibly on a phone.
 
-### Shelves
+### Origin
 
-A project sits on one of two shelves: **Selected work** (the default, studio work) and
-**Personal work & studies** (prototypes, jam games, things you made to learn something).
-Set it per project in the editor, or with `"group": "personal"` in `projects.json`. A
-`projectRail` or `projectGrid` block shows one shelf, chosen in the block's settings; tag
-pages ignore shelves and list everything carrying the tag.
+Every project has an **origin**: `professional` (the default — studio work) or `personal`
+(prototypes, jam games, studies). The home page shows a shelf for each. Set it per project
+in the editor, or with `"origin": "personal"` in `projects.json`. A `projectRail` or
+`projectGrid` block shows one origin, chosen in the block's settings; tag pages ignore the
+split and list everything carrying the tag.
+
+Within a shelf, `featured` projects lead — the editorial weight the earlier prototype
+called `primary`.
 
 ### Adding a project
 

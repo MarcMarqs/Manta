@@ -1,16 +1,16 @@
 ---
-import type { ProjectGroup } from '../lib/types';
+import type { ProjectOrigin } from '../lib/types';
 import { useContent } from '../lib/context';
 import Filters from './Filters.astro';
 
 interface Props {
   filters?: boolean;
-  /** Which shelf to show. Omitted means the main one; projects default to it too. */
-  group?: ProjectGroup;
+  /** Which shelf to show. Omitted means professional; projects default to it too. */
+  origin?: ProjectOrigin;
 }
-const { filters = true, group } = Astro.props;
+const { filters = true, origin } = Astro.props;
 const { projects: all, tagLabel, asset } = useContent(Astro.locals);
-const projects = all.filter((p) => (p.group ?? 'selected') === (group ?? 'selected'));
+const projects = all.filter((p) => (p.origin ?? 'professional') === (origin ?? 'professional'));
 const id = `rail-${Math.random().toString(36).slice(2, 8)}`;
 ---
 
