@@ -10,7 +10,7 @@ export const tags = tagsJson as Tags;
 export function orderProjects(list: Project[]): Project[] {
   return list
     .filter((p) => !p.draft)
-    .sort((a, b) => Number(b.featured) - Number(a.featured) || b.year - a.year);
+    .sort((a, b) => Number(b.featured) - Number(a.featured) || (b.year ?? 0) - (a.year ?? 0));
 }
 
 export const projects: Project[] = orderProjects(projectsJson as Project[]);

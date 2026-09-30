@@ -50,7 +50,8 @@ export interface Project {
   slug: string;
   title: string;
   genre: string;
-  year: number;
+  /** null when the date isn't public or isn't settled yet; the UI just omits it. */
+  year: number | null;
   role: string;
   summary: string;
   highlights: string[];

@@ -1,19 +1,52 @@
 {
   "title": "About",
-  "description": "Who I am and how to reach me.",
+  "description": "Senior Game Designer based in Brazil, open to remote roles in Europe or North America.",
   "blocks": [
-    { "id": "h", "type": "heading", "level": 1, "text": "About" },
+    { "id": "h", "type": "heading", "level": 1, "text": "Who I am" },
     {
       "id": "bio",
       "type": "text",
-      "html": "<p>Placeholder bio. Two or three sentences about how you work, what kind of problems you like, and what you are looking for.</p>"
+      "html": "<p>Six years in, I've worn multiple hats: from balancing individual combat frames to aligning cross-discipline teams. My focus is owning complex features end-to-end and building scalable design frameworks that empower production. As a Senior Game Designer, I thrive where systems architecture meets team collaboration.</p>"
+    },
+    {
+      "id": "facts",
+      "type": "table",
+      "columns": ["Based in / open to", "Education", "Engines", "Management", "Targeting"],
+      "rows": [
+        [
+          "Brazil > remote, Europe or North America",
+          "M.Sc. Game Design & PM",
+          "Unreal · Unity",
+          "Miro · ClickUp · Jira · Confluence",
+          "(Senior) Game Designer"
+        ]
+      ]
+    },
+    { "id": "d1", "type": "divider" },
+    {
+      "id": "cta-h",
+      "type": "heading",
+      "level": 2,
+      "text": "Let's design something players remember"
+    },
+    {
+      "id": "cta-t",
+      "type": "text",
+      "html": "<p>Open to Senior Game Designer opportunities across indie and AAA studios. Always happy to discuss systems design, leadership, or how I can help your team.</p>"
     },
     {
       "id": "contact",
       "type": "button",
-      "label": "Get in touch",
-      "href": "mailto:you@example.com",
+      "label": "marcelo.rssi@hotmail.com",
+      "href": "mailto:marcelo.rssi@hotmail.com",
       "style": "primary"
+    },
+    {
+      "id": "linkedin",
+      "type": "button",
+      "label": "LinkedIn",
+      "href": "https://www.linkedin.com/in/marceloderussi",
+      "style": "secondary"
     }
   ]
 }

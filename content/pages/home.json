@@ -1,6 +1,6 @@
 {
   "title": "Work",
-  "description": "Game design portfolio — systems, economy and level design case studies.",
+  "description": "Senior Game Designer — systems, combat, economy and AI. Selected work across AAA co-development and award-winning indie titles.",
   "blocks": [
     {
       "id": "hero",
@@ -11,14 +11,31 @@
           "id": "hero-h",
           "type": "heading",
           "level": 1,
-          "text": "Marcelo Marques"
+          "text": "Marcelo de Russi"
         },
         {
           "id": "hero-t",
           "type": "text",
-          "html": "<p>Hey There!</p><p>Game designer working on systems, economy and level flow. Below: three case studies, from the first whiteboard to the shipped numbers.</p>"
+          "html": "<p>I'm a Senior Game Designer with 6+ years of experience bridging deep systems design with hands-on production. I specialize in mechanics, balancing loops, and driving complex features from concept to final engine polish. Combining a design vision with a structural roadmap mindset, I manage cross-discipline dependencies across engineering, art and animation to deliver high-quality gameplay within scope.</p>"
         }
       ]
+    },
+    {
+      "id": "stats",
+      "type": "table",
+      "columns": ["Years in industry", "Shipped titles", "Genres designed", "Festival awards"],
+      "rows": [["6+", "3", "5+", "2"]]
+    },
+    {
+      "id": "work-h",
+      "type": "heading",
+      "level": 2,
+      "text": "Selected work"
+    },
+    {
+      "id": "work-t",
+      "type": "text",
+      "html": "<p>Game design and team management across AAA co-development and award-winning indie titles.</p>"
     },
     {
       "id": "rail",

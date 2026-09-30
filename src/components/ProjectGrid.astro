@@ -46,7 +46,7 @@ const id = `grid-${Math.random().toString(36).slice(2, 8)}`;
           <div class="card-body">
             <h3>{p.title}</h3>
             <p class="muted card-meta">
-              {p.genre} · {p.year}
+              {[p.genre, p.year].filter(Boolean).join(' · ')}
             </p>
             <p class="card-summary">{p.summary}</p>
             <div class="chips">

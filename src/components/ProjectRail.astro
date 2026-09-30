@@ -31,13 +31,13 @@ const id = `rail-${Math.random().toString(36).slice(2, 8)}`;
           </div>
           <div class="spine">
             <span class="spine-title">{p.title}</span>
-            <span class="spine-year">{p.year}</span>
+            {p.year && <span class="spine-year">{p.year}</span>}
           </div>
           <div class="panel">
             <div class="panel-inner">
               <h3>{p.title}</h3>
               <p class="muted panel-meta">
-                {p.genre} · {p.year} · {p.role}
+                {[p.genre, p.year, p.role].filter(Boolean).join(' · ')}
               </p>
               <p>{p.summary}</p>
               <ul class="highlights">

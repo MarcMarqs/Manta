@@ -31,6 +31,37 @@
       block.classList.add('will-reveal');
       watcher.observe(block);
     });
+
+    // The observer alone isn't enough to guarantee a block ever becomes visible: it can
+    // miss one that passes through between callbacks, and it never fires at all for a
+    // block the reader skips over — a #hash jump, restored scroll position, a flick to
+    // the bottom. Any of those would leave text sitting at zero opacity for good. So a
+    // sweep, not the observer, is what guarantees visibility; the observer just makes
+    // the timing pretty. Runs on scroll, coalesced to one check per frame, and stops
+    // once everything has been shown.
+    let pending = false;
+    const sweep = () => {
+      pending = false;
+      let remaining = 0;
+      for (const block of blocks) {
+        if (block.classList.contains('is-revealed')) continue;
+        if (block.getBoundingClientRect().top < innerHeight) {
+          block.classList.add('is-revealed');
+          watcher.unobserve(block);
+        } else remaining++;
+      }
+      if (!remaining) removeEventListener('scroll', onScroll);
+    };
+    const onScroll = () => {
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(sweep);
+    };
+    addEventListener('scroll', onScroll, { passive: true });
+    addEventListener('hashchange', onScroll);
+    addEventListener('load', onScroll);
+    // Scroll restoration lands after this script runs, so check once more on the way in.
+    requestAnimationFrame(sweep);
   }
 
   // --- lightbox -----------------------------------------------------------

@@ -1,0 +1,314 @@
+{
+  "title": "Aurora: A Child's Journey",
+  "description": "3C, Act II gameplay and puzzle design on an award-winning narrative adventure at Luski Game Studio.",
+  "image": "/images/projects/aurora/cover.svg",
+  "blocks": [
+    {
+      "id": "eyebrow",
+      "type": "text",
+      "html": "<p><strong>Luski Game Studio</strong> · 6 team</p>"
+    },
+    { "id": "h1", "type": "heading", "level": 1, "text": "Aurora: A Child's Journey" },
+    {
+      "id": "sub",
+      "type": "text",
+      "html": "<p>3D Puzzle / Narrative Adventure</p>"
+    },
+    {
+      "id": "specs",
+      "type": "table",
+      "columns": ["Role", "Studio", "Team size", "Engine", "Focus"],
+      "rows": [
+        ["Game Designer", "Luski Game Studio", "6", "Unity", "3C • Puzzle • Narrative"]
+      ]
+    },
+    {
+      "id": "awards",
+      "type": "text",
+      "html": "<p><strong>Recognition:</strong> Games for Change Latin America 2020 — Winner · BIG Festival Impact 2021 — Finalist. Released on Steam.</p>"
+    },
+    { "id": "d1", "type": "divider" },
+    {
+      "id": "pillars-h",
+      "type": "heading",
+      "level": 2,
+      "text": "What guided every decision"
+    },
+    {
+      "id": "pillars",
+      "type": "columns",
+      "count": 3,
+      "columns": [
+        {
+          "id": "p1",
+          "blocks": [
+            {
+              "id": "p1h",
+              "type": "heading",
+              "level": 3,
+              "text": "Feel before challenge"
+            },
+            {
+              "id": "p1t",
+              "type": "text",
+              "html": "<p>Character movement and camera responsiveness must achieve absolute mechanical precision before layout challenges can be introduced fairly.</p>"
+            }
+          ]
+        },
+        {
+          "id": "p2",
+          "blocks": [
+            {
+              "id": "p2h",
+              "type": "heading",
+              "level": 3,
+              "text": "Show, don't tell"
+            },
+            {
+              "id": "p2t",
+              "type": "text",
+              "html": "<p>An all-ages story teaches through space, motion and discovery rather than text and tutorials.</p>"
+            }
+          ]
+        },
+        {
+          "id": "p3",
+          "blocks": [
+            {
+              "id": "p3h",
+              "type": "heading",
+              "level": 3,
+              "text": "Gentle mastery"
+            },
+            {
+              "id": "p3t",
+              "type": "text",
+              "html": "<p>Puzzles escalate from intuition to insight without punishing failure. Curiosity is always rewarded.</p>"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "owned",
+      "type": "section",
+      "background": "surface",
+      "blocks": [
+        {
+          "id": "owned-h",
+          "type": "heading",
+          "level": 2,
+          "text": "What I owned, and where the team came in"
+        },
+        {
+          "id": "owned-cols",
+          "type": "columns",
+          "count": 2,
+          "columns": [
+            {
+              "id": "o1",
+              "blocks": [
+                { "id": "o1h", "type": "heading", "level": 3, "text": "What I owned" },
+                {
+                  "id": "o1t",
+                  "type": "text",
+                  "html": "<ul><li>Act II gameplay and puzzle design, end-to-end</li><li>3C tuning: camera framing and control feel</li><li>Playtest plans, sessions and synthesis</li><li>Puzzle pacing and difficulty progression</li></ul>"
+                }
+              ]
+            },
+            {
+              "id": "o2",
+              "blocks": [
+                { "id": "o2h", "type": "heading", "level": 3, "text": "Team & collaboration" },
+                {
+                  "id": "o2t",
+                  "type": "text",
+                  "html": "<ul><li>3C implementation: with programming</li><li>Blockout and level flow: with level design</li><li>Narrative and art direction: with the team</li><li>Audio and mood: with the wider studio</li></ul>"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3c-h",
+      "type": "heading",
+      "level": 2,
+      "text": "Camera, character & control"
+    },
+    {
+      "id": "3c-intro",
+      "type": "text",
+      "html": "<p>In a narrative adventure, feel is the first impression. Before a puzzle can be fair or a story can land, the player has to trust how the character moves and how the camera reads space. I co-developed the 3C around clarity and comfort for all ages.</p>"
+    },
+    {
+      "id": "3c",
+      "type": "columns",
+      "count": 2,
+      "columns": [
+        {
+          "id": "cam",
+          "blocks": [
+            {
+              "id": "camh",
+              "type": "heading",
+              "level": 3,
+              "text": "Camera — framing the space"
+            },
+            {
+              "id": "camt",
+              "type": "text",
+              "html": "<p>The camera is the player's narrator: it should reveal the puzzle, not fight it.</p><ul><li>Framing that hints at the next goal</li><li>Smooth, predictable follow, no motion sickness</li><li>Composed angles for story beats</li></ul>"
+            }
+          ]
+        },
+        {
+          "id": "ctrl",
+          "blocks": [
+            {
+              "id": "ctrlh",
+              "type": "heading",
+              "level": 3,
+              "text": "Character & control — movement"
+            },
+            {
+              "id": "ctrlt",
+              "type": "text",
+              "html": "<p>To accommodate an all-ages demographic, input detection must be forgiving and intuitive, so player intent translates seamlessly into action.</p><ul><li>Responsive input with gentle assists</li><li>Readable animation that telegraphs state</li><li>Fine-tuned jump and interaction tolerances</li></ul><p>Generous interaction and collision thresholds mean failure reads as a learning loop rather than mechanical friction.</p>"
+            }
+          ]
+        }
+      ]
+    },
+    { "id": "d2", "type": "divider" },
+    {
+      "id": "act2-h",
+      "type": "heading",
+      "level": 2,
+      "text": "Designing the second act"
+    },
+    {
+      "id": "act2-intro",
+      "type": "text",
+      "html": "<p>I owned the gameplay for the entire second act, designing puzzles and partnering with level design to refine blockout and flow so each space teaches the player something new.</p>"
+    },
+    {
+      "id": "act2",
+      "type": "columns",
+      "count": 2,
+      "columns": [
+        {
+          "id": "a1",
+          "blocks": [
+            { "id": "a1h", "type": "heading", "level": 3, "text": "Teach by doing" },
+            {
+              "id": "a1t",
+              "type": "text",
+              "html": "<p>Environmental layouts introduce mechanics in isolated, safe environments before combining them, eliminating the need for text-based tutorials. Each mechanic is introduced safely, practiced, combined with prior ideas, then mastered for an earned \"aha\" — the space is the lesson.</p>"
+            },
+            { "id": "a3h", "type": "heading", "level": 3, "text": "Gentle difficulty" },
+            {
+              "id": "a3t",
+              "type": "text",
+              "html": "<p>A progression curve based on intuition-to-insight leaps, with soft fail-states and rapid retry loops that encourage experimentation over punishment.</p>"
+            }
+          ]
+        },
+        {
+          "id": "a2",
+          "blocks": [
+            { "id": "a2h", "type": "heading", "level": 3, "text": "Blockout & flow" },
+            {
+              "id": "a2t",
+              "type": "text",
+              "html": "<ul><li>Iterated layouts for readability and pacing</li><li>Sightlines that guide without hand-holding</li><li>A rhythm of tension and calm across the act</li></ul>"
+            },
+            { "id": "a4h", "type": "heading", "level": 3, "text": "Narrative beats" },
+            {
+              "id": "a4t",
+              "type": "text",
+              "html": "<ul><li>Gameplay paced to support story moments</li><li>Quiet spaces between challenges to breathe</li><li>Emotional payoff tied to puzzle resolution</li></ul>"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iter",
+      "type": "section",
+      "background": "accent",
+      "blocks": [
+        {
+          "id": "iter-h",
+          "type": "heading",
+          "level": 2,
+          "text": "Iterating from player feedback"
+        },
+        {
+          "id": "iter-intro",
+          "type": "text",
+          "html": "<p>For an all-ages adventure, playtesting is everything: what reads as obvious to a designer can stump a first-time player. One representative loop from Act II — observe, change, measure.</p>"
+        },
+        {
+          "id": "iter-cols",
+          "type": "columns",
+          "count": 3,
+          "columns": [
+            {
+              "id": "i1",
+              "blocks": [
+                { "id": "i1h", "type": "heading", "level": 3, "text": "Observed" },
+                {
+                  "id": "i1t",
+                  "type": "text",
+                  "html": "<p>Playtest data highlighted a critical affordance failure in an Act II puzzle sequence. Players consistently missed a key interaction node, leading to progression dead-ends, loss of narrative momentum and early session abandonment.</p>"
+                }
+              ]
+            },
+            {
+              "id": "i2",
+              "blocks": [
+                { "id": "i2h", "type": "heading", "level": 3, "text": "Changed" },
+                {
+                  "id": "i2t",
+                  "type": "text",
+                  "html": "<p>Reframed the camera hierarchy to highlight the puzzle objective, adjusted blockout sightlines together with Level Design, and integrated organic environmental lighting cues to guide the player without hand-holding.</p>"
+                }
+              ]
+            },
+            {
+              "id": "i3",
+              "blocks": [
+                { "id": "i3h", "type": "heading", "level": 3, "text": "Result" },
+                {
+                  "id": "i3t",
+                  "type": "text",
+                  "html": "<p><strong>~90% solved.</strong> Puzzle resolution rates rose to around 90% across subsequent playtest cohorts, preserving the intended \"aha!\" moment while restoring narrative pacing.</p>"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cta-h",
+      "type": "heading",
+      "level": 2,
+      "text": "Want the deeper breakdown?"
+    },
+    {
+      "id": "cta-t",
+      "type": "text",
+      "html": "<p>Happy to walk through the design documentation and tuning decisions behind this project.</p>"
+    },
+    {
+      "id": "cta",
+      "type": "button",
+      "label": "Get in touch",
+      "href": "mailto:marcelo.rssi@hotmail.com",
+      "style": "primary"
+    }
+  ]
+}

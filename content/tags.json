@@ -1,14 +1,17 @@
 {
   "discipline": [
     { "id": "systems", "label": "Systems Design" },
+    { "id": "combat", "label": "Combat Design" },
+    { "id": "ai", "label": "AI & Encounters" },
+    { "id": "economy", "label": "Economy & Progression" },
     { "id": "level", "label": "Level Design" },
-    { "id": "economy", "label": "Economy" },
-    { "id": "narrative", "label": "Narrative" }
+    { "id": "narrative", "label": "Narrative" },
+    { "id": "3c", "label": "3C" }
   ],
   "engine": [
     { "id": "unreal", "label": "Unreal" },
     { "id": "unity", "label": "Unity" },
-    { "id": "godot", "label": "Godot" },
+    { "id": "uefn", "label": "UEFN" },
     { "id": "tabletop", "label": "Tabletop" }
   ]
 }

@@ -111,12 +111,15 @@ function ProjectForm({ project, index }: { project: Project; index: number }) {
         <Field label="Genre">
           <TextInput value={project.genre} onChange={(genre) => set({ genre })} />
         </Field>
-        <Field label="Year">
+        <Field label="Year" hint="Leave empty to show no year.">
           <input
             class="input"
             type="number"
-            value={project.year}
-            onInput={(e) => set({ year: Number((e.target as HTMLInputElement).value) || project.year })}
+            value={project.year ?? ''}
+            onInput={(e) => {
+              const raw = (e.target as HTMLInputElement).value.trim();
+              set({ year: raw === '' ? null : Number(raw) || project.year });
+            }}
           />
         </Field>
         <Field label="Your role" wide>
