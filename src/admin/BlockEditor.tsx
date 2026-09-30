@@ -274,8 +274,18 @@ function BlockCard({
         <span class="block-summary">{summarize(block)}</span>
         {layoutLabel(block) && <span class="block-layout">{layoutLabel(block)}</span>}
         <span class="block-tools">
-          <IconButton icon="up" label="Move up (Alt+↑)" onClick={() => onMove(-1)} disabled={first} />
-          <IconButton icon="down" label="Move down (Alt+↓)" onClick={() => onMove(1)} disabled={last} />
+          <IconButton
+            icon="up"
+            label={first ? (depth > 0 ? 'Already first inside this block' : 'Already the first block') : 'Move up (Alt+↑)'}
+            onClick={() => onMove(-1)}
+            disabled={first}
+          />
+          <IconButton
+            icon="down"
+            label={last ? (depth > 0 ? 'Already last inside this block' : 'Already the last block') : 'Move down (Alt+↓)'}
+            onClick={() => onMove(1)}
+            disabled={last}
+          />
           <IconButton icon="copy" label="Duplicate (Ctrl+D)" onClick={onDuplicate} />
           <IconButton icon="trash" label="Delete (Del)" tone="danger" onClick={confirmRemove} />
         </span>
