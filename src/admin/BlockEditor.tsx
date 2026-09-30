@@ -96,11 +96,17 @@ export function BlockListEditor({
   onChange,
   depth = 0,
   emptyHint,
+  onEscape,
 }: {
   blocks: Block[];
   onChange: (next: Block[]) => void;
   depth?: number;
   emptyHint?: string;
+  /**
+   * Moving off the end of a nested list lifts the block out of whatever holds it, rather
+   * than stopping at a wall. Absent at the top level, where there is nowhere further out.
+   */
+  onEscape?: (block: Block, dir: -1 | 1) => void;
 }) {
   const listKey = useMemo(() => newId('list'), []);
   const [dropAt, setDropAt] = useState<number | null>(null);
@@ -118,6 +124,12 @@ export function BlockListEditor({
   };
 
   const move = (from: number, to: number) => {
+    // Off the end of a nested list: hand the block to whatever contains this one, which
+    // is the only level that can both take it out and put it back down.
+    if ((to < 0 || to >= blocks.length) && onEscape) {
+      onEscape(blocks[from], to < 0 ? -1 : 1);
+      return;
+    }
     if (to < 0 || to >= blocks.length || from === to) return;
     const next = [...blocks];
     const [item] = next.splice(from, 1);
@@ -155,12 +167,21 @@ export function BlockListEditor({
           <BlockCard
             block={block}
             depth={depth}
-            first={index === 0}
-            last={index === blocks.length - 1}
+            first={index === 0 && !onEscape}
+            last={index === blocks.length - 1 && !onEscape}
+            escapesUp={Boolean(onEscape) && index === 0}
+            escapesDown={Boolean(onEscape) && index === blocks.length - 1}
             onChange={(b) => onChange(blocks.map((x, i) => (i === index ? b : x)))}
             onMove={(dir) => move(index, index + dir)}
             onDuplicate={() => insert(index + 1, cloneBlock(block))}
             onRemove={() => onChange(blocks.filter((_, i) => i !== index))}
+            onEscapeChild={(self, child, dir) => {
+              const next = [...blocks];
+              next[index] = self;
+              next.splice(dir === 1 ? index + 1 : index, 0, child);
+              onChange(next);
+              selectedBlock.value = child.id;
+            }}
             onDragStart={() => (drag = { list: listKey, index })}
             onDragEnd={() => {
               drag = null;
@@ -196,10 +217,13 @@ function BlockCard({
   depth,
   first,
   last,
+  escapesUp,
+  escapesDown,
   onChange,
   onMove,
   onDuplicate,
   onRemove,
+  onEscapeChild,
   onDragStart,
   onDragEnd,
 }: {
@@ -207,10 +231,15 @@ function BlockCard({
   depth: number;
   first: boolean;
   last: boolean;
+  /** At an edge of a nested list, so moving further in that direction lifts it out. */
+  escapesUp?: boolean;
+  escapesDown?: boolean;
   onChange: (b: Block) => void;
   onMove: (dir: -1 | 1) => void;
   onDuplicate: () => void;
   onRemove: () => void;
+  /** A block inside this one is leaving: here is this block without it, and where it goes. */
+  onEscapeChild?: (self: Block, child: Block, dir: -1 | 1) => void;
   onDragStart: () => void;
   onDragEnd: () => void;
 }) {
@@ -276,13 +305,29 @@ function BlockCard({
         <span class="block-tools">
           <IconButton
             icon="up"
-            label={first ? (depth > 0 ? 'Already first inside this block' : 'Already the first block') : 'Move up (Alt+↑)'}
+            label={
+              first
+                ? depth > 0
+                  ? 'Already first inside this block'
+                  : 'Already the first block'
+                : escapesUp
+                  ? 'Move up, out of this block (Alt+↑)'
+                  : 'Move up (Alt+↑)'
+            }
             onClick={() => onMove(-1)}
             disabled={first}
           />
           <IconButton
             icon="down"
-            label={last ? (depth > 0 ? 'Already last inside this block' : 'Already the last block') : 'Move down (Alt+↓)'}
+            label={
+              last
+                ? depth > 0
+                  ? 'Already last inside this block'
+                  : 'Already the last block'
+                : escapesDown
+                  ? 'Move down, out of this block (Alt+↓)'
+                  : 'Move down (Alt+↓)'
+            }
             onClick={() => onMove(1)}
             disabled={last}
           />
@@ -293,7 +338,7 @@ function BlockCard({
       {isOpen && (
         <div class="block-body">
           <LayoutFields block={block} depth={depth} onChange={onChange} />
-          <BlockFields block={block} depth={depth} onChange={onChange} />
+          <BlockFields block={block} depth={depth} onChange={onChange} onEscapeChild={onEscapeChild} />
         </div>
       )}
     </div>
@@ -406,7 +451,17 @@ function CoverList() {
 
 // --- per-type settings ---------------------------------------------------
 
-function BlockFields({ block, depth, onChange }: { block: Block; depth: number; onChange: (b: Block) => void }) {
+function BlockFields({
+  block,
+  depth,
+  onChange,
+  onEscapeChild,
+}: {
+  block: Block;
+  depth: number;
+  onChange: (b: Block) => void;
+  onEscapeChild?: (self: Block, child: Block, dir: -1 | 1) => void;
+}) {
   switch (block.type) {
     case 'heading':
       return (
@@ -729,6 +784,11 @@ function BlockFields({ block, depth, onChange }: { block: Block; depth: number; 
             depth={depth + 1}
             emptyHint="Empty section. Add blocks to it below."
             onChange={(blocks) => onChange({ ...block, blocks })}
+            onEscape={
+              onEscapeChild &&
+              ((child, dir) =>
+                onEscapeChild({ ...block, blocks: block.blocks.filter((b) => b.id !== child.id) }, child, dir))
+            }
           />
         </div>
       );
@@ -756,6 +816,20 @@ function BlockFields({ block, depth, onChange }: { block: Block; depth: number; 
                   emptyHint="Empty column."
                   onChange={(blocks) =>
                     onChange({ ...block, columns: block.columns.map((c, j) => (j === i ? { ...c, blocks } : c)) })
+                  }
+                  onEscape={
+                    onEscapeChild &&
+                    ((child, dir) =>
+                      onEscapeChild(
+                        {
+                          ...block,
+                          columns: block.columns.map((c, j) =>
+                            j === i ? { ...c, blocks: c.blocks.filter((b) => b.id !== child.id) } : c,
+                          ),
+                        },
+                        child,
+                        dir,
+                      ))
                   }
                 />
               </div>

@@ -105,7 +105,9 @@ preview on the right rendered by the site's own components, so what you see is w
 - **Discard draft** (⋯ menu) throws away saved-but-unpublished changes.
 - **Undo / redo:** Ctrl+Z / Ctrl+Shift+Z, including deleted pages, until you reload.
 - **Block shortcuts** with a block selected: Ctrl+D duplicates, Alt+↑/↓ moves, Delete removes,
-  Escape deselects.
+  Escape deselects. Moving off the end of a section or column lifts the block out of it,
+  landing just before or after whatever held it — one level at a time, so a block in a
+  column inside a section lands in the section rather than on the page.
 - **Version history** (⋯ menu) lists every save and publish, and restores one as a new change,
   so going back is itself undoable.
 - **Unsaved work** is kept in the browser: close the tab by accident and the editor offers it
