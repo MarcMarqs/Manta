@@ -126,6 +126,11 @@ preview on the right rendered by the site's own components, so what you see is w
   anything else falls back to the site-wide image in Site & theme. All of it hangs off the
   **Site address** there, so update that when the domain changes.
 
+**Settings** in the sidebar holds what belongs to you rather than to the work: theme
+(dark, the reading light theme, or follow the system), the accent that marks whatever is
+live or selected, and block-list density. It is kept in your browser and never committed
+— the site's own colours and fonts are content, and live in Site & theme.
+
 The editor's chrome uses the same palette and faces as Shipwreck, Siren and Barnacle —
 deep water at night, Cinzel for labels, Inter for body, and one phosphorescent green that
 only marks what is live or selected. Dark is home; a light reading theme applies if the

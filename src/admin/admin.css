@@ -50,8 +50,10 @@
   color-scheme: dark;
 }
 
+/* The reading theme. Applied when it is chosen, or when the system asks for it and
+   nothing has been chosen — `.e-dark` is what a deliberate dark choice leaves behind. */
 @media (prefers-color-scheme: light) {
-  :root {
+  :root:not(.e-dark) {
     /* Shipwreck's reading theme: same identity, atmosphere removed. */
     --e-bg: #fbfbf9;
     --e-panel: #f2f3f0;
@@ -75,6 +77,31 @@
     color-scheme: light;
   }
 }
+
+:root.e-light {
+  /* Shipwreck's reading theme: same identity, atmosphere removed. */
+  --e-bg: #fbfbf9;
+  --e-panel: #f2f3f0;
+  --e-raised: #ffffff;
+  --e-sunken: #e8eae6;
+  --e-fg: #0f1412;
+  --e-muted: #5c6a64;
+  --e-faint: #8a958f;
+  --e-border: #dcdfd9;
+  --e-border-strong: #c3c8c0;
+  --e-accent: #12703c;
+  --e-accent-soft: rgb(18 112 60 / 0.1);
+  --e-accent-fg: #ffffff;
+  --e-publish: #12703c;
+  --e-ok: #12703c;
+  --e-ok-soft: rgb(18 112 60 / 0.1);
+  --e-danger: #a8401d;
+  --e-warn: #8a6a10;
+  --e-warn-soft: rgb(138 106 16 / 0.12);
+  --e-shadow: 0 1px 2px rgb(16 24 40 / 0.06), 0 8px 24px rgb(16 24 40 / 0.08);
+  color-scheme: light;
+}
+
 
 * {
   box-sizing: border-box;
@@ -1918,4 +1945,93 @@ form.tag-row {
 .link-option.on {
   border-color: var(--e-accent);
   background: var(--e-accent-soft);
+}
+
+/* --- settings --- */
+
+.side-group-end {
+  margin-top: auto;
+}
+
+.rule-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 26px 0 6px;
+}
+
+.rule-label .rule {
+  height: 1px;
+  flex: 1;
+  background: var(--e-border);
+}
+
+.set-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--e-border);
+}
+
+.set-text {
+  min-width: 0;
+}
+
+.set-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.set-hint {
+  margin: 0;
+  font-size: var(--e-t-sm);
+  max-width: 46ch;
+}
+
+.set-control {
+  flex: none;
+}
+
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* The swatch is the colour, so the ring that marks the chosen one has to be drawn
+   outside it rather than over it. */
+.swatch {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: var(--e-r-pill);
+  cursor: pointer;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.swatch:hover {
+  transform: scale(1.08);
+}
+
+.swatch.is-on {
+  transform: scale(1.12);
+  box-shadow: 0 0 0 2px var(--e-bg), 0 0 0 4px var(--e-fg);
+}
+
+/* Dense packs the block list; everything else keeps its spacing. */
+:root.e-dense .block-head {
+  padding: 2px 5px 2px 4px;
+}
+
+:root.e-dense .block-list.depth-1,
+:root.e-dense .block-list.depth-2 {
+  padding: 5px;
+}
+
+:root.e-dense .block-body {
+  padding-top: 4px;
 }

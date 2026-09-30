@@ -24,7 +24,8 @@ export type View =
   | { kind: 'page'; path: string }
   | { kind: 'projects'; slug?: string }
   | { kind: 'site' }
-  | { kind: 'tags' };
+  | { kind: 'tags' }
+  | { kind: 'settings' };
 
 // --- content -------------------------------------------------------------
 

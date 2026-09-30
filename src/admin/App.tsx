@@ -5,6 +5,8 @@ import { NewPageDialog, PageEditor } from './PageEditor';
 import { Preview } from './Preview';
 import { ProjectsEditor } from './ProjectsEditor';
 import { SiteEditor } from './SiteEditor';
+import { loadAppearance } from './appearance';
+import { SettingsEditor } from './SettingsEditor';
 import { TagsEditor } from './TagsEditor';
 import {
   HOME,
@@ -424,6 +426,9 @@ function Sidebar({ onNewPage }: { onNewPage: () => void }) {
         {nav(v.kind === 'site', dirty.has('content/site.json'), 'palette', 'Site & theme', () => openView({ kind: 'site' }))}
         {nav(v.kind === 'tags', dirty.has('content/tags.json'), 'tag', 'Tags', () => openView({ kind: 'tags' }))}
       </div>
+      <div class="side-group side-group-end">
+        {nav(v.kind === 'settings', false, 'settings', 'Settings', () => openView({ kind: 'settings' }))}
+      </div>
     </nav>
   );
 }
@@ -448,6 +453,10 @@ function Toasts() {
 // --- app -----------------------------------------------------------------
 
 type Phase = { kind: 'checking' } | { kind: 'login'; configured: boolean } | { kind: 'loading' } | { kind: 'ready' } | { kind: 'error'; message: string };
+
+// Before the first render, so the editor never paints in the wrong theme and corrects
+// itself a moment later.
+loadAppearance();
 
 export default function App() {
   const [phase, setPhase] = useState<Phase>({ kind: 'checking' });
@@ -569,6 +578,7 @@ export default function App() {
         {v.kind === 'projects' && <ProjectsEditor slug={v.slug} />}
         {v.kind === 'site' && <SiteEditor />}
         {v.kind === 'tags' && <TagsEditor />}
+        {v.kind === 'settings' && <SettingsEditor />}
       </main>
       <Preview />
       <LinkSuggestions />
