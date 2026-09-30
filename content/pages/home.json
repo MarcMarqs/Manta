@@ -22,20 +22,24 @@
     },
     {
       "id": "stats",
-      "type": "table",
-      "columns": [
-        "Years in industry",
-        "Shipped titles",
-        "Genres designed",
-        "Festival awards"
-      ],
-      "rows": [
-        [
-          "6+",
-          "3",
-          "5+",
-          "2"
-        ]
+      "type": "stats",
+      "items": [
+        {
+          "value": "6+",
+          "label": "Years in industry"
+        },
+        {
+          "value": "3",
+          "label": "Shipped titles"
+        },
+        {
+          "value": "5+",
+          "label": "Genres designed"
+        },
+        {
+          "value": "2",
+          "label": "Festival awards"
+        }
       ]
     },
     {

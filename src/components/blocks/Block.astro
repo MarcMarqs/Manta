@@ -150,6 +150,32 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
   }
 
   {
+    block.type === 'specs' && (
+      <dl class="specs">
+        {block.items.map((item) => (
+          <div>
+            <dt>{item.label}</dt>
+            <dd>{item.value}</dd>
+          </div>
+        ))}
+      </dl>
+    )
+  }
+
+  {
+    block.type === 'stats' && (
+      <div class="stats">
+        {block.items.map((item) => (
+          <div>
+            <span class="stat-value">{item.value}</span>
+            <span class="stat-label">{item.label}</span>
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  {
     block.type === 'chart' && (
       <Chart variant={block.variant} title={block.title} series={block.series} />
     )
@@ -260,6 +286,62 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
     text-transform: uppercase;
     letter-spacing: 0.04em;
   }
+  /* A row of small label/value pairs. Wraps rather than scrolls, because on a phone five
+     of these should stack into a readable list, not a sideways table. */
+  .specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 40px;
+    margin: 0;
+    padding: 18px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .specs dt {
+    font-family: var(--font-heading);
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+
+  .specs dd {
+    margin: 0;
+    font-weight: 500;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 18px;
+    padding: 4px 0;
+  }
+
+  .stat-value {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: clamp(1.9rem, 1.2rem + 2vw, 2.9rem);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--accent);
+  }
+
+  .stat-label {
+    display: block;
+    margin-top: 2px;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 560px) {
+    .specs {
+      gap: 14px 28px;
+    }
+  }
+
   .spacer-sm {
     height: 16px;
   }

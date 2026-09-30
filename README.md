@@ -54,6 +54,8 @@ Every block needs a unique `id` (unique within its page) and a `type`.
 | `divider` | — |
 | `spacer` | `size?` (`sm` \| `md` \| `lg`) |
 | `table` | `columns[]`, `rows[][]`, `caption?` |
+| `specs` | `items[]` of `{ label, value }` — the strip under a case-study title |
+| `stats` | `items[]` of `{ value, label }` — figures set large |
 | `chart` | `variant` (`bar` \| `line`), `series[]` of `{ label, value }`, `title?` |
 | `columns` | `count` 2–3, `columns[]` each `{ id, blocks[] }` |
 | `section` | `background?` (`none` \| `surface` \| `accent`), `blocks[]` |

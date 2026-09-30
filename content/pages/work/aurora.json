@@ -8,7 +8,12 @@
       "type": "text",
       "html": "<p><strong>Luski Game Studio</strong> · 6 team</p>"
     },
-    { "id": "h1", "type": "heading", "level": 1, "text": "Aurora: A Child's Journey" },
+    {
+      "id": "h1",
+      "type": "heading",
+      "level": 1,
+      "text": "Aurora: A Child's Journey"
+    },
     {
       "id": "sub",
       "type": "text",
@@ -16,10 +21,28 @@
     },
     {
       "id": "specs",
-      "type": "table",
-      "columns": ["Role", "Studio", "Team size", "Engine", "Focus"],
-      "rows": [
-        ["Game Designer", "Luski Game Studio", "6", "Unity", "3C • Puzzle • Narrative"]
+      "type": "specs",
+      "items": [
+        {
+          "label": "Role",
+          "value": "Game Designer"
+        },
+        {
+          "label": "Studio",
+          "value": "Luski Game Studio"
+        },
+        {
+          "label": "Team size",
+          "value": "6"
+        },
+        {
+          "label": "Engine",
+          "value": "Unity"
+        },
+        {
+          "label": "Focus",
+          "value": "3C • Puzzle • Narrative"
+        }
       ]
     },
     {
@@ -27,7 +50,10 @@
       "type": "text",
       "html": "<p><strong>Recognition:</strong> Games for Change Latin America 2020 — Winner · BIG Festival Impact 2021 — Finalist. Released on Steam.</p>"
     },
-    { "id": "d1", "type": "divider" },
+    {
+      "id": "d1",
+      "type": "divider"
+    },
     {
       "id": "pillars-h",
       "type": "heading",
@@ -108,7 +134,12 @@
             {
               "id": "o1",
               "blocks": [
-                { "id": "o1h", "type": "heading", "level": 3, "text": "What I owned" },
+                {
+                  "id": "o1h",
+                  "type": "heading",
+                  "level": 3,
+                  "text": "What I owned"
+                },
                 {
                   "id": "o1t",
                   "type": "text",
@@ -119,7 +150,12 @@
             {
               "id": "o2",
               "blocks": [
-                { "id": "o2h", "type": "heading", "level": 3, "text": "Team & collaboration" },
+                {
+                  "id": "o2h",
+                  "type": "heading",
+                  "level": 3,
+                  "text": "Team & collaboration"
+                },
                 {
                   "id": "o2t",
                   "type": "text",
@@ -181,7 +217,10 @@
         }
       ]
     },
-    { "id": "d2", "type": "divider" },
+    {
+      "id": "d2",
+      "type": "divider"
+    },
     {
       "id": "act2-h",
       "type": "heading",
@@ -201,13 +240,23 @@
         {
           "id": "a1",
           "blocks": [
-            { "id": "a1h", "type": "heading", "level": 3, "text": "Teach by doing" },
+            {
+              "id": "a1h",
+              "type": "heading",
+              "level": 3,
+              "text": "Teach by doing"
+            },
             {
               "id": "a1t",
               "type": "text",
               "html": "<p>Environmental layouts introduce mechanics in isolated, safe environments before combining them, eliminating the need for text-based tutorials. Each mechanic is introduced safely, practiced, combined with prior ideas, then mastered for an earned \"aha\" — the space is the lesson.</p>"
             },
-            { "id": "a3h", "type": "heading", "level": 3, "text": "Gentle difficulty" },
+            {
+              "id": "a3h",
+              "type": "heading",
+              "level": 3,
+              "text": "Gentle difficulty"
+            },
             {
               "id": "a3t",
               "type": "text",
@@ -218,13 +267,23 @@
         {
           "id": "a2",
           "blocks": [
-            { "id": "a2h", "type": "heading", "level": 3, "text": "Blockout & flow" },
+            {
+              "id": "a2h",
+              "type": "heading",
+              "level": 3,
+              "text": "Blockout & flow"
+            },
             {
               "id": "a2t",
               "type": "text",
               "html": "<ul><li>Iterated layouts for readability and pacing</li><li>Sightlines that guide without hand-holding</li><li>A rhythm of tension and calm across the act</li></ul>"
             },
-            { "id": "a4h", "type": "heading", "level": 3, "text": "Narrative beats" },
+            {
+              "id": "a4h",
+              "type": "heading",
+              "level": 3,
+              "text": "Narrative beats"
+            },
             {
               "id": "a4t",
               "type": "text",
@@ -258,7 +317,12 @@
             {
               "id": "i1",
               "blocks": [
-                { "id": "i1h", "type": "heading", "level": 3, "text": "Observed" },
+                {
+                  "id": "i1h",
+                  "type": "heading",
+                  "level": 3,
+                  "text": "Observed"
+                },
                 {
                   "id": "i1t",
                   "type": "text",
@@ -269,7 +333,12 @@
             {
               "id": "i2",
               "blocks": [
-                { "id": "i2h", "type": "heading", "level": 3, "text": "Changed" },
+                {
+                  "id": "i2h",
+                  "type": "heading",
+                  "level": 3,
+                  "text": "Changed"
+                },
                 {
                   "id": "i2t",
                   "type": "text",
@@ -280,11 +349,26 @@
             {
               "id": "i3",
               "blocks": [
-                { "id": "i3h", "type": "heading", "level": 3, "text": "Result" },
+                {
+                  "id": "i3h",
+                  "type": "heading",
+                  "level": 3,
+                  "text": "Result"
+                },
+                {
+                  "id": "i3-stat",
+                  "type": "stats",
+                  "items": [
+                    {
+                      "value": "~90%",
+                      "label": "of playtesters solved it, after the change"
+                    }
+                  ]
+                },
                 {
                   "id": "i3t",
                   "type": "text",
-                  "html": "<p><strong>~90% solved.</strong> Puzzle resolution rates rose to around 90% across subsequent playtest cohorts, preserving the intended \"aha!\" moment while restoring narrative pacing.</p>"
+                  "html": "<p>Puzzle resolution rates rose to around 90% across subsequent playtest cohorts, preserving the intended \"aha!\" moment while restoring narrative pacing.</p>"
                 }
               ]
             }

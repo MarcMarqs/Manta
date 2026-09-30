@@ -2,7 +2,12 @@
   "title": "About",
   "description": "Senior Game Designer based in Brazil, open to remote roles in Europe or North America.",
   "blocks": [
-    { "id": "h", "type": "heading", "level": 1, "text": "Who I am" },
+    {
+      "id": "h",
+      "type": "heading",
+      "level": 1,
+      "text": "Who I am"
+    },
     {
       "id": "bio",
       "type": "text",
@@ -10,19 +15,34 @@
     },
     {
       "id": "facts",
-      "type": "table",
-      "columns": ["Based in / open to", "Education", "Engines", "Management", "Targeting"],
-      "rows": [
-        [
-          "Brazil > remote, Europe or North America",
-          "M.Sc. Game Design & PM",
-          "Unreal · Unity",
-          "Miro · ClickUp · Jira · Confluence",
-          "(Senior) Game Designer"
-        ]
+      "type": "specs",
+      "items": [
+        {
+          "label": "Based in / open to",
+          "value": "Brazil > remote, Europe or North America"
+        },
+        {
+          "label": "Education",
+          "value": "M.Sc. Game Design & PM"
+        },
+        {
+          "label": "Engines",
+          "value": "Unreal · Unity"
+        },
+        {
+          "label": "Management",
+          "value": "Miro · ClickUp · Jira · Confluence"
+        },
+        {
+          "label": "Targeting",
+          "value": "(Senior) Game Designer"
+        }
       ]
     },
-    { "id": "d1", "type": "divider" },
+    {
+      "id": "d1",
+      "type": "divider"
+    },
     {
       "id": "cta-h",
       "type": "heading",

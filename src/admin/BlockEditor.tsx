@@ -598,6 +598,48 @@ function BlockFields({ block, depth, onChange }: { block: Block; depth: number; 
     case 'table':
       return <TableFields block={block} onChange={onChange} />;
 
+    case 'specs':
+    case 'stats': {
+      // Same shape either way: an ordered list of two-field rows.
+      const isSpecs = block.type === 'specs';
+      const items = block.items as { label: string; value: string }[];
+      const write = (next: { label: string; value: string }[]) => onChange({ ...block, items: next } as Block);
+      const edit = (i: number, patch: Partial<{ label: string; value: string }>) =>
+        write(items.map((x, j) => (j === i ? { ...x, ...patch } : x)));
+      return (
+        <div class="stack">
+          <div class="series">
+            <div class="series-head">
+              <span>{isSpecs ? 'Label' : 'Figure'}</span>
+              <span>{isSpecs ? 'Value' : 'Caption'}</span>
+              <span />
+            </div>
+            {items.map((item, i) => (
+              <div class="series-row">
+                <TextInput
+                  value={isSpecs ? item.label : item.value}
+                  onChange={(v) => edit(i, isSpecs ? { label: v } : { value: v })}
+                />
+                <TextInput
+                  value={isSpecs ? item.value : item.label}
+                  onChange={(v) => edit(i, isSpecs ? { value: v } : { label: v })}
+                />
+                <IconButton
+                  icon="trash"
+                  label="Remove"
+                  tone="danger"
+                  onClick={() => write(items.filter((_, j) => j !== i))}
+                />
+              </div>
+            ))}
+            <button type="button" class="btn small ghost" onClick={() => write([...items, { label: '', value: '' }])}>
+              <Icon name="plus" /> Add {isSpecs ? 'pair' : 'figure'}
+            </button>
+          </div>
+        </div>
+      );
+    }
+
     case 'chart':
       return (
         <div class="stack">

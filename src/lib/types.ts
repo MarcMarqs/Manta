@@ -100,6 +100,10 @@ export type Block = BlockLayout & (
   | { id: string; type: 'divider' }
   | { id: string; type: 'spacer'; size?: 'sm' | 'md' | 'lg' }
   | { id: string; type: 'table'; caption?: string; columns: string[]; rows: string[][] }
+  /** The strip under a case-study title: role, studio, team size, engine, focus. */
+  | { id: string; type: 'specs'; items: { label: string; value: string }[] }
+  /** Figures worth stating on their own: years in industry, shipped titles, "~90% solved". */
+  | { id: string; type: 'stats'; items: { value: string; label: string }[] }
   | { id: string; type: 'chart'; variant: 'bar' | 'line'; title?: string; series: { label: string; value: number }[] }
   | { id: string; type: 'columns'; count: 2 | 3; columns: { id: string; blocks: Block[] }[] }
   | { id: string; type: 'section'; background?: 'none' | 'surface' | 'accent'; blocks: Block[] }

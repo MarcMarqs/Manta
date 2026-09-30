@@ -45,6 +45,33 @@ export const BLOCKS: Record<BlockType, BlockSpec> = {
     hint: 'Link to a page or site',
     create: () => ({ id: newId(), type: 'button', label: 'Button', href: '/', style: 'primary' }),
   },
+  specs: {
+    label: 'Spec strip',
+    group: 'Data',
+    hint: 'Role, studio, engine — a row of label/value pairs',
+    create: () => ({
+      id: newId(),
+      type: 'specs',
+      items: [
+        { label: 'Role', value: '' },
+        { label: 'Studio', value: '' },
+        { label: 'Engine', value: '' },
+      ],
+    }),
+  },
+  stats: {
+    label: 'Figures',
+    group: 'Data',
+    hint: 'Big numbers with a caption each',
+    create: () => ({
+      id: newId(),
+      type: 'stats',
+      items: [
+        { value: '', label: '' },
+        { value: '', label: '' },
+      ],
+    }),
+  },
   table: {
     label: 'Table',
     group: 'Data',
@@ -155,6 +182,10 @@ export function summarize(block: Block): string {
       return `${block.label} → ${block.href}`;
     case 'table':
       return block.caption || `${block.columns.length} × ${block.rows.length}`;
+    case 'specs':
+      return block.items.map((i) => i.label).filter(Boolean).join(' · ') || 'Empty';
+    case 'stats':
+      return block.items.map((i) => i.value).filter(Boolean).join(' · ') || 'Empty';
     case 'chart':
       return block.title || `${block.variant} chart, ${block.series.length} values`;
     case 'section': {
