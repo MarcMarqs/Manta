@@ -46,6 +46,9 @@ export interface ProjectLink {
   href: string;
 }
 
+/** Studio work versus your own prototypes, jam games and studies. */
+export type ProjectGroup = 'selected' | 'personal';
+
 export interface Project {
   slug: string;
   title: string;
@@ -60,6 +63,8 @@ export interface Project {
   cover: string;
   coverVideo: string | null;
   featured: boolean;
+  /** Which shelf the project belongs on. Absent means "selected", the main body of work. */
+  group?: ProjectGroup;
   draft: boolean;
   links: ProjectLink[];
 }
@@ -98,8 +103,8 @@ export type Block = BlockLayout & (
   | { id: string; type: 'chart'; variant: 'bar' | 'line'; title?: string; series: { label: string; value: number }[] }
   | { id: string; type: 'columns'; count: 2 | 3; columns: { id: string; blocks: Block[] }[] }
   | { id: string; type: 'section'; background?: 'none' | 'surface' | 'accent'; blocks: Block[] }
-  | { id: string; type: 'projectRail'; filters?: boolean }
-  | { id: string; type: 'projectGrid'; filters?: boolean }
+  | { id: string; type: 'projectRail'; filters?: boolean; group?: ProjectGroup }
+  | { id: string; type: 'projectGrid'; filters?: boolean; group?: ProjectGroup }
   | { id: string; type: 'html'; html: string }
 );
 

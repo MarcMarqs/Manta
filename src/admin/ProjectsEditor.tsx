@@ -2,7 +2,7 @@ import type { Project, ProjectLink } from '../lib/types';
 import { ImageField, LinkInput } from './media';
 import { createPage } from './PageEditor';
 import { PAGES_DIR, PROJECTS, files, openView, projects, setFiles, tags, updateFile, view, type PageFile } from './store';
-import { Field, Icon, IconButton, Segmented, TextArea, TextInput, Toggle } from './ui';
+import { Field, Icon, IconButton, Segmented, Select, TextArea, TextInput, Toggle } from './ui';
 
 const caseStudyPath = (slug: string) => `${PAGES_DIR}work/${slug}.json`;
 
@@ -95,6 +95,16 @@ function ProjectForm({ project, index }: { project: Project; index: number }) {
     <div class="stack">
       <div class="row spread">
         <div class="row">
+          <Field label="Shelf" hint="Which list on the site this appears in.">
+            <Select
+              value={project.group ?? 'selected'}
+              options={[
+                { value: 'selected', label: 'Selected work' },
+                { value: 'personal', label: 'Personal work & studies' },
+              ]}
+              onChange={(group) => set({ group: group === 'selected' ? undefined : (group as 'personal') })}
+            />
+          </Field>
           <Toggle checked={!project.draft} onChange={(v) => set({ draft: !v })} label="Visible on the site" />
           <Toggle checked={project.featured} onChange={(featured) => set({ featured })} label="Featured (shown first)" />
         </div>

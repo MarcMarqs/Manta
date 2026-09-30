@@ -716,14 +716,26 @@ function BlockFields({ block, depth, onChange }: { block: Block; depth: number; 
     case 'projectGrid':
       return (
         <div class="stack">
+          <Field label="Which projects">
+            <Select
+              value={block.group ?? 'selected'}
+              options={[
+                { value: 'selected', label: 'Selected work' },
+                { value: 'personal', label: 'Personal work & studies' },
+              ]}
+              onChange={(group) =>
+                onChange({ ...block, group: group === 'selected' ? undefined : (group as 'personal') })
+              }
+            />
+          </Field>
           <Toggle
             checked={Boolean(block.filters)}
             label="Show tag filters above"
             onChange={(v) => onChange({ ...block, filters: v })}
           />
           <p class="field-hint">
-            Shows every project that isn't hidden, newest first. Covers can be swapped here; everything else about
-            a project lives in the Projects tab.
+            Shows every project on that shelf that isn't hidden, newest first. Covers can be swapped here;
+            everything else about a project lives in the Projects tab.
           </p>
           <CoverList />
         </div>

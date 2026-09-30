@@ -1,12 +1,16 @@
 ---
+import type { ProjectGroup } from '../lib/types';
 import { useContent } from '../lib/context';
 import Filters from './Filters.astro';
 
 interface Props {
   filters?: boolean;
+  /** Which shelf to show. Omitted means the main one; projects default to it too. */
+  group?: ProjectGroup;
 }
-const { filters = true } = Astro.props;
-const { projects, tagLabel, asset } = useContent(Astro.locals);
+const { filters = true, group } = Astro.props;
+const { projects: all, tagLabel, asset } = useContent(Astro.locals);
+const projects = all.filter((p) => (p.group ?? 'selected') === (group ?? 'selected'));
 const id = `rail-${Math.random().toString(36).slice(2, 8)}`;
 ---
 

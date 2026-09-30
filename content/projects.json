@@ -12,8 +12,15 @@
       "Architected an AI targeting-cap and aggro-cooldown system to restore combat readability",
       "Shaped horde spawning and the difficulty curve from telemetry heatmaps"
     ],
-    "discipline": ["systems", "combat", "ai", "economy"],
-    "engine": ["unreal"],
+    "discipline": [
+      "systems",
+      "combat",
+      "ai",
+      "economy"
+    ],
+    "engine": [
+      "unreal"
+    ],
     "cover": "/images/projects/wardens-rising/cover.svg",
     "coverVideo": null,
     "featured": true,
@@ -33,8 +40,14 @@
       "Co-defined the 3C: camera, character and control",
       "Owned Act II gameplay and puzzle design end-to-end"
     ],
-    "discipline": ["3c", "level", "narrative"],
-    "engine": ["unity"],
+    "discipline": [
+      "3c",
+      "level",
+      "narrative"
+    ],
+    "engine": [
+      "unity"
+    ],
     "cover": "/images/projects/aurora/cover.svg",
     "coverVideo": null,
     "featured": true,
@@ -49,13 +62,18 @@
     "role": "Game Designer",
     "summary": "",
     "highlights": [],
-    "discipline": ["systems"],
-    "engine": ["uefn"],
+    "discipline": [
+      "systems"
+    ],
+    "engine": [
+      "uefn"
+    ],
     "cover": "/images/projects/placeholder/cover.svg",
     "coverVideo": null,
     "featured": false,
-    "draft": true,
-    "links": []
+    "draft": false,
+    "links": [],
+    "group": "personal"
   },
   {
     "slug": "plushland-curse",
@@ -65,13 +83,18 @@
     "role": "Game Designer",
     "summary": "",
     "highlights": [],
-    "discipline": ["combat"],
-    "engine": ["unreal"],
+    "discipline": [
+      "combat"
+    ],
+    "engine": [
+      "unreal"
+    ],
     "cover": "/images/projects/placeholder/cover.svg",
     "coverVideo": null,
     "featured": false,
-    "draft": true,
-    "links": []
+    "draft": false,
+    "links": [],
+    "group": "personal"
   },
   {
     "slug": "far-away-orbital-space",
@@ -81,13 +104,18 @@
     "role": "Game Designer",
     "summary": "",
     "highlights": [],
-    "discipline": ["level"],
-    "engine": ["unity"],
+    "discipline": [
+      "level"
+    ],
+    "engine": [
+      "unity"
+    ],
     "cover": "/images/projects/placeholder/cover.svg",
     "coverVideo": null,
     "featured": false,
-    "draft": true,
-    "links": []
+    "draft": false,
+    "links": [],
+    "group": "personal"
   },
   {
     "slug": "ascending-flags",
@@ -97,12 +125,17 @@
     "role": "Game Designer",
     "summary": "",
     "highlights": [],
-    "discipline": ["systems"],
-    "engine": ["tabletop"],
+    "discipline": [
+      "systems"
+    ],
+    "engine": [
+      "tabletop"
+    ],
     "cover": "/images/projects/placeholder/cover.svg",
     "coverVideo": null,
     "featured": false,
-    "draft": true,
-    "links": []
+    "draft": false,
+    "links": [],
+    "group": "personal"
   }
 ]

@@ -26,7 +26,7 @@ const others = [...tags.discipline, ...tags.engine].filter((t) => t.id !== tag.i
       <h1>{tag.label}</h1>
       <p class="muted">{count} {count === 1 ? 'project' : 'projects'}</p>
     </div>
-    <ProjectGrid tag={tag.id} />
+    <ProjectGrid tag={tag.id} group="all" />
     <div>
       <p class="muted">Other tags</p>
       <div class="tag-links">

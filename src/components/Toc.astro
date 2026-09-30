@@ -32,7 +32,9 @@ const { items } = Astro.props;
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
-    right: max(14px, calc((100vw - var(--max-width)) / 2 - 34px));
+    /* Hard against the window edge rather than tucked beside the text column, so it
+       never crowds the page at any width the rail is shown at. */
+    right: 20px;
     z-index: 15;
     padding: 10px 8px;
     border-radius: var(--radius);
@@ -43,7 +45,6 @@ const { items } = Astro.props;
 
   .toc:hover,
   .toc:focus-within {
-    right: max(14px, calc((100vw - var(--max-width)) / 2 - 34px));
     background: var(--surface);
     box-shadow: var(--shadow, 0 8px 30px rgba(0, 0, 0, 0.18));
     border: 1px solid var(--border);
@@ -109,8 +110,8 @@ const { items } = Astro.props;
     width: 26px;
   }
 
-  /* Under this width the gutter is gone entirely and the rail would sit on the text. */
-  @media (max-width: 1080px) {
+  /* Under this width the margin is too narrow to hold the rail clear of the text. */
+  @media (max-width: 1200px) {
     .toc {
       display: none;
     }

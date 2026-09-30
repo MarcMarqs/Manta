@@ -181,9 +181,9 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
     )
   }
 
-  {block.type === 'projectRail' && <ProjectRail filters={block.filters} />}
+  {block.type === 'projectRail' && <ProjectRail filters={block.filters} group={block.group} />}
 
-  {block.type === 'projectGrid' && <ProjectGrid filters={block.filters} />}
+  {block.type === 'projectGrid' && <ProjectGrid filters={block.filters} group={block.group} />}
 
   {block.type === 'html' && <div class="raw-html" set:html={block.html} />}
 </Wrap>

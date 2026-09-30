@@ -23,8 +23,20 @@
     {
       "id": "stats",
       "type": "table",
-      "columns": ["Years in industry", "Shipped titles", "Genres designed", "Festival awards"],
-      "rows": [["6+", "3", "5+", "2"]]
+      "columns": [
+        "Years in industry",
+        "Shipped titles",
+        "Genres designed",
+        "Festival awards"
+      ],
+      "rows": [
+        [
+          "6+",
+          "3",
+          "5+",
+          "2"
+        ]
+      ]
     },
     {
       "id": "work-h",
@@ -61,6 +73,27 @@
       "id": "grid",
       "type": "projectGrid",
       "filters": false
+    },
+    {
+      "id": "personal-sep",
+      "type": "divider"
+    },
+    {
+      "id": "personal-h",
+      "type": "heading",
+      "level": 2,
+      "text": "Personal work & studies"
+    },
+    {
+      "id": "personal-t",
+      "type": "text",
+      "html": "<p>Prototypes, jam games and design studies of my own — the places I try things the day job doesn't call for.</p>"
+    },
+    {
+      "id": "personal-grid",
+      "type": "projectGrid",
+      "filters": false,
+      "group": "personal"
     }
   ]
 }

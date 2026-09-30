@@ -68,6 +68,14 @@ Any block can also take `align` (`left` | `center` | `right`) and `width` (`narr
 `section` becomes a coloured band whose content stays in the column. Inside sections and
 columns, wide and full fall back to normal. Every option collapses sensibly on a phone.
 
+### Shelves
+
+A project sits on one of two shelves: **Selected work** (the default, studio work) and
+**Personal work & studies** (prototypes, jam games, things you made to learn something).
+Set it per project in the editor, or with `"group": "personal"` in `projects.json`. A
+`projectRail` or `projectGrid` block shows one shelf, chosen in the block's settings; tag
+pages ignore shelves and list everything carrying the tag.
+
 ### Adding a project
 
 1. Add an entry to `content/projects.json`.
