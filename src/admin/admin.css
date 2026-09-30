@@ -627,6 +627,8 @@ a:focus-visible,
 
 .pane-head p {
   margin: 0;
+  /* A measure, so a description doesn't run the full width of the pane. */
+  max-width: 62ch;
 }
 
 .eyebrow {
@@ -1970,12 +1972,16 @@ form.tag-row {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 24px;
+  flex-wrap: wrap;
+  gap: 12px 24px;
   padding: 16px 0;
   border-bottom: 1px solid var(--e-border);
 }
 
+/* Side by side while the pane is wide enough for both; the control drops underneath
+   rather than squeezing the reasoning into a two-word column. */
 .set-text {
+  flex: 1 1 250px;
   min-width: 0;
 }
 
@@ -1992,13 +1998,17 @@ form.tag-row {
 }
 
 .set-control {
-  flex: none;
+  flex: 0 0 auto;
+  margin-left: auto;
 }
 
 .swatches {
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-end;
   gap: 8px;
+  /* Five to a row: the whole set won't fit beside the text in one line. */
+  max-width: 178px;
 }
 
 /* The swatch is the colour, so the ring that marks the chosen one has to be drawn

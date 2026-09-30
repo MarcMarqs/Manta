@@ -13,14 +13,17 @@ export function SettingsEditor() {
   const look = appearance.value;
 
   return (
-    <div class="pane">
-      <div class="pane-head">
-        <h2>Settings</h2>
-        <p class="muted">
-          How the editor itself looks. Kept in this browser, never committed — the site's own
-          colours and fonts are content, and live in Site &amp; theme.
-        </p>
-      </div>
+    <div class="editor-pane">
+      <header class="pane-head">
+        <div>
+          <p class="eyebrow">Editor</p>
+          <h1>Settings</h1>
+          <p class="muted">
+            How the editor itself looks. Kept in this browser, never committed — the site's own
+            colours and fonts are content, and live in Site &amp; theme.
+          </p>
+        </div>
+      </header>
 
       <RuleLabel>Appearance</RuleLabel>
 
@@ -41,7 +44,7 @@ export function SettingsEditor() {
 
       <Row
         label="Accent"
-        hint="The colour of whatever is live or selected — including Publish, which is the thing going live. The same five the other tools offer."
+        hint="The colour of whatever is live or selected, including Publish. The first five are the ones Shipwreck, Siren and Barnacle offer; the rest carry on round the wheel."
       >
         <div class="swatches">
           {ACCENTS.map((accent) => (

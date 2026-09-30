@@ -15,15 +15,37 @@ import { signal } from '@preact/signals';
  */
 
 export type Theme = 'dark' | 'light' | 'system';
-export type Accent = 'green' | 'gold' | 'rust' | 'steel' | 'violet';
+export type Accent =
+  | 'green'
+  | 'teal'
+  | 'steel'
+  | 'indigo'
+  | 'violet'
+  | 'magenta'
+  | 'rust'
+  | 'gold'
+  | 'lime'
+  | 'bone';
 
-/** Two hexes each: a colour bright enough to carry on black is unreadable on paper. */
+/**
+ * Two hexes each: a colour bright enough to carry on black is unreadable on paper.
+ *
+ * The first five are Shipwreck's, unchanged, so an accent shared between the tools is
+ * the same colour in both. The rest continue round the wheel at the same brightness —
+ * teal and magenta are Barnacle's two run colours, and bone is the way out for anyone
+ * who would rather the editor didn't have a colour at all.
+ */
 export const ACCENTS: { key: Accent; label: string; dark: string; light: string }[] = [
   { key: 'green', label: 'Green', dark: '#3fe082', light: '#12703c' },
-  { key: 'gold', label: 'Gold', dark: '#e0b23f', light: '#8a6a10' },
-  { key: 'rust', label: 'Rust', dark: '#e0663f', light: '#a8401d' },
+  { key: 'lime', label: 'Lime', dark: '#a8e03f', light: '#5a7a12' },
+  { key: 'teal', label: 'Teal', dark: '#3cc4b4', light: '#0f6f66' },
   { key: 'steel', label: 'Steel', dark: '#3fa8e0', light: '#1a6b96' },
+  { key: 'indigo', label: 'Indigo', dark: '#7f8ce0', light: '#3f4aa8' },
   { key: 'violet', label: 'Violet', dark: '#a97fe0', light: '#6a48a8' },
+  { key: 'magenta', label: 'Magenta', dark: '#e0529c', light: '#a3266a' },
+  { key: 'rust', label: 'Rust', dark: '#e0663f', light: '#a8401d' },
+  { key: 'gold', label: 'Gold', dark: '#e0b23f', light: '#8a6a10' },
+  { key: 'bone', label: 'Bone', dark: '#e7ede9', light: '#3a4744' },
 ];
 
 export interface Appearance {
