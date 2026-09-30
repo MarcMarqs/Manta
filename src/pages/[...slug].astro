@@ -1,7 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
 import BlockList from '../components/blocks/BlockList.astro';
+import Toc from '../components/Toc.astro';
 import { pages, projects, site, tagLabel } from '../lib/content';
+import { headingAnchors, tocItems } from '../lib/toc';
 
 // One route for the whole site: every file in content/pages/ becomes a page.
 // home.json is the root, work/dunes.json is /work/dunes, and so on.
@@ -21,10 +23,17 @@ const image = page.image || current?.cover || site.socialImage;
 const index = current ? projects.indexOf(current) : -1;
 const next = index >= 0 && projects.length > 1 ? projects[(index + 1) % projects.length] : undefined;
 const tagsOf = current ? [...current.discipline, ...current.engine] : [];
+
+// Headings get anchors either way; the floating contents list only earns its place on a
+// page long enough to get lost in, and a page can opt out in its settings.
+const anchors = headingAnchors(page.blocks);
+const toc = page.toc === false ? [] : tocItems(page.blocks, anchors);
 ---
 
 <Base title={page.title} description={page.description} path={page.path} image={image}>
-  <BlockList blocks={page.blocks} />
+  {toc.length >= 3 && <Toc items={toc} />}
+
+  <BlockList blocks={page.blocks} anchors={anchors} />
 
   {
     tagsOf.length > 0 && (

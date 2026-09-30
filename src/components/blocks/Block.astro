@@ -10,8 +10,10 @@ import Self from './Block.astro';
 
 interface Props {
   block: Block;
+  /** Heading anchors for the whole page, keyed by block id; see lib/toc.ts. */
+  anchors?: Map<string, string>;
 }
-const { block } = Astro.props;
+const { block, anchors } = Astro.props;
 const { preview, asset } = useContent(Astro.locals);
 
 // Blocks with a width or alignment get a wrapper carrying those classes (styled in
@@ -51,7 +53,13 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
 ---
 
 <Wrap {...wrapProps}>
-  {block.type === 'heading' && <Fragment set:html={`<h${block.level}>${block.text}</h${block.level}>`} />}
+  {
+    block.type === 'heading' && (
+      <Fragment
+        set:html={`<h${block.level}${anchors?.get(block.id) ? ` id="${anchors.get(block.id)}"` : ''}>${block.text}</h${block.level}>`}
+      />
+    )
+  }
 
   {block.type === 'text' && <div class="rich" set:html={block.html} />}
 
@@ -153,7 +161,7 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
         {block.columns.map((col) => (
           <div class="column blocks">
             {col.blocks.map((child) => (
-              <Self block={child} />
+              <Self block={child} anchors={anchors} />
             ))}
           </div>
         ))}
@@ -166,7 +174,7 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
       <section class={`section bg-${block.background ?? 'none'}`}>
         <div class="blocks">
           {block.blocks.map((child) => (
-            <Self block={child} />
+            <Self block={child} anchors={anchors} />
           ))}
         </div>
       </section>

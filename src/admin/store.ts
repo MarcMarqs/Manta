@@ -15,6 +15,8 @@ export interface PageFile {
   /** Picture for this page's link previews. */
   image?: string;
   project?: string;
+  /** false hides the floating contents list, which otherwise appears on long pages. */
+  toc?: boolean;
   blocks: Block[];
 }
 

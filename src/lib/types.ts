@@ -116,5 +116,7 @@ export interface Page {
   image?: string;
   /** Slug of the project this page is a case study for, if any. */
   project?: string;
+  /** false hides the floating contents list, which otherwise appears on long pages. */
+  toc?: boolean;
   blocks: Block[];
 }

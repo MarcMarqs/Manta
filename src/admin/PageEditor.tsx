@@ -270,6 +270,13 @@ export function PageEditor({ path }: { path: string }) {
               >
                 <ImageField value={page.image ?? ''} onChange={(image) => set({ image: image || undefined })} />
               </Field>
+              <Field label="Contents list" wide>
+                <Toggle
+                  checked={page.toc !== false}
+                  onChange={(v) => set({ toc: v ? undefined : false })}
+                  label="Float a jump-to-section list beside long pages"
+                />
+              </Field>
               {path.startsWith(`${PAGES_DIR}work/`) && (
                 <Field label="Case study for">
                   <Select

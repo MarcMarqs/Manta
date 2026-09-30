@@ -101,6 +101,12 @@ preview on the right rendered by the site's own components, so what you see is w
   `public/images/uploads/` on the draft straight away, so the preview can show them. An image
   block can be scaled and cropped to a shape; the library deletes ones nothing uses any more.
 
+- **Contents list:** every heading gets an anchor derived from its words, so any section can
+  be linked to directly. A page with three or more level-2 headings also floats a jump-to
+  rail in the right margin: dashes at rest, labels on hover, the current section marked as
+  you read. Turn it off per page under **Page settings → Contents list**. It needs a margin
+  to live in, so it hides below 1080px.
+
 - **Link previews and search:** every page carries Open Graph and Twitter tags, a canonical
   URL, and appears in `/sitemap.xml`; `/robots.txt` keeps crawlers out of `/admin`. A shared
   link shows the page's own description and picture — a case study uses its project cover,

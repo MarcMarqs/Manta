@@ -66,6 +66,22 @@ img {
   margin-top: calc(1.6rem * var(--spacing));
 }
 
+/* Jumping to a heading must not tuck it under the sticky header, and the jump itself
+   should be followable rather than instant — unless the reader asked for less motion. */
+html {
+  scroll-behavior: smooth;
+}
+
+:is(h1, h2, h3, h4)[id] {
+  scroll-margin-top: 84px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 /* --- header / footer --- */
 
 .site-header {
