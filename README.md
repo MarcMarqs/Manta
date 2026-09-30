@@ -126,6 +126,12 @@ preview on the right rendered by the site's own components, so what you see is w
   anything else falls back to the site-wide image in Site & theme. All of it hangs off the
   **Site address** there, so update that when the domain changes.
 
+The editor's chrome uses the same palette and faces as Shipwreck, Siren and Barnacle —
+deep water at night, Cinzel for labels, Inter for body, and one phosphorescent green that
+only marks what is live or selected. Dark is home; a light reading theme applies if the
+system asks for one. It is deliberately independent of the site's own theme, so the
+preview pane always looks like the site and the chrome around it always looks like Manta.
+
 The editor can only write `content/**.json` and `public/images/**`, never code or config.
 
 ### Running it locally

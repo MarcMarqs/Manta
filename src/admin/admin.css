@@ -2,28 +2,35 @@
    palette never makes the editor itself hard to read. */
 
 :root {
-  --e-bg: #f6f7f9;
-  --e-panel: #ffffff;
-  --e-raised: #ffffff;
-  --e-sunken: #f0f2f5;
-  --e-fg: #16181d;
-  --e-muted: #626b78;
-  --e-faint: #9aa2ae;
-  --e-border: #e2e5ea;
-  --e-border-strong: #cfd4dc;
-  --e-accent: #4a6cf7;
-  --e-accent-soft: #eef1fe;
-  --e-accent-fg: #ffffff;
-  --e-publish: #0f9960;
-  --e-danger: #d64545;
-  --e-warn: #b7791f;
-  --e-warn-soft: #fdf5e6;
-  --e-ok: #0f9960;
-  --e-ok-soft: #e7f6ef;
-  --e-shadow: 0 1px 2px rgba(16, 24, 40, 0.06), 0 8px 24px rgba(16, 24, 40, 0.08);
-  /* Type scale. Everything in the editor picks one of these five; nothing in between.
-     The old values drifted across ten sizes, half of them on half-pixels, which round
-     differently from one display to the next. */
+  /*
+   * Shipwreck's palette, as Siren and Barnacle already use it: deep water at night,
+   * bone-white text, and one phosphorescent green that only ever marks what is live or
+   * selected. Dark is home here too — the light block below is the reading theme, for a
+   * bright room, and it only applies if the system asks for it.
+   */
+  --e-bg: #070a09;
+  --e-panel: #0c1211;
+  --e-raised: #131b18;
+  --e-sunken: #040706;
+  --e-fg: #e7ede9;
+  --e-muted: #7c8b85;
+  --e-faint: #56645f;
+  --e-border: #1c2622;
+  --e-border-strong: #2c3a37;
+  --e-accent: #3fe082;
+  --e-accent-soft: rgb(63 224 130 / 0.14);
+  --e-accent-fg: #070a09;
+  /* Publishing is the thing going live, so it takes the live colour rather than a
+     second green competing with it. */
+  --e-publish: #3fe082;
+  --e-ok: #3fe082;
+  --e-ok-soft: rgb(63 224 130 / 0.12);
+  --e-danger: #e0663f;
+  --e-warn: #f2b441;
+  --e-warn-soft: rgb(242 180 65 / 0.12);
+  --e-shadow: 0 1px 2px rgb(0 0 0 / 0.5), 0 12px 32px rgb(0 0 0 / 0.55);
+
+  /* Type scale. Everything in the editor picks one of these five; nothing in between. */
   --e-t-xs: 11px;
   --e-t-sm: 12px;
   --e-t-md: 13px;
@@ -35,32 +42,37 @@
   --e-r-lg: 14px;
   --e-r-pill: 999px;
   --e-radius: var(--e-r-sm);
-  --e-font: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --e-mono: ui-monospace, 'SFMono-Regular', Consolas, monospace;
-  color-scheme: light;
+  /* Inscriptional caps for anything display or label-like, Inter for body copy, and a
+     system mono for anything that has to line up. The same three faces as the others. */
+  --e-display: 'Cinzel', Georgia, serif;
+  --e-font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --e-mono: ui-monospace, 'Cascadia Mono', 'SFMono-Regular', Consolas, monospace;
+  color-scheme: dark;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
-    --e-bg: #0e1014;
-    --e-panel: #191d24;
-    --e-raised: #222730;
-    --e-sunken: #0b0d11;
-    --e-fg: #e8ebf0;
-    --e-muted: #9aa3b0;
-    --e-faint: #69717e;
-    --e-border: #272c35;
-    --e-border-strong: #353b46;
-    --e-accent: #6f8bff;
-    --e-accent-soft: #1f2640;
-    --e-publish: #24b77a;
-    --e-danger: #f06a6a;
-    --e-warn: #e3a64a;
-    --e-warn-soft: #2e2615;
-    --e-ok: #3ccf8e;
-    --e-ok-soft: #14291f;
-    --e-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 32px rgba(0, 0, 0, 0.4);
-    color-scheme: dark;
+    /* Shipwreck's reading theme: same identity, atmosphere removed. */
+    --e-bg: #fbfbf9;
+    --e-panel: #f2f3f0;
+    --e-raised: #ffffff;
+    --e-sunken: #e8eae6;
+    --e-fg: #0f1412;
+    --e-muted: #5c6a64;
+    --e-faint: #8a958f;
+    --e-border: #dcdfd9;
+    --e-border-strong: #c3c8c0;
+    --e-accent: #12703c;
+    --e-accent-soft: rgb(18 112 60 / 0.1);
+    --e-accent-fg: #ffffff;
+    --e-publish: #12703c;
+    --e-ok: #12703c;
+    --e-ok-soft: rgb(18 112 60 / 0.1);
+    --e-danger: #a8401d;
+    --e-warn: #8a6a10;
+    --e-warn-soft: rgb(138 106 16 / 0.12);
+    --e-shadow: 0 1px 2px rgb(16 24 40 / 0.06), 0 8px 24px rgb(16 24 40 / 0.08);
+    color-scheme: light;
   }
 }
 
@@ -75,6 +87,72 @@ button,
 select,
 textarea {
   font: inherit;
+}
+
+/* The house details, the same in Shipwreck, Siren and Barnacle. */
+
+/* A plain colour snap on hover reads as unfinished at this level of polish. */
+button,
+a,
+input,
+select,
+textarea {
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    opacity 150ms ease;
+}
+
+/* One deliberate keyboard-focus ring, in the accent; the mouse doesn't get it. */
+:focus-visible {
+  outline: 2px solid var(--e-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Spinner arrows fight a column of numbers that should line up. */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+  font-variant-numeric: tabular-nums;
+}
+
+.mono,
+code {
+  font-variant-numeric: tabular-nums;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--e-border);
+  border-radius: var(--e-r-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--e-border-strong);
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+  }
 }
 
 html,
@@ -181,7 +259,9 @@ code,
   display: flex;
   align-items: center;
   gap: 9px;
-  font-weight: 650;
+  font-family: var(--e-display);
+  letter-spacing: 0.04em;
+  font-weight: 600;
   font-size: var(--e-t-lg);
   width: 194px;
 }
@@ -523,6 +603,7 @@ a:focus-visible,
 }
 
 .eyebrow {
+  font-family: var(--e-display);
   font-size: var(--e-t-xs);
   font-weight: 650;
   letter-spacing: 0.06em;
@@ -1008,6 +1089,7 @@ input[type='range'] {
 }
 
 .add-group-label {
+  font-family: var(--e-display);
   padding: 6px 8px 3px;
   font-size: var(--e-t-xs);
   font-weight: 650;
@@ -1051,6 +1133,7 @@ input[type='range'] {
 }
 
 .column-label {
+  font-family: var(--e-display);
   font-size: var(--e-t-xs);
   font-weight: 650;
   color: var(--e-faint);
