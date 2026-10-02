@@ -28,7 +28,8 @@
     "links": [
       {
         "label": "Epic Games Store",
-        "href": "https://store.epicgames.com/p/wardens-rising-b42f9b"
+        "href": "https://store.epicgames.com/p/wardens-rising-b42f9b",
+        "type": "play"
       }
     ]
   },
@@ -60,7 +61,8 @@
     "links": [
       {
         "label": "Steam",
-        "href": "https://store.steampowered.com/app/1438440/Aurora_A_Childs_Journey/"
+        "href": "https://store.steampowered.com/app/1438440/Aurora_A_Childs_Journey/",
+        "type": "play"
       }
     ]
   },

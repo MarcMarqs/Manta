@@ -2,6 +2,7 @@
   "title": "Gundam: Requiem for Vengeance",
   "description": "Mode design, combat and UI on an external-IP Fortnite game mode at Big Moxi Games.",
   "image": "/images/projects/placeholder/cover.svg",
+  "project": "gundam-requiem",
   "blocks": [
     {
       "id": "eyebrow",

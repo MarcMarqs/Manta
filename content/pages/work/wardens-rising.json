@@ -2,6 +2,7 @@
   "title": "Wardens Rising",
   "description": "Combat, AI, systems and economy design on an ARPG / tower defense hybrid at Big Moxi Games.",
   "image": "/images/projects/wardens-rising/cover.svg",
+  "project": "wardens-rising",
   "blocks": [
     {
       "id": "eyebrow",

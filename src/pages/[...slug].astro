@@ -36,6 +36,18 @@ const toc = page.toc === false ? [] : tocItems(page.blocks, anchors);
   <BlockList blocks={page.blocks} anchors={anchors} />
 
   {
+    current && current.links.length > 0 && (
+      <div class="project-links">
+        {current.links.map((link) => (
+          <a class="project-link" href={link.href} target="_blank" rel="noopener">
+            {link.label}
+          </a>
+        ))}
+      </div>
+    )
+  }
+
+  {
     tagsOf.length > 0 && (
       <div class="tag-links" style="margin-top: calc(2rem * var(--spacing))">
         {tagsOf.map((id) => (

@@ -2,6 +2,7 @@
   "title": "Far Away from Orbital Space",
   "description": "Scoring systems, puzzle design and playtest iteration on a co-op communication puzzler at Luski Game Studio.",
   "image": "/images/projects/placeholder/cover.svg",
+  "project": "far-away-orbital-space",
   "blocks": [
     {
       "id": "eyebrow",

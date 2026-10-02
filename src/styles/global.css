@@ -198,6 +198,26 @@ hr.block-divider {
   margin-block: calc(2rem * var(--spacing));
 }
 
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: calc(2rem * var(--spacing));
+}
+
+.project-link {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.project-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 .tag-chip {
   border: 1px solid var(--border);
   border-radius: 999px;

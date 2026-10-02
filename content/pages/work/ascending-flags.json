@@ -2,6 +2,7 @@
   "title": "Ascending Flags",
   "description": "Economy architecture, a 40+ card catalog and cross-discipline leadership on a competitive card game at Scary Noodles.",
   "image": "/images/projects/placeholder/cover.svg",
+  "project": "ascending-flags",
   "blocks": [
     {
       "id": "eyebrow",

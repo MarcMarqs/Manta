@@ -2,6 +2,7 @@
   "title": "Aurora: A Child's Journey",
   "description": "3C, Act II gameplay and puzzle design on an award-winning narrative adventure at Luski Game Studio.",
   "image": "/images/projects/aurora/cover.svg",
+  "project": "aurora",
   "blocks": [
     {
       "id": "eyebrow",

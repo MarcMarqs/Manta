@@ -2,6 +2,7 @@
   "title": "Plushland Curse",
   "description": "Combat, enemy AI and weapon systems on a toy-themed souls-like at Luski Game Studio.",
   "image": "/images/projects/placeholder/cover.svg",
+  "project": "plushland-curse",
   "blocks": [
     {
       "id": "eyebrow",
