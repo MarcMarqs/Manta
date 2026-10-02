@@ -210,41 +210,6 @@
       ]
     },
     {
-      "id": "sens",
-      "type": "tornado",
-      "title": "What moves average match length — placeholder numbers, swap for your balance passes",
-      "unit": " min",
-      "lowLabel": "Shorter match",
-      "highLabel": "Longer match",
-      "rows": [
-        {
-          "label": "Starting mana",
-          "low": 22,
-          "high": 9
-        },
-        {
-          "label": "Terrain-to-mana rate",
-          "low": 19,
-          "high": 12
-        },
-        {
-          "label": "Hand size",
-          "low": 14,
-          "high": 18
-        },
-        {
-          "label": "Board width",
-          "low": 13,
-          "high": 21
-        },
-        {
-          "label": "Unit cost curve",
-          "low": 15,
-          "high": 17
-        }
-      ]
-    },
-    {
       "id": "d3",
       "type": "divider"
     },
@@ -295,6 +260,59 @@
           "Visible or hidden; disrupt enemy strategy",
           "Force opponents into new approaches"
         ]
+      ]
+    },
+    {
+      "id": "docs",
+      "type": "section",
+      "background": "surface",
+      "blocks": [
+        {
+          "id": "docs-h",
+          "type": "heading",
+          "level": 2,
+          "text": "The documents behind it"
+        },
+        {
+          "id": "docs-t",
+          "type": "text",
+          "html": "<p>The specs and balancing sheets I wrote on this project, as they were.</p>"
+        },
+        {
+          "id": "docs-row",
+          "type": "section",
+          "arrange": "row",
+          "blocks": [
+            {
+              "id": "doc0",
+              "type": "button",
+              "label": "Combat / economy spreadsheet",
+              "href": "https://docs.google.com/spreadsheets/d/1imr4SIqvD1LGcHsdi3wWAb06aIMf18Sf9ROC5T59wTA/edit?usp=sharing",
+              "style": "secondary"
+            },
+            {
+              "id": "doc1",
+              "type": "button",
+              "label": "Combat / economy doc",
+              "href": "https://docs.google.com/document/d/1E7D_83VNzk1NdK35UPYuYnTDH80sL0PVH8S1Eol-VBA/edit?usp=sharing",
+              "style": "secondary"
+            },
+            {
+              "id": "doc2",
+              "type": "button",
+              "label": "Scanner / fog of war doc",
+              "href": "https://docs.google.com/document/d/1Y3eiL4zgeMN0anqR511jKebfxHOt4FHpqGDI7pmEkTo/edit?usp=sharing",
+              "style": "secondary"
+            },
+            {
+              "id": "doc3",
+              "type": "button",
+              "label": "Card catalog doc",
+              "href": "https://docs.google.com/document/d/1NUAAqXod230BbBtSxvOW7oz2uzDnPddd2H_pbvVKnGI/edit?usp=sharing",
+              "style": "secondary"
+            }
+          ]
+        }
       ]
     },
     {

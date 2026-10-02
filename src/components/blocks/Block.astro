@@ -127,7 +127,12 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
   {
     block.type === 'button' && (
       <p>
-        <a class={`btn btn-${block.style ?? 'primary'}`} href={block.href}>
+        <a
+          class={`btn btn-${block.style ?? 'primary'}`}
+          href={block.href}
+          target={/^https?:/i.test(block.href) ? '_blank' : undefined}
+          rel={/^https?:/i.test(block.href) ? 'noopener' : undefined}
+        >
           {block.label}
         </a>
       </p>

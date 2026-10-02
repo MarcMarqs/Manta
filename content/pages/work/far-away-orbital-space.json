@@ -114,27 +114,6 @@
       ]
     },
     {
-      "id": "score",
-      "type": "chart",
-      "variant": "line",
-      "title": "Score as time remaining grows — placeholder curve, swap for the real weights",
-      "range": {
-        "from": 0,
-        "to": 60,
-        "step": 10
-      },
-      "series": [
-        {
-          "name": "Base objectives",
-          "formula": "100 + 4 * x"
-        },
-        {
-          "name": "With time multiplier",
-          "formula": "round(100 + 4 * x + pow(x, 1.6))"
-        }
-      ]
-    },
-    {
       "id": "d3",
       "type": "divider"
     },
@@ -173,6 +152,52 @@
       "id": "puz-note",
       "type": "text",
       "html": "<p>Every puzzle idea was evaluated against all three layers before it went in.</p>"
+    },
+    {
+      "id": "docs",
+      "type": "section",
+      "background": "surface",
+      "blocks": [
+        {
+          "id": "docs-h",
+          "type": "heading",
+          "level": 2,
+          "text": "The documents behind it"
+        },
+        {
+          "id": "docs-t",
+          "type": "text",
+          "html": "<p>The specs and balancing sheets I wrote on this project, as they were.</p>"
+        },
+        {
+          "id": "docs-row",
+          "type": "section",
+          "arrange": "row",
+          "blocks": [
+            {
+              "id": "doc0",
+              "type": "button",
+              "label": "Scoring and star system",
+              "href": "https://docs.google.com/document/d/1cfeOIUXEiG-GA8qlHfSJS4Pm_K5nGmwRJoT38jBm6FE/edit?usp=sharing",
+              "style": "secondary"
+            },
+            {
+              "id": "doc1",
+              "type": "button",
+              "label": "Core loop doc",
+              "href": "https://docs.google.com/document/d/1waST6QNT_IDhXRgcbjSCBVlO-BPah4wt4AQDiz2-OFE/edit?usp=sharing",
+              "style": "secondary"
+            },
+            {
+              "id": "doc2",
+              "type": "button",
+              "label": "Example puzzle doc",
+              "href": "https://docs.google.com/document/d/18uklyJrDZP98ic8DQOq4jSG0HxoRzhO_4lvjtvidjIs/edit?usp=sharing",
+              "style": "secondary"
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "cta-h",

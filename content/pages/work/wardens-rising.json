@@ -421,6 +421,59 @@
       ]
     },
     {
+      "id": "docs",
+      "type": "section",
+      "background": "surface",
+      "blocks": [
+        {
+          "id": "docs-h",
+          "type": "heading",
+          "level": 2,
+          "text": "The documents behind it"
+        },
+        {
+          "id": "docs-t",
+          "type": "text",
+          "html": "<p>The specs and balancing sheets I wrote on this project, as they were.</p>"
+        },
+        {
+          "id": "docs-row",
+          "type": "section",
+          "arrange": "row",
+          "blocks": [
+            {
+              "id": "doc0",
+              "type": "button",
+              "label": "Economy spreadsheet",
+              "href": "https://docs.google.com/spreadsheets/d/17AmLLtet92lOAq8DaLgIoI_FPo7_6EVAqURGteR3Swk/edit?usp=sharing",
+              "style": "secondary"
+            },
+            {
+              "id": "doc1",
+              "type": "button",
+              "label": "Boss behaviour doc",
+              "href": "https://docs.google.com/document/d/1_iMewFruAgFewSJI1mqwcNtGRQnsfFDeOD5jknpyVpU/edit?usp=sharing",
+              "style": "secondary"
+            },
+            {
+              "id": "doc2",
+              "type": "button",
+              "label": "Character sheet doc",
+              "href": "https://docs.google.com/document/d/12SGrVTRO0otoN6TOlacOuvF6A1dPFET8TAK4QhwlWWI/edit?usp=sharing",
+              "style": "secondary"
+            },
+            {
+              "id": "doc3",
+              "type": "button",
+              "label": "Player progression doc",
+              "href": "https://docs.google.com/document/d/13Zs4J4PjROyjEQHpZrv-M2KFofuuaFygy-yEsajhqOQ/edit?usp=sharing",
+              "style": "secondary"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "cta-h",
       "type": "heading",
       "level": 2,

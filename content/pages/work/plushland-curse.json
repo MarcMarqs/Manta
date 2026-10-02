@@ -183,51 +183,6 @@
       ]
     },
     {
-      "id": "arch-radar",
-      "type": "radar",
-      "title": "Three archetypes against the same stat line — placeholder values, swap for the real table",
-      "axes": [
-        "Damage",
-        "Reach",
-        "Speed",
-        "Health",
-        "Control"
-      ],
-      "max": 10,
-      "series": [
-        {
-          "name": "Heavy hitter",
-          "values": [
-            9,
-            2,
-            3,
-            9,
-            4
-          ]
-        },
-        {
-          "name": "Agile assassin",
-          "values": [
-            6,
-            3,
-            9,
-            3,
-            5
-          ]
-        },
-        {
-          "name": "Ranged caster",
-          "values": [
-            5,
-            9,
-            4,
-            3,
-            8
-          ]
-        }
-      ]
-    },
-    {
       "id": "d3",
       "type": "divider"
     },
@@ -243,77 +198,6 @@
       "id": "wep-intro",
       "type": "text",
       "html": "<p>Weapon categories distribute damage types against a tri-attribute counter system, so players adapt and swap rather than lock into one loadout.</p>"
-    },
-    {
-      "id": "htk",
-      "type": "chart",
-      "variant": "bar",
-      "title": "Hit-to-kill by archetype — placeholder numbers, swap for the real matrix",
-      "series": [
-        {
-          "name": "Blunt",
-          "data": [
-            {
-              "label": "Basic melee",
-              "value": 3
-            },
-            {
-              "label": "Swarm",
-              "value": 1
-            },
-            {
-              "label": "Armored sentinel",
-              "value": 4
-            },
-            {
-              "label": "Heavy hitter",
-              "value": 6
-            }
-          ]
-        },
-        {
-          "name": "Pierce",
-          "data": [
-            {
-              "label": "Basic melee",
-              "value": 4
-            },
-            {
-              "label": "Swarm",
-              "value": 2
-            },
-            {
-              "label": "Armored sentinel",
-              "value": 8
-            },
-            {
-              "label": "Heavy hitter",
-              "value": 5
-            }
-          ]
-        },
-        {
-          "name": "Arcane",
-          "data": [
-            {
-              "label": "Basic melee",
-              "value": 5
-            },
-            {
-              "label": "Swarm",
-              "value": 3
-            },
-            {
-              "label": "Armored sentinel",
-              "value": 3
-            },
-            {
-              "label": "Heavy hitter",
-              "value": 7
-            }
-          ]
-        }
-      ]
     },
     {
       "id": "flex-h",
@@ -332,6 +216,52 @@
         {
           "label": "Non-restrictive specialisation",
           "body": "Investment paths allow deep specialisation into a damage vector while preserving basic weapon versatility."
+        }
+      ]
+    },
+    {
+      "id": "docs",
+      "type": "section",
+      "background": "surface",
+      "blocks": [
+        {
+          "id": "docs-h",
+          "type": "heading",
+          "level": 2,
+          "text": "The documents behind it"
+        },
+        {
+          "id": "docs-t",
+          "type": "text",
+          "html": "<p>The specs and balancing sheets I wrote on this project, as they were.</p>"
+        },
+        {
+          "id": "docs-row",
+          "type": "section",
+          "arrange": "row",
+          "blocks": [
+            {
+              "id": "doc0",
+              "type": "button",
+              "label": "Combat / economy spreadsheet",
+              "href": "https://docs.google.com/spreadsheets/d/1nrn_Xw4B_lxcAcZz5l3CEKWURYriUSIu67kp1TQ7_dM/edit?usp=sharing",
+              "style": "secondary"
+            },
+            {
+              "id": "doc1",
+              "type": "button",
+              "label": "Character stat system doc",
+              "href": "https://docs.google.com/document/d/1aJRXp-kEhv4-8U3z1omYJWNTeLOqo5_6aeUU6kcL8b0/edit?usp=sharing",
+              "style": "secondary"
+            },
+            {
+              "id": "doc2",
+              "type": "button",
+              "label": "Combat / economy doc",
+              "href": "https://docs.google.com/document/d/13ImC5iEV0K7q8hokYrC_FmZ7qHTIVwv_XWX_iUh18JQ/edit?usp=sharing",
+              "style": "secondary"
+            }
+          ]
         }
       ]
     },
