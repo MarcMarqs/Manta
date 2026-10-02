@@ -1,0 +1,318 @@
+{
+  "title": "Ascending Flags",
+  "description": "Economy architecture, a 40+ card catalog and cross-discipline leadership on a competitive card game at Scary Noodles.",
+  "image": "/images/projects/placeholder/cover.svg",
+  "blocks": [
+    {
+      "id": "eyebrow",
+      "type": "text",
+      "html": "<p><strong>Scary Noodles</strong> · 15 team</p>"
+    },
+    {
+      "id": "h1",
+      "type": "heading",
+      "level": 1,
+      "text": "Ascending Flags"
+    },
+    {
+      "id": "sub",
+      "type": "text",
+      "html": "<p>Competitive card game</p>"
+    },
+    {
+      "id": "specs",
+      "type": "specs",
+      "items": [
+        {
+          "label": "Role",
+          "value": "Game Designer"
+        },
+        {
+          "label": "Studio",
+          "value": "Scary Noodles"
+        },
+        {
+          "label": "Team size",
+          "value": "15"
+        },
+        {
+          "label": "Engine",
+          "value": "Unity"
+        },
+        {
+          "label": "Focus",
+          "value": "Systems · Economy · Leadership"
+        }
+      ]
+    },
+    {
+      "id": "stats",
+      "type": "stats",
+      "items": [
+        {
+          "value": "40+",
+          "label": "Unique cards designed"
+        },
+        {
+          "value": "5",
+          "label": "Card types"
+        },
+        {
+          "value": "15",
+          "label": "Team members"
+        },
+        {
+          "value": "3",
+          "label": "Disciplines mentored"
+        }
+      ]
+    },
+    {
+      "id": "d1",
+      "type": "divider"
+    },
+    {
+      "id": "contrib-h",
+      "type": "heading",
+      "level": 2,
+      "text": "My contribution"
+    },
+    {
+      "id": "contrib",
+      "type": "pillars",
+      "items": [
+        {
+          "label": "Gameplay systems",
+          "body": "Architected the core combat and resource economy models, running parallel balancing loops to keep dominant strategies out and competitive health in."
+        },
+        {
+          "label": "Card design",
+          "body": "Conceived and balanced a 40+ card catalog for archetypal synergy, mechanical variety and strategic depth."
+        },
+        {
+          "label": "Direct reports",
+          "body": "Drove production roadmaps across art, design and engineering, keeping the pipeline collaborative and the milestones clean."
+        },
+        {
+          "label": "Playtest iteration",
+          "body": "Validated the competitive loop through paper prototyping before deployment, which took the technical risk out early."
+        }
+      ]
+    },
+    {
+      "id": "lead",
+      "type": "section",
+      "background": "surface",
+      "blocks": [
+        {
+          "id": "lead-h",
+          "type": "heading",
+          "level": 3,
+          "text": "Leadership on this project"
+        },
+        {
+          "id": "lead-t",
+          "type": "text",
+          "html": "<p>I acted as the central vision holder across design, programming and art — mentoring team members, unblocking cross-discipline dependencies, and keeping product goals aligned so the mechanics and the creative stayed coherent.</p>"
+        }
+      ]
+    },
+    {
+      "id": "d2",
+      "type": "divider"
+    },
+    {
+      "id": "eco-h",
+      "type": "heading",
+      "level": 2,
+      "text": "One economy for everything",
+      "number": "01",
+      "eyebrow": "Gameplay systems"
+    },
+    {
+      "id": "eco-intro",
+      "type": "text",
+      "html": "<p>I owned the foundational system loops, using analog paper testing to refine pacing. The pivotal call was eliminating split movement currencies: movement, utility and offensive actions all draw on a single resource pool, so every turn is an economic trade-off and inefficient play is punished on its own terms.</p>"
+    },
+    {
+      "id": "eco-flow",
+      "type": "flow",
+      "caption": "One mana pool funds every action. Surplus terrain converts back to mana, so the economy keeps flowing without dead draws.",
+      "nodes": [
+        {
+          "id": "n1",
+          "label": "Draw cards"
+        },
+        {
+          "id": "n2",
+          "label": "Single mana pool",
+          "accent": true
+        },
+        {
+          "id": "n3",
+          "label": "Move, attack or defend"
+        },
+        {
+          "id": "n4",
+          "label": "Board fills up"
+        },
+        {
+          "id": "n5",
+          "label": "Surplus terrain to mana"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2"
+        },
+        {
+          "from": "n2",
+          "to": "n3"
+        },
+        {
+          "from": "n3",
+          "to": "n4"
+        },
+        {
+          "from": "n4",
+          "to": "n5"
+        },
+        {
+          "from": "n5",
+          "to": "n2"
+        }
+      ]
+    },
+    {
+      "id": "depth-h",
+      "type": "heading",
+      "level": 3,
+      "text": "Depth I layered on top"
+    },
+    {
+      "id": "depth",
+      "type": "pillars",
+      "items": [
+        {
+          "label": "Imperfect information",
+          "body": "Concealed enemy flag positions and base parameters, which raises the strategic value of scouting and makes bluffing worth doing."
+        },
+        {
+          "label": "Variance mitigation",
+          "body": "Excess terrain cards convert into usable mana once the board is saturated, eliminating late-game dead draws."
+        },
+        {
+          "label": "Asymmetric border placement",
+          "body": "Hidden flag deployment along personalised territory boundaries, so opponents have to deduce coordinates from movement cues."
+        }
+      ]
+    },
+    {
+      "id": "sens",
+      "type": "tornado",
+      "title": "What moves average match length — placeholder numbers, swap for your balance passes",
+      "unit": " min",
+      "lowLabel": "Shorter match",
+      "highLabel": "Longer match",
+      "rows": [
+        {
+          "label": "Starting mana",
+          "low": 22,
+          "high": 9
+        },
+        {
+          "label": "Terrain-to-mana rate",
+          "low": 19,
+          "high": 12
+        },
+        {
+          "label": "Hand size",
+          "low": 14,
+          "high": 18
+        },
+        {
+          "label": "Board width",
+          "low": 13,
+          "high": 21
+        },
+        {
+          "label": "Unit cost curve",
+          "low": 15,
+          "high": 17
+        }
+      ]
+    },
+    {
+      "id": "d3",
+      "type": "divider"
+    },
+    {
+      "id": "card-h",
+      "type": "heading",
+      "level": 2,
+      "text": "Five card types, 40+ cards",
+      "number": "02",
+      "eyebrow": "Card design"
+    },
+    {
+      "id": "card-intro",
+      "type": "text",
+      "html": "<p>To drive tactical expression, the catalog is partitioned into five operational vectors. Each type is a different systemic lever, so players can build a strategy out of them rather than picking from a list.</p>"
+    },
+    {
+      "id": "cards",
+      "type": "table",
+      "columns": [
+        "Type",
+        "What it does",
+        "Why it is there"
+      ],
+      "rows": [
+        [
+          "Terrain",
+          "Creates the board layout where units spawn and move",
+          "Surplus converts to mana when the board is full"
+        ],
+        [
+          "Obstacles",
+          "Block movement and add tactical challenge",
+          "Shape lanes and approach routes"
+        ],
+        [
+          "Trainers",
+          "Rotate the deck and cycle through cards",
+          "Keep options flowing across a match"
+        ],
+        [
+          "Units",
+          "The characters that engage the opposing team",
+          "Costed against the shared economy"
+        ],
+        [
+          "Traps",
+          "Visible or hidden; disrupt enemy strategy",
+          "Force opponents into new approaches"
+        ]
+      ]
+    },
+    {
+      "id": "cta-h",
+      "type": "heading",
+      "level": 2,
+      "text": "Want the deeper breakdown?"
+    },
+    {
+      "id": "cta-t",
+      "type": "text",
+      "html": "<p>Happy to walk through the documentation, behaviour trees and tuning decisions behind this project.</p>"
+    },
+    {
+      "id": "cta",
+      "type": "button",
+      "label": "Get in touch",
+      "href": "mailto:marcelo.rssi@hotmail.com",
+      "style": "primary"
+    }
+  ]
+}

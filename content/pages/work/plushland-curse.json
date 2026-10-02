@@ -1,0 +1,311 @@
+{
+  "title": "Plushland Curse",
+  "description": "Combat, enemy AI and weapon systems on a toy-themed souls-like at Luski Game Studio.",
+  "image": "/images/projects/placeholder/cover.svg",
+  "blocks": [
+    {
+      "id": "eyebrow",
+      "type": "text",
+      "html": "<p><strong>Luski Game Studio</strong> · 10 team</p>"
+    },
+    {
+      "id": "h1",
+      "type": "heading",
+      "level": 1,
+      "text": "Plushland Curse"
+    },
+    {
+      "id": "sub",
+      "type": "text",
+      "html": "<p>Souls-like / Action-adventure</p>"
+    },
+    {
+      "id": "specs",
+      "type": "specs",
+      "items": [
+        {
+          "label": "Role",
+          "value": "Game Designer"
+        },
+        {
+          "label": "Studio",
+          "value": "Luski Game Studio"
+        },
+        {
+          "label": "Team size",
+          "value": "10"
+        },
+        {
+          "label": "Engine",
+          "value": "Unreal Engine"
+        },
+        {
+          "label": "Focus",
+          "value": "Combat · AI · Weapons · Systems"
+        }
+      ]
+    },
+    {
+      "id": "stats",
+      "type": "stats",
+      "items": [
+        {
+          "value": "15",
+          "label": "Enemy archetypes designed"
+        },
+        {
+          "value": "6",
+          "label": "AI design rules"
+        },
+        {
+          "value": "RPS",
+          "label": "Damage-type system"
+        },
+        {
+          "value": "3",
+          "label": "Core systems owned"
+        }
+      ]
+    },
+    {
+      "id": "d1",
+      "type": "divider"
+    },
+    {
+      "id": "contrib-h",
+      "type": "heading",
+      "level": 2,
+      "text": "My contribution"
+    },
+    {
+      "id": "contrib",
+      "type": "pillars",
+      "items": [
+        {
+          "label": "AI behaviour",
+          "body": "Designed the AI for distinct enemy archetypes, each with its own actions, movement and weapon use."
+        },
+        {
+          "label": "Weapon system",
+          "body": "Architected the multi-tier weapon taxonomy: combat mechanics, damage types, and an interdependent rock-paper-scissors counter matrix."
+        },
+        {
+          "label": "Gameplay systems",
+          "body": "Built the core systems behind combat, enemies and the economy."
+        },
+        {
+          "label": "Balancing",
+          "body": "Formulated damage calculators and a hit-to-kill matrix in spreadsheets to simulate exact strike thresholds per archetype, giving predictable progression curves and systemic combat equity."
+        }
+      ]
+    },
+    {
+      "id": "d2",
+      "type": "divider"
+    },
+    {
+      "id": "ai-h",
+      "type": "heading",
+      "level": 2,
+      "text": "Enemies that are toys too",
+      "number": "01",
+      "eyebrow": "AI behaviour"
+    },
+    {
+      "id": "ai-intro",
+      "type": "text",
+      "html": "<p>The goal was distinct AI behaviours for a satirical, toy-themed souls-like sandbox: maximum readability and mechanical variation across encounters, leaning on unconventional silhouettes and physics-driven locomotion.</p>"
+    },
+    {
+      "id": "rules-h",
+      "type": "heading",
+      "level": 3,
+      "text": "The rule set I designed against"
+    },
+    {
+      "id": "rules",
+      "type": "pillars",
+      "items": [
+        {
+          "label": "Asset differentiation",
+          "body": "High visual and mechanical contrast, with its own silhouette boundary and movement profile for each of the 15 archetypes."
+        },
+        {
+          "label": "Dynamic threat caps",
+          "body": "Strict population ceilings for swarm-type enemies, to keep visual clutter and player cognitive load under control."
+        },
+        {
+          "label": "Dynamic hit-stop scaling",
+          "body": "Algorithmic frame pauses mapped to asset mass and velocity, so impact feedback reads at a glance."
+        }
+      ]
+    },
+    {
+      "id": "arch-h",
+      "type": "text",
+      "html": "<p><strong>The 15 archetypes</strong> — some later cut for animation or clarity limits.</p>"
+    },
+    {
+      "id": "arch",
+      "type": "table",
+      "columns": [
+        "Archetype",
+        "Archetype",
+        "Archetype"
+      ],
+      "rows": [
+        [
+          "Basic melee",
+          "Agile assassin",
+          "Area controller"
+        ],
+        [
+          "Heavy hitter",
+          "Ranged caster",
+          "Swarm"
+        ],
+        [
+          "Ambusher",
+          "Vampiric",
+          "Armored sentinel"
+        ],
+        [
+          "Tracker",
+          "Aggressive hunter",
+          "Illusionist"
+        ],
+        [
+          "Summoner",
+          "Manipulator",
+          "Explosive"
+        ]
+      ]
+    },
+    {
+      "id": "d3",
+      "type": "divider"
+    },
+    {
+      "id": "wep-h",
+      "type": "heading",
+      "level": 2,
+      "text": "A rock-paper-scissors of damage",
+      "number": "02",
+      "eyebrow": "Weapon system"
+    },
+    {
+      "id": "wep-intro",
+      "type": "text",
+      "html": "<p>Weapon categories distribute damage types against a tri-attribute counter system, so players adapt and swap rather than lock into one loadout.</p>"
+    },
+    {
+      "id": "htk",
+      "type": "chart",
+      "variant": "bar",
+      "title": "Hit-to-kill by archetype — placeholder numbers, swap for the real matrix",
+      "series": [
+        {
+          "name": "Blunt",
+          "data": [
+            {
+              "label": "Basic melee",
+              "value": 3
+            },
+            {
+              "label": "Swarm",
+              "value": 1
+            },
+            {
+              "label": "Armored sentinel",
+              "value": 4
+            },
+            {
+              "label": "Heavy hitter",
+              "value": 6
+            }
+          ]
+        },
+        {
+          "name": "Pierce",
+          "data": [
+            {
+              "label": "Basic melee",
+              "value": 4
+            },
+            {
+              "label": "Swarm",
+              "value": 2
+            },
+            {
+              "label": "Armored sentinel",
+              "value": 8
+            },
+            {
+              "label": "Heavy hitter",
+              "value": 5
+            }
+          ]
+        },
+        {
+          "name": "Arcane",
+          "data": [
+            {
+              "label": "Basic melee",
+              "value": 5
+            },
+            {
+              "label": "Swarm",
+              "value": 3
+            },
+            {
+              "label": "Armored sentinel",
+              "value": 3
+            },
+            {
+              "label": "Heavy hitter",
+              "value": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "flex-h",
+      "type": "heading",
+      "level": 3,
+      "text": "How I kept it flexible"
+    },
+    {
+      "id": "flex",
+      "type": "pillars",
+      "items": [
+        {
+          "label": "Composite damage distribution",
+          "body": "Every weapon outputs a staggered percentage of all damage attributes, so no enemy type becomes a hard progression block."
+        },
+        {
+          "label": "Non-restrictive specialisation",
+          "body": "Investment paths allow deep specialisation into a damage vector while preserving basic weapon versatility."
+        }
+      ]
+    },
+    {
+      "id": "cta-h",
+      "type": "heading",
+      "level": 2,
+      "text": "Want the deeper breakdown?"
+    },
+    {
+      "id": "cta-t",
+      "type": "text",
+      "html": "<p>Happy to walk through the documentation, behaviour trees and tuning decisions behind this project.</p>"
+    },
+    {
+      "id": "cta",
+      "type": "button",
+      "label": "Get in touch",
+      "href": "mailto:marcelo.rssi@hotmail.com",
+      "style": "primary"
+    }
+  ]
+}

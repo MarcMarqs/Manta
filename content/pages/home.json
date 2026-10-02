@@ -66,38 +66,17 @@
       "id": "grid-note",
       "type": "heading",
       "level": 2,
-      "text": "Same projects, grid layout"
+      "text": "Same work, grid layout"
     },
     {
       "id": "grid-hint",
       "type": "text",
-      "html": "<p>Both layouts are live so you can compare them, then keep whichever you prefer and delete the other block.</p>"
+      "html": "<p>A second view of the same projects.</p>"
     },
     {
       "id": "grid",
       "type": "projectGrid",
       "filters": false
-    },
-    {
-      "id": "personal-sep",
-      "type": "divider"
-    },
-    {
-      "id": "personal-h",
-      "type": "heading",
-      "level": 2,
-      "text": "Personal studies"
-    },
-    {
-      "id": "personal-t",
-      "type": "text",
-      "html": "<p>Prototypes, jam games and design studies of my own — the places I try things the day job doesn't call for.</p>"
-    },
-    {
-      "id": "personal-grid",
-      "type": "projectGrid",
-      "filters": false,
-      "origin": "personal"
     }
   ]
 }

@@ -3,7 +3,7 @@
     "slug": "wardens-rising",
     "title": "Wardens Rising",
     "genre": "ARPG / Tower Defense",
-    "year": null,
+    "year": 2024,
     "role": "Game Designer",
     "summary": "Drove combat and systems design at the core of the game. Balanced high-density wave combat using playtest telemetry, authored 30+ progression assets and economy features, and co-directed boss encounters alongside multidisciplinary teams.",
     "highlights": [
@@ -25,13 +25,18 @@
     "coverVideo": null,
     "featured": true,
     "draft": false,
-    "links": []
+    "links": [
+      {
+        "label": "Epic Games Store",
+        "href": "https://store.epicgames.com/p/wardens-rising-b42f9b"
+      }
+    ]
   },
   {
     "slug": "aurora",
     "title": "Aurora: A Child's Journey",
     "genre": "3D Puzzle / Narrative Adventure",
-    "year": null,
+    "year": 2020,
     "role": "Game Designer",
     "summary": "Owned the Act II player experience, designing and refining 3C mechanics and puzzle layouts. Partnered with Level Design to iterate on pacing via playtest feedback, leading sessions that shaped the final game.",
     "highlights": [
@@ -52,18 +57,24 @@
     "coverVideo": null,
     "featured": true,
     "draft": false,
-    "links": []
+    "links": [
+      {
+        "label": "Steam",
+        "href": "https://store.steampowered.com/app/1438440/Aurora_A_Childs_Journey/"
+      }
+    ]
   },
   {
-    "slug": "fortnite-requiem",
-    "title": "Fortnite: Requiem for Vengeance",
-    "genre": "UGC / Fortnite",
-    "year": null,
+    "slug": "gundam-requiem",
+    "title": "Gundam: Requiem for Vengeance",
+    "genre": "Fortnite game mode",
+    "year": 2024,
     "role": "Game Designer",
-    "summary": "",
+    "summary": "Designed and pitched the mode for an external IP partner, turning a UEFN limit on vehicle control into the competitive hook: teams contest objectives to earn the mech, then choose which part of the map it reshapes.",
     "highlights": [],
     "discipline": [
-      "systems"
+      "systems",
+      "combat"
     ],
     "engine": [
       "uefn"
@@ -73,18 +84,20 @@
     "featured": false,
     "draft": false,
     "links": [],
-    "origin": "personal"
+    "origin": "professional"
   },
   {
     "slug": "plushland-curse",
     "title": "Plushland Curse",
     "genre": "Souls-like",
-    "year": null,
+    "year": 2023,
     "role": "Game Designer",
-    "summary": "",
+    "summary": "Owned combat, enemy AI and the weapon system on a toy-themed souls-like: 15 enemy archetypes against a six-rule design standard, and a rock-paper-scissors damage matrix balanced from a hit-to-kill model.",
     "highlights": [],
     "discipline": [
-      "combat"
+      "combat",
+      "ai",
+      "systems"
     ],
     "engine": [
       "unreal"
@@ -94,18 +107,40 @@
     "featured": false,
     "draft": false,
     "links": [],
-    "origin": "personal"
+    "origin": "professional"
   },
   {
     "slug": "far-away-orbital-space",
     "title": "Far Away from Orbital Space",
     "genre": "Co-op Puzzle",
-    "year": null,
+    "year": 2022,
     "role": "Game Designer",
-    "summary": "",
+    "summary": "Built the scoring algorithms, puzzle gating and progression for a co-op communication puzzler, validating every system on paper and in Miro before it reached the engine.",
     "highlights": [],
     "discipline": [
+      "systems",
       "level"
+    ],
+    "engine": [
+      "unreal"
+    ],
+    "cover": "/images/projects/placeholder/cover.svg",
+    "coverVideo": null,
+    "featured": false,
+    "draft": false,
+    "links": [],
+    "origin": "professional"
+  },
+  {
+    "slug": "ascending-flags",
+    "title": "Ascending Flags",
+    "genre": "Card Game",
+    "year": 2022,
+    "role": "Game Designer",
+    "summary": "Architected a single-pool economy where movement, attack and defence all compete for the same mana, designed a 40+ card catalog across five types, and led design, art and engineering on a 15-person team.",
+    "highlights": [],
+    "discipline": [
+      "systems"
     ],
     "engine": [
       "unity"
@@ -115,27 +150,6 @@
     "featured": false,
     "draft": false,
     "links": [],
-    "origin": "personal"
-  },
-  {
-    "slug": "ascending-flags",
-    "title": "Ascending Flags",
-    "genre": "Card Game",
-    "year": null,
-    "role": "Game Designer",
-    "summary": "",
-    "highlights": [],
-    "discipline": [
-      "systems"
-    ],
-    "engine": [
-      "tabletop"
-    ],
-    "cover": "/images/projects/placeholder/cover.svg",
-    "coverVideo": null,
-    "featured": false,
-    "draft": false,
-    "links": [],
-    "origin": "personal"
+    "origin": "professional"
   }
 ]

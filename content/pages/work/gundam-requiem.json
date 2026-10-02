@@ -1,0 +1,195 @@
+{
+  "title": "Gundam: Requiem for Vengeance",
+  "description": "Mode design, combat and UI on an external-IP Fortnite game mode at Big Moxi Games.",
+  "image": "/images/projects/placeholder/cover.svg",
+  "blocks": [
+    {
+      "id": "eyebrow",
+      "type": "text",
+      "html": "<p><strong>Big Moxi Games</strong> · 15+ team</p>"
+    },
+    {
+      "id": "h1",
+      "type": "heading",
+      "level": 1,
+      "text": "Gundam: Requiem for Vengeance"
+    },
+    {
+      "id": "sub",
+      "type": "text",
+      "html": "<p>Fortnite game mode · UEFN</p>"
+    },
+    {
+      "id": "specs",
+      "type": "specs",
+      "items": [
+        {
+          "label": "Role",
+          "value": "Game Designer"
+        },
+        {
+          "label": "Studio",
+          "value": "Big Moxi Games"
+        },
+        {
+          "label": "Team size",
+          "value": "15+"
+        },
+        {
+          "label": "Engine",
+          "value": "UEFN"
+        },
+        {
+          "label": "Focus",
+          "value": "Combat · UI"
+        }
+      ]
+    },
+    {
+      "id": "d1",
+      "type": "divider"
+    },
+    {
+      "id": "contrib-h",
+      "type": "heading",
+      "level": 2,
+      "text": "My contribution"
+    },
+    {
+      "id": "contrib",
+      "type": "pillars",
+      "items": [
+        {
+          "label": "External partnership",
+          "body": "Authored and pitched high-level game-mode documentation for external IP partners, safeguarding brand alignment while protecting the core design pillars throughout development."
+        },
+        {
+          "label": "Combat & level design",
+          "body": "Partnered with Level Design to optimise combat pacing and engagement vectors, keeping a balanced competitive sandbox within the structural limits of the map."
+        },
+        {
+          "label": "Cutscene development",
+          "body": "Coordinated animation, art and engineering to implement an in-engine activation cutscene that bridged the narrative hook with live gameplay."
+        },
+        {
+          "label": "User interface",
+          "body": "Worked with engineering on clean UI overlays and HUD feedback, maximising player orientation and macro-objective clarity during high-intensity combat."
+        }
+      ]
+    },
+    {
+      "id": "d2",
+      "type": "divider"
+    },
+    {
+      "id": "mode-h",
+      "type": "heading",
+      "level": 2,
+      "text": "Turning an engine limit into the core mechanic",
+      "number": "01",
+      "eyebrow": "Mode design"
+    },
+    {
+      "id": "mode-brief",
+      "type": "text",
+      "html": "<p><strong>The brief:</strong> design a competitive UEFN mode with controllable Gundam mechs that delivers a high-impact power fantasy without shattering sandbox balance.</p>"
+    },
+    {
+      "id": "mode-catch",
+      "type": "text",
+      "html": "<p><strong>The catch:</strong> at the time, UEFN restricted direct player control to native character avatars, so custom vehicle piloting was off the table. Rather than fight the bottleneck, I reframed it as the mode's primary competitive pacing hook.</p>"
+    },
+    {
+      "id": "mode-flow",
+      "type": "flow",
+      "caption": "Players contest capture points; the leading team earns the mech and picks which preset zone to strike, turning a hard engine limit into a strategic hook.",
+      "nodes": [
+        {
+          "id": "n1",
+          "label": "Contest capture points"
+        },
+        {
+          "id": "n2",
+          "label": "Leading team earns the mech",
+          "accent": true
+        },
+        {
+          "id": "n3",
+          "label": "Pick a preset strike zone"
+        },
+        {
+          "id": "n4",
+          "label": "Strike reshapes the map"
+        },
+        {
+          "id": "n5",
+          "label": "New lanes, new contest"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2"
+        },
+        {
+          "from": "n2",
+          "to": "n3"
+        },
+        {
+          "from": "n3",
+          "to": "n4"
+        },
+        {
+          "from": "n4",
+          "to": "n5"
+        },
+        {
+          "from": "n5",
+          "to": "n1"
+        }
+      ]
+    },
+    {
+      "id": "why-h",
+      "type": "heading",
+      "level": 3,
+      "text": "Why it works"
+    },
+    {
+      "id": "why",
+      "type": "pillars",
+      "items": [
+        {
+          "label": "Active engagement loops",
+          "body": "Teams have to contest map objectives to earn mech activation, converting a technical limitation into a reason to keep fighting over the map."
+        },
+        {
+          "label": "Player-driven macro changes",
+          "body": "Mech payloads target specific infrastructure nodes, so tactical decisions visibly alter the map geometry and the late-game lanes."
+        },
+        {
+          "label": "Immersive power fantasy",
+          "body": "The automated sequence rewards the capture and sells the mech's scale and impact without custom controller mapping."
+        }
+      ]
+    },
+    {
+      "id": "cta-h",
+      "type": "heading",
+      "level": 2,
+      "text": "Want the deeper breakdown?"
+    },
+    {
+      "id": "cta-t",
+      "type": "text",
+      "html": "<p>Happy to walk through the documentation, behaviour trees and tuning decisions behind this project.</p>"
+    },
+    {
+      "id": "cta",
+      "type": "button",
+      "label": "Get in touch",
+      "href": "mailto:marcelo.rssi@hotmail.com",
+      "style": "primary"
+    }
+  ]
+}

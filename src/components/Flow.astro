@@ -14,12 +14,42 @@ interface Props {
 
 const { caption, nodes, edges } = Astro.props;
 
-const NODE_W = 132;
-const NODE_H = 52;
 const GAP = 54;
+const top = 28;
+
+/**
+ * SVG text does not wrap, and a label wider than its box spills over the neighbours and
+ * off the end of the viewBox, where it is simply clipped. So the label is wrapped here
+ * and the box is sized to hold it: width from the longest line, height from the count.
+ * Widths are estimated from character counts — close enough at this size, and it keeps
+ * the diagram a build-time thing that needs no measuring in the browser.
+ */
+const CHAR = 7.4;
+const LINE = 17;
+const MAX_LINE = 20;
+
+function wrap(label: string): string[] {
+  const lines: string[] = [];
+  let line = '';
+  for (const word of label.split(/\s+/)) {
+    const next = line ? `${line} ${word}` : word;
+    if (next.length > MAX_LINE && line) {
+      lines.push(line);
+      line = word;
+    } else {
+      line = next;
+    }
+  }
+  if (line) lines.push(line);
+  return lines.slice(0, 3);
+}
+
+const wrapped = nodes.map((n) => wrap(n.label));
+const widest = Math.max(...wrapped.flat().map((l) => l.length), 1);
+const NODE_W = Math.min(Math.max(Math.round(widest * CHAR) + 24, 132), 210);
+const NODE_H = Math.max(Math.max(...wrapped.map((l) => l.length)) * LINE + 22, 52);
 const H = NODE_H + 56;
 const W = Math.max(nodes.length * NODE_W + Math.max(nodes.length - 1, 0) * GAP, 1);
-const top = 28;
 
 const index = new Map(nodes.map((n, i) => [n.id, i]));
 const x = (i: number) => i * (NODE_W + GAP);
@@ -61,8 +91,12 @@ const drawn = edges
         nodes.map((node, i) => (
           <g transform={`translate(${x(i)}, ${top})`}>
             <rect width={NODE_W} height={NODE_H} rx="10" class={`node${node.accent ? ' is-accent' : ''}`} />
-            <text x={NODE_W / 2} y={NODE_H / 2 + 4} text-anchor="middle" class="node-label">
-              {node.label}
+            <text x={NODE_W / 2} text-anchor="middle" class="node-label">
+              {wrapped[i].map((line, l) => (
+                <tspan x={NODE_W / 2} y={NODE_H / 2 + 5 - ((wrapped[i].length - 1) * LINE) / 2 + l * LINE}>
+                  {line}
+                </tspan>
+              ))}
             </text>
           </g>
         ))

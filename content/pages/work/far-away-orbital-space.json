@@ -1,0 +1,195 @@
+{
+  "title": "Far Away from Orbital Space",
+  "description": "Scoring systems, puzzle design and playtest iteration on a co-op communication puzzler at Luski Game Studio.",
+  "image": "/images/projects/placeholder/cover.svg",
+  "blocks": [
+    {
+      "id": "eyebrow",
+      "type": "text",
+      "html": "<p><strong>Luski Game Studio</strong> · 10 team</p>"
+    },
+    {
+      "id": "h1",
+      "type": "heading",
+      "level": 1,
+      "text": "Far Away from Orbital Space"
+    },
+    {
+      "id": "sub",
+      "type": "text",
+      "html": "<p>3D puzzle / Co-op</p>"
+    },
+    {
+      "id": "specs",
+      "type": "specs",
+      "items": [
+        {
+          "label": "Role",
+          "value": "Game Designer"
+        },
+        {
+          "label": "Studio",
+          "value": "Luski Game Studio"
+        },
+        {
+          "label": "Team size",
+          "value": "10"
+        },
+        {
+          "label": "Engine",
+          "value": "Unreal Engine"
+        },
+        {
+          "label": "Focus",
+          "value": "Systems · Puzzle · Playtesting"
+        }
+      ]
+    },
+    {
+      "id": "d1",
+      "type": "divider"
+    },
+    {
+      "id": "contrib-h",
+      "type": "heading",
+      "level": 2,
+      "text": "My contribution"
+    },
+    {
+      "id": "contrib",
+      "type": "pillars",
+      "items": [
+        {
+          "label": "Analog prototypes",
+          "body": "Led analog prototyping to validate the core idea in Miro before anything was built in Unreal."
+        },
+        {
+          "label": "Gameplay systems",
+          "body": "Engineered the scoring algorithms, puzzle gating, difficulty scaling and meta-progression loops, keeping the cooperative mechanics in systemic sync."
+        },
+        {
+          "label": "Puzzle design",
+          "body": "Co-designed the puzzles with the game and level design teams, around player communication."
+        },
+        {
+          "label": "Playtest iteration",
+          "body": "Ran closed and open playtests, including live events, and iterated on what came back."
+        }
+      ]
+    },
+    {
+      "id": "d2",
+      "type": "divider"
+    },
+    {
+      "id": "sys-h",
+      "type": "heading",
+      "level": 2,
+      "text": "Validate on paper, then build",
+      "number": "01",
+      "eyebrow": "Gameplay systems"
+    },
+    {
+      "id": "sys-intro",
+      "type": "text",
+      "html": "<p>The target was a high-synergy cooperative loop built on asymmetrical communication. To keep cognitive load from turning chaotic while holding a challenging cadence, I mapped and validated every systemic interaction on paper and in Miro before engineering touched it.</p>"
+    },
+    {
+      "id": "sys",
+      "type": "pillars",
+      "items": [
+        {
+          "label": "The problem",
+          "body": "Early playtest cohorts hit opaque scoring feedback. Players could not connect their in-game actions to their final performance, which read as mechanical friction."
+        },
+        {
+          "label": "The iteration",
+          "body": "I built an analytical feedback spreadsheet to rebalance the scoring variables and weights, restructuring the algorithm so secondary objectives became high-reward modifiers tied to remaining level time."
+        },
+        {
+          "label": "The result",
+          "body": "Teams recognised their compounding multipliers immediately, and remaining match time turned into bonus economy points per dish served."
+        }
+      ]
+    },
+    {
+      "id": "score",
+      "type": "chart",
+      "variant": "line",
+      "title": "Score as time remaining grows — placeholder curve, swap for the real weights",
+      "range": {
+        "from": 0,
+        "to": 60,
+        "step": 10
+      },
+      "series": [
+        {
+          "name": "Base objectives",
+          "formula": "100 + 4 * x"
+        },
+        {
+          "name": "With time multiplier",
+          "formula": "round(100 + 4 * x + pow(x, 1.6))"
+        }
+      ]
+    },
+    {
+      "id": "d3",
+      "type": "divider"
+    },
+    {
+      "id": "puz-h",
+      "type": "heading",
+      "level": 2,
+      "text": "Puzzles you have to talk through",
+      "number": "02",
+      "eyebrow": "Puzzle design"
+    },
+    {
+      "id": "puz-intro",
+      "type": "text",
+      "html": "<p>Rather than mechanical locks, the puzzle framework was built on communication friction. Each puzzle stress-tests a different faculty — short-term memory, semantic interpretation, physical synchronisation — turning human cognitive limits into cooperative hooks.</p>"
+    },
+    {
+      "id": "puz",
+      "type": "pillars",
+      "items": [
+        {
+          "label": "The mental layer",
+          "body": "Visually dense, high-similarity glyphs that require a careful verbal breakdown between partners to avoid execution errors."
+        },
+        {
+          "label": "The memory layer",
+          "body": "Asymmetrical data relays needing rapid short-term recall and sequential message passing, under time pressure, before the information resets."
+        },
+        {
+          "label": "The physical layer",
+          "body": "Mechanically isolated layout interactions demanding precise, verbally synchronised execution, balancing movement against data delivery."
+        }
+      ]
+    },
+    {
+      "id": "puz-note",
+      "type": "text",
+      "html": "<p>Every puzzle idea was evaluated against all three layers before it went in.</p>"
+    },
+    {
+      "id": "cta-h",
+      "type": "heading",
+      "level": 2,
+      "text": "Want the deeper breakdown?"
+    },
+    {
+      "id": "cta-t",
+      "type": "text",
+      "html": "<p>Happy to walk through the documentation, behaviour trees and tuning decisions behind this project.</p>"
+    },
+    {
+      "id": "cta",
+      "type": "button",
+      "label": "Get in touch",
+      "href": "mailto:marcelo.rssi@hotmail.com",
+      "style": "primary"
+    }
+  ]
+}
