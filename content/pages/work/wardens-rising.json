@@ -57,40 +57,15 @@
     },
     {
       "id": "pillars",
-      "type": "columns",
-      "count": 2,
-      "columns": [
+      "type": "pillars",
+      "items": [
         {
-          "id": "p1",
-          "blocks": [
-            {
-              "id": "p1h",
-              "type": "heading",
-              "level": 3,
-              "text": "Upholding the core design pillars"
-            },
-            {
-              "id": "p1t",
-              "type": "text",
-              "html": "<p>Every mechanic directly supports our primary gameplay loops, maximizing player expression and maintaining tight, readable combat states.</p>"
-            }
-          ]
+          "label": "Upholding the core design pillars",
+          "body": "Every mechanic directly supports our primary gameplay loops, maximizing player expression and maintaining tight, readable combat states."
         },
         {
-          "id": "p2",
-          "blocks": [
-            {
-              "id": "p2h",
-              "type": "heading",
-              "level": 3,
-              "text": "Designing within technical constraints"
-            },
-            {
-              "id": "p2t",
-              "type": "text",
-              "html": "<p>Continuously evaluated feature scope against engineering bandwidth, ensuring systems were scalable, modular for rapid balancing, and realistic to implement without generating technical debt.</p>"
-            }
-          ]
+          "label": "Designing within technical constraints",
+          "body": "Continuously evaluated feature scope against engineering bandwidth, ensuring systems were scalable, modular for rapid balancing, and realistic to implement without generating technical debt."
         }
       ]
     },
@@ -102,79 +77,29 @@
     },
     {
       "id": "contrib-a",
-      "type": "columns",
-      "count": 2,
-      "columns": [
+      "type": "pillars",
+      "items": [
         {
-          "id": "c1",
-          "blocks": [
-            {
-              "id": "c1h",
-              "type": "heading",
-              "level": 3,
-              "text": "Data-driven balancing"
-            },
-            {
-              "id": "c1t",
-              "type": "text",
-              "html": "<p>Built mathematical models in Google Sheets to simulate and balance TTK/DPS loops for heroes, towers and enemy hordes before porting them into Unreal Data Assets. Visual charts made power outliers easy to spot and kept progression scaling smooth.</p>"
-            }
-          ]
+          "label": "Data-driven balancing",
+          "body": "Built mathematical models in Google Sheets to simulate and balance TTK/DPS loops for heroes, towers and enemy hordes before porting them into Unreal Data Assets. Visual charts made power outliers easy to spot and kept progression scaling smooth."
         },
         {
-          "id": "c2",
-          "blocks": [
-            {
-              "id": "c2h",
-              "type": "heading",
-              "level": 3,
-              "text": "Telemetry & iteration"
-            },
-            {
-              "id": "c2t",
-              "type": "text",
-              "html": "<p>Analyzed playtest data through an internal telemetry tool tracking player and enemy deaths, tower placements and pick rates, then used those heatmaps to adjust horde spawning and shape the difficulty curve.</p>"
-            }
-          ]
+          "label": "Telemetry & iteration",
+          "body": "Analyzed playtest data through an internal telemetry tool tracking player and enemy deaths, tower placements and pick rates, then used those heatmaps to adjust horde spawning and shape the difficulty curve."
         }
       ]
     },
     {
       "id": "contrib-b",
-      "type": "columns",
-      "count": 2,
-      "columns": [
+      "type": "pillars",
+      "items": [
         {
-          "id": "c3",
-          "blocks": [
-            {
-              "id": "c3h",
-              "type": "heading",
-              "level": 3,
-              "text": "Cross-functional AI design"
-            },
-            {
-              "id": "c3t",
-              "type": "text",
-              "html": "<p>Designed the behaviour trees for 4 major boss encounters. Partnered with Level Design on arena blockouts, and with Animation, VFX and Engineering to maintain gameplay readability, handling implementation and tuning inside the engine.</p>"
-            }
-          ]
+          "label": "Cross-functional AI design",
+          "body": "Designed the behaviour trees for 4 major boss encounters. Partnered with Level Design on arena blockouts, and with Animation, VFX and Engineering to maintain gameplay readability, handling implementation and tuning inside the engine."
         },
         {
-          "id": "c4",
-          "blocks": [
-            {
-              "id": "c4h",
-              "type": "heading",
-              "level": 3,
-              "text": "Systemic problem solving"
-            },
-            {
-              "id": "c4t",
-              "type": "text",
-              "html": "<p>Mitigated severe visual overhead and untelegraphed player mortality by architecting an AI targeting-cap and dynamic aggro-cooldown system, distributing enemy threat between players and defensible objectives.</p>"
-            }
-          ]
+          "label": "Systemic problem solving",
+          "body": "Mitigated severe visual overhead and untelegraphed player mortality by architecting an AI targeting-cap and dynamic aggro-cooldown system, distributing enemy threat between players and defensible objectives."
         }
       ]
     },
@@ -191,40 +116,15 @@
         },
         {
           "id": "owned-cols",
-          "type": "columns",
-          "count": 2,
-          "columns": [
+          "type": "pillars",
+          "items": [
             {
-              "id": "o1",
-              "blocks": [
-                {
-                  "id": "o1h",
-                  "type": "heading",
-                  "level": 3,
-                  "text": "Core ownership"
-                },
-                {
-                  "id": "o1t",
-                  "type": "text",
-                  "html": "<p>Owner of macro gameplay balancing and boss AI architecture. Responsible for difficulty pacing, economy scaling and boss encounter design, from concept to final engine tuning.</p>"
-                }
-              ]
+              "label": "Core ownership",
+              "body": "Owner of macro gameplay balancing and boss AI architecture. Responsible for difficulty pacing, economy scaling and boss encounter design, from concept to final engine tuning."
             },
             {
-              "id": "o2",
-              "blocks": [
-                {
-                  "id": "o2h",
-                  "type": "heading",
-                  "level": 3,
-                  "text": "Team & collaboration"
-                },
-                {
-                  "id": "o2t",
-                  "type": "text",
-                  "html": "<p>Partnered closely with Engineering, Animation, VFX and Level Design to bridge creative vision with technical constraints, and led technical design alignment to resolve performance overheads and design debt during heavy playtest periods.</p>"
-                }
-              ]
+              "label": "Team & collaboration",
+              "body": "Partnered closely with Engineering, Animation, VFX and Level Design to bridge creative vision with technical constraints, and led technical design alignment to resolve performance overheads and design debt during heavy playtest periods."
             }
           ]
         }
@@ -245,60 +145,25 @@
       "id": "pa-h",
       "type": "heading",
       "level": 3,
-      "text": "Pacing — macro pacing & threat evaluation"
+      "text": "Macro pacing & threat evaluation",
+      "number": "01",
+      "eyebrow": "Pacing"
     },
     {
       "id": "pa",
-      "type": "columns",
-      "count": 3,
-      "columns": [
+      "type": "pillars",
+      "items": [
         {
-          "id": "pa1",
-          "blocks": [
-            {
-              "id": "pa1h",
-              "type": "heading",
-              "level": 4,
-              "text": "Thought behind"
-            },
-            {
-              "id": "pa1t",
-              "type": "text",
-              "html": "<p>A campaign needs a clear sense of progression. Levels must feel dynamic, never monotonous — peak tension followed by brief relief, so players digest combat without fatigue.</p>"
-            }
-          ]
+          "label": "Thought behind",
+          "body": "A campaign needs a clear sense of progression. Levels must feel dynamic, never monotonous — peak tension followed by brief relief, so players digest combat without fatigue."
         },
         {
-          "id": "pa2",
-          "blocks": [
-            {
-              "id": "pa2h",
-              "type": "heading",
-              "level": 4,
-              "text": "Design approach"
-            },
-            {
-              "id": "pa2t",
-              "type": "text",
-              "html": "<p>Mapped the macro difficulty curve across the campaign with spreadsheet visualization, and quantified enemy strength into a standardized threat matrix to calculate wave difficulty beforehand.</p>"
-            }
-          ]
+          "label": "Design approach",
+          "body": "Mapped the macro difficulty curve across the campaign with spreadsheet visualization, and quantified enemy strength into a standardized threat matrix to calculate wave difficulty beforehand."
         },
         {
-          "id": "pa3",
-          "blocks": [
-            {
-              "id": "pa3h",
-              "type": "heading",
-              "level": 4,
-              "text": "Design choice"
-            },
-            {
-              "id": "pa3t",
-              "type": "text",
-              "html": "<p>A fluctuating wave structure per level, using visual data charts to validate difficulty spikes and pacing shifts prior to engine implementation.</p>"
-            }
-          ]
+          "label": "Design choice",
+          "body": "A fluctuating wave structure per level, using visual data charts to validate difficulty spikes and pacing shifts prior to engine implementation."
         }
       ]
     },
@@ -306,60 +171,25 @@
       "id": "pb-h",
       "type": "heading",
       "level": 3,
-      "text": "Variety — spatial control & resource economy"
+      "text": "Spatial control & resource economy",
+      "number": "02",
+      "eyebrow": "Variety"
     },
     {
       "id": "pb",
-      "type": "columns",
-      "count": 3,
-      "columns": [
+      "type": "pillars",
+      "items": [
         {
-          "id": "pb1",
-          "blocks": [
-            {
-              "id": "pb1h",
-              "type": "heading",
-              "level": 4,
-              "text": "Thought behind"
-            },
-            {
-              "id": "pb1t",
-              "type": "text",
-              "html": "<p>Tower-defense / action-strategy hybrids rely on tight resource constraints. Spending power must always be challenged by incoming pressure, forcing strategic decisions.</p>"
-            }
-          ]
+          "label": "Thought behind",
+          "body": "Tower-defense / action-strategy hybrids rely on tight resource constraints. Spending power must always be challenged by incoming pressure, forcing strategic decisions."
         },
         {
-          "id": "pb2",
-          "blocks": [
-            {
-              "id": "pb2h",
-              "type": "heading",
-              "level": 4,
-              "text": "Design approach"
-            },
-            {
-              "id": "pb2t",
-              "type": "text",
-              "html": "<p>Calibrated wave composition directly against player currency rewards, and calculated per-stage income scaling to balance upgrades against defensive limits.</p>"
-            }
-          ]
+          "label": "Design approach",
+          "body": "Calibrated wave composition directly against player currency rewards, and calculated per-stage income scaling to balance upgrades against defensive limits."
         },
         {
-          "id": "pb3",
-          "blocks": [
-            {
-              "id": "pb3h",
-              "type": "heading",
-              "level": 4,
-              "text": "Design choice"
-            },
-            {
-              "id": "pb3t",
-              "type": "text",
-              "html": "<p>Implemented the encounter architecture in our proprietary Wave Tool integrated with Unreal, orchestrating portal spawn vectors, dynamic wave compositions and algorithmic timers to dictate stage duration and maintain unpredictable lane pressure.</p>"
-            }
-          ]
+          "label": "Design choice",
+          "body": "Implemented the encounter architecture in our proprietary Wave Tool integrated with Unreal, orchestrating portal spawn vectors, dynamic wave compositions and algorithmic timers to dictate stage duration and maintain unpredictable lane pressure."
         }
       ]
     },
@@ -367,60 +197,25 @@
       "id": "pc-h",
       "type": "heading",
       "level": 3,
-      "text": "Agency — dynamic AI & boss architecture"
+      "text": "Dynamic AI & boss architecture",
+      "number": "03",
+      "eyebrow": "Agency"
     },
     {
       "id": "pc",
-      "type": "columns",
-      "count": 3,
-      "columns": [
+      "type": "pillars",
+      "items": [
         {
-          "id": "pc1",
-          "blocks": [
-            {
-              "id": "pc1h",
-              "type": "heading",
-              "level": 4,
-              "text": "Thought behind"
-            },
-            {
-              "id": "pc1t",
-              "type": "text",
-              "html": "<p>Boss fights shouldn't just be high health bars; they need to test player adaptation, actively responding to positioning and escalating tactics to keep the endgame engaging.</p>"
-            }
-          ]
+          "label": "Thought behind",
+          "body": "Boss fights shouldn't just be high health bars; they need to test player adaptation, actively responding to positioning and escalating tactics to keep the endgame engaging."
         },
         {
-          "id": "pc2",
-          "blocks": [
-            {
-              "id": "pc2h",
-              "type": "heading",
-              "level": 4,
-              "text": "Design approach"
-            },
-            {
-              "id": "pc2t",
-              "type": "text",
-              "html": "<p>Partnered with Level Design, Animation and VFX on arena blockouts and telegraphing constraints, aligning the creative vision with the technical logic of behaviour trees.</p>"
-            }
-          ]
+          "label": "Design approach",
+          "body": "Partnered with Level Design, Animation and VFX on arena blockouts and telegraphing constraints, aligning the creative vision with the technical logic of behaviour trees."
         },
         {
-          "id": "pc3",
-          "blocks": [
-            {
-              "id": "pc3h",
-              "type": "heading",
-              "level": 4,
-              "text": "Design choice"
-            },
-            {
-              "id": "pc3t",
-              "type": "text",
-              "html": "<p>Built multi-phase combat logic and proximity-based behaviour-tree checks in Unreal. Bosses shift between melee strings and ranged attacks based on real-time spatial data.</p>"
-            }
-          ]
+          "label": "Design choice",
+          "body": "Built multi-phase combat logic and proximity-based behaviour-tree checks in Unreal. Bosses shift between melee strings and ranged attacks based on real-time spatial data."
         }
       ]
     },
@@ -428,60 +223,25 @@
       "id": "pd-h",
       "type": "heading",
       "level": 3,
-      "text": "Readability — combat readability & threat management"
+      "text": "Combat readability & threat management",
+      "number": "04",
+      "eyebrow": "Readability"
     },
     {
       "id": "pd",
-      "type": "columns",
-      "count": 3,
-      "columns": [
+      "type": "pillars",
+      "items": [
         {
-          "id": "pd1",
-          "blocks": [
-            {
-              "id": "pd1h",
-              "type": "heading",
-              "level": 4,
-              "text": "Thought behind"
-            },
-            {
-              "id": "pd1t",
-              "type": "text",
-              "html": "<p>High combat density resulted in severe visual noise and untelegraphed damage spikes, compromising player agency and tactical decision-making.</p>"
-            }
-          ]
+          "label": "Thought behind",
+          "body": "High combat density resulted in severe visual noise and untelegraphed damage spikes, compromising player agency and tactical decision-making."
         },
         {
-          "id": "pd2",
-          "blocks": [
-            {
-              "id": "pd2h",
-              "type": "heading",
-              "level": 4,
-              "text": "Design approach"
-            },
-            {
-              "id": "pd2t",
-              "type": "text",
-              "html": "<p>Identified the technical and design debt from mass enemy targeting, aiming to redistribute enemy focus dynamically — urgency without overwhelming the player or the engine.</p>"
-            }
-          ]
+          "label": "Design approach",
+          "body": "Identified the technical and design debt from mass enemy targeting, aiming to redistribute enemy focus dynamically — urgency without overwhelming the player or the engine."
         },
         {
-          "id": "pd3",
-          "blocks": [
-            {
-              "id": "pd3h",
-              "type": "heading",
-              "level": 4,
-              "text": "Design choice"
-            },
-            {
-              "id": "pd3t",
-              "type": "text",
-              "html": "<p>Concepted and balanced a targeting cap and cooldown system for enemy AI. Capping simultaneous attackers forces excess enemies to bypass the player and prioritize objectives, adding depth and strategy.</p>"
-            }
-          ]
+          "label": "Design choice",
+          "body": "Concepted and balanced a targeting cap and cooldown system for enemy AI. Capping simultaneous attackers forces excess enemies to bypass the player and prioritize objectives, adding depth and strategy."
         }
       ]
     },
@@ -502,56 +262,19 @@
     },
     {
       "id": "cd",
-      "type": "columns",
-      "count": 3,
-      "columns": [
+      "type": "pillars",
+      "items": [
         {
-          "id": "cd1",
-          "blocks": [
-            {
-              "id": "cd1h",
-              "type": "heading",
-              "level": 3,
-              "text": "Hero skill architecture"
-            },
-            {
-              "id": "cd1t",
-              "type": "text",
-              "html": "<p>Reviewed, designed and documented complete ability kits for multiple playable heroes, from early concept to final engine integration. Authored tech-design specs defining frame data, logic triggers and parameters, acting as the bridge between Engineering, Animation and VFX. Each hero got a distinct mechanical identity that stayed within performance constraints.</p>"
-            }
-          ]
+          "label": "Hero skill architecture",
+          "body": "Reviewed, designed and documented complete ability kits for multiple playable heroes, from early concept to final engine integration. Authored tech-design specs defining frame data, logic triggers and parameters, acting as the bridge between Engineering, Animation and VFX. Each hero got a distinct mechanical identity that stayed within performance constraints."
         },
         {
-          "id": "cd2",
-          "blocks": [
-            {
-              "id": "cd2h",
-              "type": "heading",
-              "level": 3,
-              "text": "Enemy archetype standardization"
-            },
-            {
-              "id": "cd2t",
-              "type": "text",
-              "html": "<p>Redesigned and categorized the enemy roster with a structured combat archetype system, defining each role in the wave ecosystem. Parameterized AI behaviours and core stats in Unreal Data Tables — distinct mathematical templates per threat type: tanks, ranged, aggressive brawlers — so every threat reads at a glance.</p>"
-            }
-          ]
+          "label": "Enemy archetype standardization",
+          "body": "Redesigned and categorized the enemy roster with a structured combat archetype system, defining each role in the wave ecosystem. Parameterized AI behaviours and core stats in Unreal Data Tables — distinct mathematical templates per threat type: tanks, ranged, aggressive brawlers — so every threat reads at a glance."
         },
         {
-          "id": "cd3",
-          "blocks": [
-            {
-              "id": "cd3h",
-              "type": "heading",
-              "level": 3,
-              "text": "Modular item & perk economy"
-            },
-            {
-              "id": "cd3t",
-              "type": "text",
-              "html": "<p>Concepted, documented and balanced 30+ buyable items and 10 persistent passive perks on a component-driven architecture using Unreal Data Tables, applying standardized attribute modifiers across data fields to prevent custom code inflation. The result was extensive meta-customization that stayed balanced under the macro economy.</p>"
-            }
-          ]
+          "label": "Modular item & perk economy",
+          "body": "Concepted, documented and balanced 30+ buyable items and 10 persistent passive perks on a component-driven architecture using Unreal Data Tables, applying standardized attribute modifiers across data fields to prevent custom code inflation. The result was extensive meta-customization that stayed balanced under the macro economy."
         }
       ]
     },
@@ -568,62 +291,23 @@
     },
     {
       "id": "prog",
-      "type": "columns",
-      "count": 2,
-      "columns": [
+      "type": "pillars",
+      "items": [
         {
-          "id": "pr1",
-          "blocks": [
-            {
-              "id": "pr1h",
-              "type": "heading",
-              "level": 3,
-              "text": "Curve modelling & simulation"
-            },
-            {
-              "id": "pr1t",
-              "type": "text",
-              "html": "<p>Modeled levelling velocity with exponential and logarithmic curves in Google Sheets — simulation matrices mapping horde XP against player-efficiency margins to project pacing and unlock-point distribution for perks and items.</p>"
-            },
-            {
-              "id": "pr3h",
-              "type": "heading",
-              "level": 3,
-              "text": "Data-to-engine integration"
-            },
-            {
-              "id": "pr3t",
-              "type": "text",
-              "html": "<p>Extracted validated curves and metrics from design sheets straight into Unreal Data Tables, creating a reliable framework for levelling and reward distribution.</p>"
-            }
-          ]
+          "label": "Curve modelling & simulation",
+          "body": "Modeled levelling velocity with exponential and logarithmic curves in Google Sheets — simulation matrices mapping horde XP against player-efficiency margins to project pacing and unlock-point distribution for perks and items."
         },
         {
-          "id": "pr2",
-          "blocks": [
-            {
-              "id": "pr2h",
-              "type": "heading",
-              "level": 3,
-              "text": "Strategic milestone unlocks"
-            },
-            {
-              "id": "pr2t",
-              "type": "text",
-              "html": "<p>Synced key unlocks — towers, traps — to specific stages, using engagement data to introduce mechanics exactly when pacing dipped, pairing each with custom hordes that showcase the new asset.</p>"
-            },
-            {
-              "id": "pr4h",
-              "type": "heading",
-              "level": 3,
-              "text": "Late-game retention tuning"
-            },
-            {
-              "id": "pr4t",
-              "type": "text",
-              "html": "<p>Diagnosed a late-game content drought from playtest feedback, then restructured the perk and item unlock economy and recalibrated tower milestones to align with map and zone transitions.</p>"
-            }
-          ]
+          "label": "Strategic milestone unlocks",
+          "body": "Synced key unlocks — towers, traps — to specific stages, using engagement data to introduce mechanics exactly when pacing dipped, pairing each with custom hordes that showcase the new asset."
+        },
+        {
+          "label": "Data-to-engine integration",
+          "body": "Extracted validated curves and metrics from design sheets straight into Unreal Data Tables, creating a reliable framework for levelling and reward distribution."
+        },
+        {
+          "label": "Late-game retention tuning",
+          "body": "Diagnosed a late-game content drought from playtest feedback, then restructured the perk and item unlock economy and recalibrated tower milestones to align with map and zone transitions."
         }
       ]
     },
@@ -655,56 +339,19 @@
         },
         {
           "id": "case-cols",
-          "type": "columns",
-          "count": 3,
-          "columns": [
+          "type": "pillars",
+          "items": [
             {
-              "id": "cs1",
-              "blocks": [
-                {
-                  "id": "cs1h",
-                  "type": "heading",
-                  "level": 3,
-                  "text": "The problem"
-                },
-                {
-                  "id": "cs1t",
-                  "type": "text",
-                  "html": "<p>Telemetry revealed an endgame progression bottleneck where players defended a base core assisted by power nodes. Specific high-threat enemy archetypes were stripping core shields faster than human reaction thresholds allowed, causing an unmanageable difficulty spike that shattered player agency.</p>"
-                }
-              ]
+              "label": "The problem",
+              "body": "Telemetry revealed an endgame progression bottleneck where players defended a base core assisted by power nodes. Specific high-threat enemy archetypes were stripping core shields faster than human reaction thresholds allowed, causing an unmanageable difficulty spike that shattered player agency."
             },
             {
-              "id": "cs2",
-              "blocks": [
-                {
-                  "id": "cs2h",
-                  "type": "heading",
-                  "level": 3,
-                  "text": "The iterated solution"
-                },
-                {
-                  "id": "cs2t",
-                  "type": "text",
-                  "html": "<p>Decreased total count and placed an aggregate targeting cap on node-specific enemy types. Introduced dedicated tactical traps and items to redirect enemy focus off critical objectives. Added a voice-line audio cue on node-threat spawn so players could reposition proactively.</p>"
-                }
-              ]
+              "label": "The iterated solution",
+              "body": "Decreased total count and placed an aggregate targeting cap on node-specific enemy types. Introduced dedicated tactical traps and items to redirect enemy focus off critical objectives. Added a voice-line audio cue on node-threat spawn so players could reposition proactively."
             },
             {
-              "id": "cs3",
-              "blocks": [
-                {
-                  "id": "cs3h",
-                  "type": "heading",
-                  "level": 3,
-                  "text": "The result"
-                },
-                {
-                  "id": "cs3t",
-                  "type": "text",
-                  "html": "<p>Subsequent playtests validated the changes: the unfair difficulty spikes flattened, and strategic, rewarding defensive pacing returned to the level.</p>"
-                }
-              ]
+              "label": "The result",
+              "body": "Subsequent playtests validated the changes: the unfair difficulty spikes flattened, and strategic, rewarding defensive pacing returned to the level."
             }
           ]
         }

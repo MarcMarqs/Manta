@@ -62,56 +62,19 @@
     },
     {
       "id": "pillars",
-      "type": "columns",
-      "count": 3,
-      "columns": [
+      "type": "pillars",
+      "items": [
         {
-          "id": "p1",
-          "blocks": [
-            {
-              "id": "p1h",
-              "type": "heading",
-              "level": 3,
-              "text": "Feel before challenge"
-            },
-            {
-              "id": "p1t",
-              "type": "text",
-              "html": "<p>Character movement and camera responsiveness must achieve absolute mechanical precision before layout challenges can be introduced fairly.</p>"
-            }
-          ]
+          "label": "Feel before challenge",
+          "body": "Character movement and camera responsiveness must achieve absolute mechanical precision before layout challenges can be introduced fairly."
         },
         {
-          "id": "p2",
-          "blocks": [
-            {
-              "id": "p2h",
-              "type": "heading",
-              "level": 3,
-              "text": "Show, don't tell"
-            },
-            {
-              "id": "p2t",
-              "type": "text",
-              "html": "<p>An all-ages story teaches through space, motion and discovery rather than text and tutorials.</p>"
-            }
-          ]
+          "label": "Show, don't tell",
+          "body": "An all-ages story teaches through space, motion and discovery rather than text and tutorials."
         },
         {
-          "id": "p3",
-          "blocks": [
-            {
-              "id": "p3h",
-              "type": "heading",
-              "level": 3,
-              "text": "Gentle mastery"
-            },
-            {
-              "id": "p3t",
-              "type": "text",
-              "html": "<p>Puzzles escalate from intuition to insight without punishing failure. Curiosity is always rewarded.</p>"
-            }
-          ]
+          "label": "Gentle mastery",
+          "body": "Puzzles escalate from intuition to insight without punishing failure. Curiosity is always rewarded."
         }
       ]
     },
