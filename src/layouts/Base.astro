@@ -16,7 +16,7 @@ const { title, description, path, image } = Astro.props;
 const { site } = useContent(Astro.locals);
 const t = site.theme;
 const pageTitle = title === site.name ? site.name : `${title} — ${site.name}`;
-const fontsHref = googleFontsHref([t.fontHeading, t.fontBody]);
+const fontsHref = googleFontsHref([t.fontHeading, t.fontBody, t.fontMono]);
 
 // Chat apps and search engines need absolute URLs, which only site.url can give.
 const base = site.url?.replace(/\/$/, '');
@@ -61,6 +61,7 @@ const shareText = description || site.tagline;
       --bg:${t.bg}; --fg:${t.fg}; --muted:${t.muted};
       --surface:${t.surface}; --border:${t.border};
       --font-heading:${fontStack(t.fontHeading)}; --font-body:${fontStack(t.fontBody)};
+      --font-mono:${fontStack(t.fontMono)};
       --radius:${t.radius}; --max-width:${t.maxWidth}; --spacing:${t.spacing};
     }
     :root[data-theme="dark"]{
@@ -82,6 +83,7 @@ const shareText = description || site.tagline;
     </script>
   </head>
   <body>
+    <div class="topbar">
     <header class="site-header">
       <div class="wrap">
         <a class="brand" href="/">{site.name}</a>
@@ -100,6 +102,17 @@ const shareText = description || site.tagline;
       </div>
     </header>
 
+    {/* The name box and formula bar. The reference is the page, the formula is what the
+        page is about — it reads as chrome but it is really a subtitle that cannot lie. */}
+    <div class="fx-bar">
+      <div class="wrap">
+        <span class="fx-ref">A1</span>
+        <span class="fx-glyph">fx</span>
+        <span class="fx-value">{description || site.tagline}</span>
+      </div>
+    </div>
+    </div>
+
     <main>
       <div class="wrap">
         <slot />
@@ -109,7 +122,18 @@ const shareText = description || site.tagline;
     <SiteScripts />
 
     <footer class="site-footer">
-      <div class="wrap">{site.footer}</div>
+      <div class="wrap">
+        <nav class="sheet-tabs" aria-label="Sections">
+          {
+            site.nav.map((item) => (
+              <a class="sheet-tab" href={item.href} aria-current={item.href === path ? 'page' : undefined}>
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+        <p class="footer-note">{site.footer}</p>
+      </div>
     </footer>
 
     <script is:inline>

@@ -13,6 +13,8 @@ export interface Theme {
   /** A family name from src/lib/fonts.ts, or "system-ui". */
   fontHeading: string;
   fontBody: string;
+  /** Numerals, cell references and formulas. */
+  fontMono: string;
   radius: string;
   maxWidth: string;
   spacing: number;

@@ -464,3 +464,380 @@ a.tag-chip:hover {
   border-color: var(--accent);
   color: var(--accent);
 }
+
+/* ===========================================================================
+   The sheet
+   ---------------------------------------------------------------------------
+   The page is a spreadsheet, because the work on it was done in one: the models,
+   the balance passes and the hit-to-kill matrices all started as sheets. The grid
+   is structure rather than decoration — sections sit on it, numbers are set in a
+   tabular face, and a figure is an object anchored to a range.
+
+   It stops short of pretending to be the application. There is no Share button, no
+   avatars, no comment bubbles: the moment the page claims to be a document somebody
+   could collaborate on, the device turns into costume.
+   =========================================================================== */
+
+:root {
+  --cell-w: 112px;
+  --cell-h: 28px;
+  --rule: var(--border);
+  --rule-strong: color-mix(in srgb, var(--border) 55%, var(--fg));
+  --head-fill: var(--surface);
+}
+
+/* The grid under everything. Faint enough to read through, present enough to see. */
+body {
+  background-image:
+    linear-gradient(to right, var(--rule) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--rule) 1px, transparent 1px);
+  background-size: var(--cell-w) var(--cell-h);
+  background-position: -1px -1px;
+  background-attachment: fixed;
+}
+
+/* Square corners throughout: the theme radius is 0, and anything that opted out
+   of it reads as a foreign object on a sheet. */
+.card,
+.btn,
+.tag-chip,
+.pillar,
+.chart,
+.tornado-track,
+.map-scroll {
+  border-radius: 0 !important;
+}
+
+/* --------------------------------------------------------------- the chrome */
+
+.site-header {
+  background: var(--bg);
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: var(--bg);
+}
+
+.topbar .site-header {
+  position: static;
+}
+
+.fx-bar {
+  background: var(--bg);
+  border-bottom: 1px solid var(--rule);
+}
+
+.fx-bar .wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 34px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
+.fx-ref {
+  min-width: 54px;
+  padding: 1px 6px;
+  border: 1px solid var(--rule);
+  text-align: center;
+  color: var(--fg);
+  flex: none;
+}
+
+.fx-glyph {
+  font-style: italic;
+  opacity: 0.6;
+  flex: none;
+}
+
+.fx-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.site-footer {
+  border-top: 1px solid var(--rule-strong);
+  background: var(--bg);
+}
+
+.sheet-tabs {
+  display: flex;
+  gap: 1px;
+  overflow-x: auto;
+  padding-top: 8px;
+}
+
+.sheet-tab {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 6px 14px;
+  border: 1px solid var(--rule);
+  border-bottom: 0;
+  background: var(--head-fill);
+  color: var(--muted);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.sheet-tab[aria-current='page'] {
+  background: var(--bg);
+  color: var(--fg);
+  font-weight: 600;
+  box-shadow: inset 0 3px 0 var(--accent);
+}
+
+.footer-note {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin: 14px 0 0;
+}
+
+/* --------------------------------------------------------------- type */
+
+body {
+  font-size: 16px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: -0.022em;
+}
+
+/* Every number on the page lines up in its column. */
+.mono,
+.specs dd,
+.stat-value,
+.card-meta,
+.tornado-values,
+td.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --------------------------------------------------------------- headings as frozen rows */
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  background: var(--head-fill);
+  border: 1px solid var(--rule-strong);
+  border-left: 3px solid var(--accent);
+  padding: 9px 14px;
+}
+
+.section-kicker {
+  margin: 0;
+  order: 2;
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+}
+
+.section-header :global(h2),
+.section-header :global(h3) {
+  order: 1;
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.section-number {
+  color: var(--accent);
+}
+
+/* --------------------------------------------------------------- tables */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  background: var(--bg);
+}
+
+th,
+td {
+  border: 1px solid var(--rule);
+  padding: 6px 10px;
+  text-align: left;
+  font-size: 0.92rem;
+}
+
+thead th {
+  background: var(--head-fill);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------- the spec strip */
+
+.specs {
+  border: 1px solid var(--rule-strong);
+  background: var(--bg);
+}
+
+/* --------------------------------------------------------------- pillars as a cell range */
+
+.pillars {
+  gap: 0 !important;
+}
+
+.pillar {
+  border: 1px solid var(--rule);
+  margin: 0 -1px -1px 0;
+  background: var(--bg);
+}
+
+/* --------------------------------------------------------------- buttons as sheet chips */
+
+.btn {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  border: 1px solid var(--rule-strong);
+  padding: 8px 14px;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.btn-secondary {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* --------------------------------------------------------------- figures as sheet objects */
+
+/* A chart in a spreadsheet is an object floating over the cells, with handles at its
+   corners. Saying so is also honest: every one of these came from a range. */
+.chart,
+.tornado,
+.radar,
+.flow,
+.system-map {
+  position: relative;
+  border: 1px solid var(--rule-strong);
+  background: var(--bg);
+  padding: 14px 16px 12px;
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--fg) 7%, transparent);
+}
+
+.chart::before,
+.tornado::before,
+.radar::before,
+.flow::before,
+.system-map::before,
+.chart::after,
+.tornado::after,
+.radar::after,
+.flow::after,
+.system-map::after {
+  content: '';
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background: var(--bg);
+  border: 1px solid var(--rule-strong);
+}
+
+.chart::before,
+.tornado::before,
+.radar::before,
+.flow::before,
+.system-map::before {
+  left: -4px;
+  top: -4px;
+}
+
+.chart::after,
+.tornado::after,
+.radar::after,
+.flow::after,
+.system-map::after {
+  right: -4px;
+  bottom: -4px;
+}
+
+.chart-title,
+.tornado-title,
+.radar-title {
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  font-weight: 650;
+}
+
+/* --------------------------------------------------------------- project cards */
+
+.card {
+  border: 1px solid var(--rule-strong);
+}
+
+.tag-chip {
+  border: 1px solid var(--rule);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 4px 10px;
+}
+
+/* The filter row reads as a toolbar rather than a row of pills. */
+.filters {
+  border: 1px solid var(--rule);
+  background: var(--head-fill);
+  padding: 6px 8px;
+  gap: 1px;
+}
+
+.filters button,
+.filters .filter {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  border-radius: 0;
+}
+
+/* --------------------------------------------------------------- stats */
+
+.stat-value {
+  color: var(--accent);
+}
+
+@media (max-width: 720px) {
+  :root {
+    --cell-w: 72px;
+  }
+}
+
+/* A level-2 heading is a frozen header row whether or not it carries a number, so a
+   page does not alternate between two kinds of section break. Scoped component styles
+   out-specify this file, so the few that fight back are matched there instead. */
+main :is(h2):not(.section-header h2):not(.next-project h2) {
+  background: var(--head-fill);
+  border: 1px solid var(--rule-strong);
+  border-left: 3px solid var(--accent);
+  padding: 9px 14px;
+  font-size: 1.3rem;
+  margin-bottom: 0;
+}
+
+main :is(h2):not(.section-header h2):not(.next-project h2) + * {
+  margin-top: calc(1rem * var(--spacing)) !important;
+}

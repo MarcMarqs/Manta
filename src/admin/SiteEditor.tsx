@@ -153,6 +153,9 @@ export function SiteEditor() {
           <Field label="Body font">
             <Select value={t.fontBody} options={fontOptions} onChange={(fontBody) => setTheme({ fontBody })} />
           </Field>
+          <Field label="Number font" hint="Numerals, cell references and formulas.">
+            <Select value={t.fontMono} options={fontOptions} onChange={(fontMono) => setTheme({ fontMono })} />
+          </Field>
           <Field label={`Corner radius · ${t.radius}`}>
             <input
               type="range"
