@@ -4,6 +4,8 @@ import { useContent } from '../../lib/context';
 import { srcsetFor } from '../../lib/media';
 import Chart from '../Chart.astro';
 import Flow from '../Flow.astro';
+import Radar from '../Radar.astro';
+import SystemMap from '../SystemMap.astro';
 import Tornado from '../Tornado.astro';
 import ProjectRail from '../ProjectRail.astro';
 import ProjectGrid from '../ProjectGrid.astro';
@@ -214,6 +216,14 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
   }
 
   {block.type === 'flow' && <Flow caption={block.caption} nodes={block.nodes} edges={block.edges} />}
+
+  {
+    block.type === 'systemMap' && (
+      <SystemMap arrange={block.arrange} caption={block.caption} nodes={block.nodes} links={block.links} />
+    )
+  }
+
+  {block.type === 'radar' && <Radar title={block.title} axes={block.axes} max={block.max} series={block.series} />}
 
   {
     block.type === 'chart' && (

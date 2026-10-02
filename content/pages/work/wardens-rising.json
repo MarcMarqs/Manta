@@ -247,6 +247,68 @@
       ]
     },
     {
+      "id": "aggro-map",
+      "type": "systemMap",
+      "arrange": "layered",
+      "caption": "Capping simultaneous attackers sends the overflow at the objectives instead of the player.",
+      "nodes": [
+        {
+          "id": "w",
+          "label": "Wave spawns",
+          "layer": 0
+        },
+        {
+          "id": "cap",
+          "label": "Targeting cap",
+          "note": "Per player",
+          "accent": true,
+          "layer": 1
+        },
+        {
+          "id": "cd",
+          "label": "Aggro cooldown",
+          "layer": 1
+        },
+        {
+          "id": "p",
+          "label": "Player pressure",
+          "note": "Readable",
+          "layer": 2
+        },
+        {
+          "id": "o",
+          "label": "Objectives",
+          "note": "Overflow target",
+          "layer": 2
+        }
+      ],
+      "links": [
+        {
+          "from": "w",
+          "to": "cap"
+        },
+        {
+          "from": "cap",
+          "to": "p",
+          "label": "capped"
+        },
+        {
+          "from": "cap",
+          "to": "o",
+          "label": "overflow"
+        },
+        {
+          "from": "cd",
+          "to": "cap"
+        },
+        {
+          "from": "p",
+          "to": "cd",
+          "dashed": true
+        }
+      ]
+    },
+    {
       "id": "d2",
       "type": "divider"
     },

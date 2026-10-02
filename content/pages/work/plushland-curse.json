@@ -183,6 +183,51 @@
       ]
     },
     {
+      "id": "arch-radar",
+      "type": "radar",
+      "title": "Three archetypes against the same stat line — placeholder values, swap for the real table",
+      "axes": [
+        "Damage",
+        "Reach",
+        "Speed",
+        "Health",
+        "Control"
+      ],
+      "max": 10,
+      "series": [
+        {
+          "name": "Heavy hitter",
+          "values": [
+            9,
+            2,
+            3,
+            9,
+            4
+          ]
+        },
+        {
+          "name": "Agile assassin",
+          "values": [
+            6,
+            3,
+            9,
+            3,
+            5
+          ]
+        },
+        {
+          "name": "Ranged caster",
+          "values": [
+            5,
+            9,
+            4,
+            3,
+            8
+          ]
+        }
+      ]
+    },
+    {
       "id": "d3",
       "type": "divider"
     },

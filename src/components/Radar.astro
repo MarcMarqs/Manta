@@ -1,0 +1,204 @@
+---
+/**
+ * The same measures compared across several things — enemy archetypes on one stat line,
+ * heroes against the same five axes.
+ *
+ * A radar is only honest when every axis shares a scale, so one `max` covers all of them
+ * rather than each axis normalising itself; otherwise two very different shapes can be
+ * drawn identically.
+ */
+interface Props {
+  title?: string;
+  axes: string[];
+  max?: number;
+  series: { name?: string; values: number[] }[];
+}
+
+const { title, axes, max, series } = Astro.props;
+
+const R = 118;
+const PAD = 86;
+const SIZE = (R + PAD) * 2;
+const C = SIZE / 2;
+const RINGS = 4;
+
+const top = max ?? Math.max(...series.flatMap((s) => s.values), 1);
+const count = Math.max(axes.length, 3);
+
+/** Axis 0 points straight up, the rest run clockwise. */
+const angle = (i: number) => -Math.PI / 2 + (i / count) * Math.PI * 2;
+const point = (i: number, value: number) => {
+  const r = (Math.max(value, 0) / top) * R;
+  return { x: C + Math.cos(angle(i)) * r, y: C + Math.sin(angle(i)) * r };
+};
+const ringPath = (level: number) =>
+  axes
+    .map((_, i) => {
+      const r = (level / RINGS) * R;
+      return `${i ? 'L' : 'M'}${C + Math.cos(angle(i)) * r},${C + Math.sin(angle(i)) * r}`;
+    })
+    .join(' ') + ' Z';
+
+const shapes = series.map((s) => ({
+  name: s.name,
+  d: axes.map((_, i) => {
+    const p = point(i, s.values[i] ?? 0);
+    return `${i ? 'L' : 'M'}${p.x},${p.y}`;
+  }).join(' ') + ' Z',
+  dots: axes.map((_, i) => point(i, s.values[i] ?? 0)),
+}));
+
+const named = series.filter((s) => s.name).length > 1;
+---
+
+<figure class="radar">
+  {title && <figcaption class="radar-title">{title}</figcaption>}
+  {
+    named && (
+      <div class="radar-legend">
+        {series.map((s, i) => s.name && (
+          <span class="key">
+            <span class={`swatch s${i % 4}`} />
+            {s.name}
+          </span>
+        ))}
+      </div>
+    )
+  }
+  <svg viewBox={`0 0 ${SIZE} ${SIZE}`} role="img" aria-label={title ?? 'Radar chart'}>
+    {Array.from({ length: RINGS }, (_, r) => <path class="ring" d={ringPath(r + 1)} />)}
+    {
+      axes.map((_, i) => (
+        <line class="spoke" x1={C} y1={C} x2={C + Math.cos(angle(i)) * R} y2={C + Math.sin(angle(i)) * R} />
+      ))
+    }
+    {
+      shapes.map((s, i) => (
+        <>
+          <path class={`shape s${i % 4}`} d={s.d} />
+          {s.dots.map((d) => <circle class={`dot s${i % 4}`} cx={d.x} cy={d.y} r="3.5" />)}
+        </>
+      ))
+    }
+    {
+      axes.map((label, i) => {
+        const a = angle(i);
+        const x = C + Math.cos(a) * (R + 22);
+        const y = C + Math.sin(a) * (R + 22);
+        // Labels sit outside the ring and lean away from the centre, so they never
+        // overlap the shape they describe.
+        const anchor = Math.abs(Math.cos(a)) < 0.3 ? 'middle' : Math.cos(a) > 0 ? 'start' : 'end';
+        return (
+          <text class="axis-label" x={x} y={y + 4} text-anchor={anchor}>{label}</text>
+        );
+      })
+    }
+  </svg>
+</figure>
+
+<style>
+  .radar {
+    margin: 0;
+  }
+
+  .radar-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .radar-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 8px;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+
+  .key {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .swatch {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+  }
+
+  svg {
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+    display: block;
+    margin-inline: auto;
+  }
+
+  .ring,
+  .spoke {
+    fill: none;
+    stroke: var(--border);
+    stroke-width: 1;
+  }
+
+  /* Radar outlines sit on top of each other, so colour alone is not enough to tell
+     three series apart — each also gets its own dash, which survives a mono print and
+     a colour-blind reader. Fills stay light so three stacked shapes do not go muddy. */
+  .shape {
+    fill-opacity: 0.14;
+    stroke-width: 2;
+  }
+  .shape.s1 {
+    stroke-dasharray: 7 4;
+  }
+  .shape.s2 {
+    stroke-dasharray: 2 3;
+  }
+  .shape.s3 {
+    stroke-dasharray: 10 3 2 3;
+  }
+
+  .axis-label {
+    fill: var(--muted);
+    font-size: 12px;
+    font-family: var(--font-heading);
+  }
+
+  /* The same ramp the bar and line charts use, so a page of figures reads as one set. */
+  .s0 {
+    --plot: var(--accent);
+  }
+  .s1 {
+    --plot: color-mix(in srgb, var(--accent) 35%, var(--fg));
+  }
+  .s2 {
+    --plot: color-mix(in srgb, var(--accent) 30%, var(--muted));
+  }
+  .s3 {
+    --plot: var(--muted);
+  }
+
+  .shape,
+  .dot {
+    stroke: var(--plot);
+    fill: var(--plot);
+  }
+
+  .dot {
+    fill-opacity: 1;
+    stroke: none;
+  }
+
+  .swatch {
+    background: var(--plot);
+  }
+
+  /* On a phone the labels crowd the ring, so the whole thing shrinks together. */
+  @media (max-width: 520px) {
+    .axis-label {
+      font-size: 14px;
+    }
+  }
+</style>

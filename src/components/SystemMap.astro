@@ -1,0 +1,293 @@
+---
+/**
+ * A system drawn as nodes and the links between them.
+ *
+ * Nothing here is positioned by hand. In `radial` the first node sits at the centre and
+ * the rest are spaced evenly around it, which suits "one thing everything else feeds".
+ * In `layered` nodes run left to right in the columns their `layer` names, which suits a
+ * pipeline that fans out and back in. A diagram needing real coordinates is a drawing,
+ * and belongs in an image block.
+ */
+interface Props {
+  arrange?: 'radial' | 'layered';
+  caption?: string;
+  nodes: { id: string; label: string; note?: string; accent?: boolean; layer?: number }[];
+  links: { from: string; to: string; label?: string; dashed?: boolean }[];
+}
+
+const { arrange = 'radial', caption, nodes, links } = Astro.props;
+
+const CHAR = 6.6;
+const MAX_LINE = 18;
+const LINE = 15;
+
+/** SVG text does not wrap, so a label is broken into lines before the box is sized. */
+function wrap(label: string, max = MAX_LINE): string[] {
+  const lines: string[] = [];
+  let line = '';
+  for (const word of label.split(/\s+/)) {
+    const next = line ? `${line} ${word}` : word;
+    if (next.length > max && line) {
+      lines.push(line);
+      line = word;
+    } else {
+      line = next;
+    }
+  }
+  if (line) lines.push(line);
+  return lines.slice(0, 2);
+}
+
+interface Placed {
+  id: string;
+  label: string[];
+  note?: string;
+  accent: boolean;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}
+
+const measured = nodes.map((n) => {
+  const label = wrap(n.label);
+  const widest = Math.max(...label.map((l) => l.length), (n.note ?? '').length * 0.9, 1);
+  return { node: n, label, w: Math.min(Math.max(Math.round(widest * CHAR) + 30, 110), 190) };
+});
+
+const NODE_W = Math.max(...measured.map((m) => m.w), 110);
+const NODE_H = Math.max(...measured.map((m) => m.label.length)) * LINE + (nodes.some((n) => n.note) ? 36 : 22);
+
+let placed: Placed[] = [];
+let W = 0;
+let H = 0;
+
+if (arrange === 'radial' && nodes.length > 1) {
+  // One hub, the rest on a ring around it. The radius grows with the number of
+  // satellites so boxes never close up on each other.
+  const petals = measured.length - 1;
+  const rx = Math.max(NODE_W * 1.7, (petals * (NODE_W + 26)) / (2 * Math.PI));
+  const ry = Math.max(NODE_H * 2.8, (petals * (NODE_H + 40)) / (2 * Math.PI));
+  W = Math.round(rx * 2 + NODE_W + 20);
+  H = Math.round(ry * 2 + NODE_H + 20);
+  const cx = W / 2;
+  const cy = H / 2;
+  placed = measured.map((m, i) => {
+    if (i === 0) return { ...m.node, label: m.label, accent: m.node.accent ?? true, x: cx - NODE_W / 2, y: cy - NODE_H / 2, w: NODE_W, h: NODE_H };
+    // Start at the top and go round clockwise, so reading order matches the markup.
+    const angle = -Math.PI / 2 + ((i - 1) / petals) * Math.PI * 2;
+    return {
+      ...m.node,
+      label: m.label,
+      accent: m.node.accent ?? false,
+      x: cx + Math.cos(angle) * rx - NODE_W / 2,
+      y: cy + Math.sin(angle) * ry - NODE_H / 2,
+      w: NODE_W,
+      h: NODE_H,
+    };
+  });
+} else {
+  // Columns left to right; a node without a layer falls into the first one.
+  const layers = new Map<number, typeof measured>();
+  for (const m of measured) {
+    const l = m.node.layer ?? 0;
+    layers.set(l, [...(layers.get(l) ?? []), m]);
+  }
+  const keys = [...layers.keys()].sort((a, b) => a - b);
+  const tallest = Math.max(...keys.map((k) => layers.get(k)!.length));
+  const GAP_X = 76;
+  const GAP_Y = 26;
+  W = keys.length * NODE_W + (keys.length - 1) * GAP_X;
+  H = tallest * NODE_H + (tallest - 1) * GAP_Y;
+  keys.forEach((k, ci) => {
+    const column = layers.get(k)!;
+    const span = column.length * NODE_H + (column.length - 1) * GAP_Y;
+    column.forEach((m, ri) => {
+      placed.push({
+        ...m.node,
+        label: m.label,
+        accent: m.node.accent ?? false,
+        x: ci * (NODE_W + GAP_X),
+        y: (H - span) / 2 + ri * (NODE_H + GAP_Y),
+        w: NODE_W,
+        h: NODE_H,
+      });
+    });
+  });
+}
+
+const at = new Map(placed.map((p) => [p.id, p]));
+
+/** A link leaves the edge of its box facing the other one and curves across the gap. */
+const drawn = links
+  .map((link) => {
+    const a = at.get(link.from);
+    const b = at.get(link.to);
+    if (!a || !b || a === b) return null;
+    const ac = { x: a.x + a.w / 2, y: a.y + a.h / 2 };
+    const bc = { x: b.x + b.w / 2, y: b.y + b.h / 2 };
+    const sideways = Math.abs(bc.x - ac.x) >= Math.abs(bc.y - ac.y);
+    const from = sideways
+      ? { x: bc.x > ac.x ? a.x + a.w : a.x, y: ac.y }
+      : { x: ac.x, y: bc.y > ac.y ? a.y + a.h : a.y };
+    const to = sideways
+      ? { x: bc.x > ac.x ? b.x - 7 : b.x + b.w + 7, y: bc.y }
+      : { x: bc.x, y: bc.y > ac.y ? b.y - 7 : b.y + b.h + 7 };
+    const path = sideways
+      ? `M${from.x},${from.y} C${(from.x + to.x) / 2},${from.y} ${(from.x + to.x) / 2},${to.y} ${to.x},${to.y}`
+      : `M${from.x},${from.y} C${from.x},${(from.y + to.y) / 2} ${to.x},${(from.y + to.y) / 2} ${to.x},${to.y}`;
+    // A label sits in the gap between the two boxes. When the gap is shorter than the
+    // label, it would be drawn on top of them instead, so it steps aside perpendicular
+    // to the link rather than overlapping a node.
+    const gap = Math.hypot(to.x - from.x, to.y - from.y);
+    const chipW = (link.label?.length ?? 0) * 6.8 + 14;
+    const aside = link.label && chipW > gap - 10 ? 1 : 0;
+    const mid = {
+      x: (from.x + to.x) / 2 + (sideways ? 0 : (NODE_W / 2 + chipW / 2 + 6) * aside),
+      y: (from.y + to.y) / 2 - (sideways ? (NODE_H / 2 + 14) * aside : 0),
+    };
+    return { path, label: link.label, dashed: link.dashed, mid };
+  })
+  .filter((d): d is NonNullable<typeof d> => d !== null);
+
+const pad = 14;
+const gridId = `grid-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<figure class="system-map">
+  <div class="map-scroll">
+    <svg
+      viewBox={`${-pad} ${-pad} ${W + pad * 2} ${H + pad * 2}`}
+      style={`min-width:${Math.min(W + pad * 2, 660)}px;max-width:${W + pad * 2}px`}
+      role="img"
+      aria-label={caption ?? 'System diagram'}
+    >
+      <defs>
+        <pattern id={gridId} width="22" height="22" patternUnits="userSpaceOnUse">
+          <circle cx="1" cy="1" r="1" class="grid-dot" />
+        </pattern>
+        <marker id="map-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0,0 L8,4 L0,8 z" class="arrow-head" />
+        </marker>
+      </defs>
+      <rect x={-pad} y={-pad} width={W + pad * 2} height={H + pad * 2} fill={`url(#${gridId})`} />
+
+      {drawn.map((d) => <path class={`link${d.dashed ? ' is-dashed' : ''}`} d={d.path} marker-end="url(#map-arrow)" />)}
+      {
+        drawn.map(
+          (d) =>
+            d.label && (
+              <g transform={`translate(${d.mid.x}, ${d.mid.y})`}>
+                <rect class="link-chip" x={-(d.label.length * 3.4 + 7)} y="-9" width={d.label.length * 6.8 + 14} height="18" rx="9" />
+                <text class="link-label" x="0" y="4" text-anchor="middle">{d.label}</text>
+              </g>
+            ),
+        )
+      }
+      {
+        placed.map((p) => (
+          <g transform={`translate(${p.x}, ${p.y})`}>
+            <rect class={`map-node${p.accent ? ' is-accent' : ''}`} width={p.w} height={p.h} rx="12" />
+            {p.label.map((line, i) => (
+              <text
+                class="map-label"
+                x={p.w / 2}
+                y={(p.note ? 20 : p.h / 2 - ((p.label.length - 1) * LINE) / 2 + 5) + i * LINE}
+                text-anchor="middle"
+              >
+                {line}
+              </text>
+            ))}
+            {p.note && (
+              <text class="map-note" x={p.w / 2} y={p.h - 12} text-anchor="middle">{p.note}</text>
+            )}
+          </g>
+        ))
+      }
+    </svg>
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .system-map {
+    margin: 0;
+  }
+
+  /* A map with several nodes is wider than a phone, so it scrolls sideways on its own
+     rather than shrinking its labels past reading. */
+  .map-scroll {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    padding: 10px;
+  }
+
+  svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-inline: auto;
+  }
+
+  .grid-dot {
+    fill: var(--border);
+  }
+
+  .map-node {
+    fill: var(--bg);
+    stroke: var(--border);
+    stroke-width: 1;
+  }
+
+  .map-node.is-accent {
+    fill: color-mix(in srgb, var(--accent) 14%, var(--bg));
+    stroke: var(--accent);
+  }
+
+  .map-label {
+    fill: var(--fg);
+    font-size: 13px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+  }
+
+  .map-note {
+    fill: var(--muted);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+
+  .link {
+    fill: none;
+    stroke: var(--border);
+    stroke-width: 1.5;
+  }
+
+  .link.is-dashed {
+    stroke-dasharray: 5 4;
+  }
+
+  .arrow-head {
+    fill: var(--border);
+  }
+
+  .link-chip {
+    fill: var(--surface);
+    stroke: var(--border);
+    stroke-width: 1;
+  }
+
+  .link-label {
+    fill: var(--muted);
+    font-size: 10px;
+    font-family: var(--font-mono, monospace);
+  }
+
+  figcaption {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 10px;
+  }
+</style>

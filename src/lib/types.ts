@@ -146,6 +146,32 @@ export type Block = BlockLayout & (
       nodes: { id: string; label: string; accent?: boolean }[];
       edges: { from: string; to: string }[];
     }
+  /**
+   * A system drawn as nodes and the links between them.
+   *
+   * Positions are derived, never authored: 'radial' puts the first node at the centre
+   * and arranges the rest around it, 'layered' runs them left to right in the columns
+   * their layer names. A diagram that needs hand-placed coordinates is a drawing, and
+   * belongs in an image block instead of here.
+   */
+  | {
+      id: string;
+      type: 'systemMap';
+      arrange?: 'radial' | 'layered';
+      caption?: string;
+      nodes: { id: string; label: string; note?: string; accent?: boolean; layer?: number }[];
+      links: { from: string; to: string; label?: string; dashed?: boolean }[];
+    }
+  /** The same measures compared across several things — archetypes against one stat line. */
+  | {
+      id: string;
+      type: 'radar';
+      title?: string;
+      axes: string[];
+      /** The outer ring. Left out, it comes from the largest value present. */
+      max?: number;
+      series: { name?: string; values: number[] }[];
+    }
   | { id: string; type: 'columns'; count: 2 | 3; columns: { id: string; blocks: Block[] }[] }
   | {
       id: string;

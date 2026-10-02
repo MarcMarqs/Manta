@@ -60,6 +60,8 @@ Every block needs a unique `id` (unique within its page) and a `type`.
 | `pillars` | `items[]` of `{ label, body }` — callout boxes for design principles |
 | `tornado` | `rows[]` of `{ label, low, high }`, `title?`, `unit?`, `lowLabel?`, `highLabel?` |
 | `flow` | `nodes[]` of `{ id, label, accent? }`, `edges[]` of `{ from, to }`, `caption?` |
+| `systemMap` | `arrange?` (`radial` \| `layered`), `nodes[]` of `{ id, label, note?, accent?, layer? }`, `links[]` of `{ from, to, label?, dashed? }`, `caption?` |
+| `radar` | `axes[]`, `series[]` of `{ name?, values[] }`, `max?`, `title?` |
 | `columns` | `count` 2–3, `columns[]` each `{ id, blocks[] }` |
 | `section` | `background?` (`none` \| `surface` \| `accent`), `arrange?` (`stack` \| `row`), `blocks[]` |
 | `projectRail` | `filters?` — the expandable carousel |
@@ -73,6 +75,20 @@ sqrt, pow, exp, log`. It is **not** JavaScript: it is parsed and evaluated by
 `src/lib/formula.ts`, because formulas live in content the editor can write, and the
 editor must never be able to put executable code into the repo. A formula that doesn't
 parse shows a note under the chart instead of failing the build.
+
+A **system map** draws nodes and the links between them, for explaining how the parts of
+a system feed each other. Positions are never authored: **Around a core** puts the first
+node in the middle and spaces the rest around it, **Left to right** runs them in the
+columns their layer names. A link can carry a short label, and steps aside when the gap
+between two nodes is too small to hold it. A map wider than the text column scrolls
+sideways rather than shrinking its labels, so set the block to **wide** when it has a lot
+of nodes. A diagram that needs hand-placed coordinates is a drawing, and belongs in an
+image block.
+
+A **radar** compares several things across the same measures — enemy archetypes on one
+stat line. Every axis shares one scale, because a radar that normalises each axis on its
+own can draw two very different things identically. Series are told apart by colour *and*
+by dash, so they survive a mono print and a colour-blind reader.
 
 `section` and `columns` nest other blocks, so layouts compose. A section set to **Side by
 side** (`"arrange": "row"`) lays its blocks in a row instead of a stack, each as wide as it

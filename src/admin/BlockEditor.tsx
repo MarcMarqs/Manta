@@ -1074,6 +1074,220 @@ function BlockFields({
       );
     }
 
+    case 'systemMap': {
+      const options = block.nodes.map((n) => ({ value: n.id, label: n.label || n.id }));
+      const setNode = (i: number, patch: Partial<(typeof block.nodes)[number]>) =>
+        onChange({ ...block, nodes: block.nodes.map((x, j) => (j === i ? { ...x, ...patch } : x)) });
+      const setLink = (i: number, patch: Partial<(typeof block.links)[number]>) =>
+        onChange({ ...block, links: block.links.map((x, j) => (j === i ? { ...x, ...patch } : x)) });
+      const radial = (block.arrange ?? 'radial') === 'radial';
+      return (
+        <div class="stack">
+          <div class="fields">
+            <Field label="Arrangement" hint={radial ? 'The first node sits at the centre, the rest around it.' : 'Nodes run left to right, in the column their layer names.'}>
+              <Segmented
+                value={block.arrange ?? 'radial'}
+                options={[
+                  { value: 'radial', label: 'Around a core' },
+                  { value: 'layered', label: 'Left to right' },
+                ]}
+                onChange={(v) => onChange({ ...block, arrange: v })}
+              />
+            </Field>
+            <Field label="Caption" wide>
+              <TextInput value={block.caption ?? ''} onChange={(v) => onChange({ ...block, caption: v })} />
+            </Field>
+          </div>
+
+          <div class="subsection">
+            <p class="field-hint">{radial ? 'The first node is the core.' : 'Layer 0 is the leftmost column.'}</p>
+            {block.nodes.map((node, i) => (
+              <div class="series-row wide">
+                <TextInput value={node.label} onChange={(label) => setNode(i, { label })} />
+                <TextInput value={node.note ?? ''} onChange={(note) => setNode(i, { note: note || undefined })} />
+                {radial ? (
+                  <Toggle
+                    checked={Boolean(node.accent)}
+                    label="Highlight"
+                    onChange={(accent) => setNode(i, { accent: accent || undefined })}
+                  />
+                ) : (
+                  <input
+                    class="input"
+                    type="number"
+                    value={node.layer ?? 0}
+                    onInput={(e) => setNode(i, { layer: Number((e.target as HTMLInputElement).value) || 0 })}
+                  />
+                )}
+                <IconButton
+                  icon="trash"
+                  label="Remove"
+                  tone="danger"
+                  onClick={() =>
+                    onChange({
+                      ...block,
+                      nodes: block.nodes.filter((_, j) => j !== i),
+                      links: block.links.filter((l) => l.from !== node.id && l.to !== node.id),
+                    })
+                  }
+                />
+              </div>
+            ))}
+            <button
+              type="button"
+              class="btn small ghost"
+              onClick={() => onChange({ ...block, nodes: [...block.nodes, { id: newId('n'), label: '' }] })}
+            >
+              <Icon name="plus" /> Add node
+            </button>
+          </div>
+
+          <div class="subsection">
+            <p class="field-hint">Each link joins two nodes, and can carry a short label.</p>
+            {block.links.map((link, i) => (
+              <div class="series-row wide">
+                <Select value={link.from} options={options} onChange={(from) => setLink(i, { from })} />
+                <Select value={link.to} options={options} onChange={(to) => setLink(i, { to })} />
+                <TextInput value={link.label ?? ''} onChange={(label) => setLink(i, { label: label || undefined })} />
+                <IconButton
+                  icon="trash"
+                  label="Remove"
+                  tone="danger"
+                  onClick={() => onChange({ ...block, links: block.links.filter((_, j) => j !== i) })}
+                />
+              </div>
+            ))}
+            <button
+              type="button"
+              class="btn small ghost"
+              disabled={block.nodes.length < 2}
+              onClick={() =>
+                onChange({ ...block, links: [...block.links, { from: block.nodes[0].id, to: block.nodes[1].id }] })
+              }
+            >
+              <Icon name="plus" /> Add link
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    case 'radar': {
+      // Every series carries one value per axis, so adding or removing an axis has to
+      // resize all of them; a ragged series would silently plot as zero.
+      const setAxes = (axes: string[], map: (values: number[]) => number[]) =>
+        onChange({ ...block, axes, series: block.series.map((s) => ({ ...s, values: map(s.values) })) });
+      return (
+        <div class="stack">
+          <div class="fields">
+            <Field label="Title" wide>
+              <TextInput value={block.title ?? ''} onChange={(v) => onChange({ ...block, title: v })} />
+            </Field>
+            <Field label="Outer ring" hint="Left empty, it comes from the largest value.">
+              <input
+                class="input"
+                type="number"
+                value={block.max ?? ''}
+                onInput={(e) => {
+                  const v = Number((e.target as HTMLInputElement).value);
+                  onChange({ ...block, max: v > 0 ? v : undefined });
+                }}
+              />
+            </Field>
+          </div>
+
+          <div class="subsection">
+            <p class="field-hint">The measures every series is scored against.</p>
+            {block.axes.map((axis, i) => (
+              <div class="series-row">
+                <TextInput
+                  value={axis}
+                  onChange={(v) => onChange({ ...block, axes: block.axes.map((x, j) => (j === i ? v : x)) })}
+                />
+                <IconButton
+                  icon="trash"
+                  label="Remove"
+                  tone="danger"
+                  onClick={() =>
+                    setAxes(
+                      block.axes.filter((_, j) => j !== i),
+                      (values) => values.filter((_, j) => j !== i),
+                    )
+                  }
+                />
+              </div>
+            ))}
+            <button
+              type="button"
+              class="btn small ghost"
+              onClick={() => setAxes([...block.axes, ''], (values) => [...values, 0])}
+            >
+              <Icon name="plus" /> Add measure
+            </button>
+          </div>
+
+          {block.series.map((plot, i) => (
+            <div class="subsection">
+              <Field label="Series name" hint="Shown in the legend when there is more than one." wide>
+                <TextInput
+                  value={plot.name ?? ''}
+                  onChange={(name) =>
+                    onChange({ ...block, series: block.series.map((x, j) => (j === i ? { ...x, name } : x)) })
+                  }
+                />
+              </Field>
+              <div class="series">
+                {block.axes.map((axis, k) => (
+                  <div class="series-row">
+                    <span class="field-hint">{axis || `Measure ${k + 1}`}</span>
+                    <input
+                      class="input"
+                      type="number"
+                      value={plot.values[k] ?? 0}
+                      onInput={(e) =>
+                        onChange({
+                          ...block,
+                          series: block.series.map((x, j) =>
+                            j === i
+                              ? {
+                                  ...x,
+                                  values: block.axes.map((_, m) =>
+                                    m === k ? Number((e.target as HTMLInputElement).value) || 0 : (x.values[m] ?? 0),
+                                  ),
+                                }
+                              : x,
+                          ),
+                        })
+                      }
+                    />
+                  </div>
+                ))}
+              </div>
+              {block.series.length > 1 && (
+                <button
+                  type="button"
+                  class="btn small ghost"
+                  onClick={() => onChange({ ...block, series: block.series.filter((_, j) => j !== i) })}
+                >
+                  <Icon name="trash" /> Remove series
+                </button>
+              )}
+            </div>
+          ))}
+
+          <button
+            type="button"
+            class="btn small ghost"
+            onClick={() =>
+              onChange({ ...block, series: [...block.series, { name: '', values: block.axes.map(() => 0) }] })
+            }
+          >
+            <Icon name="plus" /> Add series
+          </button>
+        </div>
+      );
+    }
+
     case 'section':
       return (
         <div class="stack">

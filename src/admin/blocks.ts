@@ -149,6 +149,38 @@ export const BLOCKS: Record<BlockType, BlockSpec> = {
       edges: [{ from: 'a', to: 'b' }],
     }),
   },
+  systemMap: {
+    label: 'System map',
+    group: 'Data',
+    hint: 'Nodes and the links between them',
+    create: () => ({
+      id: newId(),
+      type: 'systemMap',
+      arrange: 'radial',
+      caption: '',
+      nodes: [
+        { id: 'a', label: 'Core', accent: true },
+        { id: 'b', label: 'Feeds in' },
+        { id: 'c', label: 'Feeds out' },
+      ],
+      links: [
+        { from: 'b', to: 'a' },
+        { from: 'a', to: 'c' },
+      ],
+    }),
+  },
+  radar: {
+    label: 'Radar chart',
+    group: 'Data',
+    hint: 'Several things across the same measures',
+    create: () => ({
+      id: newId(),
+      type: 'radar',
+      title: '',
+      axes: ['Damage', 'Range', 'Speed', 'Health', 'Control'],
+      series: [{ name: '', values: [0, 0, 0, 0, 0] }],
+    }),
+  },
   section: {
     label: 'Section',
     group: 'Layout',
@@ -243,6 +275,10 @@ export function summarize(block: Block): string {
       return block.title || `${block.rows.length} row${block.rows.length === 1 ? '' : 's'}`;
     case 'flow':
       return block.caption || `${block.nodes.length} nodes, ${block.edges.length} arrows`;
+    case 'systemMap':
+      return block.caption || `${block.nodes.length} nodes, ${block.links.length} links · ${block.arrange ?? 'radial'}`;
+    case 'radar':
+      return block.title || `${block.axes.length} axes, ${block.series.length} series`;
     case 'section': {
       const n = block.blocks.length;
       const notes = [
