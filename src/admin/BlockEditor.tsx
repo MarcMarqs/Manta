@@ -476,6 +476,18 @@ function BlockFields({
           <Field label="Text" wide>
             <TextInput value={block.text} onChange={(v) => onChange({ ...block, text: v })} />
           </Field>
+          <Field label="Number" hint="Optional, e.g. 01.">
+            <TextInput
+              value={block.number ?? ''}
+              onChange={(v) => onChange({ ...block, number: v || undefined })}
+            />
+          </Field>
+          <Field label="Kicker" hint="Small line above the title.">
+            <TextInput
+              value={block.eyebrow ?? ''}
+              onChange={(v) => onChange({ ...block, eyebrow: v || undefined })}
+            />
+          </Field>
         </div>
       );
 
@@ -705,7 +717,11 @@ function BlockFields({
       );
     }
 
-    case 'chart':
+    case 'chart': {
+      const setSeries = (i: number, patch: Partial<(typeof block.series)[number]>) =>
+        onChange({ ...block, series: block.series.map((x, j) => (j === i ? { ...x, ...patch } : x)) });
+      const computed = block.series.some((x) => x.formula !== undefined);
+      const range = block.range ?? { from: 0, to: 10, step: 1 };
       return (
         <div class="stack">
           <div class="fields">
@@ -723,47 +739,340 @@ function BlockFields({
               <TextInput value={block.title ?? ''} onChange={(v) => onChange({ ...block, title: v })} />
             </Field>
           </div>
+
+          {computed && (
+            <div class="fields">
+              <Field label="From" hint="The chart runs each formula from here…">
+                <input
+                  class="input"
+                  type="number"
+                  value={range.from}
+                  onInput={(e) =>
+                    onChange({ ...block, range: { ...range, from: Number((e.target as HTMLInputElement).value) || 0 } })
+                  }
+                />
+              </Field>
+              <Field label="To" hint="…to here.">
+                <input
+                  class="input"
+                  type="number"
+                  value={range.to}
+                  onInput={(e) =>
+                    onChange({ ...block, range: { ...range, to: Number((e.target as HTMLInputElement).value) || 0 } })
+                  }
+                />
+              </Field>
+              <Field label="Step">
+                <input
+                  class="input"
+                  type="number"
+                  value={range.step ?? 1}
+                  onInput={(e) =>
+                    onChange({ ...block, range: { ...range, step: Number((e.target as HTMLInputElement).value) || 1 } })
+                  }
+                />
+              </Field>
+            </div>
+          )}
+
+          {block.series.map((plot, i) => (
+            <div class="subsection">
+              <div class="fields">
+                <Field label="Series name" hint="Shown in the legend when there is more than one.">
+                  <TextInput value={plot.name ?? ''} onChange={(name) => setSeries(i, { name: name || undefined })} />
+                </Field>
+                <Field label="Values from" wide>
+                  <Segmented
+                    value={plot.formula !== undefined ? 'formula' : 'typed'}
+                    options={[
+                      { value: 'typed', label: 'Typed values' },
+                      { value: 'formula', label: 'A formula' },
+                    ]}
+                    onChange={(mode) =>
+                      setSeries(
+                        i,
+                        mode === 'formula'
+                          ? { formula: plot.formula ?? '', data: undefined }
+                          : { formula: undefined, data: plot.data ?? [] },
+                      )
+                    }
+                  />
+                </Field>
+              </div>
+
+              {plot.formula !== undefined ? (
+                <Field
+                  label="Formula"
+                  hint="In x, e.g. round(90 * pow(1.28, x - 75)). Arithmetic and ^, plus round, floor, ceil, abs, min, max, sqrt, pow, exp, log."
+                  wide
+                >
+                  <TextInput value={plot.formula} onChange={(formula) => setSeries(i, { formula })} />
+                </Field>
+              ) : (
+                <div class="series">
+                  <div class="series-head">
+                    <span>Label</span>
+                    <span>Value</span>
+                    <span />
+                  </div>
+                  {(plot.data ?? []).map((d, k) => (
+                    <div class="series-row">
+                      <TextInput
+                        value={d.label}
+                        onChange={(label) =>
+                          setSeries(i, { data: (plot.data ?? []).map((x, m) => (m === k ? { ...x, label } : x)) })
+                        }
+                      />
+                      <input
+                        class="input"
+                        type="number"
+                        value={d.value}
+                        onInput={(e) =>
+                          setSeries(i, {
+                            data: (plot.data ?? []).map((x, m) =>
+                              m === k ? { ...x, value: Number((e.target as HTMLInputElement).value) || 0 } : x,
+                            ),
+                          })
+                        }
+                      />
+                      <IconButton
+                        icon="trash"
+                        label="Remove"
+                        tone="danger"
+                        onClick={() => setSeries(i, { data: (plot.data ?? []).filter((_, m) => m !== k) })}
+                      />
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    class="btn small ghost"
+                    onClick={() => setSeries(i, { data: [...(plot.data ?? []), { label: '', value: 0 }] })}
+                  >
+                    <Icon name="plus" /> Add value
+                  </button>
+                </div>
+              )}
+
+              {block.series.length > 1 && (
+                <button
+                  type="button"
+                  class="btn small ghost"
+                  onClick={() => onChange({ ...block, series: block.series.filter((_, j) => j !== i) })}
+                >
+                  <Icon name="trash" /> Remove series
+                </button>
+              )}
+            </div>
+          ))}
+
+          <button
+            type="button"
+            class="btn small ghost"
+            onClick={() => onChange({ ...block, series: [...block.series, { name: '', data: [] }] })}
+          >
+            <Icon name="plus" /> Add series
+          </button>
+        </div>
+      );
+    }
+
+    case 'pillars': {
+      const write = (items: typeof block.items) => onChange({ ...block, items });
+      return (
+        <div class="stack">
+          {block.items.map((item, i) => (
+            <div class="subsection">
+              <div class="fields">
+                <Field label="Label" wide>
+                  <TextInput
+                    value={item.label}
+                    onChange={(label) => write(block.items.map((x, j) => (j === i ? { ...x, label } : x)))}
+                  />
+                </Field>
+                <Field label="Body" wide>
+                  <TextArea
+                    value={item.body}
+                    onChange={(body) => write(block.items.map((x, j) => (j === i ? { ...x, body } : x)))}
+                  />
+                </Field>
+              </div>
+              <button type="button" class="btn small ghost" onClick={() => write(block.items.filter((_, j) => j !== i))}>
+                <Icon name="trash" /> Remove
+              </button>
+            </div>
+          ))}
+          <button type="button" class="btn small ghost" onClick={() => write([...block.items, { label: '', body: '' }])}>
+            <Icon name="plus" /> Add pillar
+          </button>
+        </div>
+      );
+    }
+
+    case 'tornado': {
+      const write = (rows: typeof block.rows) => onChange({ ...block, rows });
+      return (
+        <div class="stack">
+          <div class="fields">
+            <Field label="Title" wide>
+              <TextInput value={block.title ?? ''} onChange={(v) => onChange({ ...block, title: v })} />
+            </Field>
+            <Field label="Unit" hint="Added after each number, e.g. %.">
+              <TextInput value={block.unit ?? ''} onChange={(v) => onChange({ ...block, unit: v })} />
+            </Field>
+            <Field label="Low label">
+              <TextInput value={block.lowLabel ?? ''} onChange={(v) => onChange({ ...block, lowLabel: v })} />
+            </Field>
+            <Field label="High label">
+              <TextInput value={block.highLabel ?? ''} onChange={(v) => onChange({ ...block, highLabel: v })} />
+            </Field>
+          </div>
+          <p class="field-hint">Rows sort themselves by the size of the swing, biggest first.</p>
           <div class="series">
             <div class="series-head">
-              <span>Label</span>
-              <span>Value</span>
+              <span>Variable</span>
+              <span>Low</span>
+              <span>High</span>
               <span />
             </div>
-            {block.series.map((d, i) => (
-              <div class="series-row">
+            {block.rows.map((row, i) => (
+              <div class="series-row wide">
                 <TextInput
-                  value={d.label}
-                  onChange={(label) =>
-                    onChange({ ...block, series: block.series.map((x, j) => (j === i ? { ...x, label } : x)) })
+                  value={row.label}
+                  onChange={(label) => write(block.rows.map((x, j) => (j === i ? { ...x, label } : x)))}
+                />
+                <input
+                  class="input"
+                  type="number"
+                  value={row.low}
+                  onInput={(e) =>
+                    write(
+                      block.rows.map((x, j) =>
+                        j === i ? { ...x, low: Number((e.target as HTMLInputElement).value) || 0 } : x,
+                      ),
+                    )
                   }
                 />
                 <input
                   class="input"
                   type="number"
-                  value={d.value}
-                  onInput={(e) => {
-                    const value = Number((e.target as HTMLInputElement).value) || 0;
-                    onChange({ ...block, series: block.series.map((x, j) => (j === i ? { ...x, value } : x)) });
-                  }}
+                  value={row.high}
+                  onInput={(e) =>
+                    write(
+                      block.rows.map((x, j) =>
+                        j === i ? { ...x, high: Number((e.target as HTMLInputElement).value) || 0 } : x,
+                      ),
+                    )
+                  }
                 />
                 <IconButton
                   icon="trash"
                   label="Remove"
                   tone="danger"
-                  onClick={() => onChange({ ...block, series: block.series.filter((_, j) => j !== i) })}
+                  onClick={() => write(block.rows.filter((_, j) => j !== i))}
                 />
               </div>
             ))}
             <button
               type="button"
               class="btn small ghost"
-              onClick={() => onChange({ ...block, series: [...block.series, { label: '', value: 0 }] })}
+              onClick={() => write([...block.rows, { label: '', low: 0, high: 0 }])}
             >
-              <Icon name="plus" /> Add value
+              <Icon name="plus" /> Add variable
             </button>
           </div>
         </div>
       );
+    }
+
+    case 'flow': {
+      const options = block.nodes.map((n) => ({ value: n.id, label: n.label || n.id }));
+      return (
+        <div class="stack">
+          <Field label="Caption" wide>
+            <TextInput value={block.caption ?? ''} onChange={(v) => onChange({ ...block, caption: v })} />
+          </Field>
+          <div class="subsection">
+            <p class="field-hint">Nodes are drawn left to right, in this order.</p>
+            {block.nodes.map((node, i) => (
+              <div class="series-row">
+                <TextInput
+                  value={node.label}
+                  onChange={(label) =>
+                    onChange({ ...block, nodes: block.nodes.map((x, j) => (j === i ? { ...x, label } : x)) })
+                  }
+                />
+                <Toggle
+                  checked={Boolean(node.accent)}
+                  label="Highlight"
+                  onChange={(accent) =>
+                    onChange({
+                      ...block,
+                      nodes: block.nodes.map((x, j) => (j === i ? { ...x, accent: accent || undefined } : x)),
+                    })
+                  }
+                />
+                <IconButton
+                  icon="trash"
+                  label="Remove"
+                  tone="danger"
+                  onClick={() =>
+                    onChange({
+                      ...block,
+                      nodes: block.nodes.filter((_, j) => j !== i),
+                      edges: block.edges.filter((e) => e.from !== node.id && e.to !== node.id),
+                    })
+                  }
+                />
+              </div>
+            ))}
+            <button
+              type="button"
+              class="btn small ghost"
+              onClick={() => onChange({ ...block, nodes: [...block.nodes, { id: newId('n'), label: '' }] })}
+            >
+              <Icon name="plus" /> Add node
+            </button>
+          </div>
+          <div class="subsection">
+            <p class="field-hint">Each arrow joins two nodes.</p>
+            {block.edges.map((edge, i) => (
+              <div class="series-row">
+                <Select
+                  value={edge.from}
+                  options={options}
+                  onChange={(from) =>
+                    onChange({ ...block, edges: block.edges.map((x, j) => (j === i ? { ...x, from } : x)) })
+                  }
+                />
+                <Select
+                  value={edge.to}
+                  options={options}
+                  onChange={(to) =>
+                    onChange({ ...block, edges: block.edges.map((x, j) => (j === i ? { ...x, to } : x)) })
+                  }
+                />
+                <IconButton
+                  icon="trash"
+                  label="Remove"
+                  tone="danger"
+                  onClick={() => onChange({ ...block, edges: block.edges.filter((_, j) => j !== i) })}
+                />
+              </div>
+            ))}
+            <button
+              type="button"
+              class="btn small ghost"
+              disabled={block.nodes.length < 2}
+              onClick={() =>
+                onChange({ ...block, edges: [...block.edges, { from: block.nodes[0].id, to: block.nodes[1].id }] })
+              }
+            >
+              <Icon name="plus" /> Add arrow
+            </button>
+          </div>
+        </div>
+      );
+    }
 
     case 'section':
       return (

@@ -1,109 +1,197 @@
 ---
 // Inline SVG chart — no library, no client JS. Bars for comparison, line for trend.
+// A series is either typed out or computed from a formula across a range, so a chart
+// built on a curve stays right when the curve changes.
+import { evaluateFormula, rangeValues, type ChartRange } from '../lib/formula';
+
+export interface ChartSeries {
+  name?: string;
+  /** Expression in `x`, e.g. "round(90 * pow(1.28, x - 75))". Needs `range`. */
+  formula?: string;
+  data?: { label: string; value: number }[];
+}
+
 interface Props {
   variant: 'bar' | 'line';
   title?: string;
-  series: { label: string; value: number }[];
+  range?: ChartRange;
+  series: ChartSeries[];
 }
 
-const { variant, title, series } = Astro.props;
+const { variant, title, range, series } = Astro.props;
+
+let problem: string | null = null;
+
+/** A formula series is computed here; a typed one is used as it stands. */
+const resolve = (s: ChartSeries): { label: string; value: number }[] => {
+  if (!s.formula) return s.data ?? [];
+  if (!range) {
+    problem = 'This series has a formula but no range to run it over.';
+    return [];
+  }
+  try {
+    return rangeValues(range).map((x) => ({ label: String(x), value: evaluateFormula(s.formula!, x) }));
+  } catch (err) {
+    problem = `${s.name ? `${s.name}: ` : ''}${(err as Error).message}`;
+    return [];
+  }
+};
+
+const plots = series.map((s) => ({ name: s.name, points: resolve(s) }));
+const labels = plots.reduce<string[]>((longest, p) => (p.points.length > longest.length ? p.points.map((d) => d.label) : longest), []);
+const named = plots.filter((p) => p.name).length > 1;
 
 const W = 720;
 const H = 300;
-const PAD = { top: 20, right: 16, bottom: 40, left: 48 };
+const PAD = { top: named ? 34 : 20, right: 16, bottom: 40, left: 48 };
 const plotW = W - PAD.left - PAD.right;
 const plotH = H - PAD.top - PAD.bottom;
 
-const max = Math.max(...series.map((d) => d.value), 0);
+const values = plots.flatMap((p) => p.points.map((d) => d.value));
+const max = Math.max(...values, 0);
+const min = Math.min(...values, 0);
 const niceMax = max === 0 ? 1 : Math.ceil(max / 5) * 5;
-const y = (v: number) => PAD.top + plotH - (v / niceMax) * plotH;
-const ticks = [0, niceMax / 2, niceMax];
+const niceMin = min < 0 ? Math.floor(min / 5) * 5 : 0;
+const span = niceMax - niceMin || 1;
+const y = (v: number) => PAD.top + plotH - ((v - niceMin) / span) * plotH;
+const ticks = [niceMin, niceMin + span / 2, niceMax];
 
-const bandW = plotW / Math.max(series.length, 1);
-const barW = Math.min(bandW * 0.55, 72);
+const bandW = plotW / Math.max(labels.length, 1);
 const cx = (i: number) => PAD.left + bandW * i + bandW / 2;
+// Bars of several series share a band, side by side inside it.
+const barW = Math.min((bandW * 0.62) / Math.max(plots.length, 1), 72);
 
-const linePath = series.map((d, i) => `${i === 0 ? 'M' : 'L'}${cx(i)},${y(d.value)}`).join(' ');
+// With a long range every label would collide, so only some are drawn.
+const labelEvery = Math.max(1, Math.ceil(labels.length / 12));
+
+const linePath = (points: { value: number }[]) =>
+  points.map((d, i) => `${i === 0 ? 'M' : 'L'}${cx(i)},${y(d.value)}`).join(' ');
 ---
 
 <figure class="chart">
   {title && <figcaption class="chart-title">{title}</figcaption>}
   <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={title ?? `${variant} chart`}>
     {
+      named && (
+        <g class="legend">
+          {plots.map((p, s) => (
+            <g transform={`translate(${PAD.left + s * 150}, 14)`}>
+              <rect width="10" height="10" y="-9" rx="2" class={`swatch s${s}`} />
+              <text x="16" class="axis">
+                {p.name}
+              </text>
+            </g>
+          ))}
+        </g>
+      )
+    }
+    {
       ticks.map((t) => (
         <g>
           <line x1={PAD.left} x2={W - PAD.right} y1={y(t)} y2={y(t)} class="grid" />
           <text x={PAD.left - 10} y={y(t) + 4} text-anchor="end" class="axis">
-            {t}
+            {Math.round(t)}
           </text>
         </g>
       ))
     }
-
     {
-      variant === 'bar' &&
-        series.map((d, i) => (
-          <rect
-            x={cx(i) - barW / 2}
-            y={y(d.value)}
-            width={barW}
-            height={PAD.top + plotH - y(d.value)}
-            rx="4"
-            class="bar"
-          />
-        ))
+      variant === 'bar'
+        ? plots.map((p, s) =>
+            p.points.map((d, i) => (
+              <rect
+                class={`bar s${s}`}
+                x={cx(i) - (barW * plots.length) / 2 + s * barW}
+                y={Math.min(y(d.value), y(0))}
+                width={Math.max(barW - 1, 1)}
+                height={Math.max(Math.abs(y(d.value) - y(0)), 1)}
+              >
+                <title>{`${p.name ? `${p.name} · ` : ''}${d.label}: ${d.value}`}</title>
+              </rect>
+            )),
+          )
+        : plots.map((p, s) => (
+            <g>
+              <path class={`line s${s}`} d={linePath(p.points)} />
+              {p.points.map((d, i) => (
+                <circle class={`dot s${s}`} cx={cx(i)} cy={y(d.value)} r="3">
+                  <title>{`${p.name ? `${p.name} · ` : ''}${d.label}: ${d.value}`}</title>
+                </circle>
+              ))}
+            </g>
+          ))
     }
-
-    {variant === 'line' && <path d={linePath} class="line" />}
     {
-      variant === 'line' &&
-        series.map((d, i) => <circle cx={cx(i)} cy={y(d.value)} r="4" class="dot" />)
-    }
-
-    {
-      series.map((d, i) => (
-        <text x={cx(i)} y={H - 14} text-anchor="middle" class="axis">
-          {d.label}
-        </text>
-      ))
+      labels.map((label, i) =>
+        i % labelEvery === 0 ? (
+          <text x={cx(i)} y={H - 14} text-anchor="middle" class="axis">
+            {label}
+          </text>
+        ) : null,
+      )
     }
   </svg>
+  {problem && <p class="chart-problem">Chart formula: {problem}</p>}
 </figure>
 
 <style>
   .chart {
     margin: 0;
   }
+
   .chart-title {
     font-family: var(--font-heading);
     font-weight: 600;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
+
   svg {
     width: 100%;
     height: auto;
     overflow: visible;
   }
+
   .grid {
     stroke: var(--border);
     stroke-width: 1;
   }
+
   .axis {
     fill: var(--muted);
     font-size: 12px;
-    font-family: var(--font-body);
   }
-  .bar {
-    fill: var(--accent);
+
+  /* One accent, then colours that still read against it rather than competing. */
+  .s0 {
+    --plot: var(--accent);
   }
+  .s1 {
+    --plot: color-mix(in srgb, var(--accent) 35%, var(--fg));
+  }
+  .s2 {
+    --plot: color-mix(in srgb, var(--accent) 30%, var(--muted));
+  }
+
+  .bar,
+  .swatch {
+    fill: var(--plot, var(--accent));
+  }
+
   .line {
     fill: none;
-    stroke: var(--accent);
+    stroke: var(--plot, var(--accent));
     stroke-width: 2.5;
     stroke-linejoin: round;
     stroke-linecap: round;
   }
+
   .dot {
-    fill: var(--accent);
+    fill: var(--plot, var(--accent));
+  }
+
+  .chart-problem {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 6px;
   }
 </style>

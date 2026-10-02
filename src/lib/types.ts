@@ -81,7 +81,15 @@ export interface BlockLayout {
 
 /** One entry in a page's block array. Nested blocks live in `section` and `columns`. */
 export type Block = BlockLayout & (
-  | { id: string; type: 'heading'; level: 1 | 2 | 3 | 4; text: string }
+  | {
+      id: string;
+      type: 'heading';
+      level: 1 | 2 | 3 | 4;
+      text: string;
+      /** A numbered section header: "01" above the title, with an optional kicker line. */
+      number?: string;
+      eyebrow?: string;
+    }
   | { id: string; type: 'text'; html: string }
   | {
       id: string;
@@ -104,7 +112,40 @@ export type Block = BlockLayout & (
   | { id: string; type: 'specs'; items: { label: string; value: string }[] }
   /** Figures worth stating on their own: years in industry, shipped titles, "~90% solved". */
   | { id: string; type: 'stats'; items: { value: string; label: string }[] }
-  | { id: string; type: 'chart'; variant: 'bar' | 'line'; title?: string; series: { label: string; value: number }[] }
+  | {
+      id: string;
+      type: 'chart';
+      variant: 'bar' | 'line';
+      title?: string;
+      /** Values are computed across this range for any series carrying a formula. */
+      range?: { from: number; to: number; step?: number };
+      series: {
+        name?: string;
+        /** Expression in `x`, e.g. "round(90 * pow(1.28, x - 75))". Needs `range`. */
+        formula?: string;
+        data?: { label: string; value: number }[];
+      }[];
+    }
+  /** Short callout boxes for the principles a piece of work was built on. */
+  | { id: string; type: 'pillars'; items: { label: string; body: string }[] }
+  /** Sensitivity: how far an outcome swings when one input moves low or high. */
+  | {
+      id: string;
+      type: 'tornado';
+      title?: string;
+      unit?: string;
+      lowLabel?: string;
+      highLabel?: string;
+      rows: { label: string; low: number; high: number }[];
+    }
+  /** A few labelled nodes and the arrows between them. */
+  | {
+      id: string;
+      type: 'flow';
+      caption?: string;
+      nodes: { id: string; label: string; accent?: boolean }[];
+      edges: { from: string; to: string }[];
+    }
   | { id: string; type: 'columns'; count: 2 | 3; columns: { id: string; blocks: Block[] }[] }
   | {
       id: string;

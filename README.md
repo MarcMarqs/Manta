@@ -45,7 +45,7 @@ Every block needs a unique `id` (unique within its page) and a `type`.
 
 | Type | Fields |
 |---|---|
-| `heading` | `level` 1–4, `text` |
+| `heading` | `level` 1–4, `text`, `number?` + `eyebrow?` for a numbered section header |
 | `text` | `html` — rich text |
 | `image` | `src`, `alt`, `caption?`, `scale?` (10–100, % of the block), `aspect?` (`1:1` \| `4:3` \| `3:2` \| `16:9` \| `21:9`) |
 | `gallery` | `images[]` of `{ src, alt }` |
@@ -56,12 +56,23 @@ Every block needs a unique `id` (unique within its page) and a `type`.
 | `table` | `columns[]`, `rows[][]`, `caption?` |
 | `specs` | `items[]` of `{ label, value }` — the strip under a case-study title |
 | `stats` | `items[]` of `{ value, label }` — figures set large |
-| `chart` | `variant` (`bar` \| `line`), `series[]` of `{ label, value }`, `title?` |
+| `chart` | `variant` (`bar` \| `line`), `title?`, `range?` `{ from, to, step? }`, `series[]` of `{ name?, formula?, data? }` |
+| `pillars` | `items[]` of `{ label, body }` — callout boxes for design principles |
+| `tornado` | `rows[]` of `{ label, low, high }`, `title?`, `unit?`, `lowLabel?`, `highLabel?` |
+| `flow` | `nodes[]` of `{ id, label, accent? }`, `edges[]` of `{ from, to }`, `caption?` |
 | `columns` | `count` 2–3, `columns[]` each `{ id, blocks[] }` |
 | `section` | `background?` (`none` \| `surface` \| `accent`), `arrange?` (`stack` \| `row`), `blocks[]` |
 | `projectRail` | `filters?` — the expandable carousel |
 | `projectGrid` | `filters?` — the plain card grid |
 | `html` | `html` — escape hatch for embeds the editor can't express |
+
+A chart series is either typed out as `data`, or computed by a `formula` across `range`,
+so a chart built on a curve stays right when the curve changes. A formula is arithmetic in
+`x` — `round(90 * pow(1.28, x - 75))` — with `^` and `round, floor, ceil, abs, min, max,
+sqrt, pow, exp, log`. It is **not** JavaScript: it is parsed and evaluated by
+`src/lib/formula.ts`, because formulas live in content the editor can write, and the
+editor must never be able to put executable code into the repo. A formula that doesn't
+parse shows a note under the chart instead of failing the build.
 
 `section` and `columns` nest other blocks, so layouts compose. A section set to **Side by
 side** (`"arrange": "row"`) lays its blocks in a row instead of a stack, each as wide as it

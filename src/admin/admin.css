@@ -1282,6 +1282,10 @@ input[type='range'] {
   align-items: center;
 }
 
+.series-row.wide {
+  grid-template-columns: 1fr 90px 90px 28px;
+}
+
 .series-head {
   font-size: var(--e-t-xs);
   font-weight: 600;

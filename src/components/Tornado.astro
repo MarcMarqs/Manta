@@ -1,0 +1,126 @@
+---
+/**
+ * Sensitivity: how far an outcome swings when one input moves low or high.
+ *
+ * Rows sort by the size of their swing, biggest first, because the question the chart
+ * answers is "which of these actually matters" — and that reads straight down the page
+ * only when the longest bar is at the top.
+ */
+interface Props {
+  title?: string;
+  unit?: string;
+  lowLabel?: string;
+  highLabel?: string;
+  rows: { label: string; low: number; high: number }[];
+}
+
+const { title, unit = '', lowLabel = 'Low', highLabel = 'High', rows } = Astro.props;
+
+const sorted = [...rows].sort((a, b) => Math.abs(b.high - b.low) - Math.abs(a.high - a.low));
+const lo = Math.min(...sorted.flatMap((r) => [r.low, r.high]), 0);
+const hi = Math.max(...sorted.flatMap((r) => [r.low, r.high]), 0);
+const span = hi - lo || 1;
+/** Where a value sits across the full width, as a percentage. */
+const at = (v: number) => ((v - lo) / span) * 100;
+---
+
+<figure class="tornado">
+  {title && <figcaption class="tornado-title">{title}</figcaption>}
+  <div class="tornado-scale">
+    <span>{lowLabel}</span>
+    <span>{highLabel}</span>
+  </div>
+  <div class="tornado-rows">
+    {
+      sorted.map((row) => {
+        const from = Math.min(row.low, row.high);
+        const to = Math.max(row.low, row.high);
+        return (
+          <div class="tornado-row">
+            <span class="tornado-label">{row.label}</span>
+            <span class="tornado-track">
+              <span class="tornado-bar" style={`left:${at(from)}%;width:${Math.max(at(to) - at(from), 0.6)}%`} />
+            </span>
+            <span class="tornado-values mono">{`${row.low}${unit} → ${row.high}${unit}`}</span>
+          </div>
+        );
+      })
+    }
+  </div>
+</figure>
+
+<style>
+  .tornado {
+    margin: 0;
+  }
+
+  .tornado-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .tornado-scale {
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 0.8rem;
+    margin-left: clamp(90px, 22%, 200px);
+    margin-bottom: 6px;
+  }
+
+  .tornado-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .tornado-row {
+    display: grid;
+    grid-template-columns: clamp(90px, 22%, 200px) 1fr auto;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .tornado-label {
+    font-size: 0.9rem;
+  }
+
+  .tornado-track {
+    position: relative;
+    display: block;
+    height: 20px;
+    border-radius: 4px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+
+  .tornado-bar {
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    border-radius: 3px;
+    background: var(--accent);
+  }
+
+  .tornado-values {
+    color: var(--muted);
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+
+  /* On a phone the three columns leave no room for the bar, so the numbers move under
+     the label and the bar gets the full width. */
+  @media (max-width: 620px) {
+    .tornado-scale {
+      margin-left: 0;
+    }
+    .tornado-row {
+      grid-template-columns: 1fr auto;
+    }
+    .tornado-track {
+      grid-column: 1 / -1;
+      order: 2;
+    }
+  }
+</style>

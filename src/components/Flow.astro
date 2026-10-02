@@ -1,0 +1,124 @@
+---
+/**
+ * A few labelled nodes and the arrows between them — how resources or systems connect.
+ *
+ * Nodes run left to right in the order given, and an edge is drawn between the two it
+ * names. Nothing is positioned by hand: a diagram that needs real coordinates wants a
+ * drawing, not a block, and can be an image instead.
+ */
+interface Props {
+  caption?: string;
+  nodes: { id: string; label: string; accent?: boolean }[];
+  edges: { from: string; to: string }[];
+}
+
+const { caption, nodes, edges } = Astro.props;
+
+const NODE_W = 132;
+const NODE_H = 52;
+const GAP = 54;
+const H = NODE_H + 56;
+const W = Math.max(nodes.length * NODE_W + Math.max(nodes.length - 1, 0) * GAP, 1);
+const top = 28;
+
+const index = new Map(nodes.map((n, i) => [n.id, i]));
+const x = (i: number) => i * (NODE_W + GAP);
+const centre = (i: number) => x(i) + NODE_W / 2;
+
+/**
+ * Neighbours join along the straight line between them; anything further apart arcs over
+ * the nodes in between, so an edge never runs underneath a box it has nothing to do with.
+ */
+const drawn = edges
+  .map(({ from, to }) => {
+    const a = index.get(from);
+    const b = index.get(to);
+    if (a === undefined || b === undefined || a === b) return null;
+    const [left, right] = a < b ? [a, b] : [b, a];
+    const backwards = a > b;
+    if (right - left === 1) {
+      return { path: `M${x(left) + NODE_W},${top + NODE_H / 2} L${x(right) - 8},${top + NODE_H / 2}`, backwards };
+    }
+    const lift = top - 16;
+    return {
+      path: `M${centre(left)},${top} C${centre(left)},${lift} ${centre(right)},${lift} ${centre(right)},${top - 8}`,
+      backwards,
+    };
+  })
+  .filter((e): e is { path: string; backwards: boolean } => e !== null);
+---
+
+<figure class="flow">
+  <div class="flow-scroll">
+    <svg viewBox={`0 0 ${W} ${H}`} style={`min-width:${Math.min(W, 680)}px`} role="img" aria-label={caption ?? 'Diagram'}>
+      <defs>
+        <marker id="flow-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0,0 L8,4 L0,8 z" class="arrow-head" />
+        </marker>
+      </defs>
+      {drawn.map((edge) => <path class="edge" d={edge.path} marker-end="url(#flow-arrow)" />)}
+      {
+        nodes.map((node, i) => (
+          <g transform={`translate(${x(i)}, ${top})`}>
+            <rect width={NODE_W} height={NODE_H} rx="10" class={`node${node.accent ? ' is-accent' : ''}`} />
+            <text x={NODE_W / 2} y={NODE_H / 2 + 4} text-anchor="middle" class="node-label">
+              {node.label}
+            </text>
+          </g>
+        ))
+      }
+    </svg>
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .flow {
+    margin: 0;
+  }
+
+  /* A diagram with several nodes is wider than a phone; it scrolls sideways on its own
+     rather than shrinking the labels to nothing. */
+  .flow-scroll {
+    overflow-x: auto;
+  }
+
+  svg {
+    width: 100%;
+    height: auto;
+  }
+
+  .node {
+    fill: var(--surface);
+    stroke: var(--border);
+    stroke-width: 1;
+  }
+
+  .node.is-accent {
+    fill: color-mix(in srgb, var(--accent) 16%, var(--surface));
+    stroke: var(--accent);
+  }
+
+  .node-label {
+    fill: var(--fg);
+    font-size: 14px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+  }
+
+  .edge {
+    fill: none;
+    stroke: var(--muted);
+    stroke-width: 1.5;
+  }
+
+  .arrow-head {
+    fill: var(--muted);
+  }
+
+  figcaption {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 8px;
+  }
+</style>

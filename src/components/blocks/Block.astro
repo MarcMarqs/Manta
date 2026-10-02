@@ -3,6 +3,8 @@ import type { Block } from '../../lib/types';
 import { useContent } from '../../lib/context';
 import { srcsetFor } from '../../lib/media';
 import Chart from '../Chart.astro';
+import Flow from '../Flow.astro';
+import Tornado from '../Tornado.astro';
 import ProjectRail from '../ProjectRail.astro';
 import ProjectGrid from '../ProjectGrid.astro';
 // Self-import: `section` and `columns` hold nested blocks.
@@ -54,11 +56,22 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
 
 <Wrap {...wrapProps}>
   {
-    block.type === 'heading' && (
-      <Fragment
-        set:html={`<h${block.level}${anchors?.get(block.id) ? ` id="${anchors.get(block.id)}"` : ''}>${block.text}</h${block.level}>`}
-      />
-    )
+    block.type === 'heading' &&
+      (block.number || block.eyebrow ? (
+        <div class="section-header">
+          <p class="section-kicker">
+            {block.number && <span class="section-number">{block.number}</span>}
+            {block.eyebrow}
+          </p>
+          <Fragment
+            set:html={`<h${block.level}${anchors?.get(block.id) ? ` id="${anchors.get(block.id)}"` : ''}>${block.text}</h${block.level}>`}
+          />
+        </div>
+      ) : (
+        <Fragment
+          set:html={`<h${block.level}${anchors?.get(block.id) ? ` id="${anchors.get(block.id)}"` : ''}>${block.text}</h${block.level}>`}
+        />
+      ))
   }
 
   {block.type === 'text' && <div class="rich" set:html={block.html} />}
@@ -176,8 +189,35 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
   }
 
   {
+    block.type === 'pillars' && (
+      <div class="pillars">
+        {block.items.map((item) => (
+          <div class="pillar">
+            <p class="pillar-label">{item.label}</p>
+            <p class="pillar-body">{item.body}</p>
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  {
+    block.type === 'tornado' && (
+      <Tornado
+        title={block.title}
+        unit={block.unit}
+        lowLabel={block.lowLabel}
+        highLabel={block.highLabel}
+        rows={block.rows}
+      />
+    )
+  }
+
+  {block.type === 'flow' && <Flow caption={block.caption} nodes={block.nodes} edges={block.edges} />}
+
+  {
     block.type === 'chart' && (
-      <Chart variant={block.variant} title={block.title} series={block.series} />
+      <Chart variant={block.variant} title={block.title} range={block.range} series={block.series} />
     )
   }
 
@@ -256,6 +296,59 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
   .section.bg-accent {
     background: color-mix(in srgb, var(--accent) 12%, var(--bg));
   }
+  /* Flex rather than grid: with `auto-fit` a trailing row holding fewer boxes than the
+     column count leaves a visible empty track, where flex lets a lone last box stretch
+     across the space instead. */
+  .pillars {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .pillar {
+    flex: 1 1 200px;
+    padding: 16px 18px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .pillar-label {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    margin: 0 0 4px;
+  }
+
+  .pillar-body {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .section-header :global(h1),
+  .section-header :global(h2),
+  .section-header :global(h3),
+  .section-header :global(h4) {
+    margin-top: 0;
+  }
+
+  .section-kicker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 2px;
+    font-family: var(--font-heading);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .section-number {
+    color: var(--accent);
+  }
+
   .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

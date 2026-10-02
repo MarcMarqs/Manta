@@ -97,10 +97,56 @@ export const BLOCKS: Record<BlockType, BlockSpec> = {
       variant: 'bar',
       title: '',
       series: [
-        { label: 'A', value: 10 },
-        { label: 'B', value: 20 },
-        { label: 'C', value: 15 },
+        {
+          data: [
+            { label: 'A', value: 10 },
+            { label: 'B', value: 20 },
+            { label: 'C', value: 15 },
+          ],
+        },
       ],
+    }),
+  },
+  pillars: {
+    label: 'Pillars',
+    group: 'Data',
+    hint: 'Short callout boxes for principles',
+    create: () => ({
+      id: newId(),
+      type: 'pillars',
+      items: [
+        { label: '', body: '' },
+        { label: '', body: '' },
+      ],
+    }),
+  },
+  tornado: {
+    label: 'Sensitivity',
+    group: 'Data',
+    hint: 'How far an outcome swings per input',
+    create: () => ({
+      id: newId(),
+      type: 'tornado',
+      title: '',
+      unit: '',
+      lowLabel: 'Low',
+      highLabel: 'High',
+      rows: [{ label: '', low: 0, high: 0 }],
+    }),
+  },
+  flow: {
+    label: 'Flow diagram',
+    group: 'Data',
+    hint: 'Labelled nodes joined by arrows',
+    create: () => ({
+      id: newId(),
+      type: 'flow',
+      caption: '',
+      nodes: [
+        { id: 'a', label: 'First' },
+        { id: 'b', label: 'Second' },
+      ],
+      edges: [{ from: 'a', to: 'b' }],
     }),
   },
   section: {
@@ -169,7 +215,7 @@ const stripTags = (html: string) =>
 export function summarize(block: Block): string {
   switch (block.type) {
     case 'heading':
-      return stripTags(block.text);
+      return [block.number, block.eyebrow, stripTags(block.text)].filter(Boolean).join(' · ');
     case 'text':
       return stripTags(block.html);
     case 'image':
@@ -186,8 +232,17 @@ export function summarize(block: Block): string {
       return block.items.map((i) => i.label).filter(Boolean).join(' · ') || 'Empty';
     case 'stats':
       return block.items.map((i) => i.value).filter(Boolean).join(' · ') || 'Empty';
-    case 'chart':
-      return block.title || `${block.variant} chart, ${block.series.length} values`;
+    case 'chart': {
+      const points = block.series.reduce((n, s) => n + (s.formula ? 1 : (s.data?.length ?? 0)), 0);
+      const computed = block.series.some((s) => s.formula);
+      return block.title || `${block.variant} chart · ${computed ? 'from a formula' : `${points} values`}`;
+    }
+    case 'pillars':
+      return block.items.map((i) => i.label).filter(Boolean).join(' · ') || 'Empty';
+    case 'tornado':
+      return block.title || `${block.rows.length} row${block.rows.length === 1 ? '' : 's'}`;
+    case 'flow':
+      return block.caption || `${block.nodes.length} nodes, ${block.edges.length} arrows`;
     case 'section': {
       const n = block.blocks.length;
       const notes = [
