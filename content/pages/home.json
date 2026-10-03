@@ -21,26 +21,9 @@
       ]
     },
     {
-      "id": "stats",
-      "type": "stats",
-      "items": [
-        {
-          "value": "6+",
-          "label": "Years in industry"
-        },
-        {
-          "value": "3",
-          "label": "Shipped titles"
-        },
-        {
-          "value": "5+",
-          "label": "Genres designed"
-        },
-        {
-          "value": "2",
-          "label": "Festival awards"
-        }
-      ]
+      "id": "b-2j6ctx",
+      "type": "spacer",
+      "size": "sm"
     },
     {
       "id": "work-h",
@@ -56,11 +39,12 @@
     {
       "id": "rail",
       "type": "projectRail",
-      "filters": true
+      "filters": false
     },
     {
-      "id": "sep",
-      "type": "divider"
+      "id": "b-z4o6nz",
+      "type": "spacer",
+      "size": "lg"
     },
     {
       "id": "grid-note",
@@ -76,7 +60,8 @@
     {
       "id": "grid",
       "type": "projectGrid",
-      "filters": false
+      "filters": false,
+      "origin": "personal"
     }
   ]
 }
