@@ -169,7 +169,7 @@
     "cover": "",
     "coverVideo": null,
     "featured": false,
-    "draft": true,
+    "draft": false,
     "links": [],
     "origin": "personal"
   }
