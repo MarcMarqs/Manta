@@ -153,5 +153,24 @@
     "draft": true,
     "links": [],
     "origin": "personal"
+  },
+  {
+    "slug": "fc27-teardown",
+    "title": "FC 27 Teardown",
+    "genre": "",
+    "year": 2026,
+    "role": "",
+    "summary": "When cards become points, the points table becomes the economy. FC 27's Streamlined SBCs swap the squad-building puzzle for a score bar, and players like it: EA reported a positive reception within a week. But the change moved every important decision into one table, the Item Score curve, and that table brought issues.",
+    "highlights": [],
+    "discipline": [
+      "systems"
+    ],
+    "engine": [],
+    "cover": "",
+    "coverVideo": null,
+    "featured": false,
+    "draft": true,
+    "links": [],
+    "origin": "personal"
   }
 ]
