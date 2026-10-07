@@ -479,21 +479,9 @@ a.tag-chip:hover {
    =========================================================================== */
 
 :root {
-  --cell-w: 112px;
-  --cell-h: 28px;
   --rule: var(--border);
   --rule-strong: color-mix(in srgb, var(--border) 55%, var(--fg));
   --head-fill: var(--surface);
-}
-
-/* The grid under everything. Faint enough to read through, present enough to see. */
-body {
-  background-image:
-    linear-gradient(to right, var(--rule) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--rule) 1px, transparent 1px);
-  background-size: var(--cell-w) var(--cell-h);
-  background-position: -1px -1px;
-  background-attachment: fixed;
 }
 
 /* Square corners throughout: the theme radius is 0, and anything that opted out
@@ -513,53 +501,6 @@ body {
 .site-header {
   background: var(--bg);
   border-bottom: 1px solid var(--rule-strong);
-}
-
-.topbar {
-  position: sticky;
-  top: 0;
-  z-index: 30;
-  background: var(--bg);
-}
-
-.topbar .site-header {
-  position: static;
-}
-
-.fx-bar {
-  background: var(--bg);
-  border-bottom: 1px solid var(--rule);
-}
-
-.fx-bar .wrap {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  height: 34px;
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  color: var(--muted);
-}
-
-.fx-ref {
-  min-width: 54px;
-  padding: 1px 6px;
-  border: 1px solid var(--rule);
-  text-align: center;
-  color: var(--fg);
-  flex: none;
-}
-
-.fx-glyph {
-  font-style: italic;
-  opacity: 0.6;
-  flex: none;
-}
-
-.fx-value {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .site-footer {
@@ -820,11 +761,6 @@ thead th {
   color: var(--accent);
 }
 
-@media (max-width: 720px) {
-  :root {
-    --cell-w: 72px;
-  }
-}
 
 /* A level-2 heading is a frozen header row whether or not it carries a number, so a
    page does not alternate between two kinds of section break. Scoped component styles
