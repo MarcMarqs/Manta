@@ -118,7 +118,21 @@ if (arrange === 'radial' && nodes.length > 1) {
 
 const at = new Map(placed.map((p) => [p.id, p]));
 
-/** A link leaves the edge of its box facing the other one and curves across the gap. */
+/**
+ * A link leaves the edge of its box facing the other one and curves across the gap.
+ *
+ * Two cases need more than that. A link that runs back against the flow — right to left
+ * in a layered map — would otherwise be threaded between the boxes alongside the forward
+ * link, where the two read as one confused line with an arrowhead at each end. It is
+ * bowed underneath the row instead, which is what a return arrow looks like everywhere
+ * else. And where a pair is joined more than once, the extras are fanned apart so each
+ * is still its own line.
+ */
+const pairSeen = new Map<string, number>();
+const RETURN_DIP = 34;
+const floor = Math.max(...placed.map((p) => p.y + p.h), 0);
+let hasReturn = false;
+
 const drawn = links
   .map((link) => {
     const a = at.get(link.from);
@@ -126,7 +140,28 @@ const drawn = links
     if (!a || !b || a === b) return null;
     const ac = { x: a.x + a.w / 2, y: a.y + a.h / 2 };
     const bc = { x: b.x + b.w / 2, y: b.y + b.h / 2 };
+
+    const key = [link.from, link.to].sort().join('|');
+    const nth = pairSeen.get(key) ?? 0;
+    pairSeen.set(key, nth + 1);
+
+    // Only a layered map has a direction to run against.
+    const backwards = arrange !== 'radial' && bc.x < ac.x - 1;
+    if (backwards) {
+      hasReturn = true;
+      const dip = floor + RETURN_DIP + nth * 14;
+      const from = { x: ac.x, y: a.y + a.h };
+      const to = { x: bc.x, y: b.y + b.h + 7 };
+      return {
+        path: `M${from.x},${from.y} C${from.x},${dip} ${to.x},${dip} ${to.x},${to.y}`,
+        label: link.label,
+        dashed: link.dashed,
+        mid: { x: (from.x + to.x) / 2, y: dip - 4 },
+      };
+    }
+
     const sideways = Math.abs(bc.x - ac.x) >= Math.abs(bc.y - ac.y);
+    const lift = nth * 16;
     const from = sideways
       ? { x: bc.x > ac.x ? a.x + a.w : a.x, y: ac.y }
       : { x: ac.x, y: bc.y > ac.y ? a.y + a.h : a.y };
@@ -134,8 +169,8 @@ const drawn = links
       ? { x: bc.x > ac.x ? b.x - 7 : b.x + b.w + 7, y: bc.y }
       : { x: bc.x, y: bc.y > ac.y ? b.y - 7 : b.y + b.h + 7 };
     const path = sideways
-      ? `M${from.x},${from.y} C${(from.x + to.x) / 2},${from.y} ${(from.x + to.x) / 2},${to.y} ${to.x},${to.y}`
-      : `M${from.x},${from.y} C${from.x},${(from.y + to.y) / 2} ${to.x},${(from.y + to.y) / 2} ${to.x},${to.y}`;
+      ? `M${from.x},${from.y} C${(from.x + to.x) / 2},${from.y - lift} ${(from.x + to.x) / 2},${to.y - lift} ${to.x},${to.y}`
+      : `M${from.x},${from.y} C${from.x + lift},${(from.y + to.y) / 2} ${to.x + lift},${(from.y + to.y) / 2} ${to.x},${to.y}`;
     // A label sits in the gap between the two boxes. When the gap is shorter than the
     // label, it would be drawn on top of them instead, so it steps aside perpendicular
     // to the link rather than overlapping a node.
@@ -151,13 +186,15 @@ const drawn = links
   .filter((d): d is NonNullable<typeof d> => d !== null);
 
 const pad = 14;
+/** A return arrow bows below the lowest box, so the frame has to reach past it. */
+const padBottom = pad + (hasReturn ? RETURN_DIP + 18 : 0);
 const gridId = `grid-${Math.random().toString(36).slice(2, 8)}`;
 ---
 
 <figure class="system-map">
   <div class="map-scroll">
     <svg
-      viewBox={`${-pad} ${-pad} ${W + pad * 2} ${H + pad * 2}`}
+      viewBox={`${-pad} ${-pad} ${W + pad * 2} ${H + pad + padBottom}`}
       style={`min-width:${Math.min(W + pad * 2, 660)}px;max-width:${W + pad * 2}px`}
       role="img"
       aria-label={caption ?? 'System diagram'}
@@ -170,7 +207,7 @@ const gridId = `grid-${Math.random().toString(36).slice(2, 8)}`;
           <path d="M0,0 L8,4 L0,8 z" class="arrow-head" />
         </marker>
       </defs>
-      <rect x={-pad} y={-pad} width={W + pad * 2} height={H + pad * 2} fill={`url(#${gridId})`} />
+      <rect x={-pad} y={-pad} width={W + pad * 2} height={H + pad + padBottom} fill={`url(#${gridId})`} />
 
       {drawn.map((d) => <path class={`link${d.dashed ? ' is-dashed' : ''}`} d={d.path} marker-end="url(#map-arrow)" />)}
       {

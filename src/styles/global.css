@@ -647,42 +647,6 @@ thead th {
   box-shadow: 0 6px 18px color-mix(in srgb, var(--fg) 7%, transparent);
 }
 
-.chart::before,
-.tornado::before,
-.radar::before,
-.flow::before,
-.system-map::before,
-.chart::after,
-.tornado::after,
-.radar::after,
-.flow::after,
-.system-map::after {
-  content: '';
-  position: absolute;
-  width: 7px;
-  height: 7px;
-  background: var(--bg);
-  border: 1px solid var(--rule-strong);
-}
-
-.chart::before,
-.tornado::before,
-.radar::before,
-.flow::before,
-.system-map::before {
-  left: -4px;
-  top: -4px;
-}
-
-.chart::after,
-.tornado::after,
-.radar::after,
-.flow::after,
-.system-map::after {
-  right: -4px;
-  bottom: -4px;
-}
-
 .chart-title,
 .tornado-title,
 .radar-title {
