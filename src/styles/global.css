@@ -508,30 +508,21 @@ a.tag-chip:hover {
   background: var(--bg);
 }
 
-.sheet-tabs {
+.footer-nav {
   display: flex;
-  gap: 1px;
-  overflow-x: auto;
-  padding-top: 8px;
+  flex-wrap: wrap;
+  gap: 18px;
 }
 
-.sheet-tab {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  padding: 6px 14px;
-  border: 1px solid var(--rule);
-  border-bottom: 0;
-  background: var(--head-fill);
+.footer-nav a {
   color: var(--muted);
   text-decoration: none;
-  white-space: nowrap;
+  font-size: 0.9rem;
 }
 
-.sheet-tab[aria-current='page'] {
-  background: var(--bg);
+.footer-nav a:hover,
+.footer-nav a[aria-current='page'] {
   color: var(--fg);
-  font-weight: 600;
-  box-shadow: inset 0 3px 0 var(--accent);
 }
 
 .footer-note {
@@ -563,33 +554,6 @@ h4 {
 td.num {
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
-}
-
-/* --------------------------------------------------------------- headings as frozen rows */
-
-.section-header {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  background: var(--head-fill);
-  border: 1px solid var(--rule-strong);
-  border-left: 3px solid var(--accent);
-  padding: 9px 14px;
-}
-
-.section-kicker {
-  margin: 0;
-  order: 2;
-  margin-left: auto;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-}
-
-.section-header :global(h2),
-.section-header :global(h3) {
-  order: 1;
-  margin: 0;
-  font-size: 1.3rem;
 }
 
 .section-number {
@@ -761,19 +725,3 @@ thead th {
   color: var(--accent);
 }
 
-
-/* A level-2 heading is a frozen header row whether or not it carries a number, so a
-   page does not alternate between two kinds of section break. Scoped component styles
-   out-specify this file, so the few that fight back are matched there instead. */
-main :is(h2):not(.section-header h2):not(.next-project h2) {
-  background: var(--head-fill);
-  border: 1px solid var(--rule-strong);
-  border-left: 3px solid var(--accent);
-  padding: 9px 14px;
-  font-size: 1.3rem;
-  margin-bottom: 0;
-}
-
-main :is(h2):not(.section-header h2):not(.next-project h2) + * {
-  margin-top: calc(1rem * var(--spacing)) !important;
-}
