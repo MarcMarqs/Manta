@@ -165,7 +165,7 @@ main {
 
 .btn-primary {
   background: var(--accent);
-  color: #fff;
+  color: var(--accent-fg, #fff);
 }
 
 .btn-secondary {
@@ -484,18 +484,6 @@ a.tag-chip:hover {
   --head-fill: var(--surface);
 }
 
-/* Square corners throughout: the theme radius is 0, and anything that opted out
-   of it reads as a foreign object on a sheet. */
-.card,
-.btn,
-.tag-chip,
-.pillar,
-.chart,
-.tornado-track,
-.map-scroll {
-  border-radius: 0 !important;
-}
-
 /* --------------------------------------------------------------- the chrome */
 
 .site-header {
@@ -526,8 +514,7 @@ a.tag-chip:hover {
 }
 
 .footer-note {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   color: var(--muted);
   margin: 14px 0 0;
 }
@@ -547,7 +534,6 @@ h4 {
 
 /* Every number on the page lines up in its column. */
 .mono,
-.specs dd,
 .stat-value,
 .card-meta,
 .tornado-values,
@@ -586,13 +572,6 @@ thead th {
   font-weight: 600;
 }
 
-/* --------------------------------------------------------------- the spec strip */
-
-.specs {
-  border: 1px solid var(--rule-strong);
-  background: var(--bg);
-}
-
 /* --------------------------------------------------------------- pillars as a cell range */
 
 .pillars {
@@ -603,32 +582,6 @@ thead th {
   border: 1px solid var(--rule);
   margin: 0 -1px -1px 0;
   background: var(--bg);
-}
-
-/* --------------------------------------------------------------- buttons as sheet chips */
-
-.btn {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  border: 1px solid var(--rule-strong);
-  padding: 8px 14px;
-  text-decoration: none;
-}
-
-.btn-primary {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
-}
-
-.btn-secondary {
-  background: var(--bg);
-  color: var(--fg);
-}
-
-.btn-secondary:hover {
-  border-color: var(--accent);
-  color: var(--accent);
 }
 
 /* --------------------------------------------------------------- figures as sheet objects */
