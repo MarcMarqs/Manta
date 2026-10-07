@@ -112,10 +112,10 @@ const shareText = description || site.tagline;
 
     <footer class="site-footer">
       <div class="wrap">
-        <nav class="sheet-tabs" aria-label="Sections">
+        <nav class="footer-nav" aria-label="Sections">
           {
             site.nav.map((item) => (
-              <a class="sheet-tab" href={item.href} aria-current={item.href === path ? 'page' : undefined}>
+              <a href={item.href} aria-current={item.href === path ? 'page' : undefined}>
                 {item.label}
               </a>
             ))
