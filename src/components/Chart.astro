@@ -4,26 +4,35 @@
 // built on a curve stays right when the curve changes.
 import { evaluateFormula, rangeValues, type ChartRange } from '../lib/formula';
 
+export interface ChartPoint {
+  label: string;
+  value: number;
+  emphasis?: 'accent' | 'muted';
+}
+
 export interface ChartSeries {
   name?: string;
   /** Expression in `x`, e.g. "round(90 * pow(1.28, x - 75))". Needs `range`. */
   formula?: string;
-  data?: { label: string; value: number }[];
+  labels?: boolean;
+  data?: ChartPoint[];
 }
 
 interface Props {
   variant: 'bar' | 'line';
   title?: string;
+  note?: string;
   range?: ChartRange;
+  reference?: { value: number; label?: string };
   series: ChartSeries[];
 }
 
-const { variant, title, range, series } = Astro.props;
+const { variant, title, note, range, reference, series } = Astro.props;
 
 let problem: string | null = null;
 
 /** A formula series is computed here; a typed one is used as it stands. */
-const resolve = (s: ChartSeries): { label: string; value: number }[] => {
+const resolve = (s: ChartSeries): ChartPoint[] => {
   if (!s.formula) return s.data ?? [];
   if (!range) {
     problem = 'This series has a formula but no range to run it over.';
@@ -37,17 +46,18 @@ const resolve = (s: ChartSeries): { label: string; value: number }[] => {
   }
 };
 
-const plots = series.map((s) => ({ name: s.name, points: resolve(s) }));
+const plots = series.map((s) => ({ name: s.name, labels: s.labels, points: resolve(s) }));
 const labels = plots.reduce<string[]>((longest, p) => (p.points.length > longest.length ? p.points.map((d) => d.label) : longest), []);
 const named = plots.filter((p) => p.name).length > 1;
 
 const W = 720;
 const H = 300;
-const PAD = { top: named ? 34 : 20, right: 16, bottom: 40, left: 48 };
+const marksLabelled = plots.some((p) => p.labels) || plots.some((p) => p.points.some((d) => d.emphasis === 'accent'));
+const PAD = { top: (named ? 34 : 20) + (marksLabelled ? 14 : 0), right: 16, bottom: 40, left: 48 };
 const plotW = W - PAD.left - PAD.right;
 const plotH = H - PAD.top - PAD.bottom;
 
-const values = plots.flatMap((p) => p.points.map((d) => d.value));
+const values = [...plots.flatMap((p) => p.points.map((d) => d.value)), ...(reference ? [reference.value] : [])];
 const max = Math.max(...values, 0);
 const min = Math.min(...values, 0);
 const niceMax = max === 0 ? 1 : Math.ceil(max / 5) * 5;
@@ -70,6 +80,7 @@ const linePath = (points: { value: number }[]) =>
 
 <figure class="chart">
   {title && <figcaption class="chart-title">{title}</figcaption>}
+  {note && <p class="chart-note">{note}</p>}
   <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={title ?? `${variant} chart`}>
     {
       named && (
@@ -99,27 +110,64 @@ const linePath = (points: { value: number }[]) =>
       variant === 'bar'
         ? plots.map((p, s) =>
             p.points.map((d, i) => (
-              <rect
-                class={`bar s${s}`}
-                x={cx(i) - (barW * plots.length) / 2 + s * barW}
-                y={Math.min(y(d.value), y(0))}
-                width={Math.max(barW - 1, 1)}
-                height={Math.max(Math.abs(y(d.value) - y(0)), 1)}
-              >
-                <title>{`${p.name ? `${p.name} · ` : ''}${d.label}: ${d.value}`}</title>
-              </rect>
+              <g>
+                <rect
+                  class={`bar s${s}${d.emphasis ? ` is-${d.emphasis}` : ''}`}
+                  x={cx(i) - (barW * plots.length) / 2 + s * barW}
+                  y={Math.min(y(d.value), y(0))}
+                  width={Math.max(barW - 1, 1)}
+                  height={Math.max(Math.abs(y(d.value) - y(0)), 1)}
+                >
+                  <title>{`${p.name ? `${p.name} · ` : ''}${d.label}: ${d.value}`}</title>
+                </rect>
+                {(p.labels || d.emphasis === 'accent') && (
+                  <text
+                    class={`mark-value${d.emphasis === 'accent' ? ' is-accent' : ''}`}
+                    x={cx(i) - (barW * plots.length) / 2 + s * barW + barW / 2}
+                    y={Math.min(y(d.value), y(0)) - 6}
+                    text-anchor="middle"
+                  >
+                    {d.value}
+                  </text>
+                )}
+              </g>
             )),
           )
         : plots.map((p, s) => (
             <g>
               <path class={`line s${s}`} d={linePath(p.points)} />
               {p.points.map((d, i) => (
-                <circle class={`dot s${s}`} cx={cx(i)} cy={y(d.value)} r="3">
-                  <title>{`${p.name ? `${p.name} · ` : ''}${d.label}: ${d.value}`}</title>
-                </circle>
+                <g>
+                  <circle class={`dot s${s}${d.emphasis ? ` is-${d.emphasis}` : ''}`} cx={cx(i)} cy={y(d.value)} r={d.emphasis === 'accent' ? 4.5 : 3}>
+                    <title>{`${p.name ? `${p.name} · ` : ''}${d.label}: ${d.value}`}</title>
+                  </circle>
+                  {(p.labels || d.emphasis === 'accent') && (
+                    <text
+                      class={`mark-value${d.emphasis === 'accent' ? ' is-accent' : ''}`}
+                      x={cx(i)}
+                      y={y(d.value) - 10}
+                      text-anchor="middle"
+                    >
+                      {d.value}
+                    </text>
+                  )}
+                </g>
               ))}
             </g>
           ))
+    }
+
+    {
+      reference && (
+        <g class="reference">
+          <line x1={PAD.left} x2={W - PAD.right} y1={y(reference.value)} y2={y(reference.value)} />
+          {reference.label && (
+            <text x={PAD.left + 6} y={y(reference.value) - 6} class="reference-label">
+              {reference.label}
+            </text>
+          )}
+        </g>
+      )
     }
     {
       labels.map((label, i) =>
@@ -187,6 +235,49 @@ const linePath = (points: { value: number }[]) =>
 
   .dot {
     fill: var(--plot, var(--accent));
+  }
+
+  .chart-note {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin: -4px 0 10px;
+  }
+
+  /* A line to read the bars against. It sits under the marks rather than over them,
+     so it never hides the value it is there to compare with. */
+  .reference line {
+    stroke: var(--fg);
+    stroke-width: 1.25;
+    stroke-dasharray: 5 4;
+    opacity: 0.55;
+  }
+
+  .reference-label {
+    fill: var(--muted);
+    font-size: 11.5px;
+  }
+
+  .mark-value {
+    fill: var(--muted);
+    font-size: 11.5px;
+    font-family: var(--font-mono, inherit);
+  }
+
+  .mark-value.is-accent {
+    fill: var(--fg);
+    font-weight: 600;
+  }
+
+  /* Emphasis is relative: one point steps forward only because the others step back. */
+  .bar.is-muted,
+  .dot.is-muted {
+    fill: var(--muted);
+    opacity: 0.45;
+  }
+
+  .bar.is-accent,
+  .dot.is-accent {
+    fill: var(--accent);
   }
 
   .chart-problem {

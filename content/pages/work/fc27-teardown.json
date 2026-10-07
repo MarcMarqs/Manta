@@ -213,54 +213,69 @@
       "id": "b-p6vzxz",
       "type": "chart",
       "variant": "bar",
-      "title": "Two Jumps, at 81 and 84, break an otherwise even gold curve",
+      "title": "Two jumps, at 81 and 84, break an otherwise even gold curve",
       "series": [
         {
-          "name": "Multiplier",
+          "name": "Step over the rating below",
           "data": [
             {
               "label": "76",
-              "value": 3
+              "value": 11,
+              "emphasis": "muted"
             },
             {
               "label": "77",
-              "value": 5
+              "value": 20,
+              "emphasis": "muted"
             },
             {
               "label": "78",
-              "value": 4
+              "value": 17,
+              "emphasis": "muted"
             },
             {
               "label": "79",
-              "value": 3
+              "value": 14,
+              "emphasis": "muted"
             },
             {
               "label": "80",
-              "value": 2
+              "value": 12,
+              "emphasis": "muted"
             },
             {
               "label": "81",
-              "value": 7
+              "value": 56,
+              "emphasis": "accent"
             },
             {
               "label": "82",
-              "value": 5
+              "value": 21,
+              "emphasis": "muted"
             },
             {
               "label": "83",
-              "value": 4
+              "value": 21,
+              "emphasis": "muted"
             },
             {
               "label": "84",
-              "value": 11
+              "value": 102,
+              "emphasis": "accent"
             },
             {
               "label": "85",
-              "value": 15
+              "value": 153,
+              "emphasis": "muted"
             }
           ]
         }
-      ]
+      ],
+      "note": "Each rating's Item Score as a percentage increase on the rating below. Community-measured in launch week; 85 and above are unchanged by the proposal.",
+      "reference": {
+        "value": 28,
+        "label": "Proposed even step: +28% for 76–84"
+      }
     },
     {
       "id": "b-coqzh7",

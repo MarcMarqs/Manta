@@ -119,13 +119,24 @@ export type Block = BlockLayout & (
       type: 'chart';
       variant: 'bar' | 'line';
       title?: string;
+      /** One line under the title, for what the numbers mean or where they came from. */
+      note?: string;
       /** Values are computed across this range for any series carrying a formula. */
       range?: { from: number; to: number; step?: number };
+      /** A line across the chart to read the bars against: a target, a proposal, a floor. */
+      reference?: { value: number; label?: string };
       series: {
         name?: string;
         /** Expression in `x`, e.g. "round(90 * pow(1.28, x - 75))". Needs `range`. */
         formula?: string;
-        data?: { label: string; value: number }[];
+        /** Print every value on its mark. An emphasised point prints its own regardless. */
+        labels?: boolean;
+        data?: {
+          label: string;
+          value: number;
+          /** Lift one point out of the series, or push it back. */
+          emphasis?: 'accent' | 'muted';
+        }[];
       }[];
     }
   /** Short callout boxes for the principles a piece of work was built on. */

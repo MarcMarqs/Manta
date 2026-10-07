@@ -56,7 +56,7 @@ Every block needs a unique `id` (unique within its page) and a `type`.
 | `table` | `columns[]`, `rows[][]`, `caption?` |
 | `specs` | `items[]` of `{ label, value }` — the strip under a case-study title |
 | `stats` | `items[]` of `{ value, label }` — figures set large |
-| `chart` | `variant` (`bar` \| `line`), `title?`, `range?` `{ from, to, step? }`, `series[]` of `{ name?, formula?, data? }` |
+| `chart` | `variant` (`bar` \| `line`), `title?`, `note?`, `range?` `{ from, to, step? }`, `reference?` `{ value, label? }`, `series[]` of `{ name?, formula?, labels?, data? }` where a data point is `{ label, value, emphasis? }` |
 | `pillars` | `items[]` of `{ label, body }` — callout boxes for design principles |
 | `tornado` | `rows[]` of `{ label, low, high }`, `title?`, `unit?`, `lowLabel?`, `highLabel?` |
 | `flow` | `nodes[]` of `{ id, label, accent? }`, `edges[]` of `{ from, to }`, `caption?` |
@@ -75,6 +75,13 @@ sqrt, pow, exp, log`. It is **not** JavaScript: it is parsed and evaluated by
 `src/lib/formula.ts`, because formulas live in content the editor can write, and the
 editor must never be able to put executable code into the repo. A formula that doesn't
 parse shows a note under the chart instead of failing the build.
+
+A chart is shaped to the claim it is making, not to the numbers it holds. **Reference**
+draws a line across it to read the marks against — a target, a proposal, a floor.
+**Emphasis** lifts one point out of its series or pushes it back, so an exception can be
+seen rather than hunted for; an emphasised point prints its value, and a series set to
+show **labels** prints all of them. **Note** is the line under the title that says what
+the numbers mean or where they came from.
 
 A **system map** draws nodes and the links between them, for explaining how the parts of
 a system feed each other. Positions are never authored: **Around a core** puts the first
