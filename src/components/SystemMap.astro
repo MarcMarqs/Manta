@@ -119,19 +119,41 @@ if (arrange === 'radial' && nodes.length > 1) {
 const at = new Map(placed.map((p) => [p.id, p]));
 
 /**
- * A link leaves the edge of its box facing the other one and curves across the gap.
+ * Links are routed as right angles rather than curves.
  *
- * Two cases need more than that. A link that runs back against the flow — right to left
- * in a layered map — would otherwise be threaded between the boxes alongside the forward
- * link, where the two read as one confused line with an arrowhead at each end. It is
- * bowed underneath the row instead, which is what a return arrow looks like everywhere
- * else. And where a pair is joined more than once, the extras are fanned apart so each
- * is still its own line.
+ * A bezier between two boxes has to guess a shape, and the guesses collide: two links
+ * sharing a pair lie on top of each other, and a link running back against the flow
+ * bulges through the gap the forward one is already using. Right angles have no shape
+ * to guess. A link leaves an edge, runs to a lane, turns once, and arrives square on
+ * the far edge, which also reads as the same kind of object as the boxes it joins.
+ *
+ * Three cases: across (the common one, turning at a lane between the columns), down
+ * (within a column), and back (against the flow, which drops to a lane beneath every
+ * box and comes up into the underside of its target). A radial map has no flow to run
+ * against and no columns to turn between, so its links are straight lines.
  */
 const pairSeen = new Map<string, number>();
 const RETURN_DIP = 34;
-const floor = Math.max(...placed.map((p) => p.y + p.h), 0);
+const floorY = Math.max(...placed.map((p) => p.y + p.h), 0);
+const HEAD = 7;
 let hasReturn = false;
+
+/**
+ * Two links going back from the same node would drop from the same point on its
+ * underside and run down the same line before separating, which looks like one arrow
+ * that forked. Counting them first lets each leave from its own place along the edge.
+ */
+const atFirst = new Map(placed.map((p) => [p.id, p]));
+const returnsFrom = new Map<string, number>();
+if (arrange !== 'radial') {
+  for (const link of links) {
+    const a = atFirst.get(link.from);
+    const b = atFirst.get(link.to);
+    if (!a || !b || a === b) continue;
+    if (b.x + b.w / 2 < a.x + a.w / 2 - 1) returnsFrom.set(link.from, (returnsFrom.get(link.from) ?? 0) + 1);
+  }
+}
+const returnSeen = new Map<string, number>();
 
 const drawn = links
   .map((link) => {
@@ -141,47 +163,75 @@ const drawn = links
     const ac = { x: a.x + a.w / 2, y: a.y + a.h / 2 };
     const bc = { x: b.x + b.w / 2, y: b.y + b.h / 2 };
 
+    // Links joining the same pair are nudged apart so each keeps its own line.
     const key = [link.from, link.to].sort().join('|');
     const nth = pairSeen.get(key) ?? 0;
     pairSeen.set(key, nth + 1);
+    const nudge = nth * 12;
 
-    // Only a layered map has a direction to run against.
-    const backwards = arrange !== 'radial' && bc.x < ac.x - 1;
-    if (backwards) {
-      hasReturn = true;
-      const dip = floor + RETURN_DIP + nth * 14;
-      const from = { x: ac.x, y: a.y + a.h };
-      const to = { x: bc.x, y: b.y + b.h + 7 };
+    if (arrange === 'radial') {
+      const dx = bc.x - ac.x;
+      const dy = bc.y - ac.y;
+      const len = Math.hypot(dx, dy) || 1;
+      const stop = { x: bc.x - (dx / len) * (b.w / 2 + HEAD), y: bc.y - (dy / len) * (b.h / 2 + HEAD) };
       return {
-        path: `M${from.x},${from.y} C${from.x},${dip} ${to.x},${dip} ${to.x},${to.y}`,
+        path: `M${ac.x},${ac.y} L${stop.x},${stop.y}`,
         label: link.label,
         dashed: link.dashed,
-        mid: { x: (from.x + to.x) / 2, y: dip - 4 },
+        mid: { x: (ac.x + stop.x) / 2, y: (ac.y + stop.y) / 2 },
       };
     }
 
-    const sideways = Math.abs(bc.x - ac.x) >= Math.abs(bc.y - ac.y);
-    const lift = nth * 16;
-    const from = sideways
-      ? { x: bc.x > ac.x ? a.x + a.w : a.x, y: ac.y }
-      : { x: ac.x, y: bc.y > ac.y ? a.y + a.h : a.y };
-    const to = sideways
-      ? { x: bc.x > ac.x ? b.x - 7 : b.x + b.w + 7, y: bc.y }
-      : { x: bc.x, y: bc.y > ac.y ? b.y - 7 : b.y + b.h + 7 };
-    const path = sideways
-      ? `M${from.x},${from.y} C${(from.x + to.x) / 2},${from.y - lift} ${(from.x + to.x) / 2},${to.y - lift} ${to.x},${to.y}`
-      : `M${from.x},${from.y} C${from.x + lift},${(from.y + to.y) / 2} ${to.x + lift},${(from.y + to.y) / 2} ${to.x},${to.y}`;
-    // A label sits in the gap between the two boxes. When the gap is shorter than the
-    // label, it would be drawn on top of them instead, so it steps aside perpendicular
-    // to the link rather than overlapping a node.
-    const gap = Math.hypot(to.x - from.x, to.y - from.y);
-    const chipW = (link.label?.length ?? 0) * 6.8 + 14;
-    const aside = link.label && chipW > gap - 10 ? 1 : 0;
-    const mid = {
-      x: (from.x + to.x) / 2 + (sideways ? 0 : (NODE_W / 2 + chipW / 2 + 6) * aside),
-      y: (from.y + to.y) / 2 - (sideways ? (NODE_H / 2 + 14) * aside : 0),
+    // Back against the flow: down, along a lane under everything, then up into the target.
+    if (bc.x < ac.x - 1) {
+      hasReturn = true;
+      const total = returnsFrom.get(link.from) ?? 1;
+      const seen = returnSeen.get(link.from) ?? 0;
+      returnSeen.set(link.from, seen + 1);
+      const lane = floorY + RETURN_DIP + seen * 14;
+      // Spread the exits evenly along the underside rather than stacking them.
+      const from = { x: a.x + (a.w * (seen + 1)) / (total + 1), y: a.y + a.h };
+      const to = { x: bc.x, y: b.y + b.h + HEAD };
+      return {
+        path: `M${from.x},${from.y} V${lane} H${to.x} V${to.y}`,
+        label: link.label,
+        dashed: link.dashed,
+        mid: { x: (from.x + to.x) / 2, y: lane - 5 },
+      };
+    }
+
+    const across = Math.abs(bc.x - ac.x) >= Math.abs(bc.y - ac.y);
+
+    if (across) {
+      const from = { x: a.x + a.w, y: ac.y };
+      const to = { x: b.x - HEAD, y: bc.y };
+      // Straight when the two sit on the same line; otherwise one turn at a lane
+      // halfway across the gap.
+      const path =
+        Math.abs(from.y - to.y) < 1
+          ? `M${from.x},${from.y} H${to.x}`
+          : `M${from.x},${from.y} H${(from.x + to.x) / 2 + nudge} V${to.y} H${to.x}`;
+      return {
+        path,
+        label: link.label,
+        dashed: link.dashed,
+        mid: { x: (from.x + to.x) / 2 + nudge, y: (from.y + to.y) / 2 },
+      };
+    }
+
+    const down = bc.y > ac.y;
+    const from = { x: ac.x, y: down ? a.y + a.h : a.y };
+    const to = { x: bc.x, y: down ? b.y - HEAD : b.y + b.h + HEAD };
+    const path =
+      Math.abs(from.x - to.x) < 1
+        ? `M${from.x},${from.y} V${to.y}`
+        : `M${from.x},${from.y} V${(from.y + to.y) / 2 + nudge} H${to.x} V${to.y}`;
+    return {
+      path,
+      label: link.label,
+      dashed: link.dashed,
+      mid: { x: (from.x + to.x) / 2, y: (from.y + to.y) / 2 + nudge },
     };
-    return { path, label: link.label, dashed: link.dashed, mid };
   })
   .filter((d): d is NonNullable<typeof d> => d !== null);
 
