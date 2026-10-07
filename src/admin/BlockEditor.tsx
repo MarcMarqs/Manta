@@ -738,6 +738,34 @@ function BlockFields({
             <Field label="Title" wide>
               <TextInput value={block.title ?? ''} onChange={(v) => onChange({ ...block, title: v })} />
             </Field>
+            <Field label="Note" hint="One line under the title: what the numbers mean, or where they came from." wide>
+              <TextInput value={block.note ?? ''} onChange={(v) => onChange({ ...block, note: v || undefined })} />
+            </Field>
+            <Field label="Reference line" hint="A line to read the marks against — a target, a proposal, a floor. Empty for none.">
+              <input
+                class="input"
+                type="number"
+                value={block.reference?.value ?? ''}
+                onInput={(e) => {
+                  const raw = (e.target as HTMLInputElement).value;
+                  onChange({
+                    ...block,
+                    reference: raw === '' ? undefined : { ...block.reference, value: Number(raw) || 0 },
+                  });
+                }}
+              />
+            </Field>
+            <Field label="Reference label">
+              <TextInput
+                value={block.reference?.label ?? ''}
+                onChange={(label) =>
+                  onChange({
+                    ...block,
+                    reference: block.reference ? { ...block.reference, label: label || undefined } : undefined,
+                  })
+                }
+              />
+            </Field>
           </div>
 
           {computed && (
@@ -800,6 +828,14 @@ function BlockFields({
                 </Field>
               </div>
 
+              <Field label="Values on the marks" hint="Print every number. An emphasised point prints its own either way.">
+                <Toggle
+                  checked={Boolean(plot.labels)}
+                  label="Show"
+                  onChange={(labels) => setSeries(i, { labels: labels || undefined })}
+                />
+              </Field>
+
               {plot.formula !== undefined ? (
                 <Field
                   label="Formula"
@@ -813,10 +849,11 @@ function BlockFields({
                   <div class="series-head">
                     <span>Label</span>
                     <span>Value</span>
+                    <span>Emphasis</span>
                     <span />
                   </div>
                   {(plot.data ?? []).map((d, k) => (
-                    <div class="series-row">
+                    <div class="series-row wide">
                       <TextInput
                         value={d.label}
                         onChange={(label) =>
@@ -831,6 +868,21 @@ function BlockFields({
                           setSeries(i, {
                             data: (plot.data ?? []).map((x, m) =>
                               m === k ? { ...x, value: Number((e.target as HTMLInputElement).value) || 0 } : x,
+                            ),
+                          })
+                        }
+                      />
+                      <Select
+                        value={d.emphasis ?? ''}
+                        options={[
+                          { value: '', label: 'Normal' },
+                          { value: 'accent', label: 'Stand out' },
+                          { value: 'muted', label: 'Step back' },
+                        ]}
+                        onChange={(v) =>
+                          setSeries(i, {
+                            data: (plot.data ?? []).map((x, m) =>
+                              m === k ? { ...x, emphasis: (v || undefined) as 'accent' | 'muted' | undefined } : x,
                             ),
                           })
                         }
