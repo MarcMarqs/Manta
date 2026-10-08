@@ -82,6 +82,17 @@ export function SiteEditor() {
           >
             <ImageField value={s.socialImage ?? ''} onChange={(socialImage) => set({ socialImage })} />
           </Field>
+          <Field
+            label="Cloudflare Web Analytics token"
+            hint="Cloudflare dashboard → Analytics & Logs → Web Analytics → add this site, then paste the token from the snippet it gives you. Counting is cookieless, so the site needs no consent banner. Leave empty to measure nothing."
+            wide
+          >
+            <TextInput
+              value={s.analyticsToken ?? ''}
+              onChange={(analyticsToken) => set({ analyticsToken: analyticsToken.trim() || undefined })}
+              placeholder="Nothing is measured"
+            />
+          </Field>
         </div>
       </section>
 

@@ -15,7 +15,7 @@ interface Props {
 }
 
 const { title, description, path, image, noindex } = Astro.props;
-const { site } = useContent(Astro.locals);
+const { site, preview } = useContent(Astro.locals);
 const t = site.theme;
 const pageTitle = title === site.name ? site.name : `${title} — ${site.name}`;
 const fontsHref = googleFontsHref([t.fontHeading, t.fontBody, t.fontMono]);
@@ -51,6 +51,10 @@ const absolute = (value?: string) =>
 const canonical = base && path ? `${base}${path === '/' ? '/' : path}` : undefined;
 const shareImage = absolute(image || site.socialImage);
 const shareText = description || site.tagline;
+
+// Not in the editor's preview: looking at your own page while writing it is not a visit,
+// and counting it would make the numbers answer the wrong question.
+const beacon = !preview && site.analyticsToken ? site.analyticsToken : undefined;
 ---
 
 <!doctype html>
@@ -166,5 +170,15 @@ const shareText = description || site.tagline;
         } catch {}
       });
     </script>
+
+    {
+      beacon && (
+        <script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={JSON.stringify({ token: beacon })}
+        />
+      )
+    }
   </body>
 </html>
