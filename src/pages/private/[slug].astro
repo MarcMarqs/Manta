@@ -1,0 +1,117 @@
+---
+/**
+ * A case study for work that cannot be published.
+ *
+ * Not prerendered, and that is the whole point: a prerendered page is a file on the
+ * asset server, and a file cannot ask for a password. This route renders per request,
+ * so nothing of the project reaches the browser until the password is right.
+ *
+ * It is reached only by the address its author sends out. Nothing links here, it is
+ * absent from the sitemap, and robots.txt tells crawlers to leave it alone.
+ */
+import Base from '../../layouts/Base.astro';
+import PageView from '../../components/PageView.astro';
+import { allProjects, privatePages, site } from '../../lib/content';
+import { checkPassword, hasSession, startSession } from '../../server/auth';
+import { notFound } from '../../server/http';
+
+export const prerender = false;
+
+const { slug } = Astro.params;
+const env = Astro.locals.runtime?.env as Env | undefined;
+const project = allProjects.find((p) => p.slug === slug && p.visibility === 'private');
+const page = slug ? privatePages.get(slug) : undefined;
+
+// An address that is not a private case study is simply not here, whatever the reason.
+// Saying "wrong password" for a project that does not exist would confirm it does.
+if (!project || !page || !env?.WORK_PASSWORD) return notFound(env ?? ({} as Env), Astro.url);
+
+let wrong = false;
+if (Astro.request.method === 'POST') {
+  const form = await Astro.request.formData();
+  const password = String(form.get('password') ?? '');
+  if (await checkPassword(env, password, 'work')) {
+    await startSession(env, Astro.cookies, Astro.url.protocol === 'https:', 'work');
+    return Astro.redirect(Astro.url.pathname, 303);
+  }
+  // A little friction for anyone guessing, the same as the editor's.
+  await new Promise((r) => setTimeout(r, 600));
+  wrong = true;
+}
+
+const unlocked = await hasSession(env, Astro.cookies, 'work');
+// Nothing about the work is in the response until it is unlocked — not the title, not
+// the summary, not the cover.
+const title = unlocked ? page.title : 'Private';
+---
+
+<Base title={title} description={unlocked ? page.description : undefined} path={Astro.url.pathname} noindex>
+  {
+    unlocked ? (
+      <>
+        <p class="private-note">
+          Private — shared with you directly. Please don't pass the link on.
+        </p>
+        <PageView page={page} project={project} linkOut={false} />
+      </>
+    ) : (
+      <form class="gate" method="POST">
+        <h1>This one's under wraps</h1>
+        <p>
+          It's work I can't publish, so it's behind a password. If you were sent a link, the password came with it.
+        </p>
+        <label>
+          <span>Password</span>
+          <input type="password" name="password" autocomplete="current-password" autofocus required />
+        </label>
+        {wrong && <p class="gate-error">That isn't it. Try again?</p>}
+        <button type="submit" class="btn btn-primary">Unlock</button>
+      </form>
+    )
+  }
+</Base>
+
+<style>
+  .gate {
+    max-width: 30rem;
+    margin: calc(4rem * var(--spacing)) auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .gate label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+  }
+  .gate label span {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .gate input {
+    width: 100%;
+    padding: 10px 12px;
+    font: inherit;
+    color: var(--fg);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  .gate input:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
+  .gate-error {
+    margin: 0;
+    color: var(--accent);
+  }
+  .private-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+    border-left: 2px solid var(--accent);
+    padding-left: 12px;
+    margin-bottom: calc(1.5rem * var(--spacing));
+  }
+</style>

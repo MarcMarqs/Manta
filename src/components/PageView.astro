@@ -1,0 +1,73 @@
+---
+/**
+ * Everything inside the page shell: the contents list, the blocks, and the tail a case
+ * study carries. Shared so a private case study is the same page as a public one, and
+ * can't quietly drift from it — only the way it is reached differs.
+ */
+import BlockList from './blocks/BlockList.astro';
+import Toc from './Toc.astro';
+import { projects, tagLabel } from '../lib/content';
+import { headingAnchors, tocItems } from '../lib/toc';
+import type { Page, Project } from '../lib/types';
+
+interface Props {
+  page: Page;
+  /** The project this page is a case study for, if any. */
+  project?: Project;
+  /** Private work is a dead end on purpose: no tag links out, no next case study. */
+  linkOut?: boolean;
+}
+const { page, project, linkOut = true } = Astro.props;
+
+// After a case study, point at the next project in the same order the home page uses,
+// wrapping round at the end so there is always somewhere to go.
+const index = project ? projects.indexOf(project) : -1;
+const next = linkOut && index >= 0 && projects.length > 1 ? projects[(index + 1) % projects.length] : undefined;
+const tagsOf = linkOut && project ? [...project.discipline, ...project.engine] : [];
+
+// Headings get anchors either way; the floating contents list only earns its place on a
+// page long enough to get lost in, and a page can opt out in its settings.
+const anchors = headingAnchors(page.blocks);
+const toc = page.toc === false ? [] : tocItems(page.blocks, anchors);
+---
+
+{toc.length >= 3 && <Toc items={toc} />}
+
+<BlockList blocks={page.blocks} anchors={anchors} />
+
+{
+  project && project.links.length > 0 && (
+    <div class="project-links">
+      {project.links.map((link) => (
+        <a class="project-link" href={link.href} target="_blank" rel="noopener">
+          {link.label}
+        </a>
+      ))}
+    </div>
+  )
+}
+
+{
+  tagsOf.length > 0 && (
+    <div class="tag-links" style="margin-top: calc(2rem * var(--spacing))">
+      {tagsOf.map((id) => (
+        <a class="tag-chip" href={`/tags/${id}`}>
+          {tagLabel(id)}
+        </a>
+      ))}
+    </div>
+  )
+}
+
+{
+  next && (
+    <a class="next-project" href={`/work/${next.slug}`}>
+      {next.cover && <img src={next.cover} alt="" loading="lazy" />}
+      <span>
+        <span class="eyebrow">Next case study</span>
+        <h2>{next.title}</h2>
+        <p>{next.summary}</p>
+      </span>
+    </a>
+  )
+}

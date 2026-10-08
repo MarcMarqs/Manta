@@ -127,7 +127,22 @@ called `primary`.
    scrolls into view on a touch screen), so a page of cards doesn't run every video at once.
 3. Create `content/pages/work/<slug>.json` for its case study.
 
-Set `"draft": true` on a project to keep it out of the build.
+### Who can see a project
+
+Each project carries a `visibility`, set in the editor under **Who can see it**:
+
+| Value | What happens |
+| --- | --- |
+| `public` | Listed and linked like any other project. The default. |
+| `private` | Absent from the home page, the tag pages, the sitemap and the next-case-study link. Its case study is not built as a file at all: it is served on demand at `/private/<slug>` and asks for `WORK_PASSWORD` first. Nothing of the project — not even its title — is in the response until the password is right. |
+| `draft` | Not built. Nothing of it reaches the site. |
+
+A private case study is reached only by the address you send someone, which the editor
+shows next to the setting. It is a dead end on purpose: no tag links, no next case study,
+`noindex` in the head and `Disallow: /private/` in robots.txt. Unlock lasts a week in
+that browser.
+
+If `WORK_PASSWORD` is unset, private case studies answer 404 — the safe way to fail.
 
 ## The editor (`/admin`)
 
@@ -204,6 +219,9 @@ Cloudflare builds and deploys the Worker (`manta`) on every push. In the Worker'
 Secrets, set under **Settings → Variables and Secrets** as type *Secret*, never in this repo:
 
 - `ADMIN_PASSWORD` — the password for `/admin`. Changing it signs every session out.
+- `WORK_PASSWORD` — opens case studies marked private. You give this one out, so keep it
+  different from `ADMIN_PASSWORD`; it opens nothing but those pages, and a session for one
+  is never a session for the other. Changing it ends every unlock.
 - `GITHUB_TOKEN` — fine-grained token: this repository only, **Contents: Read and write**.
 
 After the first deploy, put your real URLs in `wrangler.jsonc` under `vars`

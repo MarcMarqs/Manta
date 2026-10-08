@@ -1,7 +1,7 @@
-import type { Project, ProjectLink } from '../lib/types';
+import type { Project, ProjectLink, Site } from '../lib/types';
 import { ImageField, LinkInput } from './media';
 import { createPage } from './PageEditor';
-import { PAGES_DIR, PROJECTS, files, openView, projects, setFiles, tags, updateFile, view, type PageFile } from './store';
+import { PAGES_DIR, PROJECTS, SITE, files, openView, projects, setFiles, tags, toast, updateFile, view, type PageFile } from './store';
 import { Field, Icon, IconButton, Segmented, Select, TextArea, TextInput, Toggle } from './ui';
 
 const caseStudyPath = (slug: string) => `${PAGES_DIR}work/${slug}.json`;
@@ -22,9 +22,38 @@ function blankProject(existing: Project[]): Project {
     cover: '',
     coverVideo: null,
     featured: false,
-    draft: true,
+    visibility: 'draft',
     links: [],
   };
+}
+
+/**
+ * The one address a private case study answers on. It is the only way in, so the editor
+ * has to hand it over — there is nothing to click through to.
+ */
+function PrivateLink({ slug }: { slug: string }) {
+  const site = files.value[SITE] as Site | undefined;
+  const base = (site?.url ?? '').replace(/\/$/, '');
+  const url = `${base}/private/${slug}`;
+  return (
+    <Field label="Private address" hint="Send this with the password. Nothing on the site links to it." wide>
+      <div class="private-link">
+        <code>{url}</code>
+        <button
+          type="button"
+          class="btn small ghost"
+          onClick={() => {
+            navigator.clipboard?.writeText(url).then(
+              () => toast('Address copied.'),
+              () => toast('Could not copy that.', 'error'),
+            );
+          }}
+        >
+          <Icon name="copy" /> Copy
+        </button>
+      </div>
+    </Field>
+  );
 }
 
 function TagPicker({
@@ -107,7 +136,28 @@ function ProjectForm({ project, index }: { project: Project; index: number }) {
               }
             />
           </Field>
-          <Toggle checked={!project.draft} onChange={(v) => set({ draft: !v })} label="Visible on the site" />
+          <Field
+            label="Who can see it"
+            hint={
+              project.visibility === 'private'
+                ? 'Kept off every list. Its case study opens only at the address below, with the private password.'
+                : project.visibility === 'draft'
+                  ? 'Not built at all. Nothing of it reaches the site.'
+                  : 'Listed on the site like any other project.'
+            }
+            wide
+          >
+            <Segmented
+              value={project.visibility ?? 'public'}
+              options={[
+                { value: 'public', label: 'Anyone' },
+                { value: 'private', label: 'Password' },
+                { value: 'draft', label: 'Nobody yet' },
+              ]}
+              onChange={(visibility) => set({ visibility })}
+            />
+          </Field>
+          {project.visibility === 'private' && <PrivateLink slug={project.slug} />}
           <Toggle checked={project.featured} onChange={(featured) => set({ featured })} label="Featured (shown first)" />
         </div>
         <IconButton icon="trash" label="Delete project" tone="danger" onClick={remove} />
@@ -249,7 +299,8 @@ export function ProjectsEditor({ slug }: { slug?: string }) {
             <span class="project-title">{p.title || 'Untitled'}</span>
             <span class="muted">
               {p.year}
-              {p.draft ? ' · hidden' : ''}
+              {p.visibility === 'draft' ? ' · not built' : ''}
+              {p.visibility === 'private' ? ' · password' : ''}
               {p.featured ? ' · featured' : ''}
             </span>
           </button>
