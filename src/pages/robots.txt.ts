@@ -9,6 +9,8 @@ export const GET: APIRoute = () => {
     'Allow: /',
     'Disallow: /admin',
     'Disallow: /api/',
+    // Private case studies are behind a password anyway; this spares them the attempt.
+    'Disallow: /private/',
     ...(base ? ['', `Sitemap: ${base}/sitemap.xml`] : []),
   ];
   return new Response(`${lines.join('\n')}\n`, {

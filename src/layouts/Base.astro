@@ -10,9 +10,11 @@ interface Props {
   path?: string;
   /** Picture for link previews, as a site path or a full URL. */
   image?: string;
+  /** Keep this page out of search results and out of link previews. */
+  noindex?: boolean;
 }
 
-const { title, description, path, image } = Astro.props;
+const { title, description, path, image, noindex } = Astro.props;
 const { site } = useContent(Astro.locals);
 const t = site.theme;
 const pageTitle = title === site.name ? site.name : `${title} — ${site.name}`;
@@ -58,13 +60,15 @@ const shareText = description || site.tagline;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     {description && <meta name="description" content={description} />}
-    {canonical && <link rel="canonical" href={canonical} />}
+    {/* A crawler that reaches a private page anyway is told to forget it. */}
+    {noindex && <meta name="robots" content="noindex, nofollow, noarchive" />}
+    {!noindex && canonical && <link rel="canonical" href={canonical} />}
 
     <meta property="og:type" content={path === '/' ? 'website' : 'article'} />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={pageTitle} />
     {shareText && <meta property="og:description" content={shareText} />}
-    {canonical && <meta property="og:url" content={canonical} />}
+    {!noindex && canonical && <meta property="og:url" content={canonical} />}
     {shareImage && <meta property="og:image" content={shareImage} />}
     <meta name="twitter:card" content={shareImage ? 'summary_large_image' : 'summary'} />
     <meta name="twitter:title" content={pageTitle} />

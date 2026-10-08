@@ -28,5 +28,7 @@
   }
   // Secrets are set in the Cloudflare dashboard, never committed:
   //   ADMIN_PASSWORD  - password for the /admin editor
+  //   WORK_PASSWORD   - password for case studies marked private; shared with the
+  //                     people you send those links to, never the same as the above
   //   GITHUB_TOKEN    - fine-grained token, this repo only, contents read/write
 }

@@ -51,6 +51,16 @@ export interface ProjectLink {
 /** Where the work came from; drives which shelf on the home page it appears in. */
 export type ProjectOrigin = 'professional' | 'personal';
 
+/**
+ * How much of a project the world gets to see.
+ *
+ * 'public' is the ordinary state. 'private' is work that cannot be published — under
+ * NDA, usually — so it is kept out of every index and its case study is served behind
+ * a password, on its own address, to whoever is sent the link. 'draft' is not finished
+ * and is not built at all.
+ */
+export type ProjectVisibility = 'public' | 'private' | 'draft';
+
 export interface Project {
   slug: string;
   title: string;
@@ -67,7 +77,7 @@ export interface Project {
   featured: boolean;
   /** Absent means professional — the studio work that leads the page. */
   origin?: ProjectOrigin;
-  draft: boolean;
+  visibility: ProjectVisibility;
   links: ProjectLink[];
 }
 

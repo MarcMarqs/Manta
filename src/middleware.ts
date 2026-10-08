@@ -1,26 +1,15 @@
 import { defineMiddleware } from 'astro:middleware';
 import type { APIContext } from 'astro';
 import { hasSession } from './server/auth';
-import { envOf, json } from './server/http';
+import { envOf, json, notFound as notFoundPage } from './server/http';
 
 const OPEN = new Set(['/api/login', '/api/session']);
 
 const isEditorPath = (pathname: string) =>
   pathname === '/admin' || pathname.startsWith('/admin/') || pathname.startsWith('/api/');
 
-/** The site's own 404 page, so a blocked editor URL looks like any other missing page. */
-async function notFound(ctx: APIContext): Promise<Response> {
-  try {
-    const page = await envOf(ctx).ASSETS?.fetch(new URL('/404', ctx.url));
-    if (page?.ok) {
-      return new Response(page.body, {
-        status: 404,
-        headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' },
-      });
-    }
-  } catch {}
-  return new Response('Not found', { status: 404 });
-}
+/** A blocked editor URL looks like any other missing page. */
+const notFound = (ctx: APIContext) => notFoundPage(envOf(ctx), ctx.url);
 
 export const onRequest = defineMiddleware(async (ctx, next) => {
   const { pathname } = ctx.url;

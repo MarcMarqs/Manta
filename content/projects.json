@@ -24,7 +24,7 @@
     "cover": "/images/projects/wardens-rising/cover.svg",
     "coverVideo": null,
     "featured": true,
-    "draft": false,
+    "visibility": "public",
     "links": [
       {
         "label": "Epic Games Store",
@@ -57,7 +57,7 @@
     "cover": "/images/projects/aurora/cover.svg",
     "coverVideo": null,
     "featured": true,
-    "draft": false,
+    "visibility": "public",
     "links": [
       {
         "label": "Steam",
@@ -84,7 +84,7 @@
     "cover": "/images/projects/gundam-requiem/cover.svg",
     "coverVideo": null,
     "featured": false,
-    "draft": false,
+    "visibility": "public",
     "links": [],
     "origin": "personal"
   },
@@ -107,7 +107,7 @@
     "cover": "/images/projects/plushland-curse/cover.svg",
     "coverVideo": null,
     "featured": false,
-    "draft": false,
+    "visibility": "public",
     "links": [],
     "origin": "personal"
   },
@@ -129,7 +129,7 @@
     "cover": "/images/projects/far-away-orbital-space/cover.svg",
     "coverVideo": null,
     "featured": false,
-    "draft": false,
+    "visibility": "public",
     "links": [],
     "origin": "personal"
   },
@@ -150,7 +150,7 @@
     "cover": "/images/projects/ascending-flags/cover.svg",
     "coverVideo": null,
     "featured": false,
-    "draft": true,
+    "visibility": "draft",
     "links": [],
     "origin": "personal"
   },
@@ -169,7 +169,7 @@
     "cover": "",
     "coverVideo": null,
     "featured": false,
-    "draft": false,
+    "visibility": "public",
     "links": [],
     "origin": "personal"
   }

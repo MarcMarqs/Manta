@@ -1311,6 +1311,24 @@ input[type='range'] {
   color: var(--e-muted);
 }
 
+.private-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.private-link code {
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 8px 10px;
+  border: 1px solid var(--e-border);
+  border-radius: var(--e-r-sm);
+  background: var(--e-sunken);
+  font-size: var(--e-t-xs);
+}
+
 .table-editor {
   overflow-x: auto;
 }

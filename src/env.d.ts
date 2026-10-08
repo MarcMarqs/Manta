@@ -3,6 +3,12 @@
 interface Env {
   ASSETS: Fetcher;
   ADMIN_PASSWORD?: string;
+  /**
+   * Password for case studies marked private. Sent to people outside, so it is a
+   * separate credential from ADMIN_PASSWORD and opens nothing but those pages. Unset
+   * means private case studies answer 404, which is the safe way to fail.
+   */
+  WORK_PASSWORD?: string;
   GITHUB_TOKEN?: string;
   GITHUB_REPO?: string;
   LIVE_URL?: string;
