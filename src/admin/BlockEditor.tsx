@@ -493,11 +493,37 @@ function BlockFields({
 
     case 'text':
       return (
-        <RichText
-          value={block.html}
-          links={linkOptions()}
-          onChange={(v) => onChange({ ...block, html: v })}
-        />
+        <div class="stack">
+          <RichText
+            value={block.html}
+            links={linkOptions()}
+            onChange={(v) => onChange({ ...block, html: v })}
+          />
+          <div class="fields">
+            <Field label="Line spacing" hint="Space between the lines of a paragraph.">
+              <Select
+                value={block.leading ?? 'normal'}
+                options={[
+                  { value: 'tight', label: 'Tight' },
+                  { value: 'normal', label: 'Normal' },
+                  { value: 'airy', label: 'Airy' },
+                ]}
+                onChange={(v) => onChange({ ...block, leading: v === 'normal' ? undefined : v })}
+              />
+            </Field>
+            <Field label="Paragraph spacing" hint="Space between one paragraph and the next.">
+              <Select
+                value={block.gap ?? 'normal'}
+                options={[
+                  { value: 'tight', label: 'Tight' },
+                  { value: 'normal', label: 'Normal' },
+                  { value: 'airy', label: 'Airy' },
+                ]}
+                onChange={(v) => onChange({ ...block, gap: v === 'normal' ? undefined : v })}
+              />
+            </Field>
+          </div>
+        </div>
       );
 
     case 'image':

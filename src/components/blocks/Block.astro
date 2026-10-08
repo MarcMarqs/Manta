@@ -76,7 +76,14 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
       ))
   }
 
-  {block.type === 'text' && <div class="rich" set:html={block.html} />}
+  {
+    block.type === 'text' && (
+      <div
+        class={`rich leading-${block.leading ?? 'normal'} gap-${block.gap ?? 'normal'}`}
+        set:html={block.html}
+      />
+    )
+  }
 
   {
     block.type === 'image' && (
@@ -489,6 +496,39 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
     padding-left: 20px;
   }
   .rich :global(:last-child) {
+    margin-bottom: 0;
+  }
+
+  /* Highlighted text. A tint of the accent rather than a yellow felt-tip, so it belongs
+     to the page; the padding is asymmetric because text sits off-centre in its line box. */
+  .rich :global(mark) {
+    background: color-mix(in srgb, var(--accent) 22%, transparent);
+    color: inherit;
+    padding: 0.1em 0.2em 0.02em;
+  }
+
+  /* A raised passage: the line it sits in has to grow with it, or it crowds the line above. */
+  .rich :global(.big) {
+    font-size: 1.18em;
+    line-height: 1.45;
+  }
+
+  .rich.leading-tight {
+    line-height: 1.4;
+  }
+  .rich.leading-airy {
+    line-height: 1.9;
+  }
+
+  .rich.gap-tight :global(:is(p, ul, ol)) {
+    margin-bottom: 0.6em;
+  }
+  .rich.gap-airy :global(:is(p, ul, ol)) {
+    margin-bottom: 1.6em;
+  }
+  /* Set last, because the spacing rules above out-specify the plain one. */
+  .rich.gap-tight :global(:last-child),
+  .rich.gap-airy :global(:last-child) {
     margin-bottom: 0;
   }
 </style>

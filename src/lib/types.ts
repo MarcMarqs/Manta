@@ -92,7 +92,15 @@ export type Block = BlockLayout & (
       number?: string;
       eyebrow?: string;
     }
-  | { id: string; type: 'text'; html: string }
+  | {
+      id: string;
+      type: 'text';
+      html: string;
+      /** Space between the lines of a paragraph. */
+      leading?: 'tight' | 'normal' | 'airy';
+      /** Space between one paragraph and the next. */
+      gap?: 'tight' | 'normal' | 'airy';
+    }
   | {
       id: string;
       type: 'image';
