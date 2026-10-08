@@ -430,6 +430,12 @@ code,
   color: var(--e-danger);
 }
 
+/* A toggle that is on for the text the caret is in. */
+.icon-btn.is-on {
+  background: var(--e-accent-soft);
+  color: var(--e-accent);
+}
+
 .icon-btn:disabled {
   opacity: 0.3;
   cursor: default;

@@ -69,19 +69,23 @@ export function IconButton({
   onClick,
   disabled,
   tone,
+  active,
 }: {
   icon: string;
   label: string;
   onClick: (e: MouseEvent) => void;
   disabled?: boolean;
   tone?: 'danger';
+  /** On for a toggle whose formatting the selection already has. */
+  active?: boolean;
 }) {
   return (
     <button
       type="button"
-      class={`icon-btn${tone ? ` ${tone}` : ''}`}
+      class={`icon-btn${tone ? ` ${tone}` : ''}${active ? ' is-on' : ''}`}
       title={label}
       aria-label={label}
+      aria-pressed={active}
       onClick={(e) => {
         e.stopPropagation();
         onClick(e);
@@ -253,6 +257,9 @@ export interface LinkOption {
   href: string;
 }
 
+const IS_MARK = (el: HTMLElement) => el.tagName === 'MARK';
+const IS_BIG = (el: HTMLElement) => el.classList.contains('big');
+
 /** The nearest ancestor of a node that the test accepts, stopping at the editor itself. */
 function enclosing(node: Node, root: HTMLElement, match: (el: HTMLElement) => boolean) {
   let el: HTMLElement | null = node.nodeType === 1 ? (node as HTMLElement) : node.parentElement;
@@ -287,6 +294,56 @@ function selectedTextNodes(range: Range): Text[] {
 }
 
 /**
+ * The word the caret is sitting in, as a range, or nothing when it sits in a gap.
+ *
+ * The search runs over the whole paragraph rather than the one text node under the
+ * caret, because taking formatting off a word leaves the text split into several
+ * nodes either side of where it used to be — and the caret then lands on a node
+ * boundary, where a single node offers no word at all.
+ */
+function wordAround(root: HTMLElement, caret: Range): Range | null {
+  const node = caret.startContainer;
+  if (node.nodeType !== 3) return null;
+  const host = node.parentElement?.closest('p, li, h1, h2, h3, h4, blockquote') ?? root;
+
+  const nodes: Text[] = [];
+  const walker = document.createTreeWalker(host, NodeFilter.SHOW_TEXT);
+  for (let n = walker.nextNode(); n; n = walker.nextNode()) nodes.push(n as Text);
+
+  let text = '';
+  let at = -1;
+  for (const n of nodes) {
+    if (n === node) at = text.length + caret.startOffset;
+    text += n.nodeValue ?? '';
+  }
+  if (at < 0) return null;
+
+  let from = at;
+  let to = at;
+  while (from > 0 && !/\s/.test(text[from - 1])) from--;
+  while (to < text.length && !/\s/.test(text[to])) to++;
+  if (from === to) return null;
+
+  const locate = (offset: number) => {
+    let seen = 0;
+    for (const n of nodes) {
+      const length = (n.nodeValue ?? '').length;
+      if (offset <= seen + length) return { node: n, offset: offset - seen };
+      seen += length;
+    }
+    return null;
+  };
+  const start = locate(from);
+  const end = locate(to);
+  if (!start || !end) return null;
+
+  const range = document.createRange();
+  range.setStart(start.node, start.offset);
+  range.setEnd(end.node, end.offset);
+  return range;
+}
+
+/**
  * Highlight and bigger text are applied by hand rather than through execCommand.
  *
  * execCommand writes `<font size>` in one browser and an inline `style` attribute in
@@ -303,9 +360,19 @@ function wrapSelection(
   match: (el: HTMLElement) => boolean,
 ) {
   const selection = getSelection();
-  if (!selection || !selection.rangeCount || selection.isCollapsed) return;
-  const range = selection.getRangeAt(0);
+  if (!selection || !selection.rangeCount) return;
+  let range = selection.getRangeAt(0);
   if (!root.contains(range.commonAncestorContainer)) return;
+
+  // Pressed with nothing selected, the button takes the word the caret is sitting in.
+  // Doing nothing at all is the same as being broken from where the writer is standing.
+  if (range.collapsed) {
+    const word = wordAround(root, range);
+    if (!word) return;
+    selection.removeAllRanges();
+    selection.addRange(word);
+    range = word;
+  }
 
   const nodes = selectedTextNodes(range);
   if (!nodes.length) return;
@@ -344,6 +411,22 @@ export function RichText({
   const ref = useRef<HTMLDivElement>(null);
   const savedRange = useRef<Range | null>(null);
   const [linking, setLinking] = useState<{ href: string; text: string } | null>(null);
+  const [on, setOn] = useState({ mark: false, big: false });
+
+  // The two toggles light up for the text the caret is in, so pressing one visibly
+  // does something even where the formatting itself is quiet.
+  useEffect(() => {
+    const read = () => {
+      const root = ref.current;
+      const selection = getSelection();
+      if (!root || !selection || !selection.rangeCount) return;
+      const node = selection.getRangeAt(0).commonAncestorContainer;
+      if (!root.contains(node)) return;
+      setOn({ mark: !!enclosing(node, root, IS_MARK), big: !!enclosing(node, root, IS_BIG) });
+    };
+    document.addEventListener('selectionchange', read);
+    return () => document.removeEventListener('selectionchange', read);
+  }, []);
 
   useEffect(() => {
     if (ref.current && ref.current.innerHTML !== value) ref.current.innerHTML = value;
@@ -367,6 +450,10 @@ export function RichText({
     if (!ref.current) return;
     ref.current.focus();
     wrapSelection(ref.current, tag, className, match);
+    setOn({
+      mark: !!enclosing(getSelection()?.getRangeAt(0).commonAncestorContainer ?? ref.current, ref.current, IS_MARK),
+      big: !!enclosing(getSelection()?.getRangeAt(0).commonAncestorContainer ?? ref.current, ref.current, IS_BIG),
+    });
     emit();
   };
 
@@ -406,15 +493,11 @@ export function RichText({
 
   return (
     <div class="richtext">
-      <div class="richtext-toolbar">
+      <div class="richtext-toolbar" onMouseDown={(e) => e.preventDefault()}>
         <IconButton icon="bold" label="Bold" onClick={() => exec('bold')} />
         <IconButton icon="italic" label="Italic" onClick={() => exec('italic')} />
-        <IconButton icon="highlight" label="Highlight" onClick={() => wrap('mark', undefined, (el) => el.tagName === 'MARK')} />
-        <IconButton
-          icon="bigger"
-          label="Bigger text"
-          onClick={() => wrap('span', 'big', (el) => el.classList.contains('big'))}
-        />
+        <IconButton icon="highlight" label="Highlight" active={on.mark} onClick={() => wrap('mark', undefined, IS_MARK)} />
+        <IconButton icon="bigger" label="Bigger text" active={on.big} onClick={() => wrap('span', 'big', IS_BIG)} />
         <IconButton icon="link" label="Link" onClick={openLink} />
         <IconButton icon="list" label="Bullet list" onClick={() => exec('insertUnorderedList')} />
         <IconButton icon="olist" label="Numbered list" onClick={() => exec('insertOrderedList')} />
