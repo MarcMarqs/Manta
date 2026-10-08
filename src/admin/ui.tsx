@@ -38,6 +38,8 @@ const paths: Record<string, string> = {
   list: 'M6 4h7.5M6 8h7.5M6 12h7.5M2.5 4h.01M2.5 8h.01M2.5 12h.01',
   olist: 'M6.5 4h7M6.5 8h7M6.5 12h7M2.5 3l1-.5V6M2.5 10.5c0-1.5 2-1.5 2 0 0 .8-2 1.5-2 2.5h2',
   clear: 'M3 13h10M6 3h7M9.5 3L7 11M4 5l6 6',
+  highlight: 'M2.5 13.5h11M4.5 10.5l5.5-5.5 2 2-5.5 5.5h-2zM9.5 3.5l1-1 2 2-1 1',
+  bigger: 'M2 11.5L5 3l3 8.5M3 9h4M10 11.5V6M8 7.5L10 5.5l2 2',
   alignLeft: 'M2.5 4h11M2.5 8h7M2.5 12h9',
   alignCenter: 'M2.5 4h11M4.5 8h7M3.5 12h9',
   alignRight: 'M2.5 4h11M6.5 8h7M4.5 12h9',
@@ -251,6 +253,84 @@ export interface LinkOption {
   href: string;
 }
 
+/** The nearest ancestor of a node that the test accepts, stopping at the editor itself. */
+function enclosing(node: Node, root: HTMLElement, match: (el: HTMLElement) => boolean) {
+  let el: HTMLElement | null = node.nodeType === 1 ? (node as HTMLElement) : node.parentElement;
+  while (el && el !== root) {
+    if (match(el)) return el;
+    el = el.parentElement;
+  }
+  return null;
+}
+
+/** Every text node the selection touches, with the partly-selected ends split off. */
+function selectedTextNodes(range: Range): Text[] {
+  const root = range.commonAncestorContainer;
+  let nodes: Text[] = [];
+  if (root.nodeType === 3) {
+    nodes = [root as Text];
+  } else {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    for (let n = walker.nextNode(); n; n = walker.nextNode()) {
+      if (range.intersectsNode(n) && n.nodeValue) nodes.push(n as Text);
+    }
+  }
+  if (!nodes.length) return nodes;
+
+  // The ends are trimmed before the middle, so splitting one node twice still works.
+  const last = nodes[nodes.length - 1];
+  if (last === range.endContainer && range.endOffset < last.length) last.splitText(range.endOffset);
+  const first = nodes[0];
+  if (first === range.startContainer && range.startOffset > 0) nodes[0] = first.splitText(range.startOffset);
+
+  return nodes.filter((n) => n.nodeValue && n.nodeValue.trim());
+}
+
+/**
+ * Highlight and bigger text are applied by hand rather than through execCommand.
+ *
+ * execCommand writes `<font size>` in one browser and an inline `style` attribute in
+ * another, and whichever it writes is saved into the page's JSON — so the content file
+ * would end up carrying markup that depends on which browser did the editing. Wrapping
+ * the selection directly writes the one tag the page styles, and nothing else.
+ *
+ * A selection already wrapped end to end is unwrapped instead, so each button toggles.
+ */
+function wrapSelection(
+  root: HTMLElement,
+  tag: string,
+  className: string | undefined,
+  match: (el: HTMLElement) => boolean,
+) {
+  const selection = getSelection();
+  if (!selection || !selection.rangeCount || selection.isCollapsed) return;
+  const range = selection.getRangeAt(0);
+  if (!root.contains(range.commonAncestorContainer)) return;
+
+  const nodes = selectedTextNodes(range);
+  if (!nodes.length) return;
+
+  const wrappers = nodes.map((n) => enclosing(n, root, match));
+  if (wrappers.every((w) => w)) {
+    for (const wrapper of new Set(wrappers as HTMLElement[])) wrapper.replaceWith(...wrapper.childNodes);
+  } else {
+    for (const node of nodes) {
+      if (enclosing(node, root, match)) continue;
+      const el = document.createElement(tag);
+      if (className) el.className = className;
+      node.parentNode?.insertBefore(el, node);
+      el.appendChild(node);
+    }
+  }
+
+  // Reselected while the nodes the range points at are still the ones in the tree.
+  const next = document.createRange();
+  next.setStartBefore(nodes[0]);
+  next.setEndAfter(nodes[nodes.length - 1]);
+  selection.removeAllRanges();
+  selection.addRange(next);
+}
+
 export function RichText({
   value,
   onChange,
@@ -280,6 +360,13 @@ export function RichText({
   const exec = (command: string, arg?: string) => {
     ref.current?.focus();
     document.execCommand(command, false, arg);
+    emit();
+  };
+
+  const wrap = (tag: string, className: string | undefined, match: (el: HTMLElement) => boolean) => {
+    if (!ref.current) return;
+    ref.current.focus();
+    wrapSelection(ref.current, tag, className, match);
     emit();
   };
 
@@ -322,6 +409,12 @@ export function RichText({
       <div class="richtext-toolbar">
         <IconButton icon="bold" label="Bold" onClick={() => exec('bold')} />
         <IconButton icon="italic" label="Italic" onClick={() => exec('italic')} />
+        <IconButton icon="highlight" label="Highlight" onClick={() => wrap('mark', undefined, (el) => el.tagName === 'MARK')} />
+        <IconButton
+          icon="bigger"
+          label="Bigger text"
+          onClick={() => wrap('span', 'big', (el) => el.classList.contains('big'))}
+        />
         <IconButton icon="link" label="Link" onClick={openLink} />
         <IconButton icon="list" label="Bullet list" onClick={() => exec('insertUnorderedList')} />
         <IconButton icon="olist" label="Numbered list" onClick={() => exec('insertOrderedList')} />

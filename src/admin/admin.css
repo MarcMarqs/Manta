@@ -910,6 +910,19 @@ input[type='range'] {
   padding-left: 22px;
 }
 
+/* Highlight and bigger text, shown the way the page will show them. The editor's own
+   accent stands in for the site's, which the editor has no colour for here. */
+.richtext-body mark {
+  background: var(--e-accent-soft);
+  color: inherit;
+  padding: 0.1em 0.2em 0.02em;
+}
+
+.richtext-body .big {
+  font-size: 1.18em;
+  line-height: 1.45;
+}
+
 /* --- block list --- */
 
 .block-list {
