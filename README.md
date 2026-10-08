@@ -224,6 +224,16 @@ Secrets, set under **Settings → Variables and Secrets** as type *Secret*, neve
   is never a session for the other. Changing it ends every unlock.
 - `GITHUB_TOKEN` — fine-grained token: this repository only, **Contents: Read and write**.
 
+## Measuring
+
+**Site & theme → Sharing & search → Cloudflare Web Analytics token** turns on counting.
+In the Cloudflare dashboard: **Analytics & Logs → Web Analytics → Add a site**, then paste
+the token out of the snippet it offers. Empty means nothing is measured.
+
+It is cookieless and stores no identifier, so the site needs no consent banner — which
+matters, because a banner would be the first thing anyone sees. The beacon is left out of
+the editor's preview: looking at your own page while writing it is not a visit.
+
 After the first deploy, put your real URLs in `wrangler.jsonc` under `vars`
 (`LIVE_URL`, `PREVIEW_URL`) so the editor can link to them.
 
