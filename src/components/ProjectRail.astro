@@ -28,7 +28,11 @@ const id = `rail-${Math.random().toString(36).slice(2, 8)}`;
           data-slug={p.slug}
           data-tags={[...p.discipline, ...p.engine].join(' ')}
         >
-          <div class="cover" style={`background-image:url('${asset(p.cover)}')`} aria-hidden="true">
+          <div
+            class="cover"
+            style={p.cover ? `background-image:url('${asset(p.cover)}')` : undefined}
+            aria-hidden="true"
+          >
             {p.coverVideo && (
               <video src={p.coverVideo} muted loop playsinline preload="none" aria-hidden="true" />
             )}
@@ -101,9 +105,12 @@ const id = `rail-${Math.random().toString(36).slice(2, 8)}`;
     outline-offset: 2px;
   }
 
+  /* Without a cover the spine still needs a surface; url('') would resolve against the
+     page and fetch the page itself as an image. */
   .cover {
     position: absolute;
     inset: 0;
+    background-color: var(--surface);
     background-size: cover;
     background-position: center;
   }

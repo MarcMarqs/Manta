@@ -50,12 +50,12 @@
       "id": "grid-note",
       "type": "heading",
       "level": 2,
-      "text": "Same work, grid layout"
+      "text": "Personal studies"
     },
     {
       "id": "grid-hint",
       "type": "text",
-      "html": "<p>A second view of the same projects.</p>"
+      "html": "<p>Design work I take on outside studio projects.</p>"
     },
     {
       "id": "grid",
