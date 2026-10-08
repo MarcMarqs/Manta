@@ -8,6 +8,41 @@ import { Field, Icon, IconButton, RichText, Segmented, Select, TextArea, TextInp
 
 const MAX_DEPTH = 2;
 
+/** Blocks that hold other blocks, and so can be moved into rather than stepped over. */
+const holdsBlocks = (b: Block) => b.type === 'section' || b.type === 'columns';
+
+/** How many containers deep a block goes, counting itself. A plain block is 0. */
+function nesting(block: Block): number {
+  if (block.type === 'section') return 1 + Math.max(0, ...block.blocks.map(nesting));
+  if (block.type === 'columns') return 1 + Math.max(0, ...block.columns.flatMap((c) => c.blocks.map(nesting)));
+  return 0;
+}
+
+/**
+ * Whether a block may be moved into a container sitting in a list at this depth.
+ *
+ * It is the whole subtree that has to fit, not just the block itself: carrying a section
+ * that holds sections into a container pushes the ones inside it a level deeper too, and
+ * they would end up nested further than the Add menu will create.
+ */
+const fitsInside = (block: Block, depth: number) => nesting(block) === 0 || depth + nesting(block) < MAX_DEPTH;
+
+/** The container with the block put inside it, at whichever end it arrived from. */
+function withChild(container: Block, child: Block, at: 'start' | 'end'): Block {
+  const place = (list: Block[]) => (at === 'start' ? [child, ...list] : [...list, child]);
+  if (container.type === 'section') return { ...container, blocks: place(container.blocks) };
+  if (container.type === 'columns') {
+    // Columns have no single inside, so a block enters the near one: the first coming
+    // down, the last coming up. Reaching the others is what dragging is for.
+    const target = at === 'start' ? 0 : container.columns.length - 1;
+    return {
+      ...container,
+      columns: container.columns.map((col, i) => (i === target ? { ...col, blocks: place(col.blocks) } : col)),
+    };
+  }
+  return container;
+}
+
 /** Every page, plus any case study that doesn't have one yet, offered when adding a link. */
 const linkOptions = () => {
   const pages = pagePaths.value.map((path) => ({
@@ -131,10 +166,36 @@ export function BlockListEditor({
       return;
     }
     if (to < 0 || to >= blocks.length || from === to) return;
+
+    // A neighbour that holds blocks is moved into rather than stepped over. This is the
+    // mirror of escaping: travelling down enters at its top, travelling up enters at its
+    // bottom, and carrying on in the same direction takes the block out the far side.
+    // Without it a block created at the top level could never be put inside anything.
+    const moving = blocks[from];
+    const neighbour = blocks[to];
+    if (holdsBlocks(neighbour) && fitsInside(moving, depth)) {
+      const at = to > from ? 'start' : 'end';
+      onChange(
+        blocks
+          .filter((_, i) => i !== from)
+          .map((b) => (b.id === neighbour.id ? withChild(b, moving, at) : b)),
+      );
+      toggleExpanded(neighbour.id, true);
+      selectedBlock.value = moving.id;
+      return;
+    }
+
     const next = [...blocks];
     const [item] = next.splice(from, 1);
     next.splice(to, 0, item);
     onChange(next);
+  };
+
+  /** Whether the step in this direction puts the block inside a neighbour. */
+  const entersFrom = (index: number, dir: -1 | 1) => {
+    const neighbour = blocks[index + dir];
+    if (!neighbour || !holdsBlocks(neighbour)) return undefined;
+    return fitsInside(blocks[index], depth) ? neighbour.type : undefined;
   };
 
   return (
@@ -171,6 +232,8 @@ export function BlockListEditor({
             last={index === blocks.length - 1 && !onEscape}
             escapesUp={Boolean(onEscape) && index === 0}
             escapesDown={Boolean(onEscape) && index === blocks.length - 1}
+            entersUp={entersFrom(index, -1)}
+            entersDown={entersFrom(index, 1)}
             onChange={(b) => onChange(blocks.map((x, i) => (i === index ? b : x)))}
             onMove={(dir) => move(index, index + dir)}
             onDuplicate={() => insert(index + 1, cloneBlock(block))}
@@ -219,6 +282,8 @@ function BlockCard({
   last,
   escapesUp,
   escapesDown,
+  entersUp,
+  entersDown,
   onChange,
   onMove,
   onDuplicate,
@@ -234,6 +299,9 @@ function BlockCard({
   /** At an edge of a nested list, so moving further in that direction lifts it out. */
   escapesUp?: boolean;
   escapesDown?: boolean;
+  /** The neighbour in that direction holds blocks, so moving puts this one inside it. */
+  entersUp?: 'section' | 'columns';
+  entersDown?: 'section' | 'columns';
   onChange: (b: Block) => void;
   onMove: (dir: -1 | 1) => void;
   onDuplicate: () => void;
@@ -310,9 +378,11 @@ function BlockCard({
                 ? depth > 0
                   ? 'Already first inside this block'
                   : 'Already the first block'
-                : escapesUp
-                  ? 'Move up, out of this block (Alt+↑)'
-                  : 'Move up (Alt+↑)'
+                : entersUp
+                  ? `Move up, into the ${entersUp} above (Alt+↑)`
+                  : escapesUp
+                    ? 'Move up, out of this block (Alt+↑)'
+                    : 'Move up (Alt+↑)'
             }
             onClick={() => onMove(-1)}
             disabled={first}
@@ -324,9 +394,11 @@ function BlockCard({
                 ? depth > 0
                   ? 'Already last inside this block'
                   : 'Already the last block'
-                : escapesDown
-                  ? 'Move down, out of this block (Alt+↓)'
-                  : 'Move down (Alt+↓)'
+                : entersDown
+                  ? `Move down, into the ${entersDown} below (Alt+↓)`
+                  : escapesDown
+                    ? 'Move down, out of this block (Alt+↓)'
+                    : 'Move down (Alt+↓)'
             }
             onClick={() => onMove(1)}
             disabled={last}
