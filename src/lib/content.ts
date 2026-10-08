@@ -27,12 +27,24 @@ const pageModules = import.meta.glob<Record<string, unknown>>('../../content/pag
 /** Route path for a page file slug: "home" is the root, "work/dunes" is /work/dunes. */
 export const slugToPath = (slug: string) => (slug === 'home' ? '/' : `/${slug}`);
 
-/** Every page in content/pages/, keyed by route path. */
-export const pages: Page[] = Object.entries(pageModules).map(([file, data]) => {
-  const slug = file.replace('../../content/pages/', '').replace(/\.json$/, '');
-  return {
-    ...(data as Omit<Page, 'path' | 'slug'>),
-    slug,
-    path: slugToPath(slug),
-  };
-});
+/** Projects held back from the site, by slug. */
+const drafted = new Set((projectsJson as Project[]).filter((p) => p.draft).map((p) => p.slug));
+
+/**
+ * Every page in content/pages/ that belongs on the site, keyed by route path.
+ *
+ * A case study for a drafted project is left out of the build entirely, rather than
+ * built and merely unlinked: a page that answers on its address is public whether or
+ * not anything points at it, and it would be in the sitemap besides. The editor's
+ * preview renders through /admin/preview, so a draft can still be worked on.
+ */
+export const pages: Page[] = Object.entries(pageModules)
+  .map(([file, data]) => {
+    const slug = file.replace('../../content/pages/', '').replace(/\.json$/, '');
+    return {
+      ...(data as Omit<Page, 'path' | 'slug'>),
+      slug,
+      path: slugToPath(slug),
+    };
+  })
+  .filter((page) => !(page.project && drafted.has(page.project)));
