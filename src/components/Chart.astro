@@ -20,6 +20,8 @@ export interface ChartSeries {
 
 interface Props {
   variant: 'bar' | 'line';
+  /** Bars only: across the page, or down it with the categories on the left. */
+  direction?: 'vertical' | 'horizontal';
   title?: string;
   note?: string;
   range?: ChartRange;
@@ -27,7 +29,7 @@ interface Props {
   series: ChartSeries[];
 }
 
-const { variant, title, note, range, reference, series } = Astro.props;
+const { variant, direction, title, note, range, reference, series } = Astro.props;
 
 let problem: string | null = null;
 
@@ -46,14 +48,38 @@ const resolve = (s: ChartSeries): ChartPoint[] => {
   }
 };
 
-const plots = series.map((s) => ({ name: s.name, labels: s.labels, points: resolve(s) }));
+/**
+ * The emphasis a whole series carries, if every point in it carries the same one.
+ *
+ * Emphasis overrides the colour a series is drawn in, so a series whose points are all
+ * stepped back is grey however its legend is coloured. The legend has to say what the
+ * marks actually look like, or it is pointing at the wrong bars.
+ */
+const sharedEmphasis = (points: ChartPoint[]) => {
+  const first = points[0]?.emphasis;
+  return points.length > 0 && points.every((d) => d.emphasis === first) ? first : undefined;
+};
+
+const plots = series.map((s) => {
+  const points = resolve(s);
+  return { name: s.name, labels: s.labels, points, emphasis: sharedEmphasis(points) };
+});
 const labels = plots.reduce<string[]>((longest, p) => (p.points.length > longest.length ? p.points.map((d) => d.label) : longest), []);
 const named = plots.filter((p) => p.name).length > 1;
+const marksLabelled = plots.some((p) => p.labels) || plots.some((p) => p.points.some((d) => d.emphasis === 'accent'));
+
+// Bars can run either way; a line always reads left to right, so it ignores this.
+const horizontal = variant === 'bar' && direction === 'horizontal';
 
 const W = 720;
-const H = 300;
-const marksLabelled = plots.some((p) => p.labels) || plots.some((p) => p.points.some((d) => d.emphasis === 'accent'));
-const PAD = { top: (named ? 34 : 20) + (marksLabelled ? 14 : 0), right: 16, bottom: 40, left: 48 };
+const PAD = horizontal
+  ? { top: named ? 34 : 16, right: 56, bottom: 34, left: 132 }
+  : { top: (named ? 34 : 20) + (marksLabelled ? 14 : 0), right: 16, bottom: 40, left: 48 };
+
+// Laid out across, the chart is as tall as it needs to be for its categories rather
+// than a fixed height they have to squeeze into.
+const band = Math.max(26, 16 * plots.length + 16);
+const H = horizontal ? PAD.top + PAD.bottom + band * Math.max(labels.length, 1) : 300;
 const plotW = W - PAD.left - PAD.right;
 const plotH = H - PAD.top - PAD.bottom;
 
@@ -63,19 +89,29 @@ const min = Math.min(...values, 0);
 const niceMax = max === 0 ? 1 : Math.ceil(max / 5) * 5;
 const niceMin = min < 0 ? Math.floor(min / 5) * 5 : 0;
 const span = niceMax - niceMin || 1;
-const y = (v: number) => PAD.top + plotH - ((v - niceMin) / span) * plotH;
 const ticks = [niceMin, niceMin + span / 2, niceMax];
 
-const bandW = plotW / Math.max(labels.length, 1);
-const cx = (i: number) => PAD.left + bandW * i + bandW / 2;
-// Bars of several series share a band, side by side inside it.
-const barW = Math.min((bandW * 0.62) / Math.max(plots.length, 1), 72);
+/** Where a value sits along the axis it is measured on. */
+const v = (value: number) =>
+  horizontal
+    ? PAD.left + ((value - niceMin) / span) * plotW
+    : PAD.top + plotH - ((value - niceMin) / span) * plotH;
 
-// With a long range every label would collide, so only some are drawn.
-const labelEvery = Math.max(1, Math.ceil(labels.length / 12));
+const bandSize = horizontal ? plotH / Math.max(labels.length, 1) : plotW / Math.max(labels.length, 1);
+/** The middle of a category's band, along the axis the categories are spread on. */
+const c = (i: number) => (horizontal ? PAD.top : PAD.left) + bandSize * i + bandSize / 2;
+
+// Bars of several series share a band, side by side inside it.
+const thickness = Math.min((bandSize * 0.62) / Math.max(plots.length, 1), horizontal ? 40 : 72);
+/** Where a series' bar starts within the band. */
+const offset = (s: number) => -(thickness * plots.length) / 2 + s * thickness;
+
+// Laid out down the page every category label has a line of its own; across it, with a
+// long range, they would collide, so only some are drawn.
+const labelEvery = horizontal ? 1 : Math.max(1, Math.ceil(labels.length / 12));
 
 const linePath = (points: { value: number }[]) =>
-  points.map((d, i) => `${i === 0 ? 'M' : 'L'}${cx(i)},${y(d.value)}`).join(' ');
+  points.map((d, i) => `${i === 0 ? 'M' : 'L'}${c(i)},${v(d.value)}`).join(' ');
 ---
 
 <figure class="chart">
@@ -87,7 +123,7 @@ const linePath = (points: { value: number }[]) =>
         <g class="legend">
           {plots.map((p, s) => (
             <g transform={`translate(${PAD.left + s * 150}, 14)`}>
-              <rect width="10" height="10" y="-9" rx="2" class={`swatch s${s}`} />
+              <rect width="10" height="10" y="-9" rx="2" class={`swatch s${s}${p.emphasis ? ` is-${p.emphasis}` : ''}`} />
               <text x="16" class="axis">
                 {p.name}
               </text>
@@ -97,55 +133,87 @@ const linePath = (points: { value: number }[]) =>
       )
     }
     {
-      ticks.map((t) => (
-        <g>
-          <line x1={PAD.left} x2={W - PAD.right} y1={y(t)} y2={y(t)} class="grid" />
-          <text x={PAD.left - 10} y={y(t) + 4} text-anchor="end" class="axis">
-            {Math.round(t)}
-          </text>
-        </g>
-      ))
+      ticks.map((t) =>
+        horizontal ? (
+          <g>
+            <line x1={v(t)} x2={v(t)} y1={PAD.top} y2={H - PAD.bottom} class="grid" />
+            <text x={v(t)} y={H - PAD.bottom + 18} text-anchor="middle" class="axis">
+              {Math.round(t)}
+            </text>
+          </g>
+        ) : (
+          <g>
+            <line x1={PAD.left} x2={W - PAD.right} y1={v(t)} y2={v(t)} class="grid" />
+            <text x={PAD.left - 10} y={v(t) + 4} text-anchor="end" class="axis">
+              {Math.round(t)}
+            </text>
+          </g>
+        ),
+      )
     }
     {
       variant === 'bar'
         ? plots.map((p, s) =>
-            p.points.map((d, i) => (
-              <g>
-                <rect
-                  class={`bar s${s}${d.emphasis ? ` is-${d.emphasis}` : ''}`}
-                  x={cx(i) - (barW * plots.length) / 2 + s * barW}
-                  y={Math.min(y(d.value), y(0))}
-                  width={Math.max(barW - 1, 1)}
-                  height={Math.max(Math.abs(y(d.value) - y(0)), 1)}
-                >
-                  <title>{`${p.name ? `${p.name} · ` : ''}${d.label}: ${d.value}`}</title>
-                </rect>
-                {(p.labels || d.emphasis === 'accent') && (
-                  <text
-                    class={`mark-value${d.emphasis === 'accent' ? ' is-accent' : ''}`}
-                    x={cx(i) - (barW * plots.length) / 2 + s * barW + barW / 2}
-                    y={Math.min(y(d.value), y(0)) - 6}
-                    text-anchor="middle"
+            p.points.map((d, i) =>
+              horizontal ? (
+                <g>
+                  <rect
+                    class={`bar s${s}${d.emphasis ? ` is-${d.emphasis}` : ''}`}
+                    x={Math.min(v(d.value), v(0))}
+                    y={c(i) + offset(s)}
+                    width={Math.max(Math.abs(v(d.value) - v(0)), 1)}
+                    height={Math.max(thickness - 1, 1)}
                   >
-                    {d.value}
-                  </text>
-                )}
-              </g>
-            )),
+                    <title>{`${p.name ? `${p.name} · ` : ''}${d.label}: ${d.value}`}</title>
+                  </rect>
+                  {(p.labels || d.emphasis === 'accent') && (
+                    <text
+                      class={`mark-value${d.emphasis === 'accent' ? ' is-accent' : ''}`}
+                      x={Math.max(v(d.value), v(0)) + 6}
+                      y={c(i) + offset(s) + thickness / 2 + 4}
+                    >
+                      {d.value}
+                    </text>
+                  )}
+                </g>
+              ) : (
+                <g>
+                  <rect
+                    class={`bar s${s}${d.emphasis ? ` is-${d.emphasis}` : ''}`}
+                    x={c(i) + offset(s)}
+                    y={Math.min(v(d.value), v(0))}
+                    width={Math.max(thickness - 1, 1)}
+                    height={Math.max(Math.abs(v(d.value) - v(0)), 1)}
+                  >
+                    <title>{`${p.name ? `${p.name} · ` : ''}${d.label}: ${d.value}`}</title>
+                  </rect>
+                  {(p.labels || d.emphasis === 'accent') && (
+                    <text
+                      class={`mark-value${d.emphasis === 'accent' ? ' is-accent' : ''}`}
+                      x={c(i) + offset(s) + thickness / 2}
+                      y={Math.min(v(d.value), v(0)) - 6}
+                      text-anchor="middle"
+                    >
+                      {d.value}
+                    </text>
+                  )}
+                </g>
+              ),
+            ),
           )
         : plots.map((p, s) => (
             <g>
               <path class={`line s${s}`} d={linePath(p.points)} />
               {p.points.map((d, i) => (
                 <g>
-                  <circle class={`dot s${s}${d.emphasis ? ` is-${d.emphasis}` : ''}`} cx={cx(i)} cy={y(d.value)} r={d.emphasis === 'accent' ? 4.5 : 3}>
+                  <circle class={`dot s${s}${d.emphasis ? ` is-${d.emphasis}` : ''}`} cx={c(i)} cy={v(d.value)} r={d.emphasis === 'accent' ? 4.5 : 3}>
                     <title>{`${p.name ? `${p.name} · ` : ''}${d.label}: ${d.value}`}</title>
                   </circle>
                   {(p.labels || d.emphasis === 'accent') && (
                     <text
                       class={`mark-value${d.emphasis === 'accent' ? ' is-accent' : ''}`}
-                      x={cx(i)}
-                      y={y(d.value) - 10}
+                      x={c(i)}
+                      y={v(d.value) - 10}
                       text-anchor="middle"
                     >
                       {d.value}
@@ -160,22 +228,35 @@ const linePath = (points: { value: number }[]) =>
     {
       reference && (
         <g class="reference">
-          <line x1={PAD.left} x2={W - PAD.right} y1={y(reference.value)} y2={y(reference.value)} />
-          {reference.label && (
-            <text x={PAD.left + 6} y={y(reference.value) - 6} class="reference-label">
-              {reference.label}
-            </text>
+          {horizontal ? (
+            <line x1={v(reference.value)} x2={v(reference.value)} y1={PAD.top} y2={H - PAD.bottom} />
+          ) : (
+            <line x1={PAD.left} x2={W - PAD.right} y1={v(reference.value)} y2={v(reference.value)} />
           )}
+          {reference.label &&
+            (horizontal ? (
+              <text x={v(reference.value) + 6} y={PAD.top + 12} class="reference-label">
+                {reference.label}
+              </text>
+            ) : (
+              <text x={PAD.left + 6} y={v(reference.value) - 6} class="reference-label">
+                {reference.label}
+              </text>
+            ))}
         </g>
       )
     }
     {
       labels.map((label, i) =>
-        i % labelEvery === 0 ? (
-          <text x={cx(i)} y={H - 14} text-anchor="middle" class="axis">
+        i % labelEvery !== 0 ? null : horizontal ? (
+          <text x={PAD.left - 10} y={c(i) + 4} text-anchor="end" class="axis">
             {label}
           </text>
-        ) : null,
+        ) : (
+          <text x={c(i)} y={H - 14} text-anchor="middle" class="axis">
+            {label}
+          </text>
+        ),
       )
     }
   </svg>
@@ -268,15 +349,19 @@ const linePath = (points: { value: number }[]) =>
     font-weight: 600;
   }
 
-  /* Emphasis is relative: one point steps forward only because the others step back. */
+  /* Emphasis is relative: one point steps forward only because the others step back.
+     The legend swatch takes it too when a whole series carries the same one, so what is
+     in the key is the colour that is actually on the page. */
   .bar.is-muted,
-  .dot.is-muted {
+  .dot.is-muted,
+  .swatch.is-muted {
     fill: var(--muted);
     opacity: 0.45;
   }
 
   .bar.is-accent,
-  .dot.is-accent {
+  .dot.is-accent,
+  .swatch.is-accent {
     fill: var(--accent);
   }
 
