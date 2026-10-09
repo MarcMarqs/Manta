@@ -30,6 +30,11 @@ export interface Site {
   footer: string;
   nav: { label: string; href: string }[];
   /**
+   * What goes between a project's genre, year and role. Carries its own spaces, so a
+   * comma can sit tight against the word before it while a dash does not.
+   */
+  separator?: string;
+  /**
    * Cloudflare Web Analytics token. Counting is cookieless and carries no identifier,
    * which is why the site needs no consent banner — the first thing a visitor would
    * otherwise have to get past. Empty means nothing is measured at all.

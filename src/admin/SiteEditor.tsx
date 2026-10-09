@@ -62,6 +62,20 @@ export function SiteEditor() {
           <Field label="Tagline" wide>
             <TextInput value={s.tagline} onChange={(tagline) => set({ tagline })} />
           </Field>
+          <Field label="Between project facts" hint="Genre, year and role on a project card." wide>
+            <Select
+              value={s.separator ?? ' · '}
+              options={[
+                { value: ' · ', label: 'Dot ·' },
+                { value: ' — ', label: 'Dash —' },
+                { value: ' / ', label: 'Slash /' },
+                { value: ' | ', label: 'Bar |' },
+                { value: ', ', label: 'Comma ,' },
+                { value: '  ', label: 'Space' },
+              ]}
+              onChange={(separator: string) => set({ separator })}
+            />
+          </Field>
         </div>
       </section>
 

@@ -1,6 +1,6 @@
 ---
 import type { ProjectOrigin } from '../lib/types';
-import { originOf, useContent } from '../lib/context';
+import { factLine, originOf, useContent } from '../lib/context';
 import Filters from './Filters.astro';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
   origin?: ProjectOrigin;
 }
 const { filters = true, origin } = Astro.props;
-const { projects: all, tags, tagLabel, asset } = useContent(Astro.locals);
+const { projects: all, site, tags, tagLabel, asset } = useContent(Astro.locals);
 const shown = originOf(origin, tags.origin);
 const projects = all.filter((p) => originOf(p.origin, tags.origin) === shown);
 const id = `rail-${Math.random().toString(36).slice(2, 8)}`;
@@ -46,7 +46,7 @@ const id = `rail-${Math.random().toString(36).slice(2, 8)}`;
             <div class="panel-inner">
               <h3>{p.title}</h3>
               <p class="muted panel-meta">
-                {[p.genre, p.year, p.role].filter(Boolean).join(' · ')}
+                {factLine(site, [p.genre, p.year, p.role])}
               </p>
               <p>{p.summary}</p>
               <ul class="highlights">
