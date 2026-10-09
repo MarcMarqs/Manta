@@ -12,8 +12,14 @@
       "Architected an AI targeting-cap and aggro-cooldown system to restore combat readability",
       "Shaped horde spawning and the difficulty curve from telemetry heatmaps"
     ],
-    "discipline": [],
-    "engine": [],
+    "discipline": [
+      "systems-design",
+      "combat-design",
+      "game-production-project-management"
+    ],
+    "engine": [
+      "unreal-engine"
+    ],
     "cover": "/images/projects/wardens-rising/cover.svg",
     "coverVideo": null,
     "visibility": "public",
@@ -29,8 +35,8 @@
   {
     "slug": "aurora",
     "title": "Aurora: A Child's Journey",
-    "genre": "3D Puzzle / Narrative Adventure",
-    "year": 2020,
+    "genre": "Narrative Puzzle Adventure",
+    "year": null,
     "role": "Game Designer",
     "summary": "Owned the Act II player experience, designing and refining 3C mechanics and puzzle layouts. Partnered with Level Design to iterate on pacing via playtest feedback, leading sessions that shaped the final game.",
     "highlights": [
@@ -39,8 +45,14 @@
       "Co-defined the 3C: camera, character and control",
       "Owned Act II gameplay and puzzle design end-to-end"
     ],
-    "discipline": [],
-    "engine": [],
+    "discipline": [
+      "mechanics-design",
+      "level-design",
+      "game-production-project-management"
+    ],
+    "engine": [
+      "unity-engine"
+    ],
     "cover": "/images/projects/aurora/cover.svg",
     "coverVideo": null,
     "visibility": "public",
@@ -94,13 +106,19 @@
   {
     "slug": "gundam-requiem",
     "title": "Gundam: Requiem for Vengeance",
-    "genre": "Fortnite game mode",
-    "year": 2024,
+    "genre": "Fortnite Game Mode",
+    "year": null,
     "role": "Game Designer",
     "summary": "Designed and pitched the mode for an external IP partner, turning a UEFN limit on vehicle control into the competitive hook: teams contest objectives to earn the mech, then choose which part of the map it reshapes.",
     "highlights": [],
-    "discipline": [],
-    "engine": [],
+    "discipline": [
+      "systems-design",
+      "user-experience",
+      "game-production-project-management"
+    ],
+    "engine": [
+      "uefn-unreal-fortnite"
+    ],
     "cover": "/images/projects/gundam-requiem/cover.svg",
     "coverVideo": null,
     "visibility": "public",
@@ -111,12 +129,18 @@
     "slug": "plushland-curse",
     "title": "Plushland Curse",
     "genre": "Souls-like",
-    "year": 2023,
+    "year": null,
     "role": "Game Designer",
     "summary": "Owned combat, enemy AI and the weapon system on a toy-themed souls-like: 15 enemy archetypes against a six-rule design standard, and a rock-paper-scissors damage matrix balanced from a hit-to-kill model.",
     "highlights": [],
-    "discipline": [],
-    "engine": [],
+    "discipline": [
+      "combat-design",
+      "ai-encounters",
+      "progression-balancing"
+    ],
+    "engine": [
+      "unreal-engine"
+    ],
     "cover": "/images/projects/plushland-curse/cover.svg",
     "coverVideo": null,
     "visibility": "public",
@@ -126,13 +150,18 @@
   {
     "slug": "far-away-orbital-space",
     "title": "Far Away from Orbital Space",
-    "genre": "Co-op Puzzle",
-    "year": 2022,
+    "genre": "Co-Op Puzzle",
+    "year": null,
     "role": "Game Designer",
     "summary": "Built the scoring algorithms, puzzle gating and progression for a co-op communication puzzler, validating every system on paper and in Miro before it reached the engine.",
     "highlights": [],
-    "discipline": [],
-    "engine": [],
+    "discipline": [
+      "systems-design",
+      "user-experience"
+    ],
+    "engine": [
+      "unreal-engine"
+    ],
     "cover": "/images/projects/far-away-orbital-space/cover.svg",
     "coverVideo": null,
     "visibility": "public",

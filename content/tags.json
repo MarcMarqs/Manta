@@ -42,7 +42,7 @@
     },
     {
       "id": "game-production-project-management",
-      "label": "Game Production (Project Management)"
+      "label": "Project Management"
     },
     {
       "id": "progression-balancing",
@@ -52,11 +52,13 @@
   "engine": [
     {
       "id": "unreal-engine",
-      "label": "Unreal Engine"
+      "label": "Unreal Engine",
+      "accent": true
     },
     {
       "id": "unity-engine",
-      "label": "Unity Engine"
+      "label": "Unity Engine",
+      "accent": true
     },
     {
       "id": "godot",
