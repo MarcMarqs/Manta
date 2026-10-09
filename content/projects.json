@@ -158,19 +158,20 @@
   },
   {
     "slug": "fc27-teardown",
-    "title": "FC 27 Teardown",
+    "title": "Economy Teardown",
     "genre": "",
-    "year": 2026,
+    "year": null,
     "role": "",
     "summary": "When cards become points, the points table becomes the economy. FC 27's Streamlined SBCs swap the squad-building puzzle for a score bar, and players like it: EA reported a positive reception within a week. But the change moved every important decision into one table, the Item Score curve, and that table brought issues.",
     "highlights": [],
     "discipline": [
-      "systems"
+      "systems",
+      "economy"
     ],
     "engine": [],
     "cover": "",
     "coverVideo": null,
-    "featured": false,
+    "featured": true,
     "visibility": "public",
     "links": [],
     "origin": "personal"
@@ -181,7 +182,7 @@
     "genre": "Analysis",
     "year": null,
     "role": "",
-    "summary": "",
+    "summary": "Overwatch’s matchmaker builds fair games; the rank players see is what breaks. This study diagnoses that and redesigns it, halving the share of matches played at the wrong rank across 300 modeled players.",
     "highlights": [],
     "discipline": [
       "systems"
