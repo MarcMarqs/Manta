@@ -43,6 +43,10 @@
     {
       "id": "game-production-project-management",
       "label": "Game Production (Project Management)"
+    },
+    {
+      "id": "progression-balancing",
+      "label": "Progression & Balancing"
     }
   ],
   "engine": [

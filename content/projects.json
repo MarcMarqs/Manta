@@ -56,12 +56,15 @@
   {
     "slug": "fc27-teardown",
     "title": "Economy Teardown",
-    "genre": "",
+    "genre": "Economy Design",
     "year": null,
     "role": "",
     "summary": "When cards become points, the points table becomes the economy. FC 27's Streamlined SBCs swap the squad-building puzzle for a score bar, and players like it: EA reported a positive reception within a week. But the change moved every important decision into one table, the Item Score curve, and that table brought issues.",
     "highlights": [],
-    "discipline": [],
+    "discipline": [
+      "economy-design",
+      "systems-design"
+    ],
     "engine": [],
     "cover": "",
     "coverVideo": null,
@@ -77,7 +80,10 @@
     "role": "",
     "summary": "Overwatch’s matchmaker builds fair games; the rank players see is what breaks. This study diagnoses that and redesigns it, halving the share of matches played at the wrong rank across 300 modeled players.",
     "highlights": [],
-    "discipline": [],
+    "discipline": [
+      "progression-balancing",
+      "systems-design"
+    ],
     "engine": [],
     "cover": "",
     "coverVideo": null,
@@ -137,12 +143,18 @@
     "slug": "ascending-flags",
     "title": "Ascending Flags",
     "genre": "Card Game",
-    "year": 2022,
+    "year": null,
     "role": "Game Designer",
     "summary": "Architected a single-pool economy where movement, attack and defence all compete for the same mana, designed a 40+ card catalog across five types, and led design, art and engineering on a 15-person team.",
     "highlights": [],
-    "discipline": [],
-    "engine": [],
+    "discipline": [
+      "systems-design",
+      "economy-design",
+      "progression-balancing"
+    ],
+    "engine": [
+      "unity-engine"
+    ],
     "cover": "/images/projects/ascending-flags/cover.svg",
     "coverVideo": null,
     "visibility": "public",
@@ -152,12 +164,15 @@
   {
     "slug": "crafting-economy",
     "title": "Crafting Economy",
-    "genre": "Economy",
+    "genre": "System Design",
     "year": null,
     "role": "",
     "summary": "An economy that broke when tested against three kinds of players over 100 hours, rebuilt so nothing gets hoarded and nothing runs dry. It also asks players real questions: whether to roll or target a stat, and whether to gamble on an upgrade or protect it.",
     "highlights": [],
-    "discipline": [],
+    "discipline": [
+      "economy-design",
+      "systems-design"
+    ],
     "engine": [],
     "cover": "",
     "coverVideo": null,
