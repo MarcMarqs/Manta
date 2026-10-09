@@ -172,6 +172,8 @@ export type Block = BlockLayout & (
       id: string;
       type: 'chart';
       variant: 'bar' | 'line';
+      /** Bars only: across the page, or down it with the categories on the left. */
+      direction?: 'vertical' | 'horizontal';
       title?: string;
       /** One line under the title, for what the numbers mean or where they came from. */
       note?: string;

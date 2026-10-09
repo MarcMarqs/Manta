@@ -982,6 +982,18 @@ function BlockFields({
                 onChange={(v) => onChange({ ...block, variant: v })}
               />
             </Field>
+            {block.variant === 'bar' && (
+              <Field label="Bars run" hint="Across the page, or down it with the labels on the left.">
+                <Segmented
+                  value={block.direction ?? 'vertical'}
+                  options={[
+                    { value: 'vertical', label: 'Up' },
+                    { value: 'horizontal', label: 'Across' },
+                  ]}
+                  onChange={(d) => onChange({ ...block, direction: d === 'vertical' ? undefined : d })}
+                />
+              </Field>
+            )}
             <Field label="Title" wide>
               <TextInput value={block.title ?? ''} onChange={(v) => onChange({ ...block, title: v })} />
             </Field>

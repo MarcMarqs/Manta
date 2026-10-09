@@ -274,6 +274,7 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
     block.type === 'chart' && (
       <Chart
         variant={block.variant}
+        direction={block.direction}
         title={block.title}
         note={block.note}
         range={block.range}
