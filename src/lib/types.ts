@@ -46,6 +46,8 @@ export interface Tag {
 export interface Tags {
   discipline: Tag[];
   engine: Tag[];
+  /** The shelves work is divided into. The first is where a project lands by default. */
+  origin: Tag[];
 }
 
 export interface ProjectLink {
@@ -54,8 +56,14 @@ export interface ProjectLink {
   href: string;
 }
 
-/** Where the work came from; drives which shelf on the home page it appears in. */
-export type ProjectOrigin = 'professional' | 'personal';
+/**
+ * Where the work came from; drives which shelf on the home page it appears in.
+ *
+ * An id from the origin list in content/tags.json, which the author keeps. It started as
+ * two names fixed in the code, which is one shelf short the moment there is contract work
+ * or a game jam to separate out.
+ */
+export type ProjectOrigin = string;
 
 /**
  * How much of a project the world gets to see.
@@ -81,7 +89,7 @@ export interface Project {
   cover: string;
   coverVideo: string | null;
   featured: boolean;
-  /** Absent means professional — the studio work that leads the page. */
+  /** An id from the origin list. Absent means the first one. */
   origin?: ProjectOrigin;
   visibility: ProjectVisibility;
   links: ProjectLink[];

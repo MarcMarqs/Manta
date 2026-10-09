@@ -1,16 +1,17 @@
 ---
 import type { ProjectOrigin } from '../lib/types';
-import { useContent } from '../lib/context';
+import { originOf, useContent } from '../lib/context';
 import Filters from './Filters.astro';
 
 interface Props {
   filters?: boolean;
-  /** Which shelf to show. Omitted means professional; projects default to it too. */
+  /** Which shelf to show. Omitted means the first one on the list. */
   origin?: ProjectOrigin;
 }
 const { filters = true, origin } = Astro.props;
-const { projects: all, tagLabel, asset } = useContent(Astro.locals);
-const projects = all.filter((p) => (p.origin ?? 'professional') === (origin ?? 'professional'));
+const { projects: all, tags, tagLabel, asset } = useContent(Astro.locals);
+const shown = originOf(origin, tags.origin);
+const projects = all.filter((p) => originOf(p.origin, tags.origin) === shown);
 const id = `rail-${Math.random().toString(36).slice(2, 8)}`;
 ---
 

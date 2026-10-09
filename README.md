@@ -127,6 +127,18 @@ called `primary`.
    scrolls into view on a touch screen), so a page of cards doesn't run every video at once.
 3. Create `content/pages/work/<slug>.json` for its case study.
 
+### Origins
+
+A project sits on exactly one **origin** — the shelf it belongs to. The list lives under
+**Tags → Origins**: rename them, reorder them, add as many as the work needs. The first
+is where a new project lands.
+
+A project rail or grid is pointed at one of them, which is how the home page shows studio
+work in one place and personal studies in another. Removing an origin moves its projects,
+and every rail and grid aimed at it, to the first shelf that remains — a block left
+pointing at a missing shelf would just show nothing, with no sign why. The last origin
+cannot be removed.
+
 ### Who can see a project
 
 Each project carries a `visibility`, set in the editor under **Who can see it**:

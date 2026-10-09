@@ -6,7 +6,8 @@ import { Field, Icon, IconButton, Segmented, Select, TextArea, TextInput, Toggle
 
 const caseStudyPath = (slug: string) => `${PAGES_DIR}work/${slug}.json`;
 
-function blankProject(existing: Project[]): Project {
+/** A new project lands on the first shelf, written down rather than left to a default. */
+function blankProject(existing: Project[], origin: string): Project {
   let n = existing.length + 1;
   while (existing.some((p) => p.slug === `new-project-${n}`)) n++;
   return {
@@ -22,6 +23,7 @@ function blankProject(existing: Project[]): Project {
     cover: '',
     coverVideo: null,
     featured: false,
+    origin,
     visibility: 'draft',
     links: [],
   };
@@ -120,20 +122,17 @@ function ProjectForm({ project, index }: { project: Project; index: number }) {
   const setLink = (i: number, patch: Partial<ProjectLink>) =>
     set({ links: project.links.map((l, j) => (j === i ? { ...l, ...patch } : l)) });
 
+  const origins = tags.value?.origin ?? [];
+
   return (
     <div class="stack">
       <div class="row spread">
         <div class="row">
-          <Field label="Origin" hint="Which shelf on the home page this appears in.">
+          <Field label="Origin" hint="Which shelf on the home page this appears in. Edit the list under Tags.">
             <Select
-              value={project.origin ?? 'professional'}
-              options={[
-                { value: 'professional', label: 'Professional work' },
-                { value: 'personal', label: 'Personal studies' },
-              ]}
-              onChange={(origin) =>
-                set({ origin: origin === 'professional' ? undefined : (origin as 'personal') })
-              }
+              value={project.origin ?? origins[0]?.id ?? ''}
+              options={origins.map((o) => ({ value: o.id, label: o.label }))}
+              onChange={(origin) => set({ origin })}
             />
           </Field>
           <Field
@@ -271,7 +270,7 @@ export function ProjectsEditor({ slug }: { slug?: string }) {
   const index = slug ? list.findIndex((p) => p.slug === slug) : -1;
 
   const add = () => {
-    const project = blankProject(list);
+    const project = blankProject(list, tags.value?.origin?.[0]?.id ?? 'professional');
     updateFile<Project[]>(PROJECTS, (l) => [...l, project], { coalesce: false });
     view.value = { kind: 'projects', slug: project.slug };
   };
