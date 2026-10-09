@@ -270,7 +270,8 @@
             }
           ],
           "note": "Expected gold to gain one level. Source: balance model, Upgrade Table tab.",
-          "width": "narrow"
+          "width": "narrow",
+          "direction": "horizontal"
         },
         {
           "id": "b-f1dqny",
