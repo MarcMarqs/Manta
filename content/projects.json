@@ -172,5 +172,24 @@
     "visibility": "public",
     "links": [],
     "origin": "personal"
+  },
+  {
+    "slug": "ranked-systems-analysis",
+    "title": "Ranked Systems Analysis",
+    "genre": "Analysis",
+    "year": null,
+    "role": "",
+    "summary": "",
+    "highlights": [],
+    "discipline": [
+      "systems"
+    ],
+    "engine": [],
+    "cover": "",
+    "coverVideo": null,
+    "featured": false,
+    "visibility": "public",
+    "links": [],
+    "origin": "personal"
   }
 ]
