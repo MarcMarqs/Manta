@@ -18,7 +18,8 @@
     {
       "id": "t-overview",
       "type": "text",
-      "html": "<p>Overwatch's matchmaker already builds fair games. What breaks is the rank players see: reset on a timer, crowded into two tiers and explained by a pile of modifiers. This is a designer's diagnosis of Competitive as of 2026, and a redesign built on one rule: the rank on screen should always be the game's best current guess.</p><p></p><p></p>"
+      "html": "<p>Overwatch's matchmaker already builds fair games. What breaks is the rank players see: reset on a timer, crowded into two tiers and explained by a pile of modifiers. This is a designer's diagnosis of Competitive as of 2026, and a redesign built on one rule: the rank on screen should always be the game's best current guess.</p><p></p><p></p>",
+      "width": "narrow"
     },
     {
       "id": "b-xk46er",
