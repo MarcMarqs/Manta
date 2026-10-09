@@ -148,7 +148,17 @@ export type Block = BlockLayout & (
       /** Crop shape. Absent or 'auto' keeps the picture's own proportions. */
       aspect?: 'auto' | '1:1' | '4:3' | '3:2' | '16:9' | '21:9';
     }
-  | { id: string; type: 'gallery'; images: { src: string; alt: string }[] }
+  | {
+      id: string;
+      type: 'gallery';
+      /**
+       * 'grid' shows them all at once; 'carousel' shows one at a time and lets the
+       * reader rotate through. A carousel rather than a second block type: the content
+       * is identical, only the way it is laid out differs.
+       */
+      layout?: 'grid' | 'carousel';
+      images: { src: string; alt: string; caption?: string }[];
+    }
   | { id: string; type: 'video'; provider: 'youtube' | 'vimeo' | 'itch'; videoId: string; title?: string }
   | {
       id: string;
@@ -163,6 +173,22 @@ export type Block = BlockLayout & (
       sheetId: string;
       /** Which tab, as the gid from its address. Absent means whichever opens first. */
       gid?: string;
+      /** Names the frame for screen readers, which otherwise announce only "iframe". */
+      title?: string;
+      caption?: string;
+      height?: 'short' | 'medium' | 'tall';
+    }
+  | {
+      id: string;
+      type: 'doc';
+      /**
+       * 'file' is an ordinary document, embedded from its own address and readable only
+       * if its sharing allows it. 'published' is one put through File → Share → Publish
+       * to web, which has a different id and renders without the Docs chrome.
+       */
+      source: 'file' | 'published';
+      /** The id out of the Google Docs address. */
+      docId: string;
       /** Names the frame for screen readers, which otherwise announce only "iframe". */
       title?: string;
       caption?: string;

@@ -69,6 +69,14 @@ const sheetSrc = (b: Extract<Block, { type: 'sheet' }>) => {
   return `https://docs.google.com/spreadsheets/d/${id}/preview${gid ? `#gid=${gid}` : ''}`;
 };
 
+/** The address a document is embedded from. Scrubbed for the same reason as a sheet. */
+const docSrc = (b: Extract<Block, { type: 'doc' }>) => {
+  const id = b.docId.replace(/[^\w-]/g, '');
+  return b.source === 'published'
+    ? `https://docs.google.com/document/d/e/${id}/pub?embedded=true`
+    : `https://docs.google.com/document/d/${id}/preview`;
+};
+
 const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
   ({
     youtube: `https://www.youtube-nocookie.com/embed/${b.videoId}`,
@@ -123,19 +131,54 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
   }
 
   {
-    block.type === 'gallery' && (
-      <div class="gallery">
-        {block.images.map((img) => (
-          <img
-            src={asset(img.src)}
-            srcset={preview ? undefined : srcsetFor(img.src)}
-            sizes="(max-width: 720px) 45vw, 260px"
-            alt={img.alt}
-            loading="lazy"
-          />
-        ))}
-      </div>
-    )
+    block.type === 'gallery' &&
+      (block.layout === 'carousel' ? (
+        /* The track scrolls and snaps, so a touch screen swipes it and a keyboard can
+           tab to it, with or without the buttons. The buttons only nudge that scroll. */
+        <div class="carousel" data-carousel>
+          <div class="carousel-track" tabindex="0" aria-label="Images, scrollable">
+            {block.images.map((img) => (
+              <figure class="carousel-slide">
+                <img
+                  src={asset(img.src)}
+                  srcset={preview ? undefined : srcsetFor(img.src)}
+                  sizes="(max-width: 900px) 92vw, 760px"
+                  alt={img.alt}
+                  loading="lazy"
+                />
+                {img.caption && <figcaption>{img.caption}</figcaption>}
+              </figure>
+            ))}
+          </div>
+          {block.images.length > 1 && (
+            <>
+              <button type="button" class="carousel-arrow prev" data-step="-1" aria-label="Previous image">
+                &#8249;
+              </button>
+              <button type="button" class="carousel-arrow next" data-step="1" aria-label="Next image">
+                &#8250;
+              </button>
+              <div class="carousel-dots" role="tablist" aria-label="Choose an image">
+                {block.images.map((_, i) => (
+                  <button type="button" class="carousel-dot" data-to={i} aria-label={`Image ${i + 1}`} />
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+      ) : (
+        <div class="gallery">
+          {block.images.map((img) => (
+            <img
+              src={asset(img.src)}
+              srcset={preview ? undefined : srcsetFor(img.src)}
+              sizes="(max-width: 720px) 45vw, 260px"
+              alt={img.alt}
+              loading="lazy"
+            />
+          ))}
+        </div>
+      ))
   }
 
   {
@@ -176,6 +219,18 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
         </figure>
       ) : (
         preview && <p class="blk-empty">Paste a Google Sheets link to show it here.</p>
+      ))
+  }
+
+  {
+    block.type === 'doc' &&
+      (block.docId ? (
+        <figure class={`sheet sheet-${block.height ?? 'medium'}`}>
+          <iframe src={docSrc(block)} title={block.title ?? 'Embedded document'} loading="lazy" />
+          {block.caption && <figcaption>{block.caption}</figcaption>}
+        </figure>
+      ) : (
+        preview && <p class="blk-empty">Paste a Google Docs link to show it here.</p>
       ))
   }
 
@@ -422,6 +477,109 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
     aspect-ratio: 4 / 3;
     object-fit: cover;
     width: 100%;
+  }
+
+  /* One image at a time. The track is a scroller with snap points rather than a
+     transform, so swiping works on its own and the arrows have only to scroll it. */
+  .carousel {
+    position: relative;
+  }
+
+  .carousel-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 0;
+    scrollbar-width: none;
+  }
+  .carousel-track::-webkit-scrollbar {
+    display: none;
+  }
+  .carousel-track:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .carousel-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+    margin: 0;
+  }
+
+  .carousel-slide img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: var(--radius);
+    display: block;
+    cursor: zoom-in;
+  }
+
+  .carousel-slide figcaption {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 8px;
+  }
+
+  .carousel-arrow {
+    position: absolute;
+    top: calc(50% - 20px);
+    transform: translateY(-50%);
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    font: inherit;
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--fg);
+    background: color-mix(in srgb, var(--bg) 78%, transparent);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+  }
+  .carousel-arrow.prev {
+    left: 10px;
+  }
+  .carousel-arrow.next {
+    right: 10px;
+  }
+  .carousel-arrow:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .carousel-arrow[disabled] {
+    opacity: 0.3;
+    cursor: default;
+  }
+
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 10px;
+  }
+
+  .carousel-dot {
+    width: 7px;
+    height: 7px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: var(--border);
+    cursor: pointer;
+  }
+  .carousel-dot[aria-selected='true'] {
+    background: var(--accent);
+    width: 20px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .carousel-track {
+      scroll-behavior: auto;
+    }
   }
   figure img {
     border-radius: var(--radius);
