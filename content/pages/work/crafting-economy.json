@@ -1,0 +1,273 @@
+{
+  "title": "Crafting Economy",
+  "description": "",
+  "project": "crafting-economy",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "heading",
+      "level": 1,
+      "text": "Crafting Economy",
+      "width": "narrow"
+    },
+    {
+      "id": "b-2ut9wq",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-t9o9jw",
+          "type": "heading",
+          "level": 2,
+          "text": "Three Players, One Economy",
+          "width": "narrow"
+        },
+        {
+          "id": "b-o3w5t3",
+          "type": "text",
+          "html": "<p>A three-tier crafting economy for a fantasy RPG, tested for 100 hours with casual, average and hardcore players. For all three, nothing is hoarded and nothing runs dry, and crafting asks real questions: roll or target, gamble or ward.</p>",
+          "width": "narrow"
+        },
+        {
+          "id": "b-0mx3wb",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ],
+      "width": "narrow"
+    },
+    {
+      "id": "b-435jmd",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-e2tygj",
+          "type": "section",
+          "background": "none",
+          "blocks": [
+            {
+              "id": "b-d4d6wn",
+              "type": "heading",
+              "level": 2,
+              "text": "The Problem",
+              "width": "narrow"
+            },
+            {
+              "id": "b-50pnj0",
+              "type": "text",
+              "html": "<p>Crafting economies usually break slowly. Players earn a little more than they can spend, the surplus compounds, and by the endgame drops are clutter. The opposite failure is a resource running dry and crafting stalling behind a grind wall.</p><p>My second version balanced the flows for one average player over 50 hours. Run with casual and hardcore players over 100 hours, the economy broke: once upgrades capped, the main gold sink closed, and hardcore players ended up holding 34 hours of gold income. Balanced flows weren't enough either. Recipes asked players no real questions.</p><p>So I set five goals:</p><p><ol><li><b>Every drop is worth picking up.</b> Salvage always beats selling.</li><li><b>Crafting keeps pace with play,</b> at every play speed.</li><li><b>Crafting asks real questions,</b> where both answers are reasonable.</li><li><b>Progress has a horizon, and a tail.</b> Upgrades finish late, then a cosmetic loop keeps the economy moving.</li><li><b>Hard limits are a safety net, not the design.</b></li></ol></p>",
+              "width": "narrow"
+            },
+            {
+              "id": "b-fyouey",
+              "type": "spacer",
+              "size": "sm"
+            }
+          ],
+          "width": "narrow"
+        },
+        {
+          "id": "b-9ytg6q",
+          "type": "section",
+          "background": "none",
+          "blocks": [
+            {
+              "id": "b-aj4lbi",
+              "type": "heading",
+              "level": 2,
+              "text": "The Problem",
+              "width": "narrow"
+            },
+            {
+              "id": "b-llykmh",
+              "type": "text",
+              "html": "<p>Crafting economies usually break slowly. Players earn a little more than they can spend, the surplus compounds, and by the endgame drops are clutter. The opposite failure is a resource running dry and crafting stalling behind a grind wall.</p><p>My second version balanced the flows for one average player over 50 hours. Run with casual and hardcore players over 100 hours, the economy broke: once upgrades capped, the main gold sink closed, and hardcore players ended up holding 34 hours of gold income. Balanced flows weren't enough either. Recipes asked players no real questions.</p><p>So I set five goals:</p><p><ol><li><b>Every drop is worth picking up.</b> Salvage always beats selling.</li><li><b>Crafting keeps pace with play,</b> at every play speed.</li><li><b>Crafting asks real questions,</b> where both answers are reasonable.</li><li><b>Progress has a horizon, and a tail.</b> Upgrades finish late, then a cosmetic loop keeps the economy moving.</li><li><b>Hard limits are a safety net, not the design.</b></li></ol></p>",
+              "width": "narrow"
+            },
+            {
+              "id": "b-hwqbx5",
+              "type": "spacer",
+              "size": "sm"
+            }
+          ],
+          "width": "narrow"
+        },
+        {
+          "id": "b-wi37tx",
+          "type": "heading",
+          "level": 2,
+          "text": "Four Resources, Four Kinds of Drain",
+          "width": "narrow"
+        },
+        {
+          "id": "b-t2fyy7",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "Resource",
+            "Unlocks",
+            "Earned From",
+            "Spent On"
+          ],
+          "rows": [
+            [
+              "Iron Shards",
+              "Start",
+              "40 drops/h, plus 3 per salvaged item",
+              "Every recipe, upgrades"
+            ],
+            [
+              "Arcane Dust",
+              "5h",
+              "4.5 drops/h, plus salvage",
+              "Rare and epic recipes, upgrades"
+            ],
+            [
+              "Starsteel",
+              "20h",
+              "0.6 drops/h, plus salvage",
+              "Epic recipes"
+            ],
+            [
+              "Gold",
+              "Start",
+              "300/h, growing to a plateau of 1,245/h at 45 h",
+              "Fees, wards, reforging"
+            ]
+          ]
+        },
+        {
+          "id": "b-gr0slm",
+          "type": "text",
+          "html": "<p>Crafting economies usually break slowly. Players earn a little more than they can spend, the surplus compounds, and by the endgame drops are clutter. The opposite failure is a resource running dry and crafting stalling behind a grind wall.</p><p>My second version balanced the flows for one average player over 50 hours. Run with casual and hardcore players over 100 hours, the economy broke: once upgrades capped, the main gold sink closed, and hardcore players ended up holding 34 hours of gold income. Balanced flows weren't enough either. Recipes asked players no real questions.</p><p>So I set five goals:</p><p><ol><li><b>Every drop is worth picking up.</b> Salvage always beats selling.</li><li><b>Crafting keeps pace with play,</b> at every play speed.</li><li><b>Crafting asks real questions,</b> where both answers are reasonable.</li><li><b>Progress has a horizon, and a tail.</b> Upgrades finish late, then a cosmetic loop keeps the economy moving.</li><li><b>Hard limits are a safety net, not the design.</b></li></ol></p>",
+          "width": "narrow"
+        },
+        {
+          "id": "b-y8esrn",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ],
+      "width": "narrow"
+    },
+    {
+      "id": "b-yiy6lq",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-w7m96y",
+          "type": "heading",
+          "level": 2,
+          "text": "Two Real Choices"
+        },
+        {
+          "id": "b-oz5m4h",
+          "type": "text",
+          "html": "<p><b><span class=\"big\">Roll randomly, or pay to target?</span></b></p><p>A random rare craft hits the stat pair you want 1 time in 6. A targeted craft lets you choose, for the price of 5 random crafts.</p>"
+        },
+        {
+          "id": "b-s59dyf",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "Player",
+            "Random Crafts Needed"
+          ],
+          "rows": [
+            [
+              "Typical (median)",
+              "4"
+            ],
+            [
+              "Average",
+              "6"
+            ],
+            [
+              "Unlucky (90th percentile)",
+              "13"
+            ]
+          ],
+          "width": "narrow"
+        },
+        {
+          "id": "b-2rna5d",
+          "type": "text",
+          "html": "<p>Targeting costs more than a typical run of luck but far less than an unlucky one. Gamblers save gold on average; planners pay a premium to remove risk.</p>"
+        },
+        {
+          "id": "b-0nq9no",
+          "type": "chart",
+          "variant": "bar",
+          "title": "",
+          "series": [
+            {
+              "data": [
+                {
+                  "label": "+5",
+                  "value": 413,
+                  "emphasis": "muted"
+                },
+                {
+                  "label": "+6",
+                  "value": 628,
+                  "emphasis": "muted"
+                },
+                {
+                  "label": "+7",
+                  "value": 971,
+                  "emphasis": "muted"
+                },
+                {
+                  "label": "+8",
+                  "value": 1603,
+                  "emphasis": "muted"
+                },
+                {
+                  "label": "+9",
+                  "value": 2943,
+                  "emphasis": "muted"
+                }
+              ],
+              "name": "Gamble",
+              "labels": true
+            },
+            {
+              "name": "Warded",
+              "data": [
+                {
+                  "label": "+5",
+                  "value": 426,
+                  "emphasis": "accent"
+                },
+                {
+                  "label": "+6",
+                  "value": 512,
+                  "emphasis": "accent"
+                },
+                {
+                  "label": "+7",
+                  "value": 621,
+                  "emphasis": "accent"
+                },
+                {
+                  "label": "+8",
+                  "value": 763,
+                  "emphasis": "accent"
+                },
+                {
+                  "label": "+9",
+                  "value": 954,
+                  "emphasis": "accent"
+                }
+              ],
+              "labels": true
+            }
+          ]
+        }
+      ],
+      "width": "narrow"
+    }
+  ]
+}

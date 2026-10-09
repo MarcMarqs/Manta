@@ -183,8 +183,26 @@
     ],
     "cover": "/images/projects/ascending-flags/cover.svg",
     "coverVideo": null,
-    "visibility": "draft",
+    "visibility": "public",
     "links": [],
     "origin": "other-projects"
+  },
+  {
+    "slug": "crafting-economy",
+    "title": "Crafting Economy",
+    "genre": "Economy",
+    "year": null,
+    "role": "",
+    "summary": "An economy that broke when tested against three kinds of players over 100 hours, rebuilt so nothing gets hoarded and nothing runs dry. It also asks players real questions: whether to roll or target a stat, and whether to gamble on an upgrade or protect it.",
+    "highlights": [],
+    "discipline": [
+      "economy"
+    ],
+    "engine": [],
+    "cover": "",
+    "coverVideo": null,
+    "origin": "personal",
+    "visibility": "public",
+    "links": []
   }
 ]
