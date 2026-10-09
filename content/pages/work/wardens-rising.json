@@ -5,11 +5,6 @@
   "project": "wardens-rising",
   "blocks": [
     {
-      "id": "eyebrow",
-      "type": "text",
-      "html": "<p><strong>Big Moxi Games</strong> · 60+ team</p>"
-    },
-    {
       "id": "h1",
       "type": "heading",
       "level": 1,

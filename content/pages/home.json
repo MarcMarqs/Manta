@@ -39,7 +39,8 @@
     {
       "id": "rail",
       "type": "projectRail",
-      "filters": false
+      "filters": false,
+      "width": "wide"
     },
     {
       "id": "b-z4o6nz",
