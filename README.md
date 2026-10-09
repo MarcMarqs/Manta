@@ -171,6 +171,12 @@ If `WORK_PASSWORD` is unset, private case studies answer 404 — the safe way to
 
 ## The editor (`/admin`)
 
+**Duplicate page** (beside Delete, in a page's header) copies a page whole to the next
+free address: `/about` becomes `/about-copy`, then `/about-copy-2`. A page in a folder
+stays in it. Every block is cloned rather than shared, so each gets a new id and editing
+the copy never touches the original. The copy does not carry **Case study for** — two
+pages claiming one project leaves no answer to which of them is its case study.
+
 Pages, projects, tags and the theme are edited at `/admin`: forms on the left, a live
 preview on the right rendered by the site's own components, so what you see is what ships.
 

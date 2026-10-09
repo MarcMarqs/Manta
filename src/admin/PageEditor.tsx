@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'preact/hooks';
 import type { Block, Site } from '../lib/types';
 import { BlockListEditor } from './BlockEditor';
+import { cloneBlock } from './blocks';
 import {
   HOME,
   PAGES_DIR,
@@ -51,6 +52,44 @@ const TEMPLATES: Record<string, { label: string; blocks: (title: string) => Bloc
     ],
   },
 };
+
+/** `about` → `about-copy`, then `about-copy-2`, until one is free. */
+function freeRoute(route: string): string {
+  const base = `${route.replace(/\/+$/, '')}-copy`;
+  if (!routeProblem(base)) return base;
+  for (let n = 2; n < 500; n++) {
+    if (!routeProblem(`${base}-${n}`)) return `${base}-${n}`;
+  }
+  return `${base}-${Date.now()}`;
+}
+
+/**
+ * A page copied whole, at an address of its own.
+ *
+ * Every block is cloned rather than shared, which gives each one a new id: ids are what
+ * the editor selects by and what headings anchor to, and two pages holding the same ones
+ * is a knot waiting to be pulled.
+ *
+ * The copy does not carry the original's project. A case study is the page for a project,
+ * and two of them claiming the same one leaves no answer to which is which — the tags, the
+ * next-case-study link and, for private work, the one address it answers on.
+ */
+export function duplicatePage(path: string) {
+  const page = files.value[path] as PageFile | undefined;
+  if (!page) return;
+  const route = freeRoute(fileToRoute(path));
+  const copy: PageFile = {
+    ...page,
+    title: `${page.title || 'Untitled'} (copy)`,
+    project: undefined,
+    blocks: page.blocks.map(cloneBlock),
+  };
+  const next = routeToFile(route);
+  setFiles({ ...files.value, [next]: copy }, { coalesce: false });
+  openView({ kind: 'page', path: next });
+  toast(`Copied to ${route}.`);
+  return next;
+}
 
 export function createPage(route: string, title: string, template: keyof typeof TEMPLATES, extra?: Partial<PageFile>) {
   const path = routeToFile(route);
@@ -245,6 +284,7 @@ export function PageEditor({ path }: { path: string }) {
           <button type="button" class={`btn small ghost${jsonMode ? ' active' : ''}`} onClick={() => setJsonMode(!jsonMode)}>
             <Icon name="code" /> JSON
           </button>
+          <IconButton icon="copy" label="Duplicate page" onClick={() => duplicatePage(path)} />
           {!isHome && <IconButton icon="trash" label="Delete page" tone="danger" onClick={remove} />}
         </div>
       </header>
