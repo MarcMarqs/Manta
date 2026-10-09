@@ -7,13 +7,15 @@
       "id": "title",
       "type": "heading",
       "level": 1,
-      "text": "Ranked Systems Analysis - Overwatch"
+      "text": "Ranked Systems Analysis - Overwatch",
+      "width": "narrow"
     },
     {
       "id": "h-overview",
       "type": "heading",
       "level": 2,
-      "text": "The Rank You See"
+      "text": "The Rank You See",
+      "width": "narrow"
     },
     {
       "id": "t-overview",
@@ -30,7 +32,8 @@
       "id": "h-goals",
       "type": "heading",
       "level": 2,
-      "text": "How Ranked Works Today"
+      "text": "How Ranked Works Today",
+      "width": "narrow"
     },
     {
       "id": "b-r7cacx",
@@ -65,7 +68,8 @@
           "Distribution",
           "Gold and Platinum held 66.6% of players in the last official chart in 2025"
         ]
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-6w2uh3",
@@ -81,7 +85,8 @@
     {
       "id": "t-takeaways",
       "type": "text",
-      "html": "<p>Of five major competitive games, Overwatch is the only one that hides every player's rank on a fixed timer.<p></p></p>"
+      "html": "<p>Of five major competitive games, Overwatch is the only one that hides every player's rank on a fixed timer.<p></p></p>",
+      "width": "narrow"
     },
     {
       "id": "b-e7t88g",
@@ -118,12 +123,14 @@
           "Every season, re-establish rating",
           "10 wins"
         ]
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-yhfn8s",
       "type": "text",
-      "html": "<p>This changed how I position my redesign. Season check-ins are close to VALORANT's one-game recalibration, and showing uncertainty echoes League's Climb Indicator, so those ideas are industry-tested. Percentile-anchored tiers are the least tested idea, so they get the most validation and ship last.</p>"
+      "html": "<p>This changed how I position my redesign. Season check-ins are close to VALORANT's one-game recalibration, and showing uncertainty echoes League's Climb Indicator, so those ideas are industry-tested. Percentile-anchored tiers are the least tested idea, so they get the most validation and ship last.</p>",
+      "width": "narrow"
     },
     {
       "id": "b-y1n6n2",
@@ -139,7 +146,8 @@
     {
       "id": "b-lpwde8",
       "type": "text",
-      "html": "<p><ol><li>Resets erase information the game already has. Rank has been tied to MMR since 2024, so a reset hides an accurate number and makes players re-earn it: 30 placement matches to re-rank all three roles. Blizzard itself named resets as a cause of ranks that don't match skill.<br><br></li><li>The middle has no identity. Two tiers held two-thirds of players. Emerald was added by hand to split them, and early reviews say it gathered the chaos rather than fixing it.<br><br></li><li>Feedback describes the math, not the reason. Eight-plus modifier labels explain how rank moved without telling players what to do about it.<br><br></li><li>The top end runs on a second currency. The Top 500 Challenger Score was reworked three times in 2026, and developers said in August it had problems tuning couldn't fix.</li></ol></p>"
+      "html": "<p><ol><li>Resets erase information the game already has. Rank has been tied to MMR since 2024, so a reset hides an accurate number and makes players re-earn it: 30 placement matches to re-rank all three roles. Blizzard itself named resets as a cause of ranks that don't match skill.<br><br></li><li>The middle has no identity. Two tiers held two-thirds of players. Emerald was added by hand to split them, and early reviews say it gathered the chaos rather than fixing it.<br><br></li><li>Feedback describes the math, not the reason. Eight-plus modifier labels explain how rank moved without telling players what to do about it.<br><br></li><li>The top end runs on a second currency. The Top 500 Challenger Score was reworked three times in 2026, and developers said in August it had problems tuning couldn't fix.</li></ol></p>",
+      "width": "narrow"
     },
     {
       "id": "b-hv0f1o",
@@ -155,7 +163,8 @@
     {
       "id": "b-b4mctk",
       "type": "text",
-      "html": "<p><b><span class=\"big\">Season check-ins instead of resets</span></b></p><p>Rank carries over. The first three matches of each season move rank faster, with a small \"checking in\" tag, so it can re-settle after balance changes without being hidden. I chose a check-in every season over a reset every third, because small, frequent corrections beat a large, rare one: the worst error in the model falls from 4.0 divisions to 1.65.</p><p><br></p><p><b><span class=\"big\">Percentile-anchored tiers</span></b></p><p>Each season, tier cutoffs are recomputed from MMR percentiles against fixed targets. No tier can hold more than 18% of players, and seven tiers hold at least 5% instead of four. I picked percentiles over fixed SR bands because the population keeps moving; fixed bands are why a new tier had to be added by hand.</p><p><br></p><p><b><span class=\"big\">Two numbers instead of eight labels</span></b></p><p>Before the match, show the predicted win chance. After it, show how far rank moved and whether the result beat or missed that prediction.</p><p><br></p><p><b><span class=\"big\">One ladder to the top</span></b></p><p>Top 500 ranks players by the same rank everyone else has, with a minimum number of wins to qualify and no separate score. Blizzard's October 2026 patch already moved most of the way here, which I read as validation of the direction.</p><p><br></p><p><b><span class=\"big\">A lighter gate for new accounts</span></b></p><p>The unlock returns to 20 wins. New accounts start with high uncertainty and keep fast-moving rank for 25 matches, so a smurf settles in about 12 ranked matches. That's in place of the current gate, which costs every new player about 80 matches to unlock.</p>"
+      "html": "<p><b><span class=\"big\">Season check-ins instead of resets</span></b></p><p>Rank carries over. The first three matches of each season move rank faster, with a small \"checking in\" tag, so it can re-settle after balance changes without being hidden. I chose a check-in every season over a reset every third, because small, frequent corrections beat a large, rare one: the worst error in the model falls from 4.0 divisions to 1.65.</p><p><br></p><p><b><span class=\"big\">Percentile-anchored tiers</span></b></p><p>Each season, tier cutoffs are recomputed from MMR percentiles against fixed targets. No tier can hold more than 18% of players, and seven tiers hold at least 5% instead of four. I picked percentiles over fixed SR bands because the population keeps moving; fixed bands are why a new tier had to be added by hand.</p><p><br></p><p><b><span class=\"big\">Two numbers instead of eight labels</span></b></p><p>Before the match, show the predicted win chance. After it, show how far rank moved and whether the result beat or missed that prediction.</p><p><br></p><p><b><span class=\"big\">One ladder to the top</span></b></p><p>Top 500 ranks players by the same rank everyone else has, with a minimum number of wins to qualify and no separate score. Blizzard's October 2026 patch already moved most of the way here, which I read as validation of the direction.</p><p><br></p><p><b><span class=\"big\">A lighter gate for new accounts</span></b></p><p>The unlock returns to 20 wins. New accounts start with high uncertainty and keep fast-moving rank for 25 matches, so a smurf settles in about 12 ranked matches. That's in place of the current gate, which costs every new player about 80 matches to unlock.</p>",
+      "width": "narrow"
     },
     {
       "id": "b-vivyc1",
@@ -171,7 +180,8 @@
     {
       "id": "b-r8ytz8",
       "type": "text",
-      "html": "<p>Since 2024, groups whose ranks are far apart play as wide groups: they only face other wide groups, and their rank moves less. The system works, so the redesign keeps it with two changes. First, the wide-group threshold becomes a fixed rating gap, since a span of five divisions would mean different things as percentile tiers move. Second, check-in matches only count solo or in a narrow group, so a strong friend can't carry someone through the three fast-moving matches.</p><p>For smurfing, the 50-win gate becomes 20 wins, and the work moves to calibration. New accounts move fast for 25 matches, and accounts that keep beating their predicted win chance stay in fast mode longer, so a smurf can't settle below their real skill.</p>"
+      "html": "<p>Since 2024, groups whose ranks are far apart play as wide groups: they only face other wide groups, and their rank moves less. The system works, so the redesign keeps it with two changes. First, the wide-group threshold becomes a fixed rating gap, since a span of five divisions would mean different things as percentile tiers move. Second, check-in matches only count solo or in a narrow group, so a strong friend can't carry someone through the three fast-moving matches.</p><p>For smurfing, the 50-win gate becomes 20 wins, and the work moves to calibration. New accounts move fast for 25 matches, and accounts that keep beating their predicted win chance stay in fast mode longer, so a smurf can't settle below their real skill.</p>",
+      "width": "narrow"
     },
     {
       "id": "b-yo5rkv",
@@ -273,7 +283,8 @@
           ]
         }
       ],
-      "note": "Current: Blizzard chart reported July 2025, before Emerald existed. Target: redesign"
+      "note": "Current: Blizzard chart reported July 2025, before Emerald existed. Target: redesign",
+      "width": "narrow"
     },
     {
       "id": "b-oog46l",
@@ -305,7 +316,8 @@
           "4",
           "7"
         ]
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-emyqcq",
@@ -316,12 +328,14 @@
       "id": "b-weh62d",
       "type": "heading",
       "level": 2,
-      "text": "Across 300 Players"
+      "text": "Across 300 Players",
+      "width": "narrow"
     },
     {
       "id": "b-v74kpm",
       "type": "text",
-      "html": "<p>Run for 300 players with different play rates, from 10 to 100 matches a season, the share of ranked matches played at a visibly wrong rank halves.</p>"
+      "html": "<p>Run for 300 players with different play rates, from 10 to 100 matches a season, the share of ranked matches played at a visibly wrong rank halves.</p>",
+      "width": "narrow"
     },
     {
       "id": "b-zxmxfu",
@@ -348,12 +362,14 @@
           "6.9%",
           "3.3%"
         ]
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-3zdhsn",
       "type": "text",
-      "html": "<p>It isn't better for everyone. 16 of the 300 players lose out by 1 or 2 matches. All of them are light players, at 10 matches a season, whose reset left them close to their true rank, and they now absorb the redesign's season-start drift every season.</p><p><br></p><p><span class=\"big\"><b>Testing the risk of moving tiers</b></span></p><p>With 1,000 simulated players who improve a little each season, recomputed percentile cutoffs drop 0.4% of players a tier without them getting worse. A small cap on how far boundaries can move removes that entirely, at the cost of the largest tier sitting at 18.3% instead of 18%. Fixed bands fail the other way. As the population improves, the top four tiers grow from 26% to 37% of players in six seasons: the crowding Emerald was added to fix.</p>"
+      "html": "<p>It isn't better for everyone. 16 of the 300 players lose out by 1 or 2 matches. All of them are light players, at 10 matches a season, whose reset left them close to their true rank, and they now absorb the redesign's season-start drift every season.</p><p><br></p><p><span class=\"big\"><b>Testing the risk of moving tiers</b></span></p><p>With 1,000 simulated players who improve a little each season, recomputed percentile cutoffs drop 0.4% of players a tier without them getting worse. A small cap on how far boundaries can move removes that entirely, at the cost of the largest tier sitting at 18.3% instead of 18%. Fixed bands fail the other way. As the population improves, the top four tiers grow from 26% to 37% of players in six seasons: the crowding Emerald was added to fix.</p>",
+      "width": "narrow"
     },
     {
       "id": "b-ktul0g",
@@ -371,7 +387,8 @@
           "type": "text",
           "html": "<p>Three UI mockups: a Diamond 3 rank card checking in at season start, a post-match result showing a 44% predicted win chance and +31, and a tier boundary notice stating the player's rating did not change.</p><p><ol><li><b>Rank Card:</b> No reset and no placements: the rank stays visible with a \"Checking in · 1 of 3\" tag.<br><br></li><li><b>Post-Match Result:</b> One sentence, \"You won a 44% match: +31 instead of +24 for an even win,\" replaces the modifier labels. The rank changes shown are illustrative, since Blizzard's formula isn't public.<br><br></li><li><b>Tier Boundary Notice:</b> Shown only when cutoffs move. It states that the player's rating didn't change, so a tier change never reads as a punishment.</li></ol></p>"
         }
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-ay00tq",
@@ -389,7 +406,8 @@
           "type": "text",
           "html": "<p><ul><li><b>The Fresh-Start Feeling</b>: Resets let players escape a bad rank. Check-ins keep faster early movement, but the clean slate is gone.<br><br></li><li><b>Bigger Swings at Season Start, and Some Light Players Lose Out:</b> Without resets, balance drift isn't wiped either. The redesign peaks at 1.65 divisions off at seasons 2 and 3, versus 1.15 for the current system, and 16 of 300 modeled players lose out slightly.<br><br></li><li><b>Tiers That Move:</b> Without a cap, 0.4% of players a season would drop a tier without playing worse. A boundary cap fixes that, but leaves the largest tier slightly over target.<br><br></li><li><b>Cheaper Alt Accounts:</b> A 20-win gate makes smurfing cheaper. Fast calibration limits how long a smurf stays misranked, but doesn't stop them existing.</li></ul></p><p></p>"
         }
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-4pbyvf",
@@ -407,7 +425,8 @@
           "type": "text",
           "html": "<p></p><ul><li><b>MMR change in the first 10 matches of a season. </b>Smaller means rank was already right when the season began.</li><li><b>Ranked participation in the first two weeks. </b>This checks whether losing resets cuts early-season engagement.</li><li><b>Share of players per tier, </b>season by season, measured against the targets.</li><li><b>A post-match survey on whether players understand why their rank moved, </b>before and after two-number feedback.</li><li><b>Time for flagged new accounts to stabilize,&nbsp;</b>and how often they're reported for smurfing.</li></ul><p></p><p></p>"
         }
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-9sv89i",
@@ -425,7 +444,8 @@
           "type": "text",
           "html": "<p></p><ol><li><b>Two-Number Feedback First: </b>It is low risk, reversible, and testable with a survey.</li><li><b>Check-Ins in One Region for One Season</b>, compared against a region that still resets.</li><li><b>Percentile Tiers Last: </b>They are the least tested idea in the industry, and need a season of data to set the boundary cap.<br><b style=\"font-weight: bold;\"><br>Ending resets also changes a ritual players know, so community and communications teams need to explain it before launch.</b></li></ol><p></p><p></p>"
         }
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-mttc0w",
@@ -443,7 +463,8 @@
           "type": "text",
           "html": "<p></p><div>This study rests on Blizzard's statements, community reports and models. The next step is my own evidence, and both tools are ready. A match log in the spreadsheet records 30 of my ranked matches, including how well I understood each rank change. A short survey for 30–50 players tests the diagnosis and asks whether they'd accept the redesign.</div><p></p><p></p>"
         }
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-m4q4d0",
@@ -460,15 +481,17 @@
       "id": "b-dhj72s",
       "type": "button",
       "label": "Analysis Model",
-      "href": "/",
-      "style": "primary"
+      "href": "https://docs.google.com/spreadsheets/d/104kd59bZ4g20xuU9mstk0rQehPliaxZb/edit?usp=sharing&ouid=101235219691024799560&rtpof=true&sd=true",
+      "style": "primary",
+      "width": "narrow"
     },
     {
       "id": "b-8xi9ri",
       "type": "button",
       "label": "Design Doc",
       "href": "/",
-      "style": "primary"
+      "style": "primary",
+      "width": "narrow"
     },
     {
       "id": "b-km5z8n",
@@ -491,7 +514,8 @@
           "type": "text",
           "html": "<p><a href=\"https://overwatch.blizzard.com/en-us/news/patch-notes/live/2026/02/\">Overwatch patch notes, February 2026</a></p><p><a href=\"https://overwatch.blizzard.com/en-us/news/patch-notes/live/2026/05/\">Overwatch patch notes, May 2026</a></p><p><a href=\"https://overwatch.blizzard.com/en-us/news/patch-notes/live/2026/08/\">Overwatch patch notes, August 2026</a></p><p><a href=\"https://overwatch.blizzard.com/en-us/news/patch-notes/\">Overwatch patch notes, October 2026</a></p><p><a href=\"https://overwatch.blizzard.com/en-us/news/23910161/\">Blizzard: Explaining matchmaker goals and plans, part 2</a></p><p><a href=\"https://esports.gg/news/overwatch/most-overwatch-2-players-are-in-platinum-rank-blizzard-reports\">Esports.gg: Most players are in Platinum (July 2025)</a></p><p><a href=\"https://esports.gg/news/overwatch/heres-why-overwatch-added-the-new-emerald-rank/\">Esports.gg: Why Overwatch added Emerald (August 2026)</a></p><p><a href=\"https://www.pcgamer.com/games/fps/overwatchs-newest-emerald-rank-is-like-a-live-grenade-wedged-between-plat-and-diamond/\">PC Gamer: Overwatch's newest Emerald rank (August 2026)</a></p><p><a href=\"https://us.forums.blizzard.com/en/overwatch/t/emerald-rank-is-worse/1033581\">Overwatch Forums: Emerald Rank is worse (August 2026)</a></p><p><a href=\"https://1v9.gg/blog/ow2-ranking-system\">1v9.gg: Overwatch 2 ranking system explained</a></p><p><a href=\"https://wiki.playvalorant.com/en-us/Competitive\">VALORANT Wiki: Competitive</a></p><p><a href=\"https://support.riotgames.com/en-us/league-of-legends/rewards/ranked-years-seasons-and-end-of-season-rewards\">Riot Support: Ranked Years, Seasons, and End-of-Season Rewards</a></p><p><a href=\"https://www.leagueoflegends.com/en-us/news/dev/dev-ranked-2026/\">League of Legends: /dev: Ranked 2026</a></p><p><a href=\"https://www.marvelrivals.com/m/gameupdate/20250904/41548_1257695.html\">Marvel Rivals Season 4 patch notes</a></p><p><a href=\"https://esports.gg/news/counter-strike-2/cs2-premier-season-2-to-arrive-next-week-train-in-for-vertigo-m4a4-discount-rank-reset-and-more\">Esports.gg: CS2 Premier Season 2</a></p><p><a href=\"https://overwatch.blizzard.com/en-us/news/24061006/\">Blizzard: Defense Matrix Update: Season 10 and Beyond</a></p><p><a href=\"https://www.ggrecon.com/guides/overwatch-2-narrow-and-wide-groups/\">GGRecon: Overwatch 2 Narrow &amp; Wide Groups explained</a></p>"
         }
-      ]
+      ],
+      "width": "narrow"
     }
   ]
 }
