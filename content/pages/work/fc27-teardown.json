@@ -7,29 +7,39 @@
       "id": "title",
       "type": "heading",
       "level": 1,
-      "text": "FC 27 Streamlined SBCs – Teardown and Redesign"
+      "text": "FC 27 Streamlined SBCs – Teardown and Redesign",
+      "width": "narrow"
     },
     {
       "id": "h-overview",
       "type": "heading",
       "level": 2,
-      "text": "Overview"
+      "text": "Overview",
+      "width": "narrow"
     },
     {
       "id": "b-39hypd",
       "type": "text",
-      "html": "<p>When cards become points, the points table becomes the economy. FC 27's Streamlined SBCs swap the squad-building puzzle for a score bar, and players like it: EA reported a positive reception within a week. But the change moved every important decision into one table, the Item Score curve, and that table has two problems.</p><p><b>1. Value.</b> The curve jumps at ratings 81 and 84, while 82–84 cards cost about the same. One rating becomes the obvious fodder, and the 76–83 cards that fill most clubs barely move the bar.</p><p><b>2. Safety.</b> The score bar makes submitting fast and irreversible, with no way to protect a card. In launch week a list bug let one player submit a 3-million-coin ICON by mistake, and a way to protect cards is now a widely requested fix.</p><p><b>Proposals:</b> an even 28% step per rating from 75 to 84, keeping 84 and above unchanged; tested first as a limited-time event before any permanent change. Plus a quick win: a \"protected\" flag and a warning when one card would cover most of a target.</p><p><b>Evidence level:</b> mechanics from EA's official notes and developer update; Item Scores and launch-week prices measured by the community from the live game, because EA doesn't publish them; my own play log in progress.</p>"
+      "html": "<p>When cards become points, the points table becomes the economy. FC 27's Streamlined SBCs swap the squad-building puzzle for a score bar, and players like it: EA reported a positive reception within a week. But the change moved every important decision into one table, the Item Score curve, and that table has two problems.</p><p><b>1. Value.</b> The curve jumps at ratings 81 and 84, while 82–84 cards cost about the same. One rating becomes the obvious fodder, and the 76–83 cards that fill most clubs barely move the bar.</p><p><b>2. Safety.</b> The score bar makes submitting fast and irreversible, with no way to protect a card. In launch week a list bug let one player submit a 3-million-coin ICON by mistake, and a way to protect cards is now a widely requested fix.</p><p><b>Proposals:</b> an even 28% step per rating from 75 to 84, keeping 84 and above unchanged; tested first as a limited-time event before any permanent change. Plus a quick win: a \"protected\" flag and a warning when one card would cover most of a target.</p><p><b>Evidence level:</b> mechanics from EA's official notes and developer update; Item Scores and launch-week prices measured by the community from the live game, because EA doesn't publish them; my own play log in progress.</p>",
+      "width": "narrow"
+    },
+    {
+      "id": "b-tyrorw",
+      "type": "spacer",
+      "size": "sm"
     },
     {
       "id": "b-je3z5x",
       "type": "heading",
-      "level": 3,
-      "text": "What It Is"
+      "level": 2,
+      "text": "What It Is",
+      "width": "narrow"
     },
     {
       "id": "b-awhp6m",
       "type": "text",
-      "html": "<p><b>Squad Building Challenges (SBCs)</b> are Ultimate Team's main sink: players give up cards in exchange for packs or special players. In FC 27, routine SBCs became \"Streamlined\": each card adds its Item Score to a bar, and the reward unlocks when the bar reaches the target.</p>"
+      "html": "<p><b>Squad Building Challenges (SBCs)</b> are Ultimate Team's main sink: players give up cards in exchange for packs or special players. In FC 27, routine SBCs became \"Streamlined\": each card adds its Item Score to a bar, and the reward unlocks when the bar reaches the target.</p>",
+      "width": "narrow"
     },
     {
       "id": "b-fneeox",
@@ -74,7 +84,8 @@
           "from": "n-sle4e2",
           "to": "n-zmhqcq"
         }
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-oxrupf",
@@ -133,23 +144,32 @@
           "from": "n-sle4e2",
           "to": "n-zmhqcq"
         }
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-6np7fa",
       "type": "text",
-      "html": "<p>The whole system now rests on one table: how many points each card is worth. In the community-measured table, bronzes are worth 20, silvers 35, and gold cards from 90 (rated 75) to 14,000 (rated 90). Special versions such as Team of the Week score more than base cards of the same rating.</p>"
+      "html": "<p>The whole system now rests on one table: how many points each card is worth. In the community-measured table, bronzes are worth 20, silvers 35, and gold cards from 90 (rated 75) to 14,000 (rated 90). Special versions such as Team of the Week score more than base cards of the same rating.</p>",
+      "width": "narrow"
+    },
+    {
+      "id": "b-502a3y",
+      "type": "spacer",
+      "size": "sm"
     },
     {
       "id": "b-sz74ti",
       "type": "heading",
-      "level": 3,
-      "text": "Why It Works"
+      "level": 2,
+      "text": "Why It Works",
+      "width": "narrow"
     },
     {
       "id": "b-d4onjm",
       "type": "text",
-      "html": "<p>EA's stated goal for FC 27 is to \"reduce repetitive friction\" while keeping \"meaningful decisions\". For routine rewards, the Streamlined format delivers on the first half well.</p>"
+      "html": "<p>EA's stated goal for FC 27 is to \"reduce repetitive friction\" while keeping \"meaningful decisions\". For routine rewards, the Streamlined format delivers on the first half well.</p>",
+      "width": "narrow"
     },
     {
       "id": "b-tcsa8i",
@@ -191,23 +211,32 @@
           "Players who enjoy the puzzle",
           "The skill-based version still exists where it adds the most"
         ]
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-en6dea",
       "type": "text",
-      "html": "<p>The split is the smartest part: routine rewards become quick, and puzzle SBCs stay as optional content for the players who like them. The design's success therefore depends on one number: how much each card is worth. That is the Item Score curve.</p><p>It's working with players, too. EA's 1 October developer update calls the reception positive, and Streamlined SBCs were added to the Companion App on 28 September. That's why this teardown proposes tuning, not a redesign.</p>"
+      "html": "<p>The split is the smartest part: routine rewards become quick, and puzzle SBCs stay as optional content for the players who like them. The design's success therefore depends on one number: how much each card is worth. That is the Item Score curve.</p><p>It's working with players, too. EA's 1 October developer update calls the reception positive, and Streamlined SBCs were added to the Companion App on 28 September. That's why this teardown proposes tuning, not a redesign.</p>",
+      "width": "narrow"
+    },
+    {
+      "id": "b-ttxejm",
+      "type": "spacer",
+      "size": "sm"
     },
     {
       "id": "b-2rth2l",
       "type": "heading",
-      "level": 3,
-      "text": "First Finding: The Score Curve"
+      "level": 2,
+      "text": "First Finding: The Score Curve",
+      "width": "narrow"
     },
     {
       "id": "b-upiova",
       "type": "text",
-      "html": "<p>Below 85, the Item Score curve is not smooth. Most ratings are worth 11–21% more than the one below, but 81 is worth 56% more and 84 is worth 102% more.</p>"
+      "html": "<p>Below 85, the Item Score curve is not smooth. Most ratings are worth 11–21% more than the one below, but 81 is worth 56% more and 84 is worth 102% more.</p>",
+      "width": "narrow"
     },
     {
       "id": "b-p6vzxz",
@@ -275,12 +304,14 @@
       "reference": {
         "value": 28,
         "label": "Proposed even step: +28% for 76–84"
-      }
+      },
+      "width": "narrow"
     },
     {
       "id": "b-coqzh7",
       "type": "text",
-      "html": "<p>The jumps matter because the market doesn't follow them. In launch week, 82s, 83s and 84s all sold at about the same price, the quick-sell floor of 600–650 coins. Score per coin therefore jumped with the curve:</p>"
+      "html": "<p>The jumps matter because the market doesn't follow them. In launch week, 82s, 83s and 84s all sold at about the same price, the quick-sell floor of 600–650 coins. Score per coin therefore jumped with the curve:</p>",
+      "width": "narrow"
     },
     {
       "id": "b-hwx99r",
@@ -312,12 +343,14 @@
           "830",
           "0.78 coins"
         ]
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-zf3uav",
       "type": "text",
-      "html": "<p>Two things follow from this.</p><p>1. One rating becomes the answer. For any SBC you can't fill from your club, buying 84s is more than twice as efficient as 82s. The \"meaningful decision\" EA wanted collapses into one rule, the one fodder guides were already publishing in launch week.</p><p>2. Most of a club is worth very little. An 84 is worth about four and a half 80s, or 41 bronzes. A 75,000-point SBC would take 91 84s or 417 80s. Cards rated 76–83 add little per card, which works against reducing friction for players whose clubs are mostly made of them.</p><p>The market may partly correct the first problem by pushing 84 prices up over time. It can't fix the second: a card's SBC value is set by the table, not by its price.</p><p><b>A player's view</b></p><p>Picture a player opening a 20,000-point SBC with 45 spare golds. Today, the 5 cards rated 84 do more than a third of the work, and the other 40 cards together add less than twice as much.</p><p>With the proposal, the same club covers three quarters of the target, and the player needs to buy 7 cards instead of 11 to finish. The club they built up through play is what changes, not the price of anything.</p><p><b>What the current curve gets right</b></p><p>A teardown should argue the other side first. EA hasn't explained the curve, so these are my inferences about what it's protecting:</p>"
+      "html": "<p>Two things follow from this.</p><p>1. One rating becomes the answer. For any SBC you can't fill from your club, buying 84s is more than twice as efficient as 82s. The \"meaningful decision\" EA wanted collapses into one rule, the one fodder guides were already publishing in launch week.</p><p>2. Most of a club is worth very little. An 84 is worth about four and a half 80s, or 41 bronzes. A 75,000-point SBC would take 91 84s or 417 80s. Cards rated 76–83 add little per card, which works against reducing friction for players whose clubs are mostly made of them.</p><p>The market may partly correct the first problem by pushing 84 prices up over time. It can't fix the second: a card's SBC value is set by the table, not by its price.</p><p><b>A player's view</b></p><p>Picture a player opening a 20,000-point SBC with 45 spare golds. Today, the 5 cards rated 84 do more than a third of the work, and the other 40 cards together add less than twice as much.</p><p>With the proposal, the same club covers three quarters of the target, and the player needs to buy 7 cards instead of 11 to finish. The club they built up through play is what changes, not the price of anything.</p><p><b>What the current curve gets right</b></p><p>A teardown should argue the other side first. EA hasn't explained the curve, so these are my inferences about what it's protecting:</p>",
+      "width": "narrow"
     },
     {
       "id": "b-5slzg7",
@@ -337,7 +370,8 @@
           "low": 74,
           "high": 100
         }
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-n9f5hm",
@@ -364,23 +398,32 @@
           "\"84+ fodder\" was already a known tier in previous games",
           "Yes: 84 stays the anchor"
         ]
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-va2a0k",
       "type": "text",
-      "html": "<p>The second goal matters more this year. EA's October developer update says coin balances are over 50% higher than at the same point last year, so any change that adds value to the economy has to be paid for somewhere. That's why the proposal is anchored and paired with target retuning, rather than a straight buff.</p>"
+      "html": "<p>The second goal matters more this year. EA's October developer update says coin balances are over 50% higher than at the same point last year, so any change that adds value to the economy has to be paid for somewhere. That's why the proposal is anchored and paired with target retuning, rather than a straight buff.</p>",
+      "width": "narrow"
+    },
+    {
+      "id": "b-7zif6c",
+      "type": "spacer",
+      "size": "sm"
     },
     {
       "id": "b-xmozkx",
       "type": "heading",
-      "level": 3,
-      "text": "The Bigger Loop"
+      "level": 2,
+      "text": "The Bigger Loop",
+      "width": "narrow"
     },
     {
       "id": "b-q05nam",
       "type": "text",
-      "html": "<p>The score table doesn't only decide SBCs. Packs fill clubs with cards, players choose what to do with each card, and SBCs turn cards back into packs. Changing what a card is worth for SBCs touches every step.</p>"
+      "html": "<p>The score table doesn't only decide SBCs. Packs fill clubs with cards, players choose what to do with each card, and SBCs turn cards back into packs. Changing what a card is worth for SBCs touches every step.</p>",
+      "width": "narrow"
     },
     {
       "id": "b-sa2z2a",
@@ -454,7 +497,8 @@
           "from": "n-udg8f7",
           "to": "a"
         }
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-l71gae",
@@ -486,23 +530,32 @@
           "Low-floor SBCs complete with fewer cards",
           "More rewards enter the game unless those targets are retuned"
         ]
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-83dysm",
       "type": "text",
-      "html": "<p><i>These are my inferences from how the loop works, not EA data. They're exactly what the one-week test event would measure.</i></p>"
+      "html": "<p><i>These are my inferences from how the loop works, not EA data. They're exactly what the one-week test event would measure.</i></p>",
+      "width": "narrow"
+    },
+    {
+      "id": "b-6i8f3h",
+      "type": "spacer",
+      "size": "sm"
     },
     {
       "id": "b-jn6s88",
       "type": "heading",
-      "level": 3,
-      "text": "Proposal: An Even Step from 75 to 84"
+      "level": 2,
+      "text": "Proposal: An Even Step from 75 to 84",
+      "width": "narrow"
     },
     {
       "id": "b-0t9h83",
       "type": "text",
-      "html": "<p>Keep 75 at 90 points and 84 at 830, and fill the ratings between with the same 28% step each time. Ratings 85 and above stay exactly as they are.</p><p><br></p><p><i>score(r) = 90 * 1.28r-75&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;75&lt;= r &lt;=84</i></p><p><i><br></i></p><p>That gives 75 = 90, 76 = 115, 77 = 147, 78 = 189, 79 = 242, 80 = 309, 81 = 396, 82 = 507, 83 = 648, 84 = 830.</p>"
+      "html": "<p>Keep 75 at 90 points and 84 at 830, and fill the ratings between with the same 28% step each time. Ratings 85 and above stay exactly as they are.</p><p><br></p><p><i>score(r) = 90 * 1.28r-75&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;75&lt;= r &lt;=84</i></p><p><i><br></i></p><p>That gives 75 = 90, 76 = 115, 77 = 147, 78 = 189, 79 = 242, 80 = 309, 81 = 396, 82 = 507, 83 = 648, 84 = 830.</p>",
+      "width": "narrow"
     },
     {
       "id": "b-ovto4d",
@@ -539,34 +592,50 @@
           "–",
           "Only SBCs whose fodder is mostly rated 75–83"
         ]
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-iuanqa",
       "type": "text",
-      "html": "<p><b>Why This Shape</b></p><p>• Anchored at 84. Every SBC filled with 84s or better needs exactly the same cards as today, so the high-end economy and its reward values don't move.</p><p>• No breakpoint. Each rating is worth the same step more than the one below, so no single rating becomes \"the\" answer. Players can use whatever 76–83s they already own.</p><p>• One change, patch-sized. It is a table edit, not a new system. It can ship mid-season and be rolled back.</p><p><b>Alternatives I Considered</b></p><p>• Raise quick-sell values so prices follow score. Rejected: quick-sell creates coins, so this would inflate the whole coin economy, not just SBCs.</p><p>• A bonus for untradeable cards. Interesting for \"use your club\", but it adds a rule to a system whose point is having fewer rules.</p><p>• Smooth the whole curve, including 85+. Rejected for now: it would change the value of high-rated cards that players have already stockpiled and paid for.</p>"
+      "html": "<p><b>Why This Shape</b></p><p>• Anchored at 84. Every SBC filled with 84s or better needs exactly the same cards as today, so the high-end economy and its reward values don't move.</p><p>• No breakpoint. Each rating is worth the same step more than the one below, so no single rating becomes \"the\" answer. Players can use whatever 76–83s they already own.</p><p>• One change, patch-sized. It is a table edit, not a new system. It can ship mid-season and be rolled back.</p><p><b>Alternatives I Considered</b></p><p>• Raise quick-sell values so prices follow score. Rejected: quick-sell creates coins, so this would inflate the whole coin economy, not just SBCs.</p><p>• A bonus for untradeable cards. Interesting for \"use your club\", but it adds a rule to a system whose point is having fewer rules.</p><p>• Smooth the whole curve, including 85+. Rejected for now: it would change the value of high-rated cards that players have already stockpiled and paid for.</p>",
+      "width": "narrow"
+    },
+    {
+      "id": "b-ebxy6l",
+      "type": "spacer",
+      "size": "sm"
     },
     {
       "id": "b-6mfmtq",
       "type": "heading",
-      "level": 3,
-      "text": "Second Finding: Fast and Final"
+      "level": 2,
+      "text": "Second Finding: Fast and Final",
+      "width": "narrow"
     },
     {
       "id": "b-t5e5n5",
       "type": "text",
-      "html": "<p>The score bar made submitting faster and more frequent, but the safety rails didn't grow with it.</p><p><ul><li><b>Submissions can't be undone</b>. Submitted cards leave the club immediately, and EA's position is that \"SBC submissions are final\" and advisors can't restore them.</li><li><b>The old format had a built-in check</b>. Building a squad meant looking at every card. Streamlined SBCs remove that step on purpose, so mistakes are cheaper to make.</li><li><b>It has already gone wrong</b>. On 28 September a list display bug showed a 48-rated bronze while submitting a 90-rated ICON worth about 3 million coins. The only visible clue was the Item Score: 21,000 instead of 20.</li><li><b>Players are building their own workaround</b>. Community guides now tell players to park valuable cards in Evolutions, because that blocks them from SBCs. Players have asked EA for a proper way to mark cards.</li></ul><div><br></div><div><b>Quick win (no economy impact)</b></div><div>1. A \"protected\" flag on any card, which keeps it out of every SBC list until removed.</div><div>2. A warning when one card would cover more than half of a target, or when a card is a special version such as an ICON. One extra tap, shown only when the stakes are high.</div><div><br></div><div><b>The principle:</b> when you make an action faster and more frequent, its safety checks have to scale with it. This fix also saves support time, since lost cards can't be restored.</div></p>"
+      "html": "<p>The score bar made submitting faster and more frequent, but the safety rails didn't grow with it.</p><p><ul><li><b>Submissions can't be undone</b>. Submitted cards leave the club immediately, and EA's position is that \"SBC submissions are final\" and advisors can't restore them.</li><li><b>The old format had a built-in check</b>. Building a squad meant looking at every card. Streamlined SBCs remove that step on purpose, so mistakes are cheaper to make.</li><li><b>It has already gone wrong</b>. On 28 September a list display bug showed a 48-rated bronze while submitting a 90-rated ICON worth about 3 million coins. The only visible clue was the Item Score: 21,000 instead of 20.</li><li><b>Players are building their own workaround</b>. Community guides now tell players to park valuable cards in Evolutions, because that blocks them from SBCs. Players have asked EA for a proper way to mark cards.</li></ul><div><br></div><div><b>Quick win (no economy impact)</b></div><div>1. A \"protected\" flag on any card, which keeps it out of every SBC list until removed.</div><div>2. A warning when one card would cover more than half of a target, or when a card is a special version such as an ICON. One extra tap, shown only when the stakes are high.</div><div><br></div><div><b>The principle:</b> when you make an action faster and more frequent, its safety checks have to scale with it. This fix also saves support time, since lost cards can't be restored.</div></p>",
+      "width": "narrow"
+    },
+    {
+      "id": "b-pn0d2z",
+      "type": "spacer",
+      "size": "sm"
     },
     {
       "id": "b-4g6lfb",
       "type": "heading",
-      "level": 3,
-      "text": "Risks and how to Measure Success"
+      "level": 2,
+      "text": "Risks and how to Measure Success",
+      "width": "narrow"
     },
     {
       "id": "b-zds075",
       "type": "text",
-      "html": "<p>The biggest risk is the Gallery: it uses the same Item Score, so this change would also make Gallery sets easier to grade.</p>"
+      "html": "<p>The biggest risk is the Gallery: it uses the same Item Score, so this change would also make Gallery sets easier to grade.</p>",
+      "width": "narrow"
     },
     {
       "id": "b-9gv8cs",
@@ -598,7 +667,8 @@
           "Players who already sold 76–83s to the quick-sell floor feel cheated",
           "Announce it a week ahead, ship at the start of a new season"
         ]
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-vg37rj",
@@ -629,34 +699,57 @@
           "Gallery grade distribution",
           "Unchanged, if the Gallery table is decoupled"
         ]
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-3ydopj",
       "type": "text",
-      "html": "<p><i>I don't have EA's baseline numbers, so these are directions rather than exact thresholds. A team with telemetry would set the thresholds from the current values.</i></p>"
+      "html": "<p><i>I don't have EA's baseline numbers, so these are directions rather than exact thresholds. A team with telemetry would set the thresholds from the current values.</i></p>",
+      "width": "narrow"
+    },
+    {
+      "id": "b-dzjlmz",
+      "type": "spacer",
+      "size": "sm"
     },
     {
       "id": "b-z1qg8x",
       "type": "heading",
-      "level": 3,
-      "text": "How I'd Test it First"
+      "level": 2,
+      "text": "How I'd Test it First",
+      "width": "narrow"
     },
     {
       "id": "b-wytggd",
       "type": "text",
-      "html": "<p>Don't change the table straight away. Run the proposal as a one-week live event first, using tools a live-ops team already has.</p><p>1. \"Club Clear-out\" week. A set of event SBCs where cards rated 76–83 score at the proposed values. Everything else, including the Gallery, stays on the current table, so the biggest risk is contained.</p><p>2. Compare with a normal week of similar SBCs: share of score from one rating, share of cards that were already in the club, completion rate, and coins spent on fodder.</p><p>3. Decide. Make it permanent if players use more of their own clubs without completion rates jumping, which would mean too many rewards entering the game. If completions jump, keep the curve but raise those SBCs' targets.</p><p>The event also works as content in its own right: a reason to open old cards, and a week players can look forward to.</p>"
+      "html": "<p>Don't change the table straight away. Run the proposal as a one-week live event first, using tools a live-ops team already has.</p><p>1. \"Club Clear-out\" week. A set of event SBCs where cards rated 76–83 score at the proposed values. Everything else, including the Gallery, stays on the current table, so the biggest risk is contained.</p><p>2. Compare with a normal week of similar SBCs: share of score from one rating, share of cards that were already in the club, completion rate, and coins spent on fodder.</p><p>3. Decide. Make it permanent if players use more of their own clubs without completion rates jumping, which would mean too many rewards entering the game. If completions jump, keep the curve but raise those SBCs' targets.</p><p>The event also works as content in its own right: a reason to open old cards, and a week players can look forward to.</p>",
+      "width": "narrow"
+    },
+    {
+      "id": "b-ykgii5",
+      "type": "spacer",
+      "size": "sm"
     },
     {
       "id": "b-l669ud",
       "type": "heading",
       "level": 2,
-      "text": "Sources"
+      "text": "Sources",
+      "width": "narrow"
     },
     {
-      "id": "b-f0afac",
-      "type": "text",
-      "html": "<p><b>Official (EA)</b></p><p>• Pitch Notes: FC 27 Ultimate Team deep dive: stated goals, Streamlined vs traditional SBCs, duplicates, partial progress, shared Item Score with the Gallery.</p><p>• EA Help: How Ultimate Team Squad Building Challenges work: partial progress, reduced rewards on expiry, submitted items removed from the club.</p><p>• EA Help: Gallery Sets and rewards guide: Gallery grades D to S based on Item Score.</p><p>• EA FC 27 FUT developer update, 1 October 2026 (summary by Moddingway): positive reception, Companion App, coin balances over 50% higher than last year.</p><p>• Soccer Gaming: FC 27 Ultimate Team development notes: players asking for a way to mark cards so they aren't submitted.</p><p><b>Community-measured (not published by EA)</b></p><p>• Timesaver: FC 27 Item Score table and cheapest fodder: score per rating and launch-week cost per point, measured 26 September 2026.</p><p>• All Things How: FC 27 Streamlined SBCs and Item Score: score examples and the 20,000-point launch SBC.</p><p>• FUTBIN: What's new in FC 27 Ultimate Team: release dates and feature list.</p><p>• Timesaver: the SBC sort bug, 29 September 2026: the mis-drawn list row, the lost ICON, EA's \"submissions are final\" response and the Evolutions workaround.</p>"
+      "id": "b-o01toa",
+      "type": "section",
+      "background": "surface",
+      "blocks": [
+        {
+          "id": "b-30zm2w",
+          "type": "text",
+          "html": "<p><b><span class=\"big\">Official (EA)</span></b></p><p><a href=\"https://www.ea.com/games/ea-sports-fc/fc-27/news/pitch-notes-fc27-fut-deep-dive\">Pitch Notes: FC 27 Ultimate Team deep dive</a></p><p><a href=\"https://help.ea.com/en/articles/ea-sports-fc/sbcs/\">EA Help: How Ultimate Team Squad Building Challenges work</a></p><p><a href=\"https://help.ea.com/en/articles/ea-sports-fc/gallery-hub\">EA Help: Gallery Sets and rewards guide</a></p><p><a href=\"https://moddingway.com/fut/news/10292/ea-fc-27-fut-developer-update-reveals-early-trends-and-upcoming-changes\">EA FC 27 FUT developer update, 1 October 2026 (summary by Moddingway)</a></p><p><a href=\"https://soccergaming.com/fc-27-ultimate-team-development-notes-reveal-key-updates\">Soccer Gaming: FC 27 Ultimate Team development notes</a></p><p><br></p><p><b><span class=\"big\">Community-measured (not published by EA)</span></b></p><p><a href=\"https://timesaver.gg/blog/fc-27-item-score-table-cheapest-fodder-84s\">Timesaver: FC 27 Item Score table and cheapest fodder</a></p><p><a href=\"https://allthings.how/fc-27-streamlined-sbcs-how-the-item-score-system-works/\">All Things How: FC 27 Streamlined SBCs and Item Score</a></p><p><a href=\"https://www.futbin.com/whats-new-fc-27\">FUTBIN: What's new in FC 27 Ultimate Team</a></p><p><a href=\"https://timesaver.gg/blog/fc-27-sbc-submitted-wrong-player-sort-bug\">Timesaver: the SBC sort bug, 29 September 2026</a></p>"
+        }
+      ],
+      "width": "narrow"
     }
   ]
 }
