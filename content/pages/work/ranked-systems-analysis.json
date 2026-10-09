@@ -193,15 +193,39 @@
           "data": [
             {
               "label": "Bronze",
-              "value": 42
+              "value": 2.4
             },
             {
-              "label": "B",
-              "value": 20
+              "label": "Silver",
+              "value": 12.6
             },
             {
-              "label": "C",
-              "value": 15
+              "label": "Gold",
+              "value": 31.7
+            },
+            {
+              "label": "Platinum",
+              "value": 34.9
+            },
+            {
+              "label": "Emerald",
+              "value": 0
+            },
+            {
+              "label": "Diamond",
+              "value": 14.9
+            },
+            {
+              "label": "Master",
+              "value": 3.2
+            },
+            {
+              "label": "Grandmaster",
+              "value": 0.1
+            },
+            {
+              "label": "Champion",
+              "value": 0.1
             }
           ],
           "name": "Current Tier"
@@ -211,9 +235,260 @@
           "data": [
             {
               "label": "Bronze",
-              "value": 0
+              "value": 8
+            },
+            {
+              "label": "Silver",
+              "value": 14
+            },
+            {
+              "label": "Gold",
+              "value": 18
+            },
+            {
+              "label": "Platinum",
+              "value": 18
+            },
+            {
+              "label": "Emerald",
+              "value": 16
+            },
+            {
+              "label": "Diamond",
+              "value": 13
+            },
+            {
+              "label": "Master",
+              "value": 8
+            },
+            {
+              "label": "Grandmaster",
+              "value": 4
+            },
+            {
+              "label": "Champion",
+              "value": 1
             }
           ]
+        }
+      ],
+      "note": "Current: Blizzard chart reported July 2025, before Emerald existed. Target: redesign"
+    },
+    {
+      "id": "b-oog46l",
+      "type": "table",
+      "caption": "",
+      "columns": [
+        "Measure",
+        "Current",
+        "Redesign"
+      ],
+      "rows": [
+        [
+          "Placement matches per 3-season cycle",
+          "30",
+          "0"
+        ],
+        [
+          "Matches in a visibly wrong rank, per cycle (one role)",
+          "6",
+          "2"
+        ],
+        [
+          "Worst rank error in the cycle",
+          "4.0 divisions",
+          "1.65 divisions"
+        ],
+        [
+          "Tiers holding at least 5% of players",
+          "4",
+          "7"
+        ]
+      ]
+    },
+    {
+      "id": "b-emyqcq",
+      "type": "spacer",
+      "size": "sm"
+    },
+    {
+      "id": "b-weh62d",
+      "type": "heading",
+      "level": 2,
+      "text": "Across 300 Players"
+    },
+    {
+      "id": "b-v74kpm",
+      "type": "text",
+      "html": "<p>Run for 300 players with different play rates, from 10 to 100 matches a season, the share of ranked matches played at a visibly wrong rank halves.</p>"
+    },
+    {
+      "id": "b-zxmxfu",
+      "type": "table",
+      "caption": "",
+      "columns": [
+        "One Role, One 3-Season Cycle",
+        "Current",
+        "Redesign"
+      ],
+      "rows": [
+        [
+          "Median matches at a wrong rank",
+          "7",
+          "3"
+        ],
+        [
+          "90th percentile",
+          "10",
+          "5"
+        ],
+        [
+          "Share of all ranked matches",
+          "6.9%",
+          "3.3%"
+        ]
+      ]
+    },
+    {
+      "id": "b-3zdhsn",
+      "type": "text",
+      "html": "<p>It isn't better for everyone. 16 of the 300 players lose out by 1 or 2 matches. All of them are light players, at 10 matches a season, whose reset left them close to their true rank, and they now absorb the redesign's season-start drift every season.</p><p><br></p><p><span class=\"big\"><b>Testing the risk of moving tiers</b></span></p><p>With 1,000 simulated players who improve a little each season, recomputed percentile cutoffs drop 0.4% of players a tier without them getting worse. A small cap on how far boundaries can move removes that entirely, at the cost of the largest tier sitting at 18.3% instead of 18%. Fixed bands fail the other way. As the population improves, the top four tiers grow from 26% to 37% of players in six seasons: the crowding Emerald was added to fix.</p>"
+    },
+    {
+      "id": "b-ktul0g",
+      "type": "section",
+      "background": "surface",
+      "blocks": [
+        {
+          "id": "b-mld05p",
+          "type": "heading",
+          "level": 2,
+          "text": "What the Player Sees"
+        },
+        {
+          "id": "b-ufmooh",
+          "type": "text",
+          "html": "<p>Three UI mockups: a Diamond 3 rank card checking in at season start, a post-match result showing a 44% predicted win chance and +31, and a tier boundary notice stating the player's rating did not change.</p><p><ol><li><b>Rank Card:</b> No reset and no placements: the rank stays visible with a \"Checking in · 1 of 3\" tag.<br><br></li><li><b>Post-Match Result:</b> One sentence, \"You won a 44% match: +31 instead of +24 for an even win,\" replaces the modifier labels. The rank changes shown are illustrative, since Blizzard's formula isn't public.<br><br></li><li><b>Tier Boundary Notice:</b> Shown only when cutoffs move. It states that the player's rating didn't change, so a tier change never reads as a punishment.</li></ol></p>"
+        }
+      ]
+    },
+    {
+      "id": "b-ay00tq",
+      "type": "section",
+      "background": "surface",
+      "blocks": [
+        {
+          "id": "b-9m5eqo",
+          "type": "heading",
+          "level": 2,
+          "text": "What it Gives Up"
+        },
+        {
+          "id": "b-elixkf",
+          "type": "text",
+          "html": "<p><ul><li><b>The Fresh-Start Feeling</b>: Resets let players escape a bad rank. Check-ins keep faster early movement, but the clean slate is gone.<br><br></li><li><b>Bigger Swings at Season Start, and Some Light Players Lose Out:</b> Without resets, balance drift isn't wiped either. The redesign peaks at 1.65 divisions off at seasons 2 and 3, versus 1.15 for the current system, and 16 of 300 modeled players lose out slightly.<br><br></li><li><b>Tiers That Move:</b> Without a cap, 0.4% of players a season would drop a tier without playing worse. A boundary cap fixes that, but leaves the largest tier slightly over target.<br><br></li><li><b>Cheaper Alt Accounts:</b> A 20-win gate makes smurfing cheaper. Fast calibration limits how long a smurf stays misranked, but doesn't stop them existing.</li></ul></p><p></p>"
+        }
+      ]
+    },
+    {
+      "id": "b-4pbyvf",
+      "type": "section",
+      "background": "surface",
+      "blocks": [
+        {
+          "id": "b-kssg55",
+          "type": "heading",
+          "level": 2,
+          "text": "Validating it in a Live Game"
+        },
+        {
+          "id": "b-o6werz",
+          "type": "text",
+          "html": "<p></p><ul><li><b>MMR change in the first 10 matches of a season. </b>Smaller means rank was already right when the season began.</li><li><b>Ranked participation in the first two weeks. </b>This checks whether losing resets cuts early-season engagement.</li><li><b>Share of players per tier, </b>season by season, measured against the targets.</li><li><b>A post-match survey on whether players understand why their rank moved, </b>before and after two-number feedback.</li><li><b>Time for flagged new accounts to stabilize,&nbsp;</b>and how often they're reported for smurfing.</li></ul><p></p><p></p>"
+        }
+      ]
+    },
+    {
+      "id": "b-9sv89i",
+      "type": "section",
+      "background": "surface",
+      "blocks": [
+        {
+          "id": "b-da709m",
+          "type": "heading",
+          "level": 2,
+          "text": "Shipping It"
+        },
+        {
+          "id": "b-hwbctw",
+          "type": "text",
+          "html": "<p></p><ol><li><b>Two-Number Feedback First: </b>It is low risk, reversible, and testable with a survey.</li><li><b>Check-Ins in One Region for One Season</b>, compared against a region that still resets.</li><li><b>Percentile Tiers Last: </b>They are the least tested idea in the industry, and need a season of data to set the boundary cap.<br><b style=\"font-weight: bold;\"><br>Ending resets also changes a ritual players know, so community and communications teams need to explain it before launch.</b></li></ol><p></p><p></p>"
+        }
+      ]
+    },
+    {
+      "id": "b-mttc0w",
+      "type": "section",
+      "background": "surface",
+      "blocks": [
+        {
+          "id": "b-oqvu81",
+          "type": "heading",
+          "level": 2,
+          "text": "Next: First-Hand Evidence"
+        },
+        {
+          "id": "b-9yi37k",
+          "type": "text",
+          "html": "<p></p><div>This study rests on Blizzard's statements, community reports and models. The next step is my own evidence, and both tools are ready. A match log in the spreadsheet records 30 of my ranked matches, including how well I understood each rank change. A short survey for 30–50 players tests the diagnosis and asks whether they'd accept the redesign.</div><p></p><p></p>"
+        }
+      ]
+    },
+    {
+      "id": "b-m4q4d0",
+      "type": "spacer",
+      "size": "sm"
+    },
+    {
+      "id": "b-2fpi7u",
+      "type": "heading",
+      "level": 2,
+      "text": "Files"
+    },
+    {
+      "id": "b-dhj72s",
+      "type": "button",
+      "label": "Analysis Model",
+      "href": "/",
+      "style": "primary"
+    },
+    {
+      "id": "b-8xi9ri",
+      "type": "button",
+      "label": "Design Doc",
+      "href": "/",
+      "style": "primary"
+    },
+    {
+      "id": "b-km5z8n",
+      "type": "spacer",
+      "size": "sm"
+    },
+    {
+      "id": "b-9q1b64",
+      "type": "section",
+      "background": "surface",
+      "blocks": [
+        {
+          "id": "b-pcyrsr",
+          "type": "heading",
+          "level": 2,
+          "text": "Sources"
+        },
+        {
+          "id": "b-r7zo51",
+          "type": "text",
+          "html": "<p><a href=\"https://overwatch.blizzard.com/en-us/news/patch-notes/live/2026/02/\">Overwatch patch notes, February 2026</a></p><p><a href=\"https://overwatch.blizzard.com/en-us/news/patch-notes/live/2026/05/\">Overwatch patch notes, May 2026</a></p><p><a href=\"https://overwatch.blizzard.com/en-us/news/patch-notes/live/2026/08/\">Overwatch patch notes, August 2026</a></p><p><a href=\"https://overwatch.blizzard.com/en-us/news/patch-notes/\">Overwatch patch notes, October 2026</a></p><p><a href=\"https://overwatch.blizzard.com/en-us/news/23910161/\">Blizzard: Explaining matchmaker goals and plans, part 2</a></p><p><a href=\"https://esports.gg/news/overwatch/most-overwatch-2-players-are-in-platinum-rank-blizzard-reports\">Esports.gg: Most players are in Platinum (July 2025)</a></p><p><a href=\"https://esports.gg/news/overwatch/heres-why-overwatch-added-the-new-emerald-rank/\">Esports.gg: Why Overwatch added Emerald (August 2026)</a></p><p><a href=\"https://www.pcgamer.com/games/fps/overwatchs-newest-emerald-rank-is-like-a-live-grenade-wedged-between-plat-and-diamond/\">PC Gamer: Overwatch's newest Emerald rank (August 2026)</a></p><p>Overwatch Forums: Emerald Rank is worse (August 2026)</p><p>1v9.gg: Overwatch 2 ranking system explained</p><p>VALORANT Wiki: Competitive</p><p>Riot Support: Ranked Years, Seasons, and End-of-Season Rewards</p><p>League of Legends: /dev: Ranked 2026</p><p>Marvel Rivals Season 4 patch notes</p><p>Esports.gg: CS2 Premier Season 2</p><p>Blizzard: Defense Matrix Update: Season 10 and Beyond</p><p>GGRecon: Overwatch 2 Narrow &amp; Wide Groups explained</p>"
         }
       ]
     }
