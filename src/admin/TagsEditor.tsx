@@ -1,7 +1,7 @@
 import { useState } from 'preact/hooks';
 import type { Block, Project, Tag, Tags } from '../lib/types';
 import { PROJECTS, TAGS, files, pagePaths, projects, setFiles, tags, updateFile, type PageFile } from './store';
-import { Field, IconButton, TextInput } from './ui';
+import { Field, IconButton, TextInput, Toggle } from './ui';
 
 const toId = (label: string) =>
   label
@@ -53,6 +53,11 @@ function TagGroup({ group, title, hint }: { group: 'discipline' | 'engine'; titl
           <TextInput value={tag.label} onChange={(label) => setList(list.map((t, j) => (j === i ? { ...t, label } : t)))} />
           <span class="muted mono small">{tag.id}</span>
           <span class="muted small">{usage(tag.id)} projects</span>
+          <Toggle
+            checked={Boolean(tag.accent)}
+            label="Accent"
+            onChange={(accent) => setList(list.map((t, j) => (j === i ? { ...t, accent: accent || undefined } : t)))}
+          />
           <IconButton icon="trash" label="Delete tag" tone="danger" onClick={() => remove(tag.id)} />
         </div>
       ))}
@@ -241,8 +246,16 @@ export function TagsEditor() {
         </div>
       </header>
       <OriginGroup />
-      <TagGroup group="discipline" title="Disciplines" hint="What kind of design work a project shows." />
-      <TagGroup group="engine" title="Engines & tools" hint="What it was built with." />
+      <TagGroup
+        group="discipline"
+        title="Disciplines"
+        hint="What kind of design work a project shows. Accent draws a tag in the accent colour on project cards and under a case study."
+      />
+      <TagGroup
+        group="engine"
+        title="Engines & tools"
+        hint="What it was built with. Accenting these is the quickest way to tell tools from disciplines at a glance."
+      />
     </div>
   );
 }

@@ -29,6 +29,10 @@ export const projects: Project[] = orderProjects(allProjects);
 export const tagLabel = (id: string) =>
   [...tags.discipline, ...tags.engine].find((t) => t.id === id)?.label ?? id;
 
+/** Whether a tag is one of the marked ones, for pages that render outside the preview. */
+export const tagAccent = (id: string) =>
+  Boolean([...tags.discipline, ...tags.engine].find((t) => t.id === id)?.accent);
+
 const pageModules = import.meta.glob<Record<string, unknown>>('../../content/pages/**/*.json', {
   eager: true,
   import: 'default',

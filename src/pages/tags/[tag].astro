@@ -32,7 +32,7 @@ const others = [...tags.discipline, ...tags.engine].filter((t) => t.id !== tag.i
       <div class="tag-links">
         {
           others.map((t) => (
-            <a class="tag-chip" href={`/tags/${t.id}`}>
+            <a class={`tag-chip${t.accent ? ' is-marked' : ''}`} href={`/tags/${t.id}`}>
               {t.label}
             </a>
           ))
