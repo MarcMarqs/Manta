@@ -224,6 +224,25 @@ Secrets, set under **Settings → Variables and Secrets** as type *Secret*, neve
   is never a session for the other. Changing it ends every unlock.
 - `GITHUB_TOKEN` — fine-grained token: this repository only, **Contents: Read and write**.
 
+## Embedding a spreadsheet
+
+The **Spreadsheet** block puts a Google Sheet on the page, live. Paste the address from
+your browser and it works out the id and the tab on its own.
+
+Two ways to show one:
+
+- **The file** — the spreadsheet as it looks in Sheets, tabs along the bottom. It obeys
+  the sharing set on the file, so set that to *Anyone with the link* or readers get a
+  sign-in page where the sheet should be.
+- **Published grid** — the bare grid, from **File → Share → Publish to web**. Publishing
+  makes it readable by anyone who has the published address, whatever the file's own
+  sharing says.
+
+Either way the sheet is served by Google, inside a frame: it keeps its own light
+appearance and will not follow the site's dark theme. A sheet embedded on a private case
+study is still only as private as its own sharing — the password on the page does not
+reach inside the frame.
+
 ## Measuring
 
 **Site & theme → Sharing & search → Cloudflare Web Analytics token** turns on counting.

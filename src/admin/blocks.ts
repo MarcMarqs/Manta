@@ -39,6 +39,12 @@ export const BLOCKS: Record<BlockType, BlockSpec> = {
     hint: 'YouTube, Vimeo or itch.io',
     create: () => ({ id: newId(), type: 'video', provider: 'youtube', videoId: '', title: '' }),
   },
+  sheet: {
+    label: 'Spreadsheet',
+    group: 'Data',
+    hint: 'A Google Sheet, live on the page',
+    create: () => ({ id: newId(), type: 'sheet', source: 'file', sheetId: '', height: 'medium' }),
+  },
   button: {
     label: 'Button',
     group: 'Text & media',
@@ -258,6 +264,8 @@ export function summarize(block: Block): string {
       return block.videoId ? `${block.provider} · ${block.videoId}` : 'No video yet';
     case 'button':
       return `${block.label} → ${block.href}`;
+    case 'sheet':
+      return block.sheetId ? block.caption || block.title || 'Google Sheet' : 'No spreadsheet yet';
     case 'table':
       return block.caption || `${block.columns.length} × ${block.rows.length}`;
     case 'specs':
@@ -332,6 +340,24 @@ export function ancestorsOf(blocks: Block[], id: string, trail: string[] = []): 
 }
 
 /** Pulls an id out of a pasted YouTube/Vimeo URL; returns the input unchanged if it's already an id. */
+/**
+ * Pulls the id and tab out of whatever Google Sheets address was pasted.
+ *
+ * Two shapes exist and they are not interchangeable: an ordinary document lives at
+ * /spreadsheets/d/<id>, while one put through Publish to web gets a second, different id
+ * at /spreadsheets/d/e/<id>. The /e/ has to be tested for first, or the plain pattern
+ * matches it and takes "e" for the id.
+ */
+export function parseSheetInput(input: string): { source?: 'file' | 'published'; sheetId: string; gid?: string } {
+  const value = input.trim();
+  const gid = value.match(/[?#&]gid=(\d+)/)?.[1];
+  const published = value.match(/spreadsheets\/d\/e\/([\w-]+)/);
+  if (published) return { source: 'published', sheetId: published[1], gid };
+  const file = value.match(/spreadsheets\/d\/([\w-]+)/);
+  if (file) return { source: 'file', sheetId: file[1], gid };
+  return { sheetId: value, gid };
+}
+
 export function parseVideoInput(input: string): { provider?: 'youtube' | 'vimeo'; id: string } {
   const value = input.trim();
   const yt = value.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/);
