@@ -501,14 +501,6 @@
       "width": "narrow"
     },
     {
-      "id": "b-8xi9ri",
-      "type": "button",
-      "label": "Design Doc",
-      "href": "/",
-      "style": "primary",
-      "width": "narrow"
-    },
-    {
       "id": "b-km5z8n",
       "type": "spacer",
       "size": "sm"
