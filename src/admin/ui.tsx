@@ -158,6 +158,66 @@ export function TextInput({
   );
 }
 
+/**
+ * A field for a number that lets a number actually be typed.
+ *
+ * `<input type="number">` looks right and is a trap for a controlled field: while the
+ * caret sits after the dot in "2.", the contents are not a valid floating-point number,
+ * so the browser reports the value as empty. Parsing that gives 0, the field is re-set
+ * to 0, and the dot can never be reached — the control accepts whole numbers and
+ * silently refuses everything else.
+ *
+ * So the text being typed is held here and only parsed on its way out. The field follows
+ * the value from outside, but never while the text already means that value, which is
+ * what leaves "2." alone long enough to become "2.4".
+ */
+export function NumberInput({
+  value,
+  onChange,
+  integer,
+  placeholder,
+  blank,
+}: {
+  value: number | undefined;
+  onChange: (v: number | undefined) => void;
+  /** Whole numbers only, for a count or an index. */
+  integer?: boolean;
+  placeholder?: string;
+  /** Emptying the field means "unset" rather than zero. */
+  blank?: boolean;
+}) {
+  const shown = (v: number | undefined) => (v === undefined ? '' : String(v));
+  const [text, setText] = useState(shown(value));
+
+  useEffect(() => {
+    const typed = Number(text);
+    if (text.trim() !== '' && !Number.isNaN(typed) && typed === value) return;
+    setText(shown(value));
+  }, [value]);
+
+  return (
+    <input
+      class="input"
+      type="text"
+      inputMode={integer ? 'numeric' : 'decimal'}
+      placeholder={placeholder}
+      value={text}
+      onInput={(e) => {
+        const raw = (e.target as HTMLInputElement).value;
+        setText(raw);
+        if (raw.trim() === '') {
+          if (blank) onChange(undefined);
+          return;
+        }
+        const parsed = Number(raw);
+        if (Number.isNaN(parsed)) return;
+        onChange(integer ? Math.round(parsed) : parsed);
+      }}
+      onBlur={() => setText(shown(value))}
+    />
+  );
+}
+
 export function TextArea({
   value,
   onChange,

@@ -4,7 +4,7 @@ import { BLOCKS, GROUPS, cloneBlock, parseSheetInput, parseVideoInput, summarize
 import { api, assetUrl } from './api';
 import { ImageField, LinkInput } from './media';
 import { PROJECTS, expanded, fileToRoute, files, newId, openView, pagePaths, projects, selectedBlock, toggleExpanded, updateFile } from './store';
-import { Field, Icon, IconButton, RichText, Segmented, Select, TextArea, TextInput, Toggle } from './ui';
+import { Field, Icon, IconButton, NumberInput, RichText, Segmented, Select, TextArea, TextInput, Toggle } from './ui';
 
 const MAX_DEPTH = 2;
 
@@ -986,17 +986,15 @@ function BlockFields({
               <TextInput value={block.note ?? ''} onChange={(v) => onChange({ ...block, note: v || undefined })} />
             </Field>
             <Field label="Reference line" hint="A line to read the marks against — a target, a proposal, a floor. Empty for none.">
-              <input
-                class="input"
-                type="number"
-                value={block.reference?.value ?? ''}
-                onInput={(e) => {
-                  const raw = (e.target as HTMLInputElement).value;
+              <NumberInput
+                value={block.reference?.value}
+                blank
+                onChange={(v) =>
                   onChange({
                     ...block,
-                    reference: raw === '' ? undefined : { ...block.reference, value: Number(raw) || 0 },
-                  });
-                }}
+                    reference: v === undefined ? undefined : { ...block.reference, value: v },
+                  })
+                }
               />
             </Field>
             <Field label="Reference label">
@@ -1015,33 +1013,21 @@ function BlockFields({
           {computed && (
             <div class="fields">
               <Field label="From" hint="The chart runs each formula from here…">
-                <input
-                  class="input"
-                  type="number"
+                <NumberInput
                   value={range.from}
-                  onInput={(e) =>
-                    onChange({ ...block, range: { ...range, from: Number((e.target as HTMLInputElement).value) || 0 } })
-                  }
+                  onChange={(v) => onChange({ ...block, range: { ...range, from: v ?? 0 } })}
                 />
               </Field>
               <Field label="To" hint="…to here.">
-                <input
-                  class="input"
-                  type="number"
+                <NumberInput
                   value={range.to}
-                  onInput={(e) =>
-                    onChange({ ...block, range: { ...range, to: Number((e.target as HTMLInputElement).value) || 0 } })
-                  }
+                  onChange={(v) => onChange({ ...block, range: { ...range, to: v ?? 0 } })}
                 />
               </Field>
               <Field label="Step">
-                <input
-                  class="input"
-                  type="number"
+                <NumberInput
                   value={range.step ?? 1}
-                  onInput={(e) =>
-                    onChange({ ...block, range: { ...range, step: Number((e.target as HTMLInputElement).value) || 1 } })
-                  }
+                  onChange={(v) => onChange({ ...block, range: { ...range, step: v ?? 1 } })}
                 />
               </Field>
             </div>
@@ -1104,15 +1090,11 @@ function BlockFields({
                           setSeries(i, { data: (plot.data ?? []).map((x, m) => (m === k ? { ...x, label } : x)) })
                         }
                       />
-                      <input
-                        class="input"
-                        type="number"
+                      <NumberInput
                         value={d.value}
-                        onInput={(e) =>
+                        onChange={(v) =>
                           setSeries(i, {
-                            data: (plot.data ?? []).map((x, m) =>
-                              m === k ? { ...x, value: Number((e.target as HTMLInputElement).value) || 0 } : x,
-                            ),
+                            data: (plot.data ?? []).map((x, m) => (m === k ? { ...x, value: v ?? 0 } : x)),
                           })
                         }
                       />
@@ -1236,29 +1218,13 @@ function BlockFields({
                   value={row.label}
                   onChange={(label) => write(block.rows.map((x, j) => (j === i ? { ...x, label } : x)))}
                 />
-                <input
-                  class="input"
-                  type="number"
+                <NumberInput
                   value={row.low}
-                  onInput={(e) =>
-                    write(
-                      block.rows.map((x, j) =>
-                        j === i ? { ...x, low: Number((e.target as HTMLInputElement).value) || 0 } : x,
-                      ),
-                    )
-                  }
+                  onChange={(v) => write(block.rows.map((x, j) => (j === i ? { ...x, low: v ?? 0 } : x)))}
                 />
-                <input
-                  class="input"
-                  type="number"
+                <NumberInput
                   value={row.high}
-                  onInput={(e) =>
-                    write(
-                      block.rows.map((x, j) =>
-                        j === i ? { ...x, high: Number((e.target as HTMLInputElement).value) || 0 } : x,
-                      ),
-                    )
-                  }
+                  onChange={(v) => write(block.rows.map((x, j) => (j === i ? { ...x, high: v ?? 0 } : x)))}
                 />
                 <IconButton
                   icon="trash"
@@ -1408,12 +1374,7 @@ function BlockFields({
                     onChange={(accent) => setNode(i, { accent: accent || undefined })}
                   />
                 ) : (
-                  <input
-                    class="input"
-                    type="number"
-                    value={node.layer ?? 0}
-                    onInput={(e) => setNode(i, { layer: Number((e.target as HTMLInputElement).value) || 0 })}
-                  />
+                  <NumberInput integer value={node.layer ?? 0} onChange={(v) => setNode(i, { layer: v ?? 0 })} />
                 )}
                 <IconButton
                   icon="trash"
@@ -1480,14 +1441,10 @@ function BlockFields({
               <TextInput value={block.title ?? ''} onChange={(v) => onChange({ ...block, title: v })} />
             </Field>
             <Field label="Outer ring" hint="Left empty, it comes from the largest value.">
-              <input
-                class="input"
-                type="number"
-                value={block.max ?? ''}
-                onInput={(e) => {
-                  const v = Number((e.target as HTMLInputElement).value);
-                  onChange({ ...block, max: v > 0 ? v : undefined });
-                }}
+              <NumberInput
+                value={block.max}
+                blank
+                onChange={(v) => onChange({ ...block, max: v !== undefined && v > 0 ? v : undefined })}
               />
             </Field>
           </div>
@@ -1536,20 +1493,16 @@ function BlockFields({
                 {block.axes.map((axis, k) => (
                   <div class="series-row">
                     <span class="field-hint">{axis || `Measure ${k + 1}`}</span>
-                    <input
-                      class="input"
-                      type="number"
+                    <NumberInput
                       value={plot.values[k] ?? 0}
-                      onInput={(e) =>
+                      onChange={(val) =>
                         onChange({
                           ...block,
                           series: block.series.map((x, j) =>
                             j === i
                               ? {
                                   ...x,
-                                  values: block.axes.map((_, m) =>
-                                    m === k ? Number((e.target as HTMLInputElement).value) || 0 : (x.values[m] ?? 0),
-                                  ),
+                                  values: block.axes.map((_, m) => (m === k ? (val ?? 0) : (x.values[m] ?? 0))),
                                 }
                               : x,
                           ),
