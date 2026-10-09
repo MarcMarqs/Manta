@@ -93,7 +93,6 @@ export interface Project {
   engine: string[];
   cover: string;
   coverVideo: string | null;
-  featured: boolean;
   /** An id from the origin list. Absent means the first one. */
   origin?: ProjectOrigin;
   visibility: ProjectVisibility;

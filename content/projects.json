@@ -23,7 +23,6 @@
     ],
     "cover": "/images/projects/wardens-rising/cover.svg",
     "coverVideo": null,
-    "featured": true,
     "visibility": "public",
     "links": [
       {
@@ -57,7 +56,6 @@
     ],
     "cover": "/images/projects/aurora/cover.svg",
     "coverVideo": null,
-    "featured": true,
     "visibility": "public",
     "links": [
       {
@@ -67,6 +65,43 @@
       }
     ],
     "origin": "professional"
+  },
+  {
+    "slug": "fc27-teardown",
+    "title": "Economy Teardown",
+    "genre": "",
+    "year": null,
+    "role": "",
+    "summary": "When cards become points, the points table becomes the economy. FC 27's Streamlined SBCs swap the squad-building puzzle for a score bar, and players like it: EA reported a positive reception within a week. But the change moved every important decision into one table, the Item Score curve, and that table brought issues.",
+    "highlights": [],
+    "discipline": [
+      "systems",
+      "economy"
+    ],
+    "engine": [],
+    "cover": "",
+    "coverVideo": null,
+    "visibility": "public",
+    "links": [],
+    "origin": "personal"
+  },
+  {
+    "slug": "ranked-systems-analysis",
+    "title": "Ranked Systems Analysis",
+    "genre": "Analysis",
+    "year": null,
+    "role": "",
+    "summary": "Overwatch’s matchmaker builds fair games; the rank players see is what breaks. This study diagnoses that and redesigns it, halving the share of matches played at the wrong rank across 300 modeled players.",
+    "highlights": [],
+    "discipline": [
+      "systems"
+    ],
+    "engine": [],
+    "cover": "",
+    "coverVideo": null,
+    "visibility": "public",
+    "links": [],
+    "origin": "personal"
   },
   {
     "slug": "gundam-requiem",
@@ -85,7 +120,6 @@
     ],
     "cover": "/images/projects/gundam-requiem/cover.svg",
     "coverVideo": null,
-    "featured": false,
     "visibility": "public",
     "links": [],
     "origin": "personal"
@@ -108,7 +142,6 @@
     ],
     "cover": "/images/projects/plushland-curse/cover.svg",
     "coverVideo": null,
-    "featured": false,
     "visibility": "public",
     "links": [],
     "origin": "personal"
@@ -130,7 +163,6 @@
     ],
     "cover": "/images/projects/far-away-orbital-space/cover.svg",
     "coverVideo": null,
-    "featured": false,
     "visibility": "public",
     "links": [],
     "origin": "personal"
@@ -151,47 +183,7 @@
     ],
     "cover": "/images/projects/ascending-flags/cover.svg",
     "coverVideo": null,
-    "featured": false,
     "visibility": "draft",
-    "links": [],
-    "origin": "personal"
-  },
-  {
-    "slug": "fc27-teardown",
-    "title": "Economy Teardown",
-    "genre": "",
-    "year": null,
-    "role": "",
-    "summary": "When cards become points, the points table becomes the economy. FC 27's Streamlined SBCs swap the squad-building puzzle for a score bar, and players like it: EA reported a positive reception within a week. But the change moved every important decision into one table, the Item Score curve, and that table brought issues.",
-    "highlights": [],
-    "discipline": [
-      "systems",
-      "economy"
-    ],
-    "engine": [],
-    "cover": "",
-    "coverVideo": null,
-    "featured": true,
-    "visibility": "public",
-    "links": [],
-    "origin": "personal"
-  },
-  {
-    "slug": "ranked-systems-analysis",
-    "title": "Ranked Systems Analysis",
-    "genre": "Analysis",
-    "year": null,
-    "role": "",
-    "summary": "Overwatch’s matchmaker builds fair games; the rank players see is what breaks. This study diagnoses that and redesigns it, halving the share of matches played at the wrong rank across 300 modeled players.",
-    "highlights": [],
-    "discipline": [
-      "systems"
-    ],
-    "engine": [],
-    "cover": "",
-    "coverVideo": null,
-    "featured": true,
-    "visibility": "public",
     "links": [],
     "origin": "personal"
   }

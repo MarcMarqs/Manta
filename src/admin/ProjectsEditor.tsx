@@ -2,7 +2,7 @@ import type { Project, ProjectLink, Site } from '../lib/types';
 import { ImageField, LinkInput } from './media';
 import { createPage } from './PageEditor';
 import { PAGES_DIR, PROJECTS, SITE, files, openView, projects, setFiles, tags, toast, updateFile, view, type PageFile } from './store';
-import { Field, Icon, IconButton, Segmented, Select, TextArea, TextInput, Toggle } from './ui';
+import { Field, Icon, IconButton, Segmented, Select, TextArea, TextInput } from './ui';
 
 const caseStudyPath = (slug: string) => `${PAGES_DIR}work/${slug}.json`;
 
@@ -22,7 +22,6 @@ function blankProject(existing: Project[], origin: string): Project {
     engine: [],
     cover: '',
     coverVideo: null,
-    featured: false,
     origin,
     visibility: 'draft',
     links: [],
@@ -157,7 +156,6 @@ function ProjectForm({ project, index }: { project: Project; index: number }) {
             />
           </Field>
           {project.visibility === 'private' && <PrivateLink slug={project.slug} />}
-          <Toggle checked={project.featured} onChange={(featured) => set({ featured })} label="Featured (shown first)" />
         </div>
         <IconButton icon="trash" label="Delete project" tone="danger" onClick={remove} />
       </div>
@@ -269,6 +267,26 @@ export function ProjectsEditor({ slug }: { slug?: string }) {
   const list = projects.value;
   const index = slug ? list.findIndex((p) => p.slug === slug) : -1;
 
+  /**
+   * The list is the running order, so moving a row here is the whole feature. Projects
+   * hidden from the site keep their place in it rather than being skipped over, because
+   * a draft that is about to be published should land where it was put.
+   */
+  const move = (from: number, dir: -1 | 1) => {
+    const to = from + dir;
+    if (to < 0 || to >= list.length) return;
+    updateFile<Project[]>(
+      PROJECTS,
+      (l) => {
+        const next = [...l];
+        const [item] = next.splice(from, 1);
+        next.splice(to, 0, item);
+        return next;
+      },
+      { coalesce: false },
+    );
+  };
+
   const add = () => {
     const project = blankProject(list, tags.value?.origin?.[0]?.id ?? 'professional');
     updateFile<Project[]>(PROJECTS, (l) => [...l, project], { coalesce: false });
@@ -281,7 +299,7 @@ export function ProjectsEditor({ slug }: { slug?: string }) {
         <div>
           <p class="eyebrow">Content</p>
           <h1>Projects</h1>
-          <p class="muted">Shown by the project rail and grid blocks, featured first, then newest.</p>
+          <p class="muted">Shown by the project rail and grid blocks, in the order they sit in here.</p>
         </div>
         <button type="button" class="btn primary small" onClick={add}>
           <Icon name="plus" /> New project
@@ -289,20 +307,25 @@ export function ProjectsEditor({ slug }: { slug?: string }) {
       </header>
 
       <div class="project-list">
-        {list.map((p) => (
-          <button
-            type="button"
-            class={`project-item${p.slug === slug ? ' active' : ''}`}
-            onClick={() => (view.value = { kind: 'projects', slug: p.slug === slug ? undefined : p.slug })}
-          >
-            <span class="project-title">{p.title || 'Untitled'}</span>
-            <span class="muted">
-              {p.year}
-              {p.visibility === 'draft' ? ' · not built' : ''}
-              {p.visibility === 'private' ? ' · password' : ''}
-              {p.featured ? ' · featured' : ''}
+        {list.map((p, i) => (
+          <div class={`project-row${p.slug === slug ? ' active' : ''}`}>
+            <button
+              type="button"
+              class="project-item"
+              onClick={() => (view.value = { kind: 'projects', slug: p.slug === slug ? undefined : p.slug })}
+            >
+              <span class="project-title">{p.title || 'Untitled'}</span>
+              <span class="muted">
+                {p.year}
+                {p.visibility === 'draft' ? ' · not built' : ''}
+                {p.visibility === 'private' ? ' · password' : ''}
+              </span>
+            </button>
+            <span class="project-move">
+              <IconButton icon="up" label="Move up" disabled={i === 0} onClick={() => move(i, -1)} />
+              <IconButton icon="down" label="Move down" disabled={i === list.length - 1} onClick={() => move(i, 1)} />
             </span>
-          </button>
+          </div>
         ))}
       </div>
 

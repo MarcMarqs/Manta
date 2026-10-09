@@ -127,6 +127,15 @@ called `primary`.
    scrolls into view on a touch screen), so a page of cards doesn't run every video at once.
 3. Create `content/pages/work/<slug>.json` for its case study.
 
+### The running order
+
+Projects appear in the order they sit in under **Projects**, and the arrows on each row
+move them. That order is the order everywhere: the rail, the grid, the tag pages and the
+next-case-study link at the foot of a case study.
+
+Projects hidden from the site keep their place in the list rather than being skipped, so
+a draft lands where it was put when it goes public.
+
 ### Origins
 
 A project sits on exactly one **origin** — the shelf it belongs to. The list lives under
