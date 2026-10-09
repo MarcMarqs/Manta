@@ -6,6 +6,7 @@ import { Preview } from './Preview';
 import { ProjectsEditor } from './ProjectsEditor';
 import { SiteEditor } from './SiteEditor';
 import { loadAppearance } from './appearance';
+import { LIMITS, PANEL_DEFAULTS, loadPanels, panels, resetPanels, setPanels } from './panels';
 import { SettingsEditor } from './SettingsEditor';
 import { TagsEditor } from './TagsEditor';
 import {
@@ -279,6 +280,7 @@ function StatusPill() {
 function TopBar({ onPublish, onLogout, onHistory }: { onPublish: () => void; onLogout: () => void; onHistory: () => void }) {
   const dirty = dirtyPaths.value.length > 0;
   const s = status.value;
+  const p = panels.value;
   const [menu, setMenu] = useState(false);
 
   const discard = async () => {
@@ -314,6 +316,18 @@ function TopBar({ onPublish, onLogout, onHistory }: { onPublish: () => void; onL
         <span>Manta</span>
       </div>
       <div class="row">
+        <IconButton
+          icon="panelSide"
+          label={p.sideOpen ? 'Hide the page list' : 'Show the page list'}
+          active={!p.sideOpen}
+          onClick={() => setPanels({ sideOpen: !p.sideOpen })}
+        />
+        <IconButton
+          icon="panelEditor"
+          label={p.editorOpen ? 'Hide the editing pane' : 'Show the editing pane'}
+          active={!p.editorOpen}
+          onClick={() => setPanels({ editorOpen: !p.editorOpen })}
+        />
         <IconButton icon="undo" label="Undo (Ctrl+Z)" onClick={undo} disabled={!canUndo.value} />
         <IconButton icon="redo" label="Redo (Ctrl+Shift+Z)" onClick={redo} disabled={!canRedo.value} />
       </div>
@@ -366,6 +380,15 @@ function TopBar({ onPublish, onLogout, onHistory }: { onPublish: () => void; onL
               </button>
               <button type="button" onClick={reload}>
                 Reload from repository
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setMenu(false);
+                  resetPanels();
+                }}
+              >
+                Reset panel sizes
               </button>
               {s?.backend !== 'local' && (
                 <button type="button" onClick={discard} disabled={!s?.draftExists}>
@@ -433,6 +456,65 @@ function Sidebar({ onNewPage }: { onNewPage: () => void }) {
   );
 }
 
+// --- resizing ------------------------------------------------------------
+
+/**
+ * The line between two columns, draggable.
+ *
+ * It sits on top of the boundary rather than between the columns in the grid, so the
+ * grid stays the three named areas it has always been and a handle can never add a gap
+ * of its own. Double-clicking puts that one column back to its shipped width, and the
+ * arrow keys move it too, so the sizes are reachable without a mouse.
+ */
+function Resizer({ which, label }: { which: 'side' | 'editor'; label: string }) {
+  const p = panels.value;
+  if (which === 'side' ? !p.sideOpen : !p.editorOpen) return null;
+
+  const drag = (e: PointerEvent) => {
+    const handle = e.currentTarget as HTMLElement;
+    const startX = e.clientX;
+    const startWidth = which === 'side' ? p.side : p.editor;
+    handle.setPointerCapture(e.pointerId);
+    document.documentElement.classList.add('e-dragging');
+
+    const move = (ev: PointerEvent) => setPanels({ [which]: startWidth + (ev.clientX - startX) });
+    const done = () => {
+      handle.removeEventListener('pointermove', move);
+      handle.removeEventListener('pointerup', done);
+      handle.removeEventListener('pointercancel', done);
+      document.documentElement.classList.remove('e-dragging');
+    };
+    handle.addEventListener('pointermove', move);
+    handle.addEventListener('pointerup', done);
+    handle.addEventListener('pointercancel', done);
+  };
+
+  const key = (e: KeyboardEvent) => {
+    const step = e.shiftKey ? 40 : 10;
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      e.preventDefault();
+      setPanels({ [which]: (which === 'side' ? p.side : p.editor) + (e.key === 'ArrowLeft' ? -step : step) });
+    }
+  };
+
+  return (
+    <div
+      class={`resizer resizer-${which}`}
+      role="separator"
+      aria-orientation="vertical"
+      aria-label={label}
+      aria-valuenow={which === 'side' ? p.side : p.editor}
+      aria-valuemin={LIMITS[which].min}
+      aria-valuemax={LIMITS[which].max}
+      tabIndex={0}
+      title={`${label} — drag, or double-click to reset`}
+      onPointerDown={drag}
+      onDblClick={() => setPanels({ [which]: PANEL_DEFAULTS[which] })}
+      onKeyDown={key}
+    />
+  );
+}
+
 function Toasts() {
   return (
     <div class="toasts" role="status" aria-live="polite">
@@ -457,6 +539,7 @@ type Phase = { kind: 'checking' } | { kind: 'login'; configured: boolean } | { k
 // Before the first render, so the editor never paints in the wrong theme and corrects
 // itself a moment later.
 loadAppearance();
+loadPanels();
 
 export default function App() {
   const [phase, setPhase] = useState<Phase>({ kind: 'checking' });
@@ -573,6 +656,7 @@ export default function App() {
         onHistory={() => setHistory(true)}
       />
       <Sidebar onNewPage={() => setNewPage(true)} />
+      <Resizer which="side" label="Page list width" />
       <main class="editor">
         {v.kind === 'page' && <PageEditor path={v.path} />}
         {v.kind === 'projects' && <ProjectsEditor slug={v.slug} />}
@@ -580,6 +664,7 @@ export default function App() {
         {v.kind === 'tags' && <TagsEditor />}
         {v.kind === 'settings' && <SettingsEditor />}
       </main>
+      <Resizer which="editor" label="Editing pane width" />
       <Preview />
       <LinkSuggestions />
       <Toasts />

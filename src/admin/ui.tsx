@@ -43,6 +43,8 @@ const paths: Record<string, string> = {
   alignLeft: 'M2.5 4h11M2.5 8h7M2.5 12h9',
   alignCenter: 'M2.5 4h11M4.5 8h7M3.5 12h9',
   alignRight: 'M2.5 4h11M6.5 8h7M4.5 12h9',
+  panelSide: 'M2.5 3h11v10h-11zM6 3v10',
+  panelEditor: 'M2.5 3h11v10h-11zM6 3v10M10 3v10',
 };
 
 export function Icon({ name, size = 16 }: { name: keyof typeof paths | string; size?: number }) {

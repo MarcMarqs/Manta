@@ -192,6 +192,12 @@ preview on the right rendered by the site's own components, so what you see is w
   Escape deselects. Moving off the end of a section or column lifts the block out of it,
   landing just before or after whatever held it — one level at a time, so a block in a
   column inside a section lands in the section rather than on the page.
+- **The panes** are yours to size: drag either divider to make the page list or the editing
+  pane wider, double-click a divider to put that one column back, and use the two buttons at
+  the top left to fold a pane away and bring it back. Widths are clamped so the preview keeps
+  at least 300px. **Reset panel sizes** (⋯ menu) restores the shipped layout, which is the
+  width the preview's device sizes are drawn for. The choice is kept in the browser, like the
+  theme, so it follows you rather than the site.
 - **Version history** (⋯ menu) lists every save and publish, and restores one as a new change,
   so going back is itself undoable.
 - **Unsaved work** is kept in the browser: close the tab by accident and the editor offers it

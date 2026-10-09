@@ -255,15 +255,80 @@ code,
 
 /* --- layout --- */
 
+/* The two left columns are whatever width you dragged them to; the preview takes what
+   is left. The widths live in `panels.ts`, which writes them here as custom properties
+   and sets a closed pane to zero, so a hidden column takes no room at all. */
 .app {
   display: grid;
-  grid-template-columns: 220px minmax(400px, 480px) 1fr;
+  grid-template-columns: var(--e-side-w, 220px) var(--e-editor-w, 440px) minmax(0, 1fr);
   grid-template-rows: 52px 1fr;
   grid-template-areas:
     'top top top'
     'side editor preview';
   height: 100vh;
   overflow: hidden;
+  position: relative;
+}
+
+/* A zero-width column would still show its border and scrollbar. */
+.e-side-off .sidebar,
+.e-editor-off .editor {
+  display: none;
+}
+
+/* The handles are laid over the column boundaries rather than being columns of their
+   own, so the grid keeps its three areas and nothing shifts when one is hidden. The
+   hit area is wider than the line it draws, because a 1px target is unhittable. */
+.resizer {
+  position: absolute;
+  top: 52px;
+  bottom: 0;
+  width: 9px;
+  margin-left: -4px;
+  z-index: 5;
+  cursor: col-resize;
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.resizer-side {
+  left: var(--e-side-w, 220px);
+}
+
+.resizer-editor {
+  left: calc(var(--e-side-w, 220px) + var(--e-editor-w, 440px));
+}
+
+.resizer::after {
+  content: '';
+  position: absolute;
+  inset: 0 4px;
+  background: var(--e-accent);
+  opacity: 0;
+  transition: opacity 0.12s;
+}
+
+.resizer:hover::after,
+.resizer:focus-visible::after,
+.e-dragging .resizer:active::after {
+  opacity: 1;
+}
+
+.resizer:focus-visible {
+  outline: none;
+}
+
+/* While dragging, the pointer belongs to the handle: no text gets selected and the
+   preview's iframe does not swallow the move events. */
+.e-dragging,
+.e-dragging * {
+  cursor: col-resize !important;
+  user-select: none;
+}
+
+.e-dragging iframe {
+  pointer-events: none;
 }
 
 .topbar {
@@ -1821,6 +1886,9 @@ form.tag-row {
 /* --- narrow screens: stack editor over preview --- */
 
 @media (max-width: 1100px) {
+  .resizer {
+    display: none;
+  }
   .app {
     grid-template-columns: 190px 1fr;
     grid-template-rows: 52px minmax(0, 1fr) 45vh;
@@ -1835,6 +1903,12 @@ form.tag-row {
   .editor {
     border-right: 0;
     border-bottom: 1px solid var(--e-border);
+  }
+  .e-side-off .app {
+    grid-template-columns: 0 1fr;
+  }
+  .e-editor-off .app {
+    grid-template-rows: 52px 0 1fr;
   }
 }
 
@@ -1879,6 +1953,10 @@ form.tag-row {
   }
   .fields {
     grid-template-columns: 1fr;
+  }
+  /* The page list's row is `auto`, so hiding it collapses on its own. */
+  .e-editor-off .app {
+    grid-template-rows: 52px auto 0 1fr;
   }
 }
 
