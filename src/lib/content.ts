@@ -10,15 +10,17 @@ export const tags = tagsJson as Tags;
 export const allProjects = projectsJson as Project[];
 
 /**
- * Projects in display order: public only, featured first, then newest year first.
+ * Projects in display order, which is simply the order they are kept in.
  *
- * Private and drafted work is absent from every list this returns, which is what keeps
- * it off the home page, out of the tag pages and out of the next-case-study link.
+ * Sorting them here by year, with one flag to push a favourite to the front, meant the
+ * running order was something to be worked around rather than decided: two projects from
+ * the same year could not be separated, and nothing could be put third.
+ *
+ * Private and drafted work is absent from every list this returns, which is what keeps it
+ * off the home page, out of the tag pages and out of the next-case-study link.
  */
 export function orderProjects(list: Project[]): Project[] {
-  return list
-    .filter((p) => (p.visibility ?? 'public') === 'public')
-    .sort((a, b) => Number(b.featured) - Number(a.featured) || (b.year ?? 0) - (a.year ?? 0));
+  return list.filter((p) => (p.visibility ?? 'public') === 'public');
 }
 
 export const projects: Project[] = orderProjects(allProjects);

@@ -1472,10 +1472,21 @@ form.tag-row {
   gap: 4px;
 }
 
+/* A project is a row: the project itself, and the two controls that set its place in the
+   running order. The move buttons sit outside the button so they are not a click on it. */
+.project-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .project-item {
+  flex: 1;
+  min-width: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
   padding: 9px 12px;
   border: 1px solid var(--e-border);
   border-radius: var(--e-r-md);
@@ -1486,11 +1497,16 @@ form.tag-row {
   cursor: pointer;
 }
 
+.project-move {
+  display: flex;
+  flex: none;
+}
+
 .project-item:hover {
   border-color: var(--e-border-strong);
 }
 
-.project-item.active {
+.project-row.active .project-item {
   border-color: var(--e-accent);
   box-shadow: 0 0 0 3px var(--e-accent-soft);
 }
