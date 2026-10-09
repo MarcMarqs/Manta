@@ -375,7 +375,7 @@
     {
       "id": "b-ay00tq",
       "type": "section",
-      "background": "surface",
+      "background": "none",
       "blocks": [
         {
           "id": "b-9m5eqo",
@@ -411,7 +411,7 @@
     {
       "id": "b-9sv89i",
       "type": "section",
-      "background": "surface",
+      "background": "none",
       "blocks": [
         {
           "id": "b-da709m",
