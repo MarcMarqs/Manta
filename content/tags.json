@@ -1,46 +1,88 @@
 {
   "discipline": [
     {
-      "id": "systems",
+      "id": "mechanics-design",
+      "label": "Mechanics Design"
+    },
+    {
+      "id": "systems-design",
       "label": "Systems Design"
     },
     {
-      "id": "combat",
+      "id": "combat-design",
       "label": "Combat Design"
     },
     {
-      "id": "ai",
-      "label": "AI & Encounters"
+      "id": "content-design",
+      "label": "Content Design"
     },
     {
-      "id": "economy",
-      "label": "Economy & Progression"
-    },
-    {
-      "id": "level",
+      "id": "level-design",
       "label": "Level Design"
     },
     {
-      "id": "narrative",
-      "label": "Narrative"
+      "id": "ai-encounters",
+      "label": "AI & Encounters"
     },
     {
-      "id": "3c",
-      "label": "3C"
+      "id": "economy-design",
+      "label": "Economy Design"
+    },
+    {
+      "id": "narrative-design",
+      "label": "Narrative Design"
+    },
+    {
+      "id": "3c-design",
+      "label": "3C Design"
+    },
+    {
+      "id": "user-experience",
+      "label": "User Experience"
+    },
+    {
+      "id": "game-production-project-management",
+      "label": "Project Management"
+    },
+    {
+      "id": "progression-balancing",
+      "label": "Progression & Balancing"
     }
   ],
   "engine": [
     {
-      "id": "unreal",
-      "label": "Unreal"
+      "id": "unreal-engine",
+      "label": "Unreal Engine",
+      "accent": true
     },
     {
-      "id": "unity",
-      "label": "Unity"
+      "id": "unity-engine",
+      "label": "Unity Engine",
+      "accent": true
     },
     {
-      "id": "uefn",
-      "label": "UEFN"
+      "id": "godot",
+      "label": "Godot"
+    },
+    {
+      "id": "uefn-unreal-fortnite",
+      "label": "UEFN (Unreal Fortnite)"
+    },
+    {
+      "id": "clickup-jira",
+      "label": "ClickUp"
+    },
+    {
+      "id": "jira",
+      "label": "Jira"
+    },
+    {
+      "id": "google-sheets",
+      "label": "Google Sheets"
+    },
+    {
+      "id": "google-doc",
+      "label": "Google Doc"
     }
   ],
   "origin": [

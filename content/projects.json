@@ -13,13 +13,12 @@
       "Shaped horde spawning and the difficulty curve from telemetry heatmaps"
     ],
     "discipline": [
-      "systems",
-      "combat",
-      "ai",
-      "economy"
+      "systems-design",
+      "combat-design",
+      "game-production-project-management"
     ],
     "engine": [
-      "unreal"
+      "unreal-engine"
     ],
     "cover": "/images/projects/wardens-rising/cover.svg",
     "coverVideo": null,
@@ -36,8 +35,8 @@
   {
     "slug": "aurora",
     "title": "Aurora: A Child's Journey",
-    "genre": "3D Puzzle / Narrative Adventure",
-    "year": 2020,
+    "genre": "Narrative Puzzle Adventure",
+    "year": null,
     "role": "Game Designer",
     "summary": "Owned the Act II player experience, designing and refining 3C mechanics and puzzle layouts. Partnered with Level Design to iterate on pacing via playtest feedback, leading sessions that shaped the final game.",
     "highlights": [
@@ -47,12 +46,12 @@
       "Owned Act II gameplay and puzzle design end-to-end"
     ],
     "discipline": [
-      "3c",
-      "level",
-      "narrative"
+      "mechanics-design",
+      "level-design",
+      "game-production-project-management"
     ],
     "engine": [
-      "unity"
+      "unity-engine"
     ],
     "cover": "/images/projects/aurora/cover.svg",
     "coverVideo": null,
@@ -69,14 +68,14 @@
   {
     "slug": "fc27-teardown",
     "title": "Economy Teardown",
-    "genre": "",
+    "genre": "Economy Design",
     "year": null,
     "role": "",
     "summary": "When cards become points, the points table becomes the economy. FC 27's Streamlined SBCs swap the squad-building puzzle for a score bar, and players like it: EA reported a positive reception within a week. But the change moved every important decision into one table, the Item Score curve, and that table brought issues.",
     "highlights": [],
     "discipline": [
-      "systems",
-      "economy"
+      "economy-design",
+      "systems-design"
     ],
     "engine": [],
     "cover": "",
@@ -94,7 +93,8 @@
     "summary": "Overwatch’s matchmaker builds fair games; the rank players see is what breaks. This study diagnoses that and redesigns it, halving the share of matches played at the wrong rank across 300 modeled players.",
     "highlights": [],
     "discipline": [
-      "systems"
+      "progression-balancing",
+      "systems-design"
     ],
     "engine": [],
     "cover": "",
@@ -106,17 +106,18 @@
   {
     "slug": "gundam-requiem",
     "title": "Gundam: Requiem for Vengeance",
-    "genre": "Fortnite game mode",
-    "year": 2024,
+    "genre": "Fortnite Game Mode",
+    "year": null,
     "role": "Game Designer",
     "summary": "Designed and pitched the mode for an external IP partner, turning a UEFN limit on vehicle control into the competitive hook: teams contest objectives to earn the mech, then choose which part of the map it reshapes.",
     "highlights": [],
     "discipline": [
-      "systems",
-      "combat"
+      "systems-design",
+      "user-experience",
+      "game-production-project-management"
     ],
     "engine": [
-      "uefn"
+      "uefn-unreal-fortnite"
     ],
     "cover": "/images/projects/gundam-requiem/cover.svg",
     "coverVideo": null,
@@ -128,17 +129,17 @@
     "slug": "plushland-curse",
     "title": "Plushland Curse",
     "genre": "Souls-like",
-    "year": 2023,
+    "year": null,
     "role": "Game Designer",
     "summary": "Owned combat, enemy AI and the weapon system on a toy-themed souls-like: 15 enemy archetypes against a six-rule design standard, and a rock-paper-scissors damage matrix balanced from a hit-to-kill model.",
     "highlights": [],
     "discipline": [
-      "combat",
-      "ai",
-      "systems"
+      "combat-design",
+      "ai-encounters",
+      "progression-balancing"
     ],
     "engine": [
-      "unreal"
+      "unreal-engine"
     ],
     "cover": "/images/projects/plushland-curse/cover.svg",
     "coverVideo": null,
@@ -149,17 +150,17 @@
   {
     "slug": "far-away-orbital-space",
     "title": "Far Away from Orbital Space",
-    "genre": "Co-op Puzzle",
-    "year": 2022,
+    "genre": "Co-Op Puzzle",
+    "year": null,
     "role": "Game Designer",
     "summary": "Built the scoring algorithms, puzzle gating and progression for a co-op communication puzzler, validating every system on paper and in Miro before it reached the engine.",
     "highlights": [],
     "discipline": [
-      "systems",
-      "level"
+      "systems-design",
+      "user-experience"
     ],
     "engine": [
-      "unreal"
+      "unreal-engine"
     ],
     "cover": "/images/projects/far-away-orbital-space/cover.svg",
     "coverVideo": null,
@@ -171,15 +172,17 @@
     "slug": "ascending-flags",
     "title": "Ascending Flags",
     "genre": "Card Game",
-    "year": 2022,
+    "year": null,
     "role": "Game Designer",
     "summary": "Architected a single-pool economy where movement, attack and defence all compete for the same mana, designed a 40+ card catalog across five types, and led design, art and engineering on a 15-person team.",
     "highlights": [],
     "discipline": [
-      "systems"
+      "systems-design",
+      "economy-design",
+      "progression-balancing"
     ],
     "engine": [
-      "unity"
+      "unity-engine"
     ],
     "cover": "/images/projects/ascending-flags/cover.svg",
     "coverVideo": null,
@@ -190,13 +193,14 @@
   {
     "slug": "crafting-economy",
     "title": "Crafting Economy",
-    "genre": "Economy",
+    "genre": "System Design",
     "year": null,
     "role": "",
     "summary": "An economy that broke when tested against three kinds of players over 100 hours, rebuilt so nothing gets hoarded and nothing runs dry. It also asks players real questions: whether to roll or target a stat, and whether to gamble on an upgrade or protect it.",
     "highlights": [],
     "discipline": [
-      "economy"
+      "economy-design",
+      "systems-design"
     ],
     "engine": [],
     "cover": "",

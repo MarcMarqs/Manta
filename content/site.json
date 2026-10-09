@@ -32,5 +32,6 @@
     "maxWidth": "1100px",
     "spacing": 1,
     "fontMono": "system-ui"
-  }
+  },
+  "separator": " | "
 }
