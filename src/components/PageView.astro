@@ -25,13 +25,14 @@ const index = project ? projects.indexOf(project) : -1;
 const next = linkOut && index >= 0 && projects.length > 1 ? projects[(index + 1) % projects.length] : undefined;
 const tagsOf = linkOut && project ? [...project.discipline, ...project.engine] : [];
 
-// Headings get anchors either way; the floating contents list only earns its place on a
-// page long enough to get lost in, and a page can opt out in its settings.
+// Headings get anchors either way. Two sections are enough to be worth a list: the home
+// page has exactly two — the studio work and the personal studies — and moving between
+// them is the whole reason to want one. A page can still opt out in its settings.
 const anchors = headingAnchors(page.blocks);
 const toc = page.toc === false ? [] : tocItems(page.blocks, anchors);
 ---
 
-{toc.length >= 3 && <Toc items={toc} />}
+{toc.length >= 2 && <Toc items={toc} />}
 
 <BlockList blocks={page.blocks} anchors={anchors} />
 
