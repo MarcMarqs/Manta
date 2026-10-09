@@ -21,6 +21,10 @@ export interface PreviewData {
 export const originOf = (value: string | undefined, origins: { id: string }[]) =>
   value ?? origins[0]?.id ?? '';
 
+/** A project's facts, run together with whatever the site puts between them. */
+export const factLine = (site: { separator?: string }, facts: (string | number | undefined | null)[]) =>
+  facts.filter(Boolean).join(site.separator ?? ' · ');
+
 export function useContent(locals: App.Locals) {
   const preview = locals.preview;
   const t = preview?.tags ?? tags;
