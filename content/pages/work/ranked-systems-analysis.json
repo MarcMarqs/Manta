@@ -1,0 +1,221 @@
+{
+  "title": "Ranked Systems Analysis",
+  "description": "",
+  "project": "ranked-systems-analysis",
+  "blocks": [
+    {
+      "id": "title",
+      "type": "heading",
+      "level": 1,
+      "text": "Ranked Systems Analysis - Overwatch"
+    },
+    {
+      "id": "h-overview",
+      "type": "heading",
+      "level": 2,
+      "text": "The Rank You See"
+    },
+    {
+      "id": "t-overview",
+      "type": "text",
+      "html": "<p>Overwatch's matchmaker already builds fair games. What breaks is the rank players see: reset on a timer, crowded into two tiers and explained by a pile of modifiers. This is a designer's diagnosis of Competitive as of 2026, and a redesign built on one rule: the rank on screen should always be the game's best current guess.</p><p></p><p></p>"
+    },
+    {
+      "id": "b-xk46er",
+      "type": "spacer",
+      "size": "sm"
+    },
+    {
+      "id": "h-goals",
+      "type": "heading",
+      "level": 2,
+      "text": "How Ranked Works Today"
+    },
+    {
+      "id": "b-r7cacx",
+      "type": "table",
+      "caption": "",
+      "columns": [
+        "Area",
+        "Current Rule"
+      ],
+      "rows": [
+        [
+          "Tiers",
+          "Ten: Bronze to Champion with five divisions each, plus Top 500 Challenger. Emerald was added between Platinum and Diamond in August 2026"
+        ],
+        [
+          "Rank Updates",
+          "Rank moves after every match, labeled with modifiers like Win Streak, Uphill Battle, Reversal and Volatile"
+        ],
+        [
+          "Resets",
+          "All ranks reset to Unranked every three seasons, followed by 10 placement matches per role"
+        ],
+        [
+          "New Accounts",
+          "50 wins to unlock Competitive, raised from 20 in May 2026"
+        ],
+        [
+          "Match Fairness",
+          "About 80% of Role Queue matches sit between a 45% and 55% predicted win chance"
+        ],
+        [
+          "Distribution",
+          "Gold and Platinum held 66.6% of players in the last official chart in 2025"
+        ]
+      ]
+    },
+    {
+      "id": "b-6w2uh3",
+      "type": "spacer",
+      "size": "sm"
+    },
+    {
+      "id": "h-takeaways",
+      "type": "heading",
+      "level": 2,
+      "text": "How Other Games Handle It"
+    },
+    {
+      "id": "t-takeaways",
+      "type": "text",
+      "html": "<p>Of five major competitive games, Overwatch is the only one that hides every player's rank on a fixed timer.<p></p></p>"
+    },
+    {
+      "id": "b-e7t88g",
+      "type": "table",
+      "caption": "",
+      "columns": [
+        "Game",
+        "Rank Reset",
+        "Before Rank Shows Again"
+      ],
+      "rows": [
+        [
+          "Overwatch",
+          "Full reset to Unranked every 3 seasons",
+          "10 matches per role"
+        ],
+        [
+          "Valorant",
+          "Every act, 1 placement game recovers your rank; a new episode starts a couple of tiers lower",
+          "1 match per act, 5 per episode"
+        ],
+        [
+          "League of Legends",
+          "Once a year, about one tier down; a 2026 Climb Indicator shows when rank lags MMR",
+          "Placement games"
+        ],
+        [
+          "Marvel Rivals",
+          "Season 4 (Sep 2025): drop 7 divisions",
+          "None stated"
+        ],
+        [
+          "CS2 Premier",
+          "Every season, re-establish rating",
+          "10 wins"
+        ]
+      ]
+    },
+    {
+      "id": "b-yhfn8s",
+      "type": "text",
+      "html": "<p>This changed how I position my redesign. Season check-ins are close to VALORANT's one-game recalibration, and showing uncertainty echoes League's Climb Indicator, so those ideas are industry-tested. Percentile-anchored tiers are the least tested idea, so they get the most validation and ship last.</p>"
+    },
+    {
+      "id": "b-y1n6n2",
+      "type": "spacer",
+      "size": "sm"
+    },
+    {
+      "id": "b-vzuo9y",
+      "type": "heading",
+      "level": 2,
+      "text": "The Diagnosis"
+    },
+    {
+      "id": "b-lpwde8",
+      "type": "text",
+      "html": "<p><ol><li>Resets erase information the game already has. Rank has been tied to MMR since 2024, so a reset hides an accurate number and makes players re-earn it: 30 placement matches to re-rank all three roles. Blizzard itself named resets as a cause of ranks that don't match skill.<br><br></li><li>The middle has no identity. Two tiers held two-thirds of players. Emerald was added by hand to split them, and early reviews say it gathered the chaos rather than fixing it.<br><br></li><li>Feedback describes the math, not the reason. Eight-plus modifier labels explain how rank moved without telling players what to do about it.<br><br></li><li>The top end runs on a second currency. The Top 500 Challenger Score was reworked three times in 2026, and developers said in August it had problems tuning couldn't fix.</li></ol></p>"
+    },
+    {
+      "id": "b-hv0f1o",
+      "type": "spacer",
+      "size": "sm"
+    },
+    {
+      "id": "b-hxagp8",
+      "type": "heading",
+      "level": 2,
+      "text": "The Redesign"
+    },
+    {
+      "id": "b-b4mctk",
+      "type": "text",
+      "html": "<p><b><span class=\"big\">Season check-ins instead of resets</span></b></p><p>Rank carries over. The first three matches of each season move rank faster, with a small \"checking in\" tag, so it can re-settle after balance changes without being hidden. I chose a check-in every season over a reset every third, because small, frequent corrections beat a large, rare one: the worst error in the model falls from 4.0 divisions to 1.65.</p><p><br></p><p><b><span class=\"big\">Percentile-anchored tiers</span></b></p><p>Each season, tier cutoffs are recomputed from MMR percentiles against fixed targets. No tier can hold more than 18% of players, and seven tiers hold at least 5% instead of four. I picked percentiles over fixed SR bands because the population keeps moving; fixed bands are why a new tier had to be added by hand.</p><p><br></p><p><b><span class=\"big\">Two numbers instead of eight labels</span></b></p><p>Before the match, show the predicted win chance. After it, show how far rank moved and whether the result beat or missed that prediction.</p><p><br></p><p><b><span class=\"big\">One ladder to the top</span></b></p><p>Top 500 ranks players by the same rank everyone else has, with a minimum number of wins to qualify and no separate score. Blizzard's October 2026 patch already moved most of the way here, which I read as validation of the direction.</p><p><br></p><p><b><span class=\"big\">A lighter gate for new accounts</span></b></p><p>The unlock returns to 20 wins. New accounts start with high uncertainty and keep fast-moving rank for 25 matches, so a smurf settles in about 12 ranked matches. That's in place of the current gate, which costs every new player about 80 matches to unlock.</p>"
+    },
+    {
+      "id": "b-vivyc1",
+      "type": "spacer",
+      "size": "sm"
+    },
+    {
+      "id": "b-p0kzmz",
+      "type": "heading",
+      "level": 2,
+      "text": "Groups and Smurfing"
+    },
+    {
+      "id": "b-r8ytz8",
+      "type": "text",
+      "html": "<p>Since 2024, groups whose ranks are far apart play as wide groups: they only face other wide groups, and their rank moves less. The system works, so the redesign keeps it with two changes. First, the wide-group threshold becomes a fixed rating gap, since a span of five divisions would mean different things as percentile tiers move. Second, check-in matches only count solo or in a narrow group, so a strong friend can't carry someone through the three fast-moving matches.</p><p>For smurfing, the 50-win gate becomes 20 wins, and the work moves to calibration. New accounts move fast for 25 matches, and accounts that keep beating their predicted win chance stay in fast mode longer, so a smurf can't settle below their real skill.</p>"
+    },
+    {
+      "id": "b-yo5rkv",
+      "type": "heading",
+      "level": 2,
+      "text": "Proving It"
+    },
+    {
+      "id": "b-0y7dgk",
+      "type": "text",
+      "html": "<p>Percentile anchoring halves the largest tier, from 34.9% to 18%.</p>"
+    },
+    {
+      "id": "b-kqh0kw",
+      "type": "chart",
+      "variant": "bar",
+      "title": "",
+      "series": [
+        {
+          "data": [
+            {
+              "label": "Bronze",
+              "value": 42
+            },
+            {
+              "label": "B",
+              "value": 20
+            },
+            {
+              "label": "C",
+              "value": 15
+            }
+          ],
+          "name": "Current Tier"
+        },
+        {
+          "name": "Redesign Target",
+          "data": [
+            {
+              "label": "Bronze",
+              "value": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
