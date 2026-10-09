@@ -159,7 +159,18 @@ export type Block = BlockLayout & (
       layout?: 'grid' | 'carousel';
       images: { src: string; alt: string; caption?: string }[];
     }
-  | { id: string; type: 'video'; provider: 'youtube' | 'vimeo' | 'itch'; videoId: string; title?: string }
+  | {
+      id: string;
+      type: 'video';
+      /** 'file' is a clip uploaded from your own machine; the rest are embeds. */
+      provider: 'youtube' | 'vimeo' | 'itch' | 'file';
+      videoId: string;
+      /** For 'file': the uploaded clip's path under /videos/. */
+      src?: string;
+      /** Play on loop, silently, the way a GIF does — for short gameplay captures. */
+      loop?: boolean;
+      title?: string;
+    }
   | {
       id: string;
       type: 'sheet';

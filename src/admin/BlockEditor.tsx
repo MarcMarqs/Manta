@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
 import type { Align, Block, BlockType, BlockWidth, Project } from '../lib/types';
 import { BLOCKS, GROUPS, cloneBlock, parseDocInput, parseSheetInput, parseVideoInput, summarize } from './blocks';
 import { api, assetUrl } from './api';
-import { ImageField, LinkInput } from './media';
+import { ImageField, LinkInput, VideoField } from './media';
 import { PROJECTS, expanded, fileToRoute, files, newId, openView, pagePaths, projects, selectedBlock, tags, toggleExpanded, updateFile } from './store';
 import { Field, Icon, IconButton, NumberInput, RichText, Segmented, Select, TextArea, TextInput, Toggle } from './ui';
 
@@ -813,10 +813,11 @@ function BlockFields({
     case 'video':
       return (
         <div class="fields">
-          <Field label="Provider">
+          <Field label="Source">
             <Segmented
               value={block.provider}
               options={[
+                { value: 'file', label: 'My computer' },
                 { value: 'youtube', label: 'YouTube' },
                 { value: 'vimeo', label: 'Vimeo' },
                 { value: 'itch', label: 'itch.io' },
@@ -824,19 +825,38 @@ function BlockFields({
               onChange={(v) => onChange({ ...block, provider: v })}
             />
           </Field>
-          <Field
-            label="Video"
-            hint={block.provider === 'itch' ? 'The number from your itch.io embed code.' : 'Paste the video link or its id.'}
-            wide
-          >
-            <TextInput
-              value={block.videoId}
-              onChange={(v) => {
-                const parsed = parseVideoInput(v);
-                onChange({ ...block, videoId: parsed.id, provider: parsed.provider ?? block.provider });
-              }}
-            />
-          </Field>
+          {block.provider === 'file' ? (
+            <>
+              <Field label="Clip" wide>
+                <VideoField value={block.src ?? ''} onChange={(src) => onChange({ ...block, src })} />
+              </Field>
+              <Field label="Loop" hint="Plays over and over without sound, the way a GIF does." wide>
+                <Toggle
+                  checked={Boolean(block.loop)}
+                  label="Loop silently"
+                  onChange={(loop) => onChange({ ...block, loop: loop || undefined })}
+                />
+              </Field>
+            </>
+          ) : (
+            <Field
+              label="Video"
+              hint={
+                block.provider === 'itch'
+                  ? 'The number from your itch.io embed code.'
+                  : 'Paste the video link or its id.'
+              }
+              wide
+            >
+              <TextInput
+                value={block.videoId}
+                onChange={(v) => {
+                  const parsed = parseVideoInput(v);
+                  onChange({ ...block, videoId: parsed.id, provider: parsed.provider ?? block.provider });
+                }}
+              />
+            </Field>
+          )}
           <Field label="Title" hint="For screen readers." wide>
             <TextInput value={block.title ?? ''} onChange={(v) => onChange({ ...block, title: v })} />
           </Field>

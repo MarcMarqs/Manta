@@ -48,8 +48,8 @@ Every block needs a unique `id` (unique within its page) and a `type`.
 | `heading` | `level` 1–4, `text`, `number?` + `eyebrow?` for a numbered section header |
 | `text` | `html` — rich text |
 | `image` | `src`, `alt`, `caption?`, `scale?` (10–100, % of the block), `aspect?` (`1:1` \| `4:3` \| `3:2` \| `16:9` \| `21:9`) |
-| `gallery` | `images[]` of `{ src, alt }` |
-| `video` | `provider` (`youtube` \| `vimeo` \| `itch`), `videoId`, `title?` |
+| `gallery` | `layout?` (`grid` \| `carousel`), `images[]` of `{ src, alt, caption? }` |
+| `video` | `provider` (`file` \| `youtube` \| `vimeo` \| `itch`), `videoId`, `src?` (for `file`), `loop?`, `title?` |
 | `button` | `label`, `href`, `style?` (`primary` \| `secondary`) |
 | `divider` | — |
 | `spacer` | `size?` (`sm` \| `md` \| `lg`) |
@@ -205,11 +205,24 @@ preview on the right rendered by the site's own components, so what you see is w
 - **Images** are resized to 2000px and converted to WebP in the browser, then committed to
   `public/images/uploads/` on the draft straight away, so the preview can show them. An image
   block can be scaled and cropped to a shape; the library deletes ones nothing uses any more.
+  GIFs and SVGs are kept exactly as they are, since re-encoding would freeze one and
+  rasterise the other.
+
+- **Video from your own machine:** a video block's **Source** offers **My computer**
+  alongside the three embeds. The clip is committed to `public/videos/uploads/` on the draft
+  and played by the browser itself, with no third party involved. Two limits are worth
+  knowing: **MP4 or WebM only**, because those are what browsers play, and **25 MB**, which
+  is the largest single file Cloudflare will serve from the built site — the editor refuses a
+  bigger one up front rather than letting it fail after publishing. Nothing re-encodes it, so
+  what you export is what the repository carries; export at the size you want served.
+  **Loop silently** plays a short capture over and over without sound, the way a GIF does,
+  which is a far smaller file than the same thing as an actual GIF. The trash button deletes
+  the file itself, and refuses while any page still points at it.
 
 - **Contents list:** every heading gets an anchor derived from its words, so any section can
-  be linked to directly. A page with three or more level-2 headings also floats a jump-to
-  rail in the right margin: dashes at rest, labels on hover, the current section marked as
-  you read. Turn it off per page under **Page settings → Contents list**. It needs a margin
+  be linked to directly. A page with two or more level-2 headings also floats a jump-to
+  rail in the right margin — two is enough — with dashes at rest, labels on hover, and the
+  current section marked as you read. Turn it off per page under **Page settings → Contents list**. It needs a margin
   to live in, so it hides below 1080px.
 
 - **Link previews and search:** every page carries Open Graph and Twitter tags, a canonical

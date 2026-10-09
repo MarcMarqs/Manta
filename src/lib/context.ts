@@ -37,11 +37,11 @@ export function useContent(locals: App.Locals) {
     /** Whether a tag is one of the marked ones. */
     tagAccent: (id: string) => Boolean([...t.discipline, ...t.engine].find((x) => x.id === id)?.accent),
     /**
-     * Images uploaded in the editor exist on the draft branch but not in the running
+     * Files uploaded in the editor exist on the draft branch but not in the running
      * build yet, so the preview fetches them through the API instead.
      */
     asset: (src: string) =>
-      preview && src?.startsWith('/images/')
+      preview && /^\/(images|videos)\//.test(src ?? '')
         ? `/api/asset?path=${encodeURIComponent(`public${src}`)}`
         : src,
   };

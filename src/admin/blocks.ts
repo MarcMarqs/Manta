@@ -36,7 +36,7 @@ export const BLOCKS: Record<BlockType, BlockSpec> = {
   video: {
     label: 'Video',
     group: 'Text & media',
-    hint: 'YouTube, Vimeo or itch.io',
+    hint: 'A clip of your own, or YouTube, Vimeo and itch.io',
     create: () => ({ id: newId(), type: 'video', provider: 'youtube', videoId: '', title: '' }),
   },
   doc: {
@@ -267,6 +267,8 @@ export function summarize(block: Block): string {
     case 'gallery':
       return `${block.images.length} image${block.images.length === 1 ? '' : 's'}${block.layout === 'carousel' ? ' · carousel' : ''}`;
     case 'video':
+      if (block.provider === 'file')
+        return block.src ? `${block.src.split('/').pop()}${block.loop ? ' · loops' : ''}` : 'No clip yet';
       return block.videoId ? `${block.provider} · ${block.videoId}` : 'No video yet';
     case 'button':
       return `${block.label} → ${block.href}`;

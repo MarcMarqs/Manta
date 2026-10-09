@@ -1,20 +1,23 @@
 import type { APIRoute } from 'astro';
 import { getBackend, type FileChange } from '../../server/backend';
 import { envOf, handle, json } from '../../server/http';
-import { isImagePath } from '../../server/paths';
+import { isMediaPath } from '../../server/paths';
 import { MEDIA_MANIFEST } from './upload';
 
 export const prerender = false;
 
 /**
- * Removes an uploaded image from the draft branch, along with its smaller copies and its
- * entry in the media manifest. The editor refuses to delete an image that is still used
- * somewhere, and git keeps the history either way, so a mistake here is recoverable.
+ * Removes an upload from the draft branch, along with any smaller copies and its entry in
+ * the media manifest. The editor refuses to delete a file that is still used somewhere,
+ * and git keeps the history either way, so a mistake here is recoverable.
+ *
+ * A clip has neither copies nor a manifest entry, so for one of those this comes down to
+ * deleting the single file.
  */
 export const DELETE: APIRoute = (ctx) =>
   handle(async () => {
     const { path } = (await ctx.request.json()) as { path?: string };
-    if (!path || !isImagePath(path)) return json({ error: 'Not an image path.' }, 400);
+    if (!path || !isMediaPath(path)) return json({ error: 'Not an uploaded file.' }, 400);
 
     const backend = await getBackend(envOf(ctx));
     const state = await backend.load();
@@ -38,6 +41,6 @@ export const DELETE: APIRoute = (ctx) =>
       });
     }
 
-    await backend.commit(changes, `Delete image ${path.split('/').pop()}`);
+    await backend.commit(changes, `Delete ${path.startsWith('public/videos/') ? 'video' : 'image'} ${path.split('/').pop()}`);
     return json({ ok: true, manifest, status: await backend.status() });
   });

@@ -45,7 +45,7 @@ export const api = {
     call<{ ok: true; status: Status }>('POST', '/api/save', { changes, message }),
   upload: (name: string, image: { type: string; data: string; width?: number; variants: { width: number; data: string }[] }) =>
     call<{ src: string; manifest?: MediaManifest; status: Status }>('POST', '/api/upload', { name, ...image }),
-  deleteImage: (path: string) =>
+  deleteUpload: (path: string) =>
     call<{ ok: true; manifest?: MediaManifest; status: Status }>('DELETE', '/api/image', { path }),
   sheetTabs: (id: string, source: 'file' | 'published') =>
     call<{ tabs: { name: string; gid: string }[]; error?: string }>(
@@ -70,4 +70,4 @@ export const api = {
 
 /** Editor-side URL for an image: site images go through the API so draft uploads show. */
 export const assetUrl = (src: string) =>
-  src?.startsWith('/images/') ? `/api/asset?path=${encodeURIComponent(`public${src}`)}` : src;
+  /^\/(images|videos)\//.test(src ?? '') ? `/api/asset?path=${encodeURIComponent(`public${src}`)}` : src;

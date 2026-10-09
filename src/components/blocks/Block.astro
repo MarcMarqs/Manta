@@ -82,6 +82,8 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
     youtube: `https://www.youtube-nocookie.com/embed/${b.videoId}`,
     vimeo: `https://player.vimeo.com/video/${b.videoId}`,
     itch: `https://itch.io/embed/${b.videoId}`,
+    /** An uploaded clip is not an embed; it is played by the branch below. */
+    file: '',
   })[b.provider];
 ---
 
@@ -182,17 +184,35 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
   }
 
   {
-    block.type === 'video' && (
-      <div class="embed">
-        <iframe
-          src={embedSrc(block)}
-          title={block.title ?? 'Embedded video'}
-          loading="lazy"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture"
-          allowfullscreen
-        />
-      </div>
-    )
+    block.type === 'video' &&
+      (block.provider === 'file' ? (
+        /* A clip of your own, played by the browser. The controls stay on even when it
+           loops, so a reader can stop a moving thing on the page; autoplay is paired
+           with muted because no browser will start a clip with sound by itself. */
+        block.src && (
+          <video
+            class="video-file"
+            src={asset(block.src)}
+            title={block.title}
+            controls
+            playsinline
+            preload="metadata"
+            loop={block.loop}
+            autoplay={block.loop}
+            muted={block.loop}
+          />
+        )
+      ) : (
+        <div class="embed">
+          <iframe
+            src={embedSrc(block)}
+            title={block.title ?? 'Embedded video'}
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture"
+            allowfullscreen
+          />
+        </div>
+      ))
   }
 
   {
@@ -477,6 +497,13 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
     aspect-ratio: 4 / 3;
     object-fit: cover;
     width: 100%;
+  }
+
+  .video-file {
+    display: block;
+    width: 100%;
+    border-radius: var(--radius);
+    background: #000;
   }
 
   /* One image at a time. The track is a scroller with snap points rather than a

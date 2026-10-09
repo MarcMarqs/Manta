@@ -4,6 +4,9 @@ import { MEDIA, busy, fileToRoute, imageUsage, images, pagePaths, projects, setS
 import { Icon, IconButton, Modal } from './ui';
 
 const MAX_EDGE = 2000;
+/** What Cloudflare will serve as a single file on the built site. */
+const MAX_VIDEO_MB = 25;
+const VIDEO_TYPES = ['video/mp4', 'video/webm'];
 /** Copies made for phones and tablets; anything wider than the original is skipped. */
 const VARIANT_WIDTHS = [480, 960, 1440];
 
@@ -81,23 +84,65 @@ export async function uploadImage(file: File): Promise<string | null> {
   }
 }
 
-async function deleteImage(src: string) {
+/**
+ * A clip goes up exactly as it is.
+ *
+ * Nothing here re-encodes it: a browser can redraw a photo on a canvas, but it cannot
+ * compress video without shipping an encoder, so the size you export is the size the
+ * repository carries. The limit is checked before the upload rather than after, so a
+ * 200 MB capture fails in a second instead of after a long wait.
+ */
+export async function uploadVideo(file: File): Promise<string | null> {
+  if (!VIDEO_TYPES.includes(file.type)) {
+    toast('Upload an MP4 or a WebM. Other formats cannot be played on the web.', 'error');
+    return null;
+  }
+  if (file.size > MAX_VIDEO_MB * 1024 * 1024) {
+    toast(
+      `That clip is ${Math.round(file.size / 1024 / 1024)} MB; the limit is ${MAX_VIDEO_MB} MB. Trim it, or export it smaller.`,
+      'error',
+    );
+    return null;
+  }
+  busy.value = 'Uploading video…';
+  try {
+    const result = await api.upload(file.name, { type: file.type, data: await readAsBase64(file), variants: [] });
+    status.value = result.status;
+    return result.src;
+  } catch (err) {
+    toast(`Upload failed: ${(err as Error).message}`, 'error');
+    return null;
+  } finally {
+    busy.value = null;
+  }
+}
+
+/**
+ * Deletes an uploaded file, once nothing points at it any more.
+ *
+ * The check is the point: `imageUsage` searches every content file for the path, so a
+ * picture or clip still on a page cannot be deleted out from under it. What is left
+ * behind is the git history, which is why this is safe to offer at all.
+ */
+async function deleteUpload(src: string, kind: 'Image' | 'Clip'): Promise<boolean> {
   const used = imageUsage(src);
   if (used.length) {
     toast(`Still used by ${used.join(', ')}. Remove it there first.`, 'error');
-    return;
+    return false;
   }
-  if (!confirm(`Delete ${src.split('/').pop()}? It stays in the site's history, but goes from the library.`)) return;
+  if (!confirm(`Delete ${src.split('/').pop()}? It stays in the site's history, but goes from the site.`)) return false;
 
-  busy.value = 'Deleting image…';
+  busy.value = 'Deleting…';
   try {
-    const result = await api.deleteImage(`public${src}`);
+    const result = await api.deleteUpload(`public${src}`);
     images.value = images.value.filter((i) => i !== src);
     status.value = result.status;
     if (result.manifest) setSavedFile(MEDIA, result.manifest);
-    toast('Image deleted.', 'success');
+    toast(`${kind} deleted.`, 'success');
+    return true;
   } catch (err) {
     toast(`Delete failed: ${(err as Error).message}`, 'error');
+    return false;
   } finally {
     busy.value = null;
   }
@@ -135,7 +180,7 @@ function MediaLibrary({ onPick, onClose }: { onPick: (src: string) => void; onCl
                     tone="danger"
                     label={used.length ? `Used by ${used.join(', ')}` : 'Delete image'}
                     disabled={used.length > 0}
-                    onClick={() => deleteImage(src)}
+                    onClick={() => deleteUpload(src, 'Image')}
                   />
                 </span>
               </div>
@@ -215,6 +260,84 @@ export function ImageField({ value, onChange }: { value: string; onChange: (src:
           }}
         />
       )}
+    </div>
+  );
+}
+
+/** Pick a clip from this machine, or point at one already uploaded. */
+export function VideoField({ value, onChange }: { value: string; onChange: (src: string) => void }) {
+  const input = useRef<HTMLInputElement>(null);
+  const [dragging, setDragging] = useState(false);
+
+  const handleFiles = async (list: FileList | null) => {
+    const file = list?.[0];
+    if (!file) return;
+    const src = await uploadVideo(file);
+    if (src) onChange(src);
+  };
+
+  return (
+    <div
+      class={`image-field${dragging ? ' dragging' : ''}`}
+      onDragOver={(e) => {
+        if (e.dataTransfer?.types.includes('Files')) {
+          e.preventDefault();
+          setDragging(true);
+        }
+      }}
+      onDragLeave={() => setDragging(false)}
+      onDrop={(e) => {
+        e.preventDefault();
+        setDragging(false);
+        handleFiles(e.dataTransfer?.files ?? null);
+      }}
+    >
+      <div class="image-thumb">
+        {value ? <video src={assetUrl(value)} muted preload="metadata" /> : <Icon name="play" size={22} />}
+      </div>
+      <div class="image-actions">
+        <div class="row">
+          <button type="button" class="btn small" onClick={() => input.current?.click()}>
+            <Icon name="upload" /> Upload
+          </button>
+          {value && (
+            <>
+              <IconButton icon="x" label="Take this clip off the block" onClick={() => onChange('')} />
+              <IconButton
+                icon="trash"
+                tone="danger"
+                label="Delete the file from the site"
+                onClick={async () => {
+                  const gone = value;
+                  // This block has to stop pointing at the file first, or the usage
+                  // check finds itself and refuses. Put it back if it is used elsewhere.
+                  onChange('');
+                  if (!(await deleteUpload(gone, 'Clip'))) onChange(gone);
+                }}
+              />
+            </>
+          )}
+        </div>
+        <input
+          class="input small"
+          value={value}
+          placeholder="…or paste the path of a clip"
+          onInput={(e) => onChange((e.target as HTMLInputElement).value)}
+        />
+        <span class="field-hint">
+          Drop a file here too. MP4 or WebM, up to {MAX_VIDEO_MB} MB — the most a published page can serve.
+        </span>
+      </div>
+      <input
+        ref={input}
+        type="file"
+        accept="video/mp4,video/webm"
+        hidden
+        onChange={(e) => {
+          handleFiles((e.target as HTMLInputElement).files);
+          (e.target as HTMLInputElement).value = '';
+        }}
+      />
     </div>
   );
 }
