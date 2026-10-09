@@ -31,7 +31,8 @@
         "href": "https://store.epicgames.com/p/wardens-rising-b42f9b",
         "type": "play"
       }
-    ]
+    ],
+    "origin": "professional"
   },
   {
     "slug": "aurora",
@@ -64,7 +65,8 @@
         "href": "https://store.steampowered.com/app/1438440/Aurora_A_Childs_Journey/",
         "type": "play"
       }
-    ]
+    ],
+    "origin": "professional"
   },
   {
     "slug": "gundam-requiem",
