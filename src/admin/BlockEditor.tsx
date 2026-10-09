@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
 import type { Align, Block, BlockType, BlockWidth, Project } from '../lib/types';
 import { BLOCKS, GROUPS, cloneBlock, parseSheetInput, parseVideoInput, summarize } from './blocks';
-import { assetUrl } from './api';
+import { api, assetUrl } from './api';
 import { ImageField, LinkInput } from './media';
 import { PROJECTS, expanded, fileToRoute, files, newId, openView, pagePaths, projects, selectedBlock, toggleExpanded, updateFile } from './store';
 import { Field, Icon, IconButton, RichText, Segmented, Select, TextArea, TextInput, Toggle } from './ui';
@@ -66,6 +66,86 @@ export const blockActions = new Map<string, { duplicate: () => void; remove: () 
 let drag: { list: string; index: number } | null = null;
 
 // --- add-block menu ------------------------------------------------------
+
+/**
+ * The tab picker for a spreadsheet block.
+ *
+ * Asking someone to find a gid in a URL is asking them to do the computer's job, so the
+ * tabs are read off the sheet and offered by name. When they cannot be read — a sheet
+ * that is not shared, or no network — the number is still editable by hand, because a
+ * picker that cannot load must not take away the only other way in.
+ */
+function SheetTabPicker({
+  sheetId,
+  source,
+  value,
+  onChange,
+}: {
+  sheetId: string;
+  source: 'file' | 'published';
+  value?: string;
+  onChange: (gid?: string) => void;
+}) {
+  const [tabs, setTabs] = useState<{ name: string; gid: string }[]>([]);
+  const [state, setState] = useState<'idle' | 'loading' | 'failed'>('idle');
+  const [note, setNote] = useState<string>();
+
+  useEffect(() => {
+    if (!sheetId) {
+      setTabs([]);
+      setState('idle');
+      return;
+    }
+    let current = true;
+    setState('loading');
+    api
+      .sheetTabs(sheetId, source)
+      .then((res) => {
+        if (!current) return;
+        setTabs(res.tabs);
+        setNote(res.error);
+        setState(res.tabs.length ? 'idle' : 'failed');
+      })
+      .catch(() => {
+        if (!current) return;
+        setState('failed');
+        setNote('Could not read the tabs just now.');
+      });
+    // Dropped if the id changes again before the answer lands, so a slow reply for an
+    // old id cannot overwrite the tabs of the new one.
+    return () => {
+      current = false;
+    };
+  }, [sheetId, source]);
+
+  if (!sheetId) return null;
+
+  if (tabs.length) {
+    return (
+      <Field label="Sheet tab" hint="Read from the spreadsheet itself." wide>
+        <Select
+          value={value && tabs.some((t) => t.gid === value) ? value : ''}
+          options={[{ value: '', label: 'First tab' }, ...tabs.map((t) => ({ value: t.gid, label: t.name }))]}
+          onChange={(gid) => onChange(gid || undefined)}
+        />
+      </Field>
+    );
+  }
+
+  return (
+    <Field
+      label="Sheet tab"
+      hint={
+        state === 'loading'
+          ? 'Reading the tabs…'
+          : (note ?? 'Paste the number after gid= from the address of the tab you want.')
+      }
+      wide
+    >
+      <TextInput value={value ?? ''} onChange={(v) => onChange(v.trim() || undefined)} placeholder="First tab" />
+    </Field>
+  );
+}
 
 function AddMenu({ depth, onPick, onClose }: { depth: number; onPick: (b: Block) => void; onClose: () => void }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -803,13 +883,12 @@ function BlockFields({
               onChange={(height) => onChange({ ...block, height })}
             />
           </Field>
-          <Field
-            label="Sheet tab"
-            hint="Filled in from the link you paste. To point at a different tab, open it in Sheets and copy the number after gid= in the address. Empty opens the first tab."
-            wide
-          >
-            <TextInput value={block.gid ?? ''} onChange={(v) => onChange({ ...block, gid: v.trim() || undefined })} />
-          </Field>
+          <SheetTabPicker
+            sheetId={block.sheetId}
+            source={block.source}
+            value={block.gid}
+            onChange={(gid) => onChange({ ...block, gid })}
+          />
           <Field label="Caption" hint="Says what the reader is looking at." wide>
             <TextInput value={block.caption ?? ''} onChange={(v) => onChange({ ...block, caption: v || undefined })} />
           </Field>

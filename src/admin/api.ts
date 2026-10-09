@@ -47,6 +47,11 @@ export const api = {
     call<{ src: string; manifest?: MediaManifest; status: Status }>('POST', '/api/upload', { name, ...image }),
   deleteImage: (path: string) =>
     call<{ ok: true; manifest?: MediaManifest; status: Status }>('DELETE', '/api/image', { path }),
+  sheetTabs: (id: string, source: 'file' | 'published') =>
+    call<{ tabs: { name: string; gid: string }[]; error?: string }>(
+      'GET',
+      `/api/sheet-tabs?id=${encodeURIComponent(id)}&source=${source}`,
+    ),
   history: () => call<{ versions: Version[] }>('GET', '/api/history'),
   restore: (sha: string) => call<{ ok: true; status: Status }>('POST', '/api/history', { sha }),
   publish: () => call<{ ok: true; status: Status }>('POST', '/api/publish', {}),
