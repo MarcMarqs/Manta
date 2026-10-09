@@ -46,11 +46,15 @@
   "origin": [
     {
       "id": "professional",
-      "label": "Professional work"
+      "label": "Professional Work"
+    },
+    {
+      "id": "other-projects",
+      "label": "Other Projects"
     },
     {
       "id": "personal",
-      "label": "Personal studies"
+      "label": "Personal Projects"
     }
   ]
 }

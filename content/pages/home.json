@@ -11,12 +11,12 @@
           "id": "hero-h",
           "type": "heading",
           "level": 1,
-          "text": "Marcelo de Russi"
+          "text": "Marcelo De Russi"
         },
         {
           "id": "hero-t",
           "type": "text",
-          "html": "<p>I'm a Senior Game Designer with 6+ years of experience bridging deep systems design with hands-on production. I specialize in mechanics, balancing loops, and driving complex features from concept to final engine polish. Combining a design vision with a structural roadmap mindset, I manage cross-discipline dependencies across engineering, art and animation to deliver high-quality gameplay within scope.</p>"
+          "html": "<p>I'm a Game Designer with 6+ years of experience bridging deep systems design with hands-on production. I specialize in mechanics, balancing loops, and driving complex features from concept to final engine polish. Combining a design vision with a structural roadmap mindset, I manage cross-discipline dependencies across engineering, art and animation to deliver high-quality gameplay within scope.</p>"
         }
       ]
     },
@@ -29,7 +29,7 @@
       "id": "work-h",
       "type": "heading",
       "level": 2,
-      "text": "Selected work"
+      "text": "Professional Work"
     },
     {
       "id": "work-t",
@@ -47,10 +47,35 @@
       "size": "sm"
     },
     {
+      "id": "b-xq8aay",
+      "type": "divider"
+    },
+    {
+      "id": "b-usvj6k",
+      "type": "heading",
+      "level": 1,
+      "text": "Other Projects"
+    },
+    {
+      "id": "b-53y245",
+      "type": "projectGrid",
+      "filters": false,
+      "origin": "other-projects"
+    },
+    {
+      "id": "b-rcmds8",
+      "type": "spacer",
+      "size": "sm"
+    },
+    {
+      "id": "b-vp86md",
+      "type": "divider"
+    },
+    {
       "id": "grid-note",
       "type": "heading",
-      "level": 2,
-      "text": "Personal studies"
+      "level": 1,
+      "text": "Personal Projects"
     },
     {
       "id": "grid-hint",
