@@ -226,6 +226,14 @@ hr.block-divider {
   color: var(--muted);
 }
 
+/* A tag marked to stand out. Only where tags are listed as facts about a project — in
+   the filter row the accent already means "this one is on", and two meanings for one
+   colour in the same row is one too many. */
+.tag-chip.is-marked {
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  color: var(--accent);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

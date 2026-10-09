@@ -6,7 +6,7 @@
  */
 import BlockList from './blocks/BlockList.astro';
 import Toc from './Toc.astro';
-import { projects, tagLabel } from '../lib/content';
+import { projects, tagAccent, tagLabel } from '../lib/content';
 import { headingAnchors, tocItems } from '../lib/toc';
 import type { Page, Project } from '../lib/types';
 
@@ -52,7 +52,7 @@ const toc = page.toc === false ? [] : tocItems(page.blocks, anchors);
   tagsOf.length > 0 && (
     <div class="tag-links" style="margin-top: calc(2rem * var(--spacing))">
       {tagsOf.map((id) => (
-        <a class="tag-chip" href={`/tags/${id}`}>
+        <a class={`tag-chip${tagAccent(id) ? ' is-marked' : ''}`} href={`/tags/${id}`}>
           {tagLabel(id)}
         </a>
       ))}

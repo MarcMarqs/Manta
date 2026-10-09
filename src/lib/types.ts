@@ -46,6 +46,14 @@ export interface Site {
 export interface Tag {
   id: string;
   label: string;
+  /**
+   * Draw this tag in the accent colour wherever it is listed as a fact about a project.
+   *
+   * Per tag rather than per group: the reason to pick out "Unreal" among disciplines is
+   * the same reason one might pick out "Systems Design" among the rest, and which of
+   * them deserves it is a judgement about the work, not about the shape of the data.
+   */
+  accent?: boolean;
 }
 
 export interface Tags {

@@ -34,6 +34,8 @@ export function useContent(locals: App.Locals) {
     tags: t,
     projects: preview ? orderProjects(preview.projects) : projects,
     tagLabel: (id: string) => [...t.discipline, ...t.engine].find((x) => x.id === id)?.label ?? id,
+    /** Whether a tag is one of the marked ones. */
+    tagAccent: (id: string) => Boolean([...t.discipline, ...t.engine].find((x) => x.id === id)?.accent),
     /**
      * Images uploaded in the editor exist on the draft branch but not in the running
      * build yet, so the preview fetches them through the API instead.

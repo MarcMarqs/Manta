@@ -12,7 +12,7 @@ interface Props {
   origin?: ProjectOrigin | 'all';
 }
 const { filters = false, tag, origin } = Astro.props;
-const { projects: all, site, tags, tagLabel, asset, preview } = useContent(Astro.locals);
+const { projects: all, site, tags, tagLabel, tagAccent, asset, preview } = useContent(Astro.locals);
 const shown = originOf(origin, tags.origin);
 const shelf = origin === 'all' ? all : all.filter((p) => originOf(p.origin, tags.origin) === shown);
 const projects = tag ? shelf.filter((p) => [...p.discipline, ...p.engine].includes(tag)) : shelf;
@@ -58,7 +58,7 @@ const id = `grid-${Math.random().toString(36).slice(2, 8)}`;
             <p class="card-summary">{p.summary}</p>
             <div class="chips">
               {[...p.discipline, ...p.engine].map((t) => (
-                <span class="tag-chip">{tagLabel(t)}</span>
+                <span class={`tag-chip${tagAccent(t) ? ' is-marked' : ''}`}>{tagLabel(t)}</span>
               ))}
             </div>
           </div>

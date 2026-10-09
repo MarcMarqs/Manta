@@ -1403,7 +1403,7 @@ input[type='range'] {
 
 .tag-row {
   display: grid;
-  grid-template-columns: 1fr auto auto 28px;
+  grid-template-columns: 1fr auto auto auto 28px;
   gap: 10px;
   align-items: center;
 }

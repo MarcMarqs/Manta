@@ -284,6 +284,17 @@ appearance and will not follow the site's dark theme. A sheet embedded on a priv
 study is still only as private as its own sharing — the password on the page does not
 reach inside the frame.
 
+## Picking tags out
+
+Each tag under **Tags** has an **Accent** switch. A tag with it on is drawn in the accent
+colour wherever it is listed as a fact about a project — on the cards, and under a case
+study. Turning it on for the engines is the quickest way to tell tools from disciplines
+at a glance, but it is per tag rather than per group: a discipline worth singling out can
+have it too.
+
+The filter row is left alone. There the accent already means "this one is on", and one
+colour cannot mean two things in the same row.
+
 ## Measuring
 
 **Site & theme → Sharing & search → Cloudflare Web Analytics token** turns on counting.
