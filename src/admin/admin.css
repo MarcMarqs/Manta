@@ -1401,11 +1401,46 @@ input[type='range'] {
   align-items: center;
 }
 
+/* The name gets the width, because it is the only part that is typed into. Everything
+   that merely reports — the id, how many projects use it, whether it is accented — goes
+   on a line beneath, where nothing has to be squeezed to fit beside it. The editor pane
+   is under 400px wide, and a row of five things across it left the name 41px. */
 .tag-row {
   display: grid;
-  grid-template-columns: 1fr auto auto auto 28px;
-  gap: 10px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 6px 10px;
   align-items: center;
+}
+
+.tag-actions {
+  display: flex;
+  gap: 2px;
+}
+
+.tag-meta {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  font-size: var(--e-t-xs);
+}
+
+/* An id can be long enough to push everything else off the row, so it is the one that
+   gives way. */
+.tag-meta .mono {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tag-meta .toggle {
+  margin-left: auto;
+  flex: none;
+}
+
+.tag-row + .tag-row {
+  margin-top: 12px;
 }
 
 form.tag-row {

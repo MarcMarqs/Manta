@@ -51,14 +51,18 @@ function TagGroup({ group, title, hint }: { group: 'discipline' | 'engine'; titl
       {list.map((tag, i) => (
         <div class="tag-row">
           <TextInput value={tag.label} onChange={(label) => setList(list.map((t, j) => (j === i ? { ...t, label } : t)))} />
-          <span class="muted mono small">{tag.id}</span>
-          <span class="muted small">{usage(tag.id)} projects</span>
-          <Toggle
-            checked={Boolean(tag.accent)}
-            label="Accent"
-            onChange={(accent) => setList(list.map((t, j) => (j === i ? { ...t, accent: accent || undefined } : t)))}
-          />
-          <IconButton icon="trash" label="Delete tag" tone="danger" onClick={() => remove(tag.id)} />
+          <span class="tag-actions">
+            <IconButton icon="trash" label="Delete tag" tone="danger" onClick={() => remove(tag.id)} />
+          </span>
+          <span class="tag-meta">
+            <span class="muted mono">{tag.id}</span>
+            <span class="muted">{usage(tag.id)} projects</span>
+            <Toggle
+              checked={Boolean(tag.accent)}
+              label="Accent"
+              onChange={(accent) => setList(list.map((t, j) => (j === i ? { ...t, accent: accent || undefined } : t)))}
+            />
+          </span>
         </div>
       ))}
       <form
@@ -204,17 +208,21 @@ function OriginGroup() {
             value={origin.label}
             onChange={(label) => setList(list.map((o, j) => (j === i ? { ...o, label } : o)))}
           />
-          <span class="muted mono small">{origin.id}</span>
-          <span class="muted small">{usage(origin.id)} projects</span>
-          <IconButton icon="up" label="Move up" disabled={i === 0} onClick={() => move(i, -1)} />
-          <IconButton icon="down" label="Move down" disabled={i === list.length - 1} onClick={() => move(i, 1)} />
-          <IconButton
-            icon="trash"
-            label={list.length <= 1 ? 'The last origin cannot be removed' : 'Delete origin'}
-            tone="danger"
-            disabled={list.length <= 1}
-            onClick={() => remove(origin.id)}
-          />
+          <span class="tag-actions">
+            <IconButton icon="up" label="Move up" disabled={i === 0} onClick={() => move(i, -1)} />
+            <IconButton icon="down" label="Move down" disabled={i === list.length - 1} onClick={() => move(i, 1)} />
+            <IconButton
+              icon="trash"
+              label={list.length <= 1 ? 'The last origin cannot be removed' : 'Delete origin'}
+              tone="danger"
+              disabled={list.length <= 1}
+              onClick={() => remove(origin.id)}
+            />
+          </span>
+          <span class="tag-meta">
+            <span class="muted mono">{origin.id}</span>
+            <span class="muted">{usage(origin.id)} projects</span>
+          </span>
         </div>
       ))}
       <form
