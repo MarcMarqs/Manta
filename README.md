@@ -238,9 +238,15 @@ Two ways to show one:
   makes it readable by anyone who has the published address, whatever the file's own
   sharing says.
 
-The tab is remembered as a `gid` and carried in the address fragment, because that is
-what Sheets reads: a `?gid=` query is accepted and then ignored, landing the reader on
-the first tab however carefully it was set.
+**Sheet tab** lists the tabs by name, read off the spreadsheet itself: the editor fetches
+the sheet's own page server-side and pulls the list out of it, since Google offers no
+key-free way to ask. If they cannot be read — a sheet that is not shared, or no network —
+the field falls back to taking the number by hand, so a picker that will not load never
+becomes the only way in.
+
+The tab is stored as a `gid` and carried in the address fragment, because that is what
+Sheets reads: a `?gid=` query is accepted and then ignored, landing the reader on the
+first tab however carefully it was set.
 
 Either way the sheet is served by Google, inside a frame: it keeps its own light
 appearance and will not follow the site's dark theme. A sheet embedded on a private case
