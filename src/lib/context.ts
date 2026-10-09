@@ -12,6 +12,15 @@ export interface PreviewData {
  * The content a component should render. On the built site this is the committed JSON;
  * inside the editor's preview it is whatever is currently in the editor.
  */
+/**
+ * Which shelf a project belongs to, and which one a block means.
+ *
+ * Both default to the first origin on the list rather than to a name written here: the
+ * list is the author's, and the first entry is whatever they put at the top.
+ */
+export const originOf = (value: string | undefined, origins: { id: string }[]) =>
+  value ?? origins[0]?.id ?? '';
+
 export function useContent(locals: App.Locals) {
   const preview = locals.preview;
   const t = preview?.tags ?? tags;

@@ -42,5 +42,15 @@
       "id": "uefn",
       "label": "UEFN"
     }
+  ],
+  "origin": [
+    {
+      "id": "professional",
+      "label": "Professional work"
+    },
+    {
+      "id": "personal",
+      "label": "Personal studies"
+    }
   ]
 }

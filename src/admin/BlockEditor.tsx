@@ -3,7 +3,7 @@ import type { Align, Block, BlockType, BlockWidth, Project } from '../lib/types'
 import { BLOCKS, GROUPS, cloneBlock, parseSheetInput, parseVideoInput, summarize } from './blocks';
 import { api, assetUrl } from './api';
 import { ImageField, LinkInput } from './media';
-import { PROJECTS, expanded, fileToRoute, files, newId, openView, pagePaths, projects, selectedBlock, toggleExpanded, updateFile } from './store';
+import { PROJECTS, expanded, fileToRoute, files, newId, openView, pagePaths, projects, selectedBlock, tags, toggleExpanded, updateFile } from './store';
 import { Field, Icon, IconButton, NumberInput, RichText, Segmented, Select, TextArea, TextInput, Toggle } from './ui';
 
 const MAX_DEPTH = 2;
@@ -44,6 +44,9 @@ function withChild(container: Block, child: Block, at: 'start' | 'end'): Block {
 }
 
 /** Every page, plus any case study that doesn't have one yet, offered when adding a link. */
+/** The shelves a rail or grid can be pointed at, as the author has them. */
+const originList = () => tags.value?.origin ?? [];
+
 const linkOptions = () => {
   const pages = pagePaths.value.map((path) => ({
     label: (files.value[path] as { title?: string }).title || fileToRoute(path),
@@ -1624,16 +1627,11 @@ function BlockFields({
     case 'projectGrid':
       return (
         <div class="stack">
-          <Field label="Which projects">
+          <Field label="Which projects" hint="The shelves come from the origin list under Tags.">
             <Select
-              value={block.origin ?? 'professional'}
-              options={[
-                { value: 'professional', label: 'Professional work' },
-                { value: 'personal', label: 'Personal studies' },
-              ]}
-              onChange={(origin) =>
-                onChange({ ...block, origin: origin === 'professional' ? undefined : (origin as 'personal') })
-              }
+              value={block.origin ?? originList()[0]?.id ?? ''}
+              options={originList().map((o) => ({ value: o.id, label: o.label }))}
+              onChange={(origin) => onChange({ ...block, origin })}
             />
           </Field>
           <Toggle
