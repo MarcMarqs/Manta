@@ -80,7 +80,8 @@
       "id": "h-takeaways",
       "type": "heading",
       "level": 2,
-      "text": "How Other Games Handle It"
+      "text": "How Other Games Handle It",
+      "width": "narrow"
     },
     {
       "id": "t-takeaways",
@@ -141,7 +142,8 @@
       "id": "b-vzuo9y",
       "type": "heading",
       "level": 2,
-      "text": "The Diagnosis"
+      "text": "The Diagnosis",
+      "width": "narrow"
     },
     {
       "id": "b-lpwde8",
@@ -158,7 +160,8 @@
       "id": "b-hxagp8",
       "type": "heading",
       "level": 2,
-      "text": "The Redesign"
+      "text": "The Redesign",
+      "width": "narrow"
     },
     {
       "id": "b-b4mctk",
@@ -184,7 +187,8 @@
       "id": "b-p0kzmz",
       "type": "heading",
       "level": 2,
-      "text": "Groups and Smurfing"
+      "text": "Groups and Smurfing",
+      "width": "narrow"
     },
     {
       "id": "b-r8ytz8",
@@ -196,12 +200,14 @@
       "id": "b-yo5rkv",
       "type": "heading",
       "level": 2,
-      "text": "Proving It"
+      "text": "Proving It",
+      "width": "narrow"
     },
     {
       "id": "b-0y7dgk",
       "type": "text",
-      "html": "<p>Percentile anchoring halves the largest tier, from 34.9% to 18%.</p>"
+      "html": "<p>Percentile anchoring halves the largest tier, from 34.9% to 18%.</p>",
+      "width": "narrow"
     },
     {
       "id": "b-kqh0kw",
@@ -484,7 +490,8 @@
       "id": "b-2fpi7u",
       "type": "heading",
       "level": 2,
-      "text": "Files"
+      "text": "Files",
+      "width": "narrow"
     },
     {
       "id": "b-dhj72s",
