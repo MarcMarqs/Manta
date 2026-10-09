@@ -3,7 +3,7 @@
     "slug": "wardens-rising",
     "title": "Wardens Rising",
     "genre": "ARPG / Tower Defense",
-    "year": 2024,
+    "year": null,
     "role": "Game Designer",
     "summary": "Drove combat and systems design at the core of the game. Balanced high-density wave combat using playtest telemetry, authored 30+ progression assets and economy features, and co-directed boss encounters alongside multidisciplinary teams.",
     "highlights": [
@@ -57,7 +57,7 @@
     ],
     "cover": "/images/projects/aurora/cover.svg",
     "coverVideo": null,
-    "featured": true,
+    "featured": false,
     "visibility": "public",
     "links": [
       {
@@ -88,7 +88,7 @@
     "featured": false,
     "visibility": "public",
     "links": [],
-    "origin": "personal"
+    "origin": "professional"
   },
   {
     "slug": "plushland-curse",
