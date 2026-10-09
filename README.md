@@ -255,6 +255,17 @@ Secrets, set under **Settings → Variables and Secrets** as type *Secret*, neve
   is never a session for the other. Changing it ends every unlock.
 - `GITHUB_TOKEN` — fine-grained token: this repository only, **Contents: Read and write**.
 
+## Carousels
+
+A **Gallery** block shows its images as a grid or as a **carousel** — one at a time, with
+arrows and dots to rotate through, and a caption per image. Either way, clicking an image
+opens it full size, where the arrow keys move between the images of that same gallery and
+a click outside closes it.
+
+The carousel is a scroller with snap points rather than a slideshow driven by script, so
+it swipes on a touch screen and takes the keyboard on its own. The buttons only nudge that
+scroll along.
+
 ## Embedding a spreadsheet
 
 The **Spreadsheet** block puts a Google Sheet on the page, live. Paste the address from
@@ -294,6 +305,14 @@ have it too.
 
 The filter row is left alone. There the accent already means "this one is on", and one
 colour cannot mean two things in the same row.
+
+## Embedding a document
+
+The **Document** block is the spreadsheet block's twin for Google Docs: paste the address
+and it works out the id. **The file** obeys the sharing set on the document; **Published
+text** is one put through File → Share → Publish to web, readable by anyone with the
+published address. Same caveats as a sheet — it is served by Google inside a frame, keeps
+its own light appearance, and is only as private as its own sharing.
 
 ## Measuring
 

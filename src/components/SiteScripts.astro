@@ -64,10 +64,62 @@
     requestAnimationFrame(sweep);
   }
 
+  // --- carousel -----------------------------------------------------------
+
+  // The track already scrolls and snaps on its own, so this only drives the buttons and
+  // keeps the dots honest. Without it a reader can still swipe or tab and arrow through.
+  for (const carousel of document.querySelectorAll<HTMLElement>('[data-carousel]')) {
+    const track = carousel.querySelector<HTMLElement>('.carousel-track');
+    if (!track) continue;
+    const slides = [...track.querySelectorAll<HTMLElement>('.carousel-slide')];
+    const dots = [...carousel.querySelectorAll<HTMLButtonElement>('.carousel-dot')];
+    const arrows = [...carousel.querySelectorAll<HTMLButtonElement>('.carousel-arrow')];
+
+    /** Whichever slide is nearest the middle of the track is the one being looked at. */
+    const current = () => {
+      const middle = track.scrollLeft + track.clientWidth / 2;
+      let best = 0;
+      slides.forEach((slide, i) => {
+        const centre = slide.offsetLeft + slide.clientWidth / 2;
+        if (Math.abs(centre - middle) < Math.abs(slides[best].offsetLeft + slides[best].clientWidth / 2 - middle)) {
+          best = i;
+        }
+      });
+      return best;
+    };
+
+    const sync = (at = current()) => {
+      dots.forEach((dot, i) => dot.setAttribute('aria-selected', String(i === at)));
+      // At either end the arrow has nowhere to go, and says so rather than doing nothing.
+      arrows.forEach((arrow) => {
+        const step = Number(arrow.dataset.step);
+        arrow.disabled = step < 0 ? at === 0 : at === slides.length - 1;
+      });
+    };
+
+    const goTo = (i: number) => {
+      const at = Math.max(0, Math.min(slides.length - 1, i));
+      const slide = slides[at];
+      if (!slide) return;
+      track.scrollTo({ left: slide.offsetLeft });
+      // Said straight away rather than waiting for the scroll to arrive: the arrow that
+      // was just pressed must not stay disabled from where the reader used to be.
+      sync(at);
+    };
+
+    arrows.forEach((arrow) => arrow.addEventListener('click', () => goTo(current() + Number(arrow.dataset.step))));
+    dots.forEach((dot) => dot.addEventListener('click', () => goTo(Number(dot.dataset.to))));
+    // Straight off the scroll, with no frame to wait for: a swipe has to move the dots
+    // too, and reading a handful of offsets is cheaper than the frame would cost.
+    track.addEventListener('scroll', () => sync(), { passive: true });
+    addEventListener('resize', () => sync());
+    sync();
+  }
+
   // --- lightbox -----------------------------------------------------------
 
   if (!inEditor) {
-    const selector = 'figure img, .gallery img';
+    const selector = 'figure img, .gallery img, .carousel-slide img';
     let items: HTMLImageElement[] = [];
     let index = 0;
 
@@ -96,11 +148,9 @@
     };
 
     const open = (target: HTMLImageElement) => {
-      // A gallery browses within itself; a lone image opens on its own.
-      const gallery = target.closest('.gallery');
-      items = gallery
-        ? [...gallery.querySelectorAll<HTMLImageElement>('img')]
-        : [target];
+      // A gallery or a carousel browses within itself; a lone image opens on its own.
+      const group = target.closest('.gallery, .carousel');
+      items = group ? [...group.querySelectorAll<HTMLImageElement>('img')] : [target];
       show(items.indexOf(target));
       box.hidden = false;
       document.body.style.overflow = 'hidden';

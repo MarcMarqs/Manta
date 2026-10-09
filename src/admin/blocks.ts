@@ -30,7 +30,7 @@ export const BLOCKS: Record<BlockType, BlockSpec> = {
   gallery: {
     label: 'Gallery',
     group: 'Text & media',
-    hint: 'A grid of images',
+    hint: 'A grid of images, or a carousel to click through',
     create: () => ({ id: newId(), type: 'gallery', images: [] }),
   },
   video: {
@@ -38,6 +38,12 @@ export const BLOCKS: Record<BlockType, BlockSpec> = {
     group: 'Text & media',
     hint: 'YouTube, Vimeo or itch.io',
     create: () => ({ id: newId(), type: 'video', provider: 'youtube', videoId: '', title: '' }),
+  },
+  doc: {
+    label: 'Document',
+    group: 'Data',
+    hint: 'A Google Doc, live on the page',
+    create: () => ({ id: newId(), type: 'doc', source: 'file', docId: '', height: 'medium' }),
   },
   sheet: {
     label: 'Spreadsheet',
@@ -259,13 +265,15 @@ export function summarize(block: Block): string {
     case 'image':
       return block.caption || block.alt || block.src.split('/').pop() || 'No image yet';
     case 'gallery':
-      return `${block.images.length} image${block.images.length === 1 ? '' : 's'}`;
+      return `${block.images.length} image${block.images.length === 1 ? '' : 's'}${block.layout === 'carousel' ? ' · carousel' : ''}`;
     case 'video':
       return block.videoId ? `${block.provider} · ${block.videoId}` : 'No video yet';
     case 'button':
       return `${block.label} → ${block.href}`;
     case 'sheet':
       return block.sheetId ? block.caption || block.title || 'Google Sheet' : 'No spreadsheet yet';
+    case 'doc':
+      return block.docId ? block.caption || block.title || 'Google Doc' : 'No document yet';
     case 'table':
       return block.caption || `${block.columns.length} × ${block.rows.length}`;
     case 'specs':
@@ -356,6 +364,22 @@ export function parseSheetInput(input: string): { source?: 'file' | 'published';
   const file = value.match(/spreadsheets\/d\/([\w-]+)/);
   if (file) return { source: 'file', sheetId: file[1], gid };
   return { sheetId: value, gid };
+}
+
+/**
+ * Pulls the id out of whatever Google Docs address was pasted.
+ *
+ * Same two shapes as a spreadsheet: an ordinary document at /document/d/<id>, and one
+ * put through Publish to web at /document/d/e/<id>, which is a different id entirely.
+ * The /e/ is tested for first, or the plain pattern matches it and takes "e" for the id.
+ */
+export function parseDocInput(input: string): { source?: 'file' | 'published'; docId: string } {
+  const value = input.trim();
+  const published = value.match(/document\/d\/e\/([\w-]+)/);
+  if (published) return { source: 'published', docId: published[1] };
+  const file = value.match(/document\/d\/([\w-]+)/);
+  if (file) return { source: 'file', docId: file[1] };
+  return { docId: value };
 }
 
 export function parseVideoInput(input: string): { provider?: 'youtube' | 'vimeo'; id: string } {

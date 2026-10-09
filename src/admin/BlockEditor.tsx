@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
 import type { Align, Block, BlockType, BlockWidth, Project } from '../lib/types';
-import { BLOCKS, GROUPS, cloneBlock, parseSheetInput, parseVideoInput, summarize } from './blocks';
+import { BLOCKS, GROUPS, cloneBlock, parseDocInput, parseSheetInput, parseVideoInput, summarize } from './blocks';
 import { api, assetUrl } from './api';
 import { ImageField, LinkInput } from './media';
 import { PROJECTS, expanded, fileToRoute, files, newId, openView, pagePaths, projects, selectedBlock, tags, toggleExpanded, updateFile } from './store';
@@ -731,6 +731,24 @@ function BlockFields({
     case 'gallery':
       return (
         <div class="stack">
+          <Field
+            label="Show as"
+            hint={
+              block.layout === 'carousel'
+                ? 'One at a time, with arrows to rotate through. Clicking one opens it full size.'
+                : 'All of them at once. Clicking one opens it full size.'
+            }
+            wide
+          >
+            <Segmented
+              value={block.layout ?? 'grid'}
+              options={[
+                { value: 'grid', label: 'Grid' },
+                { value: 'carousel', label: 'Carousel' },
+              ]}
+              onChange={(layout) => onChange({ ...block, layout: layout === 'grid' ? undefined : layout })}
+            />
+          </Field>
           {block.images.map((img, i) => (
             <div class="gallery-row">
               <ImageField
@@ -747,6 +765,18 @@ function BlockFields({
                     onChange({ ...block, images: block.images.map((x, j) => (j === i ? { ...x, alt } : x)) })
                   }
                 />
+                {block.layout === 'carousel' && (
+                  <TextInput
+                    value={img.caption ?? ''}
+                    placeholder="Caption (optional)"
+                    onChange={(caption) =>
+                      onChange({
+                        ...block,
+                        images: block.images.map((x, j) => (j === i ? { ...x, caption: caption || undefined } : x)),
+                      })
+                    }
+                  />
+                )}
                 <div class="row">
                   <IconButton
                     icon="up"
@@ -892,6 +922,61 @@ function BlockFields({
             value={block.gid}
             onChange={(gid) => onChange({ ...block, gid })}
           />
+          <Field label="Caption" hint="Says what the reader is looking at." wide>
+            <TextInput value={block.caption ?? ''} onChange={(v) => onChange({ ...block, caption: v || undefined })} />
+          </Field>
+          <Field label="Title" hint="For screen readers." wide>
+            <TextInput value={block.title ?? ''} onChange={(v) => onChange({ ...block, title: v || undefined })} />
+          </Field>
+        </div>
+      );
+
+    case 'doc':
+      return (
+        <div class="fields">
+          <Field
+            label="Document link"
+            hint="Paste the address from your browser. Share → Anyone with the link, or the reader sees a sign-in page instead."
+            wide
+          >
+            <TextInput
+              value={block.docId}
+              placeholder="https://docs.google.com/document/d/…"
+              onChange={(v) => {
+                const parsed = parseDocInput(v);
+                onChange({ ...block, docId: parsed.docId, source: parsed.source ?? block.source });
+              }}
+            />
+          </Field>
+          <Field
+            label="Show as"
+            hint={
+              block.source === 'published'
+                ? 'The text on its own, from File → Share → Publish to web. Anyone can read it, link or no link.'
+                : 'The document as it looks in Docs. Obeys the sharing you set on the file.'
+            }
+            wide
+          >
+            <Segmented
+              value={block.source}
+              options={[
+                { value: 'file', label: 'The file' },
+                { value: 'published', label: 'Published text' },
+              ]}
+              onChange={(source) => onChange({ ...block, source })}
+            />
+          </Field>
+          <Field label="Height">
+            <Select
+              value={block.height ?? 'medium'}
+              options={[
+                { value: 'short', label: 'Short' },
+                { value: 'medium', label: 'Medium' },
+                { value: 'tall', label: 'Tall' },
+              ]}
+              onChange={(height) => onChange({ ...block, height })}
+            />
+          </Field>
           <Field label="Caption" hint="Says what the reader is looking at." wide>
             <TextInput value={block.caption ?? ''} onChange={(v) => onChange({ ...block, caption: v || undefined })} />
           </Field>
