@@ -803,7 +803,11 @@ function BlockFields({
               onChange={(height) => onChange({ ...block, height })}
             />
           </Field>
-          <Field label="Tab" hint="The gid from the link. Empty opens whichever tab is first.">
+          <Field
+            label="Sheet tab"
+            hint="Filled in from the link you paste. To point at a different tab, open it in Sheets and copy the number after gid= in the address. Empty opens the first tab."
+            wide
+          >
             <TextInput value={block.gid ?? ''} onChange={(v) => onChange({ ...block, gid: v.trim() || undefined })} />
           </Field>
           <Field label="Caption" hint="Says what the reader is looking at." wide>
