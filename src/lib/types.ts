@@ -130,6 +130,24 @@ export type Block = BlockLayout & (
     }
   | { id: string; type: 'gallery'; images: { src: string; alt: string }[] }
   | { id: string; type: 'video'; provider: 'youtube' | 'vimeo' | 'itch'; videoId: string; title?: string }
+  | {
+      id: string;
+      type: 'sheet';
+      /**
+       * 'file' is an ordinary spreadsheet, embedded from its own address and readable
+       * only if its sharing allows it. 'published' is one put through File → Share →
+       * Publish to web, which has a different id and renders as a bare grid.
+       */
+      source: 'file' | 'published';
+      /** The id out of the Google Sheets address. */
+      sheetId: string;
+      /** Which tab, as the gid from its address. Absent means whichever opens first. */
+      gid?: string;
+      /** Names the frame for screen readers, which otherwise announce only "iframe". */
+      title?: string;
+      caption?: string;
+      height?: 'short' | 'medium' | 'tall';
+    }
   | { id: string; type: 'button'; label: string; href: string; style?: 'primary' | 'secondary' }
   | { id: string; type: 'divider' }
   | { id: string; type: 'spacer'; size?: 'sm' | 'md' | 'lg' }

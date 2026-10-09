@@ -48,6 +48,24 @@ const imageStyle = (b: Extract<Block, { type: 'image' }>) =>
     .filter(Boolean)
     .join(';') || undefined;
 
+/**
+ * The address a spreadsheet is embedded from.
+ *
+ * Both ids are scrubbed down to the characters Google actually uses, because whatever
+ * was typed into the editor ends up inside this URL: without it a pasted string could
+ * carry its own query or climb out of the path.
+ */
+const sheetSrc = (b: Extract<Block, { type: 'sheet' }>) => {
+  const id = b.sheetId.replace(/[^\w-]/g, '');
+  const gid = (b.gid ?? '').replace(/\D/g, '');
+  if (b.source === 'published') {
+    const params = new URLSearchParams({ single: 'true', widget: 'true', headers: 'false' });
+    if (gid) params.set('gid', gid);
+    return `https://docs.google.com/spreadsheets/d/e/${id}/pubhtml?${params}`;
+  }
+  return `https://docs.google.com/spreadsheets/d/${id}/preview${gid ? `?gid=${gid}` : ''}`;
+};
+
 const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
   ({
     youtube: `https://www.youtube-nocookie.com/embed/${b.videoId}`,
@@ -144,6 +162,18 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
         </a>
       </p>
     )
+  }
+
+  {
+    block.type === 'sheet' &&
+      (block.sheetId ? (
+        <figure class={`sheet sheet-${block.height ?? 'medium'}`}>
+          <iframe src={sheetSrc(block)} title={block.title ?? 'Embedded spreadsheet'} loading="lazy" />
+          {block.caption && <figcaption>{block.caption}</figcaption>}
+        </figure>
+      ) : (
+        preview && <p class="blk-empty">Paste a Google Sheets link to show it here.</p>
+      ))
   }
 
   {block.type === 'divider' && <hr class="block-divider" />}
@@ -403,6 +433,44 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
     height: 100%;
     border: 0;
     border-radius: var(--radius);
+  }
+  /* The sheet keeps its own chrome, so the frame here is only a border to sit it on.
+     A fixed height rather than an aspect ratio: how tall a spreadsheet wants to be has
+     to do with how many rows matter, not with how wide the page is. */
+  .sheet {
+    margin: 0;
+  }
+  /* Only ever seen in the editor's preview, so an unfilled block still has something to
+     click on instead of disappearing. */
+  .blk-empty {
+    margin: 0;
+    padding: 18px;
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .sheet iframe {
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+    display: block;
+  }
+  .sheet-short iframe {
+    height: 320px;
+  }
+  .sheet-medium iframe {
+    height: 480px;
+  }
+  .sheet-tall iframe {
+    height: 720px;
+  }
+  .sheet figcaption {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: var(--muted);
   }
   .table-wrap {
     overflow-x: auto;

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
 import type { Align, Block, BlockType, BlockWidth, Project } from '../lib/types';
-import { BLOCKS, GROUPS, cloneBlock, parseVideoInput, summarize } from './blocks';
+import { BLOCKS, GROUPS, cloneBlock, parseSheetInput, parseVideoInput, summarize } from './blocks';
 import { assetUrl } from './api';
 import { ImageField, LinkInput } from './media';
 import { PROJECTS, expanded, fileToRoute, files, newId, openView, pagePaths, projects, selectedBlock, toggleExpanded, updateFile } from './store';
@@ -748,6 +748,69 @@ function BlockFields({
           </Field>
           <Field label="Links to" hint="Pick a page from the list or type any URL." wide>
             <LinkInput value={block.href} onChange={(v) => onChange({ ...block, href: v })} />
+          </Field>
+        </div>
+      );
+
+    case 'sheet':
+      return (
+        <div class="fields">
+          <Field
+            label="Spreadsheet link"
+            hint="Paste the address from your browser. Share → Anyone with the link, or the reader sees a sign-in page instead."
+            wide
+          >
+            <TextInput
+              value={block.sheetId}
+              placeholder="https://docs.google.com/spreadsheets/d/…"
+              onChange={(v) => {
+                const parsed = parseSheetInput(v);
+                onChange({
+                  ...block,
+                  sheetId: parsed.sheetId,
+                  source: parsed.source ?? block.source,
+                  gid: parsed.gid ?? block.gid,
+                });
+              }}
+            />
+          </Field>
+          <Field
+            label="Show as"
+            hint={
+              block.source === 'published'
+                ? 'The bare grid, from File → Share → Publish to web. Anyone can read it, link or no link.'
+                : 'The spreadsheet as it looks in Sheets, tabs and all. Obeys the sharing you set on the file.'
+            }
+            wide
+          >
+            <Segmented
+              value={block.source}
+              options={[
+                { value: 'file', label: 'The file' },
+                { value: 'published', label: 'Published grid' },
+              ]}
+              onChange={(source) => onChange({ ...block, source })}
+            />
+          </Field>
+          <Field label="Height">
+            <Select
+              value={block.height ?? 'medium'}
+              options={[
+                { value: 'short', label: 'Short' },
+                { value: 'medium', label: 'Medium' },
+                { value: 'tall', label: 'Tall' },
+              ]}
+              onChange={(height) => onChange({ ...block, height })}
+            />
+          </Field>
+          <Field label="Tab" hint="The gid from the link. Empty opens whichever tab is first.">
+            <TextInput value={block.gid ?? ''} onChange={(v) => onChange({ ...block, gid: v.trim() || undefined })} />
+          </Field>
+          <Field label="Caption" hint="Says what the reader is looking at." wide>
+            <TextInput value={block.caption ?? ''} onChange={(v) => onChange({ ...block, caption: v || undefined })} />
+          </Field>
+          <Field label="Title" hint="For screen readers." wide>
+            <TextInput value={block.title ?? ''} onChange={(v) => onChange({ ...block, title: v || undefined })} />
           </Field>
         </div>
       );
