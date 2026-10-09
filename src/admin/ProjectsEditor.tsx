@@ -266,26 +266,53 @@ function ProjectForm({ project, index }: { project: Project; index: number }) {
 export function ProjectsEditor({ slug }: { slug?: string }) {
   const list = projects.value;
   const index = slug ? list.findIndex((p) => p.slug === slug) : -1;
+  const origins = tags.value?.origin ?? [];
+  /** Which shelf a project is on. Absent means the first, as everywhere else. */
+  const originOf = (p: Project) => p.origin ?? origins[0]?.id ?? '';
 
   /**
-   * The list is the running order, so moving a row here is the whole feature. Projects
-   * hidden from the site keep their place in it rather than being skipped over, because
-   * a draft that is about to be published should land where it was put.
+   * Moving a project swaps it with its neighbour on the same shelf, not with whatever
+   * happens to sit next to it in the file.
+   *
+   * Only projects sharing an origin are ever shown together, so stepping past one on
+   * another shelf changes the file and nothing a reader would see — an arrow that
+   * appears to do nothing. Everything else keeps its place, because only these two
+   * move.
    */
-  const move = (from: number, dir: -1 | 1) => {
-    const to = from + dir;
-    if (to < 0 || to >= list.length) return;
+  const move = (slug: string, dir: -1 | 1) => {
     updateFile<Project[]>(
       PROJECTS,
       (l) => {
+        const from = l.findIndex((p) => p.slug === slug);
+        if (from < 0) return l;
+        const shelf = originOf(l[from]);
+        let to = from + dir;
+        while (to >= 0 && to < l.length && originOf(l[to]) !== shelf) to += dir;
+        if (to < 0 || to >= l.length) return l;
         const next = [...l];
-        const [item] = next.splice(from, 1);
-        next.splice(to, 0, item);
+        [next[from], next[to]] = [next[to], next[from]];
         return next;
       },
       { coalesce: false },
     );
   };
+
+  /**
+   * The list in shelves, in the order the origins are kept. A project whose origin no
+   * longer exists still has to be reachable, so it is shown under its own id rather
+   * than dropped.
+   */
+  const shelves = (() => {
+    const named = origins.map((o) => ({ id: o.id, label: o.label, items: list.filter((p) => originOf(p) === o.id) }));
+    const known = new Set(origins.map((o) => o.id));
+    const orphans = list.filter((p) => !known.has(originOf(p)));
+    const strays = [...new Set(orphans.map((p) => originOf(p)))].map((id) => ({
+      id,
+      label: `${id} — no longer an origin`,
+      items: orphans.filter((p) => originOf(p) === id),
+    }));
+    return [...named, ...strays].filter((shelf) => shelf.items.length);
+  })();
 
   const add = () => {
     const project = blankProject(list, tags.value?.origin?.[0]?.id ?? 'professional');
@@ -306,28 +333,38 @@ export function ProjectsEditor({ slug }: { slug?: string }) {
         </button>
       </header>
 
-      <div class="project-list">
-        {list.map((p, i) => (
-          <div class={`project-row${p.slug === slug ? ' active' : ''}`}>
-            <button
-              type="button"
-              class="project-item"
-              onClick={() => (view.value = { kind: 'projects', slug: p.slug === slug ? undefined : p.slug })}
-            >
-              <span class="project-title">{p.title || 'Untitled'}</span>
-              <span class="muted">
-                {p.year}
-                {p.visibility === 'draft' ? ' · not built' : ''}
-                {p.visibility === 'private' ? ' · password' : ''}
-              </span>
-            </button>
-            <span class="project-move">
-              <IconButton icon="up" label="Move up" disabled={i === 0} onClick={() => move(i, -1)} />
-              <IconButton icon="down" label="Move down" disabled={i === list.length - 1} onClick={() => move(i, 1)} />
-            </span>
+      {shelves.map((shelf) => (
+        <div class="project-shelf">
+          <h3 class="shelf-head">{shelf.label}</h3>
+          <div class="project-list">
+            {shelf.items.map((p, i) => (
+              <div class={`project-row${p.slug === slug ? ' active' : ''}`}>
+                <button
+                  type="button"
+                  class="project-item"
+                  onClick={() => (view.value = { kind: 'projects', slug: p.slug === slug ? undefined : p.slug })}
+                >
+                  <span class="project-title">{p.title || 'Untitled'}</span>
+                  <span class="muted">
+                    {p.year}
+                    {p.visibility === 'draft' ? ' · not built' : ''}
+                    {p.visibility === 'private' ? ' · password' : ''}
+                  </span>
+                </button>
+                <span class="project-move">
+                  <IconButton icon="up" label="Move up" disabled={i === 0} onClick={() => move(p.slug, -1)} />
+                  <IconButton
+                    icon="down"
+                    label="Move down"
+                    disabled={i === shelf.items.length - 1}
+                    onClick={() => move(p.slug, 1)}
+                  />
+                </span>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
 
       {index >= 0 ? (
         <ProjectForm key={index} project={list[index]} index={index} />

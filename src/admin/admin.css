@@ -1472,6 +1472,22 @@ form.tag-row {
   gap: 4px;
 }
 
+/* Projects are listed in shelves, because only the ones sharing a shelf are ever shown
+   together — a flat list would make the arrows look as though they moved a project past
+   something it will never appear beside. */
+.project-shelf + .project-shelf {
+  margin-top: 18px;
+}
+
+.shelf-head {
+  margin: 0 0 8px;
+  font-size: var(--e-t-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--e-muted);
+}
+
 /* A project is a row: the project itself, and the two controls that set its place in the
    running order. The move buttons sit outside the button so they are not a click on it. */
 .project-row {

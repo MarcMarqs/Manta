@@ -133,6 +133,10 @@ Projects appear in the order they sit in under **Projects**, and the arrows on e
 move them. That order is the order everywhere: the rail, the grid, the tag pages and the
 next-case-study link at the foot of a case study.
 
+The list is grouped by origin, because only projects sharing a shelf are ever shown
+together — and a move stays inside its shelf, stepping over whatever else lies between
+them in the file. Reordering one shelf never disturbs another.
+
 Projects hidden from the site keep their place in the list rather than being skipped, so
 a draft lands where it was put when it goes public.
 
