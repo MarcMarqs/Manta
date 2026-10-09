@@ -3,7 +3,7 @@
     "slug": "wardens-rising",
     "title": "Wardens Rising",
     "genre": "ARPG / Tower Defense",
-    "year": 2024,
+    "year": null,
     "role": "Game Designer",
     "summary": "Drove combat and systems design at the core of the game. Balanced high-density wave combat using playtest telemetry, authored 30+ progression assets and economy features, and co-directed boss encounters alongside multidisciplinary teams.",
     "highlights": [
@@ -122,7 +122,7 @@
     "coverVideo": null,
     "visibility": "public",
     "links": [],
-    "origin": "personal"
+    "origin": "professional"
   },
   {
     "slug": "plushland-curse",
@@ -144,7 +144,7 @@
     "coverVideo": null,
     "visibility": "public",
     "links": [],
-    "origin": "personal"
+    "origin": "other-projects"
   },
   {
     "slug": "far-away-orbital-space",
@@ -165,7 +165,7 @@
     "coverVideo": null,
     "visibility": "public",
     "links": [],
-    "origin": "personal"
+    "origin": "other-projects"
   },
   {
     "slug": "ascending-flags",
@@ -183,8 +183,26 @@
     ],
     "cover": "/images/projects/ascending-flags/cover.svg",
     "coverVideo": null,
-    "visibility": "draft",
+    "visibility": "public",
     "links": [],
-    "origin": "personal"
+    "origin": "other-projects"
+  },
+  {
+    "slug": "crafting-economy",
+    "title": "Crafting Economy",
+    "genre": "Economy",
+    "year": null,
+    "role": "",
+    "summary": "An economy that broke when tested against three kinds of players over 100 hours, rebuilt so nothing gets hoarded and nothing runs dry. It also asks players real questions: whether to roll or target a stat, and whether to gamble on an upgrade or protect it.",
+    "highlights": [],
+    "discipline": [
+      "economy"
+    ],
+    "engine": [],
+    "cover": "",
+    "coverVideo": null,
+    "origin": "personal",
+    "visibility": "public",
+    "links": []
   }
 ]

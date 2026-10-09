@@ -15,7 +15,7 @@
     }
   ],
   "theme": {
-    "accent": "#7f8ce0",
+    "accent": "#c4ef4d",
     "bg": "#ffffff",
     "fg": "#1a1f24",
     "muted": "#5a646e",
@@ -26,11 +26,11 @@
     "mutedDark": "#8d98a4",
     "surfaceDark": "#1c2026",
     "borderDark": "#2e343c",
-    "fontHeading": "DM Sans",
-    "fontBody": "DM Sans",
+    "fontHeading": "system-ui",
+    "fontBody": "system-ui",
     "radius": "0px",
     "maxWidth": "1100px",
     "spacing": 1,
-    "fontMono": "JetBrains Mono"
+    "fontMono": "system-ui"
   }
 }
