@@ -77,6 +77,10 @@
     {
       "id": "google-sheets",
       "label": "Google Sheets"
+    },
+    {
+      "id": "google-doc",
+      "label": "Google Doc"
     }
   ],
   "origin": [
