@@ -238,6 +238,10 @@ Two ways to show one:
   makes it readable by anyone who has the published address, whatever the file's own
   sharing says.
 
+The tab is remembered as a `gid` and carried in the address fragment, because that is
+what Sheets reads: a `?gid=` query is accepted and then ignored, landing the reader on
+the first tab however carefully it was set.
+
 Either way the sheet is served by Google, inside a frame: it keeps its own light
 appearance and will not follow the site's dark theme. A sheet embedded on a private case
 study is still only as private as its own sharing — the password on the page does not

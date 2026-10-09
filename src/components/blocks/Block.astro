@@ -63,7 +63,10 @@ const sheetSrc = (b: Extract<Block, { type: 'sheet' }>) => {
     if (gid) params.set('gid', gid);
     return `https://docs.google.com/spreadsheets/d/e/${id}/pubhtml?${params}`;
   }
-  return `https://docs.google.com/spreadsheets/d/${id}/preview${gid ? `?gid=${gid}` : ''}`;
+  // The tab goes in the fragment, not the query. /preview reads location.hash to pick
+  // which sheet to load and ignores ?gid= entirely, so a query there silently lands the
+  // reader on the first tab however carefully the gid was set.
+  return `https://docs.google.com/spreadsheets/d/${id}/preview${gid ? `#gid=${gid}` : ''}`;
 };
 
 const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
