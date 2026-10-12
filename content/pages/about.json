@@ -3,70 +3,86 @@
   "description": "Senior Game Designer based in Brazil, open to remote roles in Europe or North America.",
   "blocks": [
     {
-      "id": "h",
-      "type": "heading",
-      "level": 1,
-      "text": "Who I am"
+      "id": "b-ayrocw",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-1csn4v",
+          "type": "heading",
+          "level": 1,
+          "text": "About Me"
+        },
+        {
+          "id": "b-ip8w2s",
+          "type": "text",
+          "html": "<p>Six years in, I've worked from both ends of a game: balancing individual combat frames and enemy waves, and keeping cross-discipline teams aligned on what we're building. At Big Moxi, a co-development studio, I've owned combat, encounters and game modes on licensed projects for external IP holders, and balanced difficulty and economy on Wardens Rising. Alongside that, I co-founded Luski Game Studio, where we shipped Aurora: A Child's Journey, winner at Games for Change Latin America 2020.</p><p>I like owning features end to end: defining what a system should make players do and feel, building it, testing it, and changing it until it works. I also lead and mentor designers, and I care about leaving behind documentation and processes the rest of the team can use.</p>"
+        },
+        {
+          "id": "b-vagqrp",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ],
+      "width": "narrow",
+      "place": "left"
     },
     {
-      "id": "bio",
-      "type": "text",
-      "html": "<p>Six years in, I've worn multiple hats: from balancing individual combat frames to aligning cross-discipline teams. My focus is owning complex features end-to-end and building scalable design frameworks that empower production. As a Senior Game Designer, I thrive where systems architecture meets team collaboration.</p>"
-    },
-    {
-      "id": "facts",
+      "id": "b-v3t5ay",
       "type": "specs",
       "items": [
         {
-          "label": "Based in / open to",
-          "value": "Brazil > remote, Europe or North America"
-        },
-        {
           "label": "Education",
-          "value": "M.Sc. Game Design & PM"
+          "value": "Postgraduation in Game Design and Project Management"
         },
         {
           "label": "Engines",
-          "value": "Unreal · Unity"
+          "value": "Unreal & Unity Engine"
         },
         {
-          "label": "Management",
-          "value": "Miro · ClickUp · Jira · Confluence"
-        },
-        {
-          "label": "Targeting",
-          "value": "(Senior) Game Designer"
+          "label": "Management Tools",
+          "value": "Miro - ClickUp - Jira - Confluence - Microsoft Office"
         }
-      ]
+      ],
+      "arrange": "stack",
+      "width": "narrow",
+      "place": "left"
     },
     {
-      "id": "d1",
-      "type": "divider"
+      "id": "b-ga6pxx",
+      "type": "spacer",
+      "size": "md"
     },
     {
-      "id": "cta-h",
-      "type": "heading",
-      "level": 2,
-      "text": "Let's design something players remember"
-    },
-    {
-      "id": "cta-t",
-      "type": "text",
-      "html": "<p>Open to Senior Game Designer opportunities across indie and AAA studios. Always happy to discuss systems design, leadership, or how I can help your team.</p>"
-    },
-    {
-      "id": "contact",
-      "type": "button",
-      "label": "marcelo.rssi@hotmail.com",
-      "href": "mailto:marcelo.rssi@hotmail.com",
-      "style": "primary"
-    },
-    {
-      "id": "linkedin",
-      "type": "button",
-      "label": "LinkedIn",
-      "href": "https://www.linkedin.com/in/marceloderussi",
-      "style": "secondary"
+      "id": "b-rgpjob",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-9vuy9f",
+          "type": "heading",
+          "level": 2,
+          "text": "Let's design something players remember"
+        },
+        {
+          "id": "b-rur74m",
+          "type": "button",
+          "label": "marcelo.rssi@hotmail.com",
+          "href": "mailto:marcelo.rssi@hotmail.com",
+          "style": "primary",
+          "width": "narrow",
+          "place": "left"
+        },
+        {
+          "id": "b-378j0n",
+          "type": "button",
+          "label": "LinkedIn",
+          "href": "https://www.linkedin.com/in/marceloderussi",
+          "style": "primary"
+        }
+      ],
+      "width": "narrow",
+      "place": "left"
     }
   ]
 }
