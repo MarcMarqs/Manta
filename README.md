@@ -103,10 +103,18 @@ needs to be, wrapping onto the next line when it runs out of room — for a row 
 or a few small things that belong together. Use `columns` instead when you want equal
 tracks of content that stay aligned.
 
-Any block can also take `align` (`left` | `center` | `right`) and `width` (`narrow` | `normal`
-| `wide` | `full`). Wide reaches past the text column, full runs edge to edge. A full-width
-`section` becomes a coloured band whose content stays in the column. Inside sections and
-columns, wide and full fall back to normal. Every option collapses sensibly on a phone.
+Any block can also take `align` (`left` | `center` | `right`), `width` (`narrow` | `normal`
+| `wide` | `full`) and, for a narrow block, `place` (`left` | `center` | `right`). Wide
+reaches past the text column, full runs edge to edge. A full-width `section` becomes a
+coloured band whose content stays in the column. Inside sections and columns, wide and full
+fall back to normal. Every option collapses sensibly on a phone.
+
+**Align and Position are different things.** Align is the text inside a block; Position is
+where the block itself sits, and only a narrow block is small enough for that to mean
+anything — 640px inside a 1100px column leaves 460px to play with. Position shows up in the
+editor only when Width is Narrow, and defaults to centre, which is where narrow blocks have
+always sat, so nothing moves until you move it. The two combine: a block pinned left with
+its text centred is `place: left` plus `align: center`.
 
 ### Origin
 

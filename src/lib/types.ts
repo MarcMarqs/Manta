@@ -111,10 +111,19 @@ export type Align = 'left' | 'center' | 'right';
 /** normal = the content column; wide and full reach past it (top-level blocks only). */
 export type BlockWidth = 'narrow' | 'normal' | 'wide' | 'full';
 
-/** Placement options every block can carry. Both are optional; absent means left / normal. */
+/**
+ * Placement options every block can carry. All optional; absent means left / normal /
+ * centred.
+ *
+ * `align` is about the text inside a block. `place` is about the box itself, and only
+ * means anything for a block narrower than the column it sits in — which today is
+ * `narrow`. Absent means centred, because that is where narrow blocks have always sat
+ * and nothing should move until it is asked to.
+ */
 export interface BlockLayout {
   align?: Align;
   width?: BlockWidth;
+  place?: Align;
 }
 
 /** One entry in a page's block array. Nested blocks live in `section` and `columns`. */

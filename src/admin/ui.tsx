@@ -44,6 +44,9 @@ const paths: Record<string, string> = {
   alignCenter: 'M2.5 4h11M4.5 8h7M3.5 12h9',
   alignRight: 'M2.5 4h11M6.5 8h7M4.5 12h9',
   play: 'M3 2.5h10v11H3zM6.5 6l3.5 2-3.5 2z',
+  placeLeft: 'M2.5 2.5v11M13.5 2.5v11M3 5.5h6v5H3z',
+  placeCenter: 'M2.5 2.5v11M13.5 2.5v11M5 5.5h6v5H5z',
+  placeRight: 'M2.5 2.5v11M13.5 2.5v11M7 5.5h6v5H7z',
   panelSide: 'M2.5 3h11v10h-11zM6 3v10',
   panelEditor: 'M2.5 3h11v10h-11zM6 3v10M10 3v10',
 };

@@ -258,13 +258,19 @@ main {
   text-align: right;
 }
 
-/* Narrow is a measure, not a position: it sits in the middle of the column whatever its
-   text does. Left against the edge it reads as a mistake beside the full-width blocks
-   above and below it, and alignment is about the text inside a block, not where the
-   block sits. */
+/* Narrow is a measure first: it sets how wide the block is, and sits in the middle of the
+   column unless told otherwise. Where it sits is its own control (Position in the editor),
+   kept apart from Align, which is about the text inside a block rather than the box — so a
+   block can be pinned left while its text stays centred. */
 .blk.w-narrow {
   max-width: 640px;
   margin-inline: auto;
+}
+.blk.w-narrow.p-left {
+  margin-inline: 0 auto;
+}
+.blk.w-narrow.p-right {
+  margin-inline: auto 0;
 }
 
 /* Wide reaches past the content column on both sides; full runs edge to edge. */

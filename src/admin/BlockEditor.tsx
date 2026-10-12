@@ -515,7 +515,11 @@ const widthOf = (block: Block): BlockWidth =>
 
 function layoutLabel(block: Block): string {
   const w = widthOf(block);
-  return [w !== 'normal' && WIDTHS.find((x) => x.value === w)?.label, block.align && block.align !== 'left' && (block.align === 'center' ? 'Centered' : 'Right')]
+  return [
+    w !== 'normal' && WIDTHS.find((x) => x.value === w)?.label,
+    w === 'narrow' && block.place && block.place !== 'center' && (block.place === 'left' ? 'left' : 'right'),
+    block.align && block.align !== 'left' && (block.align === 'center' ? 'Centered' : 'Right'),
+  ]
     .filter(Boolean)
     .join(' · ');
 }
@@ -530,10 +534,12 @@ function LayoutFields({ block, depth, onChange }: { block: Block; depth: number;
   const width = widthOf(block);
   const widths = depth === 0 ? WIDTHS : WIDTHS.slice(0, 2);
 
-  const set = (patch: { align?: Align; width?: BlockWidth }) => {
+  const set = (patch: { align?: Align; width?: BlockWidth; place?: Align }) => {
     const next = { ...block, ...patch } as Block;
     if (next.align === 'left') delete next.align;
     if (next.width === 'normal' || (next.width as string) === 'content') delete next.width;
+    // Centre is the default, and a block that is no longer narrow has nowhere to be put.
+    if (next.place === 'center' || next.width !== 'narrow') delete next.place;
     onChange(next);
   };
 
@@ -553,6 +559,19 @@ function LayoutFields({ block, depth, onChange }: { block: Block; depth: number;
       <Field label="Width">
         <Segmented value={widths.some((w) => w.value === width) ? width : 'normal'} options={widths} onChange={(w) => set({ width: w })} />
       </Field>
+      {width === 'narrow' && (
+        <Field label="Position" hint="Where the block sits in the column. Align moves its text; this moves the block.">
+          <Segmented
+            value={block.place ?? 'center'}
+            options={[
+              { value: 'left' as const, label: 'Left', icon: 'placeLeft' },
+              { value: 'center' as const, label: 'Center', icon: 'placeCenter' },
+              { value: 'right' as const, label: 'Right', icon: 'placeRight' },
+            ]}
+            onChange={(place) => set({ place })}
+          />
+        </Field>
+      )}
     </div>
   );
 }

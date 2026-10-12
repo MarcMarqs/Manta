@@ -23,7 +23,12 @@ const { preview, asset } = useContent(Astro.locals);
 // Blocks with a width or alignment get a wrapper carrying those classes (styled in
 // global.css). "content" is the old image-only name for normal width.
 const width = (block.width as string) === 'content' ? 'normal' : (block.width ?? 'normal');
-const layout = [width !== 'normal' && `w-${width}`, block.align && block.align !== 'left' && `a-${block.align}`]
+const layout = [
+  width !== 'normal' && `w-${width}`,
+  block.align && block.align !== 'left' && `a-${block.align}`,
+  // Only a block narrower than the column has anywhere else to be.
+  width === 'narrow' && block.place && block.place !== 'center' && `p-${block.place}`,
+]
   .filter(Boolean)
   .join(' ');
 
