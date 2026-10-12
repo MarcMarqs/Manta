@@ -1,6 +1,7 @@
 ---
 import type { ProjectOrigin } from '../lib/types';
 import { factLine, originOf, useContent } from '../lib/context';
+import { focusPoint } from '../lib/media';
 import Filters from './Filters.astro';
 
 interface Props {
@@ -31,7 +32,13 @@ const id = `rail-${Math.random().toString(36).slice(2, 8)}`;
         >
           <div
             class="cover"
-            style={p.cover ? `background-image:url('${asset(p.cover)}')` : undefined}
+            style={[
+              p.cover && `background-image:url('${asset(p.cover)}')`,
+              focusPoint(p.coverFocus) && `background-position:${focusPoint(p.coverFocus)}`,
+              p.coverFit === 'contain' && 'background-size:contain;background-repeat:no-repeat',
+            ]
+              .filter(Boolean)
+              .join(';') || undefined}
             aria-hidden="true"
           >
             {p.coverVideo && (

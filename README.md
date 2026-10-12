@@ -133,7 +133,13 @@ called `primary`.
 2. Drop a cover in `public/images/projects/<slug>/`. A `coverVideo` plays over it: in the
    rail only while that card is open, in the grid only under the pointer (or when the card
    scrolls into view on a touch screen), so a page of cards doesn't run every video at once.
-3. Create `content/pages/work/<slug>.json` for its case study.
+3. **Frame it.** A card is 16:10 and a cover rarely is, so something gets cut. Under
+   **Projects → Framing** the picture is shown at the crop a card will make, and dragging
+   it sets which part survives (`coverFocus`, a CSS position like `"50% 20%"`; absent means
+   the middle). **Show all** (`coverFit: "contain"`) fits the whole picture in the frame
+   instead, on a surface-coloured background — for logo art whose corners are the point.
+   Both apply everywhere a cover appears: the rail, the grid and the next-case-study link.
+4. Create `content/pages/work/<slug>.json` for its case study.
 
 ### The running order
 

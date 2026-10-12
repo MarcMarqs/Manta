@@ -436,6 +436,11 @@ figure img,
   flex: none;
 }
 
+.next-project img.is-contain {
+  object-fit: contain;
+  background: var(--surface);
+}
+
 .next-project .eyebrow {
   color: var(--muted);
   font-size: 0.8rem;

@@ -1,7 +1,7 @@
 import { useRef, useState } from 'preact/hooks';
 import { api, assetUrl } from './api';
 import { MEDIA, busy, fileToRoute, imageUsage, images, pagePaths, projects, setSavedFile, status, toast } from './store';
-import { Icon, IconButton, Modal } from './ui';
+import { Icon, IconButton, Modal, Segmented } from './ui';
 
 const MAX_EDGE = 2000;
 /** What Cloudflare will serve as a single file on the built site. */
@@ -338,6 +338,98 @@ export function VideoField({ value, onChange }: { value: string; onChange: (src:
           (e.target as HTMLInputElement).value = '';
         }}
       />
+    </div>
+  );
+}
+
+const CENTRE = '50% 50%';
+
+/**
+ * Which part of a picture survives the crop.
+ *
+ * A card is 16:10 and a cover rarely is, so something is always cut off; the only
+ * question is what. This shows the crop the card will actually make and lets you drag
+ * the picture inside it, because describing a focal point in percentages is nobody's
+ * idea of editing. Fit is the way out when a picture should not be cropped at all — a
+ * logo on a background, where the corners are the point.
+ */
+export function CoverFraming({
+  src,
+  focus,
+  fit,
+  onFocus,
+  onFit,
+}: {
+  src: string;
+  focus: string | undefined;
+  fit: 'cover' | 'contain' | undefined;
+  onFocus: (v: string | undefined) => void;
+  onFit: (v: 'cover' | 'contain' | undefined) => void;
+}) {
+  const frame = useRef<HTMLDivElement>(null);
+  const point = focus ?? CENTRE;
+  const [x, y] = point.split(' ').map((p) => parseInt(p, 10) || 50);
+
+  const pick = (e: PointerEvent) => {
+    const box = frame.current?.getBoundingClientRect();
+    if (!box) return;
+    const at = (v: number, min: number, size: number) =>
+      Math.round(Math.min(100, Math.max(0, ((v - min) / size) * 100)));
+    onFocus(`${at(e.clientX, box.left, box.width)}% ${at(e.clientY, box.top, box.height)}%`);
+  };
+
+  const drag = (e: PointerEvent) => {
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+    pick(e);
+    const move = (ev: PointerEvent) => pick(ev);
+    const done = () => {
+      frame.current?.removeEventListener('pointermove', move);
+      frame.current?.removeEventListener('pointerup', done);
+      frame.current?.removeEventListener('pointercancel', done);
+    };
+    frame.current?.addEventListener('pointermove', move);
+    frame.current?.addEventListener('pointerup', done);
+    frame.current?.addEventListener('pointercancel', done);
+  };
+
+  if (!src) return null;
+
+  return (
+    <div class="framing">
+      <div
+        class="framing-frame"
+        ref={frame}
+        onPointerDown={drag}
+        title="Drag to choose what the card keeps"
+        role="application"
+        aria-label="Cover framing"
+      >
+        <img
+          src={assetUrl(src)}
+          alt=""
+          style={{ objectFit: fit === 'contain' ? 'contain' : 'cover', objectPosition: point }}
+        />
+        {fit !== 'contain' && <span class="framing-pin" style={{ left: `${x}%`, top: `${y}%` }} />}
+      </div>
+      <div class="framing-side">
+        <span class="field-hint">What a card keeps when it crops this picture.</span>
+        <Segmented
+          value={fit ?? 'cover'}
+          options={[
+            { value: 'cover' as const, label: 'Fill' },
+            { value: 'contain' as const, label: 'Show all' },
+          ]}
+          onChange={(v) => onFit(v === 'cover' ? undefined : v)}
+        />
+        <div class="row">
+          <span class="muted mono small">{fit === 'contain' ? 'not cropped' : point}</span>
+          {focus && fit !== 'contain' && (
+            <button type="button" class="btn tiny ghost" onClick={() => onFocus(undefined)}>
+              Centre
+            </button>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

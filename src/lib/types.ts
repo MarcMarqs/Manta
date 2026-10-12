@@ -107,6 +107,14 @@ export interface Project {
   discipline: string[];
   engine: string[];
   cover: string;
+  /**
+   * Which part of the cover to keep when the card crops it, as a CSS position such as
+   * "50% 30%". A card is 16:10 and a picture rarely is, so something is always cut; this
+   * says what. Absent means the middle, which is what every cover did before.
+   */
+  coverFocus?: string;
+  /** 'contain' fits the whole picture in the frame instead of filling it. For logo art. */
+  coverFit?: 'cover' | 'contain';
   coverVideo: string | null;
   /** An id from the origin list. Absent means the first one. */
   origin?: ProjectOrigin;
