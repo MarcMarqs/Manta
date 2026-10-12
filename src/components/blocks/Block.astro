@@ -82,6 +82,17 @@ const docSrc = (b: Extract<Block, { type: 'doc' }>) => {
     : `https://docs.google.com/document/d/${id}/preview`;
 };
 
+/**
+ * How many callout boxes go across.
+ *
+ * Four of them used to come out three-and-one, with the last one stretched the width of
+ * the page like a mistake. Three is the most that stays readable for prose, so the count
+ * is the one at or below three that divides the boxes most evenly: four become two rows
+ * of two rather than a row and a banner. Where nothing divides evenly — seven, ten — the
+ * short row is centred instead, which reads as a decision rather than a gap.
+ */
+const pillarColumns = (count: number) => (count <= 3 ? Math.max(1, count) : count === 4 ? 2 : 3);
+
 const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
   ({
     youtube: `https://www.youtube-nocookie.com/embed/${b.videoId}`,
@@ -317,7 +328,7 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
 
   {
     block.type === 'pillars' && (
-      <div class="pillars">
+      <div class="pillars" style={`--cols:${pillarColumns(block.items.length)}`}>
         {block.items.map((item) => (
           <div class="pillar">
             <p class="pillar-label">{item.label}</p>
@@ -439,21 +450,38 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
   .section.bg-accent {
     background: color-mix(in srgb, var(--accent) 12%, var(--bg));
   }
-  /* Flex rather than grid: with `auto-fit` a trailing row holding fewer boxes than the
-     column count leaves a visible empty track, where flex lets a lone last box stretch
-     across the space instead. */
+/* Every box is one column wide and no wider: a box that grows to fill whatever is left
+     turns the last row into a banner that has nothing to do with the others. A short last
+     row is centred under the rest instead. `--cols` comes from the block, which picks the
+     count that divides its boxes most evenly; the queries below only ever lower it, so a
+     pair stays a pair on a phone rather than being promoted to three. */
   .pillars {
+    --pillar-cols: var(--cols, 3);
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 14px;
   }
 
   .pillar {
-    flex: 1 1 200px;
+    flex: 0 1 calc((100% - (var(--pillar-cols) - 1) * 14px) / var(--pillar-cols));
+    min-width: 180px;
     padding: 16px 18px;
     border: 1px solid var(--border);
     border-radius: var(--radius);
     background: var(--surface);
+  }
+
+  @media (max-width: 860px) {
+    .pillars {
+      --pillar-cols: min(var(--cols, 3), 2);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .pillars {
+      --pillar-cols: 1;
+    }
   }
 
   .pillar-label {

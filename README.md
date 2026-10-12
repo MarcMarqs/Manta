@@ -57,7 +57,7 @@ Every block needs a unique `id` (unique within its page) and a `type`.
 | `specs` | `arrange?` (`row` \| `stack`), `items[]` of `{ label, value }` — the strip under a case-study title, or a one-per-line list |
 | `stats` | `items[]` of `{ value, label }` — figures set large |
 | `chart` | `variant` (`bar` \| `line`), `title?`, `note?`, `range?` `{ from, to, step? }`, `reference?` `{ value, label? }`, `series[]` of `{ name?, formula?, labels?, data? }` where a data point is `{ label, value, emphasis? }` |
-| `pillars` | `items[]` of `{ label, body }` — callout boxes for design principles |
+| `pillars` | `items[]` of `{ label, body }` — callout boxes for design principles; the row width is chosen so the boxes divide evenly (four become 2×2), and a short last row is centred |
 | `tornado` | `rows[]` of `{ label, low, high }`, `title?`, `unit?`, `lowLabel?`, `highLabel?` |
 | `flow` | `nodes[]` of `{ id, label, accent? }`, `edges[]` of `{ from, to }`, `caption?` |
 | `systemMap` | `arrange?` (`radial` \| `layered`), `nodes[]` of `{ id, label, note?, accent?, layer? }`, `links[]` of `{ from, to, label?, dashed? }`, `caption?` |
