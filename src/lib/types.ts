@@ -1,5 +1,12 @@
 export interface Theme {
+  /** The accent on the light theme. */
   accent: string;
+  /**
+   * The accent on the dark theme. Absent means one derived from `accent` that can be
+   * read on the dark background — a colour bright enough for black is usually invisible
+   * on white, and the other way round.
+   */
+  accentDark?: string;
   bg: string;
   fg: string;
   muted: string;

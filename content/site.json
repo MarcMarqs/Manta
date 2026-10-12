@@ -15,7 +15,8 @@
     }
   ],
   "theme": {
-    "accent": "#c4ef4d",
+    "accent": "#607e0b",
+    "accentDark": "#c4ef4d",
     "bg": "#ffffff",
     "fg": "#1a1f24",
     "muted": "#5a646e",

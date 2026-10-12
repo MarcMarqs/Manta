@@ -391,6 +391,9 @@ code,
 
 .editor {
   grid-area: editor;
+  /* A grid item defaults to refusing to shrink below its content; this pane has a width
+     of its own and everything inside it has to live within that. */
+  min-width: 0;
   overflow-y: auto;
   background: var(--e-bg);
   border-right: 1px solid var(--e-border);
@@ -1240,9 +1243,18 @@ input[type='range'] {
   color: var(--e-muted);
 }
 
+/* A column's own track must be allowed to be narrower than its contents.
+   Without this the track takes the widest thing inside it — a block summary is one long
+   unwrapped line — and the whole editing pane grows a horizontal scrollbar, with the
+   nesting dragged off the left edge. Measured at 2390px of content in a 429px pane. */
 .columns-editor {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 8px;
+}
+
+.column-editor {
+  min-width: 0;
 }
 
 .column-label {
@@ -1534,6 +1546,32 @@ form.tag-row {
 
 .color-input .input {
   min-width: 0;
+}
+
+/* A swatch with its contrast reading underneath. */
+.color-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.legibility {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--e-t-xs);
+  color: var(--e-danger);
+}
+
+.legibility.ok {
+  color: var(--e-muted);
+}
+
+.btn.tiny {
+  height: 20px;
+  padding: 0 7px;
+  font-size: var(--e-t-xs);
 }
 
 .color-table {

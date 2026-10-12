@@ -239,6 +239,15 @@ preview on the right rendered by the site's own components, so what you see is w
   anything else falls back to the site-wide image in Site & theme. All of it hangs off the
   **Site address** there, so update that when the domain changes.
 
+**Colours come in pairs.** Every colour in **Site & theme → Colors** has a Light value and
+a Dark one, the accent included: a green bright enough to glow on a near-black page
+measures 1.3:1 against white, which is a stain rather than a colour. Each accent shows what
+it measures against the background it will sit on, and a **Fix** button appears when it
+falls under 4.5:1 — it keeps the hue and saturation and moves only the lightness, as far as
+it has to and no further. A theme with no dark accent set gets one derived the same way, so
+nothing is ever unreadable by default. The text that sits on a filled accent (a button) is
+derived per theme too, which is why a pale accent gets dark text and a deep one gets white.
+
 **Settings** in the sidebar holds what belongs to you rather than to the work: theme
 (dark, the reading light theme, or follow the system), the accent that marks whatever is
 live or selected, and block-list density. It is kept in your browser and never committed

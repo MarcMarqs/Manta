@@ -1,4 +1,5 @@
 ---
+import { legibleOn, onColor } from '../lib/color';
 import { useContent } from '../lib/context';
 import { fontStack, googleFontsHref } from '../lib/fonts';
 import SiteScripts from '../components/SiteScripts.astro';
@@ -21,28 +22,16 @@ const pageTitle = title === site.name ? site.name : `${title} — ${site.name}`;
 const fontsHref = googleFontsHref([t.fontHeading, t.fontBody, t.fontMono]);
 
 /**
- * What colour text sits on the accent.
+ * One accent per theme.
  *
- * A filled button used to hardcode white, which only works while the accent is dark:
- * against this site's own accent it measured 3.1:1, under the 4.5:1 a reader needs.
- * The accent is content — anyone can change it in Site & theme — so the foreground is
- * derived from it rather than assumed.
+ * The same hex cannot serve both: this site's green measures 13.5:1 on the dark
+ * background and 1.3:1 on white, where it is a stain rather than a colour. So the dark
+ * theme takes its own, and when none is set one is derived that can actually be read
+ * there. The text that sits on top of a filled accent is derived too, because a button
+ * that hardcoded white only worked while the accent stayed dark.
  */
-function onAccent(hex: string): string {
-  const m = /^#?([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(hex.trim());
-  if (!m) return '#ffffff';
-  const full = m[1].length === 3 ? m[1].replace(/./g, (c) => c + c) : m[1];
-  const channel = (i: number) => {
-    const v = parseInt(full.slice(i * 2, i * 2 + 2), 16) / 255;
-    return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
-  };
-  const luminance = 0.2126 * channel(0) + 0.7152 * channel(1) + 0.0722 * channel(2);
-  const onWhite = 1.05 / (luminance + 0.05);
-  const onBlack = (luminance + 0.05) / 0.05;
-  return onWhite >= onBlack ? '#ffffff' : '#10131a';
-}
-
-const accentFg = onAccent(t.accent);
+const accentLight = t.accent;
+const accentDark = t.accentDark || legibleOn(t.accent, t.bgDark);
 
 // Chat apps and search engines need absolute URLs, which only site.url can give.
 const base = site.url?.replace(/\/$/, '');
@@ -89,7 +78,7 @@ const beacon = !preview && site.analyticsToken ? site.analyticsToken : undefined
       )
     }
     <style is:inline set:html={`:root{
-      --accent:${t.accent}; --accent-fg:${accentFg};
+      --accent:${accentLight}; --accent-fg:${onColor(accentLight)};
       --bg:${t.bg}; --fg:${t.fg}; --muted:${t.muted};
       --surface:${t.surface}; --border:${t.border};
       --font-heading:${fontStack(t.fontHeading)}; --font-body:${fontStack(t.fontBody)};
@@ -97,11 +86,13 @@ const beacon = !preview && site.analyticsToken ? site.analyticsToken : undefined
       --radius:${t.radius}; --max-width:${t.maxWidth}; --spacing:${t.spacing};
     }
     :root[data-theme="dark"]{
+      --accent:${accentDark}; --accent-fg:${onColor(accentDark)};
       --bg:${t.bgDark}; --fg:${t.fgDark}; --muted:${t.mutedDark};
       --surface:${t.surfaceDark}; --border:${t.borderDark};
     }
     @media (prefers-color-scheme: dark){
       :root:not([data-theme="light"]){
+        --accent:${accentDark}; --accent-fg:${onColor(accentDark)};
         --bg:${t.bgDark}; --fg:${t.fgDark}; --muted:${t.mutedDark};
         --surface:${t.surfaceDark}; --border:${t.borderDark};
       }

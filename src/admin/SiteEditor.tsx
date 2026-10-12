@@ -1,10 +1,18 @@
+import { READABLE, contrast, legibleOn } from '../lib/color';
 import type { Site, Theme } from '../lib/types';
 import { FONTS, SYSTEM_FONT } from '../lib/fonts';
 import { ImageField, LinkInput } from './media';
 import { SITE, site, updateFile } from './store';
 import { Field, Icon, IconButton, Select, TextInput } from './ui';
 
-const COLORS: { key: keyof Theme; dark?: keyof Theme; label: string; hint: string }[] = [
+const COLORS: { key: keyof Theme; dark?: keyof Theme; label: string; hint: string; against?: [keyof Theme, keyof Theme] }[] = [
+  {
+    key: 'accent',
+    dark: 'accentDark',
+    label: 'Accent',
+    hint: 'Buttons, links, charts, highlights',
+    against: ['bg', 'bgDark'],
+  },
   { key: 'bg', dark: 'bgDark', label: 'Background', hint: 'Page background' },
   { key: 'fg', dark: 'fgDark', label: 'Text', hint: 'Body text and headings' },
   { key: 'muted', dark: 'mutedDark', label: 'Muted text', hint: 'Captions, meta, nav' },
@@ -23,6 +31,30 @@ function ColorInput({ value, onChange }: { value: string; onChange: (v: string) 
         spellcheck={false}
       />
     </div>
+  );
+}
+
+/**
+ * What a colour measures against the background it will sit on, and a way out when it
+ * fails. Shown rather than enforced: a number next to the swatch is how you learn that
+ * the green you love is unreadable on white, and Fix is there so learning that is not a
+ * research project.
+ */
+function Legibility({ color, on, onFix }: { color: string; on: string; onFix: (v: string) => void }) {
+  if (!/^#[0-9a-f]{3,6}$/i.test(color) || !/^#[0-9a-f]{3,6}$/i.test(on)) return null;
+  const ratio = contrast(color, on);
+  const ok = ratio >= READABLE;
+  return (
+    <span class={`legibility${ok ? ' ok' : ''}`}>
+      <span>{ratio.toFixed(1)}:1</span>
+      {ok ? (
+        <span class="muted">readable</span>
+      ) : (
+        <button type="button" class="btn tiny" onClick={() => onFix(legibleOn(color, on))} title="Darken or lighten it just enough to be readable">
+          Fix
+        </button>
+      )}
+    </span>
   );
 }
 
@@ -140,11 +172,6 @@ export function SiteEditor() {
 
       <section class="subsection">
         <h3>Colors</h3>
-        <div class="fields">
-          <Field label="Accent" hint="Buttons, links, charts, highlights." wide>
-            <ColorInput value={t.accent} onChange={(accent) => setTheme({ accent })} />
-          </Field>
-        </div>
         <div class="color-table">
           <div class="color-table-head">
             <span />
@@ -161,8 +188,29 @@ export function SiteEditor() {
                 <strong>{c.label}</strong>
                 <span class="field-hint">{c.hint}</span>
               </span>
-              <ColorInput value={t[c.key] as string} onChange={(v) => setTheme({ [c.key]: v } as Partial<Theme>)} />
-              <ColorInput value={t[c.dark!] as string} onChange={(v) => setTheme({ [c.dark!]: v } as Partial<Theme>)} />
+              <span class="color-cell">
+                <ColorInput value={t[c.key] as string} onChange={(v) => setTheme({ [c.key]: v } as Partial<Theme>)} />
+                {c.against && (
+                  <Legibility
+                    color={t[c.key] as string}
+                    on={t[c.against[0]] as string}
+                    onFix={(v) => setTheme({ [c.key]: v } as Partial<Theme>)}
+                  />
+                )}
+              </span>
+              <span class="color-cell">
+                <ColorInput
+                  value={(t[c.dark!] as string) || (c.key === 'accent' ? legibleOn(t.accent, t.bgDark) : '')}
+                  onChange={(v) => setTheme({ [c.dark!]: v } as Partial<Theme>)}
+                />
+                {c.against && (
+                  <Legibility
+                    color={(t[c.dark!] as string) || legibleOn(t.accent, t.bgDark)}
+                    on={t[c.against[1]] as string}
+                    onFix={(v) => setTheme({ [c.dark!]: v } as Partial<Theme>)}
+                  />
+                )}
+              </span>
             </div>
           ))}
         </div>
