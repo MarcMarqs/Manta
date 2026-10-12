@@ -60,7 +60,7 @@ export const BLOCKS: Record<BlockType, BlockSpec> = {
   specs: {
     label: 'Spec strip',
     group: 'Data',
-    hint: 'Role, studio, engine — a row of label/value pairs',
+    hint: 'Role, studio, engine — label/value pairs, across or listed',
     create: () => ({
       id: newId(),
       type: 'specs',
@@ -278,8 +278,10 @@ export function summarize(block: Block): string {
       return block.docId ? block.caption || block.title || 'Google Doc' : 'No document yet';
     case 'table':
       return block.caption || `${block.columns.length} × ${block.rows.length}`;
-    case 'specs':
-      return block.items.map((i) => i.label).filter(Boolean).join(' · ') || 'Empty';
+    case 'specs': {
+      const pairs = block.items.map((i) => i.label).filter(Boolean).join(' · ') || 'Empty';
+      return block.arrange === 'stack' ? `${pairs} · listed` : pairs;
+    }
     case 'stats':
       return block.items.map((i) => i.value).filter(Boolean).join(' · ') || 'Empty';
     case 'chart': {

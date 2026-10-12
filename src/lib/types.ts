@@ -219,7 +219,17 @@ export type Block = BlockLayout & (
   | { id: string; type: 'spacer'; size?: 'sm' | 'md' | 'lg' }
   | { id: string; type: 'table'; caption?: string; columns: string[]; rows: string[][] }
   /** The strip under a case-study title: role, studio, team size, engine, focus. */
-  | { id: string; type: 'specs'; items: { label: string; value: string }[] }
+  | {
+      id: string;
+      type: 'specs';
+      /**
+       * 'row' is the strip: pairs across the page, wrapping when they run out of room.
+       * 'stack' is a list: one pair per line, label beside value. Absent means 'row',
+       * which is what every existing strip is.
+       */
+      arrange?: 'row' | 'stack';
+      items: { label: string; value: string }[];
+    }
   /** Figures worth stating on their own: years in industry, shipped titles, "~90% solved". */
   | { id: string; type: 'stats'; items: { value: string; label: string }[] }
   | {

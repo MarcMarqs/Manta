@@ -291,7 +291,7 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
 
   {
     block.type === 'specs' && (
-      <dl class="specs">
+      <dl class={`specs${block.arrange === 'stack' ? ' specs-list' : ''}`}>
         {block.items.map((item) => (
           <div>
             <dt>{item.label}</dt>
@@ -700,6 +700,31 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
     border-bottom: 1px solid var(--border);
   }
 
+  /* The list: one pair per line, the label in a column of its own so the values line up
+     down the page. A spec sheet rather than a strip — better when there are more pairs
+     than fit across, or when each one deserves its own line. */
+  .specs-list {
+    display: grid;
+    gap: 0;
+    padding: 6px 0;
+  }
+
+  .specs-list > div {
+    display: grid;
+    grid-template-columns: minmax(0, 11rem) minmax(0, 1fr);
+    gap: 2px 20px;
+    align-items: baseline;
+    padding: 10px 0;
+  }
+
+  .specs-list > div + div {
+    border-top: 1px solid var(--border);
+  }
+
+  .specs-list dt {
+    margin-bottom: 0;
+  }
+
   .specs dt {
     font-family: var(--font-heading);
     color: var(--muted);
@@ -741,6 +766,11 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
   @media (max-width: 560px) {
     .specs {
       gap: 14px 28px;
+    }
+    /* No room for two columns; the label goes back above its value. */
+    .specs-list > div {
+      grid-template-columns: 1fr;
+      gap: 2px;
     }
   }
 

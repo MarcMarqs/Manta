@@ -1056,6 +1056,22 @@ function BlockFields({
         write(items.map((x, j) => (j === i ? { ...x, ...patch } : x)));
       return (
         <div class="stack">
+          {isSpecs && (
+            <div class="fields">
+              <Field label="Arrange" hint="Across the page, or one pair per line." wide>
+                <Segmented
+                  value={block.arrange ?? 'row'}
+                  options={[
+                    { value: 'row' as const, label: 'Side by side' },
+                    { value: 'stack' as const, label: 'One per line' },
+                  ]}
+                  onChange={(arrange) =>
+                    onChange({ ...block, arrange: arrange === 'row' ? undefined : arrange } as Block)
+                  }
+                />
+              </Field>
+            </div>
+          )}
           <div class="series">
             <div class="series-head">
               <span>{isSpecs ? 'Label' : 'Figure'}</span>
