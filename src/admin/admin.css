@@ -1382,6 +1382,44 @@ input[type='range'] {
   grid-template-columns: 1fr 90px 90px 28px;
 }
 
+/* A node carries four things and the pane is under 400px wide, so only the label gets a
+   line to itself; the note takes the next one and the settings the one after. The same
+   shape as a tag row, for the same reason. */
+.map-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 28px;
+  gap: 6px 8px;
+  align-items: center;
+}
+
+.map-row-note,
+.map-row-meta {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
+.map-row-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--e-t-xs);
+}
+
+.map-row-meta .input {
+  width: 64px;
+}
+
+.map-row-meta .toggle {
+  margin-left: auto;
+  flex: none;
+}
+
+.map-row + .map-row {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--e-border);
+}
+
 .series-head {
   font-size: var(--e-t-xs);
   font-weight: 600;

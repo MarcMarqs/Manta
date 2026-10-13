@@ -305,7 +305,8 @@ export type Block = BlockLayout & (
   | {
       id: string;
       type: 'systemMap';
-      arrange?: 'radial' | 'layered';
+      /** 'stacked' runs top to bottom, each layer a row; a lone node in a row spans it. */
+      arrange?: 'radial' | 'layered' | 'stacked';
       caption?: string;
       nodes: { id: string; label: string; note?: string; accent?: boolean; layer?: number }[];
       links: { from: string; to: string; label?: string; dashed?: boolean }[];

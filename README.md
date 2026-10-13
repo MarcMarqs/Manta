@@ -60,7 +60,7 @@ Every block needs a unique `id` (unique within its page) and a `type`.
 | `pillars` | `items[]` of `{ label, body }` — callout boxes for design principles; the row width is chosen so the boxes divide evenly (four become 2×2), and a short last row is centred |
 | `tornado` | `rows[]` of `{ label, low, high }`, `title?`, `unit?`, `lowLabel?`, `highLabel?` |
 | `flow` | `nodes[]` of `{ id, label, accent? }`, `edges[]` of `{ from, to }`, `caption?` |
-| `systemMap` | `arrange?` (`radial` \| `layered`), `nodes[]` of `{ id, label, note?, accent?, layer? }`, `links[]` of `{ from, to, label?, dashed? }`, `caption?` |
+| `systemMap` | `arrange?` (`radial` \| `layered` \| `stacked`), `nodes[]` of `{ id, label, note?, accent?, layer? }`, `links[]` of `{ from, to, label?, dashed? }`, `caption?` |
 | `radar` | `axes[]`, `series[]` of `{ name?, values[] }`, `max?`, `title?` |
 | `columns` | `count` 2–3, `columns[]` each `{ id, blocks[] }` |
 | `section` | `background?` (`none` \| `surface` \| `accent`), `arrange?` (`stack` \| `row`), `blocks[]` |

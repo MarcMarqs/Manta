@@ -1497,16 +1497,23 @@ function BlockFields({
         onChange({ ...block, nodes: block.nodes.map((x, j) => (j === i ? { ...x, ...patch } : x)) });
       const setLink = (i: number, patch: Partial<(typeof block.links)[number]>) =>
         onChange({ ...block, links: block.links.map((x, j) => (j === i ? { ...x, ...patch } : x)) });
-      const radial = (block.arrange ?? 'radial') === 'radial';
+      const arrange = block.arrange ?? 'radial';
+      const radial = arrange === 'radial';
+      const hint = {
+        radial: 'The first node sits at the centre, the rest around it.',
+        layered: 'Nodes run left to right, in the column their layer names.',
+        stacked: 'Layers are rows down the page. A row with one node spans the width.',
+      }[arrange];
       return (
         <div class="stack">
           <div class="fields">
-            <Field label="Arrangement" hint={radial ? 'The first node sits at the centre, the rest around it.' : 'Nodes run left to right, in the column their layer names.'}>
+            <Field label="Arrangement" hint={hint} wide>
               <Segmented
-                value={block.arrange ?? 'radial'}
+                value={arrange}
                 options={[
                   { value: 'radial', label: 'Around a core' },
                   { value: 'layered', label: 'Left to right' },
+                  { value: 'stacked', label: 'Top to bottom' },
                 ]}
                 onChange={(v) => onChange({ ...block, arrange: v })}
               />
@@ -1517,20 +1524,16 @@ function BlockFields({
           </div>
 
           <div class="subsection">
-            <p class="field-hint">{radial ? 'The first node is the core.' : 'Layer 0 is the leftmost column.'}</p>
+            <p class="field-hint">
+              {radial
+                ? 'The first node is the core.'
+                : arrange === 'stacked'
+                  ? 'Layer 0 is the top row. Give three nodes the same layer to put them side by side.'
+                  : 'Layer 0 is the leftmost column.'}
+            </p>
             {block.nodes.map((node, i) => (
-              <div class="series-row wide">
-                <TextInput value={node.label} onChange={(label) => setNode(i, { label })} />
-                <TextInput value={node.note ?? ''} onChange={(note) => setNode(i, { note: note || undefined })} />
-                {radial ? (
-                  <Toggle
-                    checked={Boolean(node.accent)}
-                    label="Highlight"
-                    onChange={(accent) => setNode(i, { accent: accent || undefined })}
-                  />
-                ) : (
-                  <NumberInput integer value={node.layer ?? 0} onChange={(v) => setNode(i, { layer: v ?? 0 })} />
-                )}
+              <div class="map-row">
+                <TextInput value={node.label} placeholder="Label" onChange={(label) => setNode(i, { label })} />
                 <IconButton
                   icon="trash"
                   label="Remove"
@@ -1543,6 +1546,26 @@ function BlockFields({
                     })
                   }
                 />
+                <span class="map-row-note">
+                  <TextInput
+                    value={node.note ?? ''}
+                    placeholder="Note under the label"
+                    onChange={(note) => setNode(i, { note: note || undefined })}
+                  />
+                </span>
+                <span class="map-row-meta">
+                  {!radial && (
+                    <>
+                      <span class="muted">Layer</span>
+                      <NumberInput integer value={node.layer ?? 0} onChange={(v) => setNode(i, { layer: v ?? 0 })} />
+                    </>
+                  )}
+                  <Toggle
+                    checked={Boolean(node.accent)}
+                    label="Highlight"
+                    onChange={(accent) => setNode(i, { accent: accent || undefined })}
+                  />
+                </span>
               </div>
             ))}
             <button
