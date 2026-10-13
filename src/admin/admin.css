@@ -1586,6 +1586,23 @@ form.tag-row {
   min-width: 0;
 }
 
+/* Somewhere to drop a file, above the box you could paste into instead. */
+.md-drop {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: 1px dashed var(--e-border-strong);
+  border-radius: var(--e-r-md);
+  background: var(--e-sunken);
+}
+
+.md-drop.dragging {
+  border-color: var(--e-accent);
+  background: var(--e-accent-soft);
+}
+
 /* The crop, at the shape a card actually uses, with the picture draggable inside it. */
 .framing {
   display: flex;

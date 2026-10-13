@@ -212,6 +212,15 @@ preview on the right rendered by the site's own components, so what you see is w
   at least 300px. **Reset panel sizes** (⋯ menu) restores the shipped layout, which is the
   width the preview's device sizes are drawn for. The choice is kept in the browser, like the
   theme, so it follows you rather than the site.
+- **Markdown in:** **Markdown** in a page's header takes a `.md` file — dropped, chosen or
+  pasted — and turns it into blocks, either replacing the page or adding to the end. **New
+  page** can start from one too, taking its title from the first `#` heading. Headings,
+  prose, lists, quotes, links, pictures, tables, rules and code all come across, with
+  `**bold**`, `*italic*`, `` `code` ``, `[links](/to)`, `==highlight==` and `~~strike~~`
+  inside them. Consecutive prose gathers into one text block rather than one per paragraph,
+  because a page of thirty single-paragraph blocks is miserable to edit. What Markdown
+  cannot say — a chart, a project rail, a spec strip — you add afterwards. An import is one
+  undoable change, so Ctrl+Z puts the page back.
 - **Version history** (⋯ menu) lists every save and publish, and restores one as a new change,
   so going back is itself undoable.
 - **Unsaved work** is kept in the browser: close the tab by accident and the editor offers it

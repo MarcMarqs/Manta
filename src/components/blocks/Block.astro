@@ -821,6 +821,40 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
 
   /* Highlighted text. A tint of the accent rather than a yellow felt-tip, so it belongs
      to the page; the padding is asymmetric because text sits off-centre in its line box. */
+  /* Quotes and code arrive with imported Markdown, so the page has to have an answer
+     for them. Quiet ones: a rule and an indent, and type that stays out of the way. */
+  .rich :global(blockquote) {
+    margin: 0;
+    padding-left: 16px;
+    border-left: 2px solid var(--accent);
+    color: var(--muted);
+  }
+
+  .rich :global(pre) {
+    margin: 0;
+    padding: 14px 16px;
+    overflow-x: auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  .rich :global(:is(pre, code)) {
+    font-family: var(--font-mono);
+    font-size: 0.86em;
+  }
+
+  .rich :global(code) {
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: var(--surface);
+  }
+
+  .rich :global(pre code) {
+    padding: 0;
+    background: none;
+  }
+
   .rich :global(mark) {
     background: color-mix(in srgb, var(--accent) 22%, transparent);
     color: inherit;
