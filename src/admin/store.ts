@@ -331,12 +331,29 @@ export async function refreshStatus() {
   } catch {}
 }
 
-/** Page and project names that still reference an image, so it isn't deleted while in use. */
+/**
+ * Page and project names that still show an image, so it isn't deleted out from under one.
+ *
+ * content/media.json is skipped. It records what widths were made of a picture, so every
+ * upload appears in it by definition — counting that as a use made every uploaded image
+ * permanently undeletable, "Used in 1" by its own paperwork. The only entries the library
+ * would then let you delete were the smaller copies, which are the one thing that should
+ * never be deleted on their own.
+ */
 export function imageUsage(src: string): string[] {
   const used: string[] = [];
   for (const [path, value] of Object.entries(files.value)) {
+    if (path === MEDIA) continue;
     if (!JSON.stringify(value).includes(`"${src}"`)) continue;
-    used.push(path === PROJECTS ? 'Projects' : path === SITE ? 'Site settings' : fileToRoute(path));
+    used.push(
+      path === PROJECTS
+        ? 'Projects'
+        : path === SITE
+          ? 'Site settings'
+          : path.startsWith(PAGES_DIR)
+            ? fileToRoute(path)
+            : path.split('/').pop()!,
+    );
   }
   return used;
 }
