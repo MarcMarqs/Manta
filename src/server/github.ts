@@ -1,5 +1,5 @@
 import type { Backend, ContentState, FileChange, Status, Version } from './backend';
-import { isContentPath, isImagePath } from './paths';
+import { isContentPath, isImagePath, pictures } from './paths';
 
 const LIVE = 'main';
 const DRAFT = 'draft';
@@ -100,9 +100,11 @@ export class GitHubBackend implements Backend {
       }),
     );
 
-    const images = blobs
-      .filter((e) => isImagePath(e.path))
-      .map((e) => e.path.replace(/^public/, ''))
+    const images = pictures(
+      blobs.filter((e) => isImagePath(e.path)).map((e) => e.path),
+      files['content/media.json'],
+    )
+      .map((p) => p.replace(/^public/, ''))
       .sort();
 
     return { branch, files, images };

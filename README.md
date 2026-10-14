@@ -233,7 +233,9 @@ preview on the right rendered by the site's own components, so what you see is w
   back next time.
 - **Images** are resized to 2000px and converted to WebP in the browser, then committed to
   `public/images/uploads/` on the draft straight away, so the preview can show them. An image
-  block can be scaled and cropped to a shape; the library deletes ones nothing uses any more.
+  block can be scaled and cropped to a shape; the library deletes ones nothing uses any more,
+  taking the smaller copies with it. The library lists pictures, not those copies — an upload
+  is four files, and listing all four made three of them look like unused duplicates.
   GIFs and SVGs are kept exactly as they are, since re-encoding would freeze one and
   rasterise the other.
 

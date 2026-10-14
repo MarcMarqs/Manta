@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { getBackend, type FileChange } from '../../server/backend';
 import { envOf, handle, json } from '../../server/http';
-import { isMediaPath } from '../../server/paths';
+import { isMediaPath, variantSource, variantWidth } from '../../server/paths';
 import { MEDIA_MANIFEST } from './upload';
 
 export const prerender = false;
@@ -29,11 +29,32 @@ export const DELETE: APIRoute = (ctx) =>
     } catch {}
 
     const changes: FileChange[] = [{ path, delete: true }];
+    let manifestChanged = false;
+
+    // A picture takes its smaller copies with it.
     for (const width of manifest[src]?.sizes ?? []) {
       changes.push({ path: path.replace(/\.(\w+)$/, `-${width}.$1`), delete: true });
     }
     if (manifest[src]) {
       delete manifest[src];
+      manifestChanged = true;
+    }
+
+    // A copy deleted on its own is a width the manifest must stop claiming, or the page
+    // goes on asking for a file that is not there. The library no longer offers these,
+    // but anything that already removed one left the record behind.
+    const parent = variantSource(path);
+    const width = variantWidth(path);
+    if (parent && width) {
+      const parentSrc = parent.replace(/^public/, '');
+      const entry = manifest[parentSrc];
+      if (entry?.sizes.includes(width)) {
+        entry.sizes = entry.sizes.filter((w) => w !== width);
+        manifestChanged = true;
+      }
+    }
+
+    if (manifestChanged) {
       changes.push({
         path: MEDIA_MANIFEST,
         content: `${JSON.stringify(manifest, null, 2)}\n`,
