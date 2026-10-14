@@ -212,6 +212,12 @@ preview on the right rendered by the site's own components, so what you see is w
   at least 300px. **Reset panel sizes** (⋯ menu) restores the shipped layout, which is the
   width the preview's device sizes are drawn for. The choice is kept in the browser, like the
   theme, so it follows you rather than the site.
+- **The Pages list keeps the order you put it in.** Hover a page in the sidebar and arrows
+  appear at its right end; the first move writes the whole order into `site.json` as
+  `pageOrder`, and **A–Z** in the Pages header drops it again. A page that is not in the
+  list sorts after the ones that are, alphabetically, so adding a page never reshuffles
+  what you arranged. Only the editor reads it — visitors reach pages through the navigation
+  and the links on them.
 - **Markdown in:** **Markdown** in a page's header takes a `.md` file — dropped, chosen or
   pasted — and turns it into blocks, either replacing the page or adding to the end. **New
   page** can start from one too, taking its title from the first `#` heading. Headings,

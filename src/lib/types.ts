@@ -37,6 +37,13 @@ export interface Site {
   footer: string;
   nav: { label: string; href: string }[];
   /**
+   * The order the Pages list is kept in, as repo paths. Only the editor reads it — a
+   * visitor reaches pages through the nav and the links on them, not through this.
+   * Anything missing from the list sorts after what is in it, alphabetically, so a page
+   * added later appears without the order having to be rewritten.
+   */
+  pageOrder?: string[];
+  /**
    * What goes between a project's genre, year and role. Carries its own spaces, so a
    * comma can sit tight against the word before it while a dash does not.
    */

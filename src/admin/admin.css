@@ -642,6 +642,29 @@ a:focus-visible,
   cursor: pointer;
 }
 
+/* The arrows sit on top of the row's right end and appear when it is pointed at or
+   tabbed into, so an eleven-page list still reads as titles rather than as controls. */
+.side-row {
+  position: relative;
+}
+
+.side-move {
+  position: absolute;
+  top: 50%;
+  right: 3px;
+  transform: translateY(-50%);
+  display: none;
+  gap: 1px;
+  padding-left: 6px;
+  border-radius: var(--e-r-sm);
+  background: linear-gradient(90deg, transparent, var(--e-sunken) 14%);
+}
+
+.side-row:hover .side-move,
+.side-row:focus-within .side-move {
+  display: flex;
+}
+
 .side-item:hover {
   background: var(--e-sunken);
   color: var(--e-fg);

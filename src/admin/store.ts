@@ -53,11 +53,45 @@ export const site = computed(() => files.value[SITE] as Site);
 export const projects = computed(() => (files.value[PROJECTS] as Project[]) ?? []);
 export const tags = computed(() => files.value[TAGS] as Tags);
 
-export const pagePaths = computed(() =>
-  Object.keys(files.value)
+/**
+ * The Pages list, in the order it is kept in.
+ *
+ * A stored order wins; anything not in it follows alphabetically. The home page leads by
+ * default because it is the site's root, but only by default: put it in the order
+ * somewhere else and that is where it goes.
+ */
+export const pagePaths = computed(() => {
+  const order = (files.value[SITE] as Site | undefined)?.pageOrder ?? [];
+  const rank = new Map(order.map((p, i) => [p, i]));
+  const rankOf = (p: string) => rank.get(p) ?? (p === HOME ? -1 : Number.MAX_SAFE_INTEGER);
+  return Object.keys(files.value)
     .filter((p) => p.startsWith(PAGES_DIR))
-    .sort((a, b) => (a === HOME ? -1 : b === HOME ? 1 : a.localeCompare(b))),
-);
+    .sort((a, b) => rankOf(a) - rankOf(b) || a.localeCompare(b));
+});
+
+/** Whether the list has been arranged by hand, rather than left alphabetical. */
+export const pagesAreOrdered = computed(() => ((files.value[SITE] as Site | undefined)?.pageOrder ?? []).length > 0);
+
+/**
+ * Moves a page one place up or down the list.
+ *
+ * The first move writes down the whole order rather than just the pair that swapped,
+ * because a list that is half arranged and half alphabetical would reshuffle itself the
+ * next time a page was added.
+ */
+export function movePage(path: string, delta: number) {
+  const list = [...pagePaths.value];
+  const from = list.indexOf(path);
+  const to = from + delta;
+  if (from < 0 || to < 0 || to >= list.length) return;
+  [list[from], list[to]] = [list[to], list[from]];
+  updateFile<Site>(SITE, (s) => ({ ...s, pageOrder: list }), { coalesce: false });
+}
+
+/** Back to alphabetical, home first. */
+export function clearPageOrder() {
+  updateFile<Site>(SITE, ({ pageOrder: _gone, ...rest }) => rest, { coalesce: false });
+}
 
 /** content/pages/work/dunes.json -> /work/dunes */
 export const fileToRoute = (path: string) => {

@@ -251,7 +251,12 @@ function RouteField({ path }: { path: string }) {
       {
         ...rest,
         [next]: page,
-        [SITE]: { ...site, nav: site.nav.map((n) => (n.href === oldRoute ? { ...n, href: newRoute } : n)) },
+        [SITE]: {
+          ...site,
+          nav: site.nav.map((n) => (n.href === oldRoute ? { ...n, href: newRoute } : n)),
+          // The page keeps its place in the list; only its address changed.
+          pageOrder: site.pageOrder?.map((p) => (p === path ? next : p)),
+        },
       },
       { coalesce: false },
     );
@@ -439,7 +444,17 @@ export function PageEditor({ path }: { path: string }) {
     if (!confirm(`Delete the page ${route}? You can undo this until you save.`)) return;
     const { [path]: _gone, ...rest } = files.value;
     const site = rest[SITE] as Site;
-    setFiles({ ...rest, [SITE]: { ...site, nav: site.nav.filter((n) => n.href !== route) } }, { coalesce: false });
+    setFiles(
+      {
+        ...rest,
+        [SITE]: {
+          ...site,
+          nav: site.nav.filter((n) => n.href !== route),
+          pageOrder: site.pageOrder?.filter((p) => p !== path),
+        },
+      },
+      { coalesce: false },
+    );
     openView({ kind: 'page', path: HOME });
   };
 
