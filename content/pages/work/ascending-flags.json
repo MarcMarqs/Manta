@@ -1,337 +1,275 @@
 {
-  "title": "Ascending Flags",
+  "title": "Ascending Flags – Portfolio Page",
   "description": "Economy architecture, a 40+ card catalog and cross-discipline leadership on a competitive card game at Scary Noodles.",
   "image": "/images/projects/placeholder/cover.svg",
   "project": "ascending-flags",
   "blocks": [
     {
-      "id": "eyebrow",
-      "type": "text",
-      "html": "<p><strong>Scary Noodles</strong> · 15 team</p>"
-    },
-    {
-      "id": "h1",
+      "id": "b-nai5a7",
       "type": "heading",
       "level": 1,
-      "text": "Ascending Flags"
+      "text": "Ascending Flags – Portfolio Page"
     },
     {
-      "id": "sub",
+      "id": "b-eq57wp",
       "type": "text",
-      "html": "<p>Competitive card game</p>"
+      "html": "<p><em>Page draft for the portfolio. Lines marked <strong>ASSET</strong> are things for you to find; brackets are facts to confirm. This project had no Wix page, so it needs the most input from you.</em></p><p><strong>Card Game</strong> · Scary Noodles · Published · Apr – Sep 2023</p><p><strong>Conceived and led a published card game where movement, attack and defence all compete for one shared pool of mana.</strong></p>"
     },
     {
-      "id": "specs",
-      "type": "specs",
-      "items": [
-        {
-          "label": "Role",
-          "value": "Game Designer"
-        },
-        {
-          "label": "Studio",
-          "value": "Scary Noodles"
-        },
-        {
-          "label": "Team size",
-          "value": "15"
-        },
-        {
-          "label": "Engine",
-          "value": "Unity"
-        },
-        {
-          "label": "Focus",
-          "value": "Systems · Economy · Leadership"
-        }
-      ]
-    },
-    {
-      "id": "stats",
-      "type": "stats",
-      "items": [
-        {
-          "value": "40+",
-          "label": "Unique cards designed"
-        },
-        {
-          "value": "5",
-          "label": "Card types"
-        },
-        {
-          "value": "15",
-          "label": "Team members"
-        },
-        {
-          "value": "3",
-          "label": "Disciplines mentored"
-        }
-      ]
-    },
-    {
-      "id": "d1",
-      "type": "divider"
-    },
-    {
-      "id": "contrib-h",
-      "type": "heading",
-      "level": 2,
-      "text": "My contribution"
-    },
-    {
-      "id": "contrib",
-      "type": "pillars",
-      "items": [
-        {
-          "label": "Gameplay systems",
-          "body": "Architected the core combat and resource economy models, running parallel balancing loops to keep dominant strategies out and competitive health in."
-        },
-        {
-          "label": "Card design",
-          "body": "Conceived and balanced a 40+ card catalog for archetypal synergy, mechanical variety and strategic depth."
-        },
-        {
-          "label": "Direct reports",
-          "body": "Drove production roadmaps across art, design and engineering, keeping the pipeline collaborative and the milestones clean."
-        },
-        {
-          "label": "Playtest iteration",
-          "body": "Validated the competitive loop through paper prototyping before deployment, which took the technical risk out early."
-        }
-      ]
-    },
-    {
-      "id": "lead",
-      "type": "section",
-      "background": "surface",
-      "blocks": [
-        {
-          "id": "lead-h",
-          "type": "heading",
-          "level": 3,
-          "text": "Leadership on this project"
-        },
-        {
-          "id": "lead-t",
-          "type": "text",
-          "html": "<p>I acted as the central vision holder across design, programming and art — mentoring team members, unblocking cross-discipline dependencies, and keeping product goals aligned so the mechanics and the creative stayed coherent.</p>"
-        }
-      ]
-    },
-    {
-      "id": "d2",
-      "type": "divider"
-    },
-    {
-      "id": "eco-h",
-      "type": "heading",
-      "level": 2,
-      "text": "One economy for everything",
-      "number": "01",
-      "eyebrow": "Gameplay systems"
-    },
-    {
-      "id": "eco-intro",
-      "type": "text",
-      "html": "<p>I owned the foundational system loops, using analog paper testing to refine pacing. The pivotal call was eliminating split movement currencies: movement, utility and offensive actions all draw on a single resource pool, so every turn is an economic trade-off and inefficient play is punished on its own terms.</p>"
-    },
-    {
-      "id": "eco-flow",
-      "type": "flow",
-      "caption": "One mana pool funds every action. Surplus terrain converts back to mana, so the economy keeps flowing without dead draws.",
-      "nodes": [
-        {
-          "id": "n1",
-          "label": "Draw cards"
-        },
-        {
-          "id": "n2",
-          "label": "Single mana pool",
-          "accent": true
-        },
-        {
-          "id": "n3",
-          "label": "Move, attack or defend"
-        },
-        {
-          "id": "n4",
-          "label": "Board fills up"
-        },
-        {
-          "id": "n5",
-          "label": "Surplus terrain to mana"
-        }
-      ],
-      "edges": [
-        {
-          "from": "n1",
-          "to": "n2"
-        },
-        {
-          "from": "n2",
-          "to": "n3"
-        },
-        {
-          "from": "n3",
-          "to": "n4"
-        },
-        {
-          "from": "n4",
-          "to": "n5"
-        },
-        {
-          "from": "n5",
-          "to": "n2"
-        }
-      ]
-    },
-    {
-      "id": "depth-h",
-      "type": "heading",
-      "level": 3,
-      "text": "Depth I layered on top"
-    },
-    {
-      "id": "depth",
-      "type": "pillars",
-      "items": [
-        {
-          "label": "Imperfect information",
-          "body": "Concealed enemy flag positions and base parameters, which raises the strategic value of scouting and makes bluffing worth doing."
-        },
-        {
-          "label": "Variance mitigation",
-          "body": "Excess terrain cards convert into usable mana once the board is saturated, eliminating late-game dead draws."
-        },
-        {
-          "label": "Asymmetric border placement",
-          "body": "Hidden flag deployment along personalised territory boundaries, so opponents have to deduce coordinates from movement cues."
-        }
-      ]
-    },
-    {
-      "id": "d3",
-      "type": "divider"
-    },
-    {
-      "id": "card-h",
-      "type": "heading",
-      "level": 2,
-      "text": "Five card types, 40+ cards",
-      "number": "02",
-      "eyebrow": "Card design"
-    },
-    {
-      "id": "card-intro",
-      "type": "text",
-      "html": "<p>To drive tactical expression, the catalog is partitioned into five operational vectors. Each type is a different systemic lever, so players can build a strategy out of them rather than picking from a list.</p>"
-    },
-    {
-      "id": "cards",
+      "id": "b-d09te0",
       "type": "table",
       "columns": [
-        "Type",
-        "What it does",
-        "Why it is there"
+        "Role",
+        "Team",
+        "Engine",
+        "Platform",
+        "Duration",
+        "My focus"
       ],
       "rows": [
         [
-          "Terrain",
-          "Creates the board layout where units spawn and move",
-          "Surplus converts to mana when the board is full"
-        ],
-        [
-          "Obstacles",
-          "Block movement and add tactical challenge",
-          "Shape lanes and approach routes"
-        ],
-        [
-          "Trainers",
-          "Rotate the deck and cycle through cards",
-          "Keep options flowing across a match"
-        ],
-        [
-          "Units",
-          "The characters that engage the opposing team",
-          "Costed against the shared economy"
-        ],
-        [
-          "Traps",
-          "Visible or hidden; disrupt enemy strategy",
-          "Force opponents into new approaches"
+          "Game Designer, concept and design lead",
+          "15",
+          "Unity",
+          "\\[Platform\\]",
+          "6 months",
+          "Systems · Economy · Cards · Team lead"
         ]
       ]
     },
     {
-      "id": "docs",
-      "type": "section",
-      "background": "surface",
-      "blocks": [
-        {
-          "id": "docs-h",
-          "type": "heading",
-          "level": 2,
-          "text": "The documents behind it"
-        },
-        {
-          "id": "docs-t",
-          "type": "text",
-          "html": "<p>The specs and balancing sheets I wrote on this project, as they were.</p>"
-        },
-        {
-          "id": "docs-row",
-          "type": "section",
-          "arrange": "row",
-          "blocks": [
-            {
-              "id": "doc0",
-              "type": "button",
-              "label": "Combat / economy spreadsheet",
-              "href": "https://docs.google.com/spreadsheets/d/1imr4SIqvD1LGcHsdi3wWAb06aIMf18Sf9ROC5T59wTA/edit?usp=sharing",
-              "style": "secondary"
-            },
-            {
-              "id": "doc1",
-              "type": "button",
-              "label": "Combat / economy doc",
-              "href": "https://docs.google.com/document/d/1E7D_83VNzk1NdK35UPYuYnTDH80sL0PVH8S1Eol-VBA/edit?usp=sharing",
-              "style": "secondary"
-            },
-            {
-              "id": "doc2",
-              "type": "button",
-              "label": "Scanner / fog of war doc",
-              "href": "https://docs.google.com/document/d/1Y3eiL4zgeMN0anqR511jKebfxHOt4FHpqGDI7pmEkTo/edit?usp=sharing",
-              "style": "secondary"
-            },
-            {
-              "id": "doc3",
-              "type": "button",
-              "label": "Card catalog doc",
-              "href": "https://docs.google.com/document/d/1NUAAqXod230BbBtSxvOW7oz2uzDnPddd2H_pbvVKnGI/edit?usp=sharing",
-              "style": "secondary"
-            }
-          ]
-        }
+      "id": "b-stojkl",
+      "type": "text",
+      "html": "<p><strong>At a glance:</strong> 40+ cards · 5 card types · 1 shared mana pool · balanced with Machinations simulations</p><p><strong>ASSET – Hero video (most important):</strong> 45–60 seconds of a match, ideally one turn where a player has to choose between moving, attacking and defending with the same mana.</p>"
+    },
+    {
+      "id": "b-0e1830",
+      "type": "heading",
+      "level": 2,
+      "text": "In short"
+    },
+    {
+      "id": "b-ajg426",
+      "type": "text",
+      "html": "<ul><li><strong>What I owned:</strong> the concept, the core systems (cards, economy, mana, combat), all 40+ cards and the board, and the backlog and roadmap for a 15-person team.</li><li><strong>Hardest problem:</strong> \\[fog of war, or another: confirm\\].</li><li><strong>What it shows:</strong> leading a project from idea to release, and an economy built to force a real choice every turn.</li></ul>"
+    },
+    {
+      "id": "b-w6vku2",
+      "type": "heading",
+      "level": 2,
+      "text": "My role"
+    },
+    {
+      "id": "b-nsou1c",
+      "type": "table",
+      "columns": [
+        "",
+        ""
+      ],
+      "rows": [
+        [
+          "**Owned**",
+          "Concept and paper prototypes · card, economy, mana and combat systems · 40+ cards and the board · balancing spreadsheets and simulations · backlog, roadmap and priorities"
+        ],
+        [
+          "**Led**",
+          "Design, art and engineering through the whole project"
+        ],
+        [
+          "**Supported**",
+          "\\[Anything others owned that you helped with\\]"
+        ]
       ]
     },
     {
-      "id": "cta-h",
+      "id": "b-3f94if",
       "type": "heading",
       "level": 2,
-      "text": "Want the deeper breakdown?"
+      "text": "The game"
     },
     {
-      "id": "cta-t",
+      "id": "b-hfx5sg",
       "type": "text",
-      "html": "<p>Happy to walk through the documentation, behaviour trees and tuning decisions behind this project.</p>"
+      "html": "<p>&amp;#91;Two or three sentences: what players do, the goal of a match, and how a turn works. For example: who plays (1v1?), what &quot;ascending flags&quot; means in the rules, and how a match is won.\\]</p><p><strong>ASSET – 3–4 screenshots:</strong> the board mid-match, a hand of cards, a card close-up, and the fog of war in action.</p>"
     },
     {
-      "id": "cta",
-      "type": "button",
-      "label": "Get in touch",
-      "href": "mailto:marcelo.rssi@hotmail.com",
-      "style": "primary"
+      "id": "b-n6rwma",
+      "type": "heading",
+      "level": 2,
+      "text": "Constraints"
+    },
+    {
+      "id": "b-d3kt87",
+      "type": "text",
+      "html": "<ul><li><strong>Six months</strong> from concept to release.</li><li><strong>A 15-person team</strong> across design, art and engineering, which I led as a side project alongside my other work.</li><li>&amp;#91;Any other: budget, platform, a jam or publisher brief?\\]</li></ul>"
+    },
+    {
+      "id": "b-xgsg50",
+      "type": "heading",
+      "level": 2,
+      "text": "Design pillars"
+    },
+    {
+      "id": "b-5w1ykj",
+      "type": "text",
+      "html": "<p>&amp;#91;Replace with your own, or confirm these:\\]</p><ol><li><strong>Every turn is a trade-off.</strong> One resource for everything means no free actions.</li><li><strong>Readable at a glance.</strong> Players understand a card's role from its type and layout.</li><li><strong>Easy to learn, deep to master.</strong> \\[Confirm.\\]</li></ol>"
+    },
+    {
+      "id": "b-632o3n",
+      "type": "heading",
+      "level": 2,
+      "text": "1. One pool of mana for everything"
+    },
+    {
+      "id": "b-1lkfls",
+      "type": "text",
+      "html": "<p>Many card games give separate resources for different actions. Here, moving, attacking and defending all draw from the same mana pool, so every turn is a trade-off: spending to advance leaves less to protect yourself.</p><p>&amp;#91;embedded content: mana economy · one pool, three uses\\]</p><p><strong>Example turn</strong> \\[fill in from the game\\]: &quot;With \\[X\\] mana, a player can \\[move two spaces and attack once\\] or \\[defend fully and move once\\]. Neither is right every time; it depends on \\[the board state\\].&quot;</p><p><strong>ASSET – Annotated turn:</strong> a screenshot of one turn with callouts showing the choice the player faces.</p>"
+    },
+    {
+      "id": "b-hznfq3",
+      "type": "heading",
+      "level": 2,
+      "text": "2. 40+ cards across five types"
+    },
+    {
+      "id": "b-6106od",
+      "type": "table",
+      "columns": [
+        "Card type",
+        "Role",
+        "Example card"
+      ],
+      "rows": [
+        [
+          "\\[Type 1\\]",
+          "\\[What it does\\]",
+          "\\[Card name and effect\\]"
+        ],
+        [
+          "\\[Type 2\\]",
+          "",
+          ""
+        ],
+        [
+          "\\[Type 3\\]",
+          "",
+          ""
+        ],
+        [
+          "\\[Type 4\\]",
+          "",
+          ""
+        ],
+        [
+          "\\[Type 5\\]",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "id": "b-evh31g",
+      "type": "text",
+      "html": "<p>I designed and documented every card, and kept the catalogue organized so art and engineering always worked from the current version. I also designed the board.</p><p><strong>ASSET – Card spread:</strong> 5 cards side by side, one of each type. <strong>ASSET – Card catalogue screenshot:</strong> your spreadsheet or document listing the cards.</p>"
+    },
+    {
+      "id": "b-ki2val",
+      "type": "heading",
+      "level": 2,
+      "text": "3. Testing on paper and in simulation"
+    },
+    {
+      "id": "b-sowbcl",
+      "type": "text",
+      "html": "<p>I validated the concept with paper prototypes before any engine work, then balanced it with spreadsheets and Machinations simulations of the mana economy, and used playtests to find balance problems the models missed.</p><p><strong>ASSET – Paper prototype photo</strong> and a <strong>Machinations diagram screenshot</strong>. A Machinations diagram is rare in portfolios and shows systems thinking at once.</p>"
+    },
+    {
+      "id": "b-d5h9ps",
+      "type": "heading",
+      "level": 2,
+      "text": "Iteration case: fog of war"
+    },
+    {
+      "id": "b-46tnfa",
+      "type": "text",
+      "html": "<p>Your master CV says fog of war improved the experience by 60%. That's a strong claim, so the page needs the story behind it.</p><ul><li><strong>Problem:</strong> \\[what wasn't working in playtests: for example, players could see everything and planned too far ahead, or matches felt solved early\\]</li><li><strong>Cause:</strong> \\[why\\]</li><li><strong>Fix:</strong> I designed a fog-of-war feature that \\[what it hides or reveals, and how players uncover it\\].</li><li><strong>Result:</strong> \\[what changed, and what the 60% measures: survey scores between rounds? If you can't say how it was measured, describe the change without the number.\\]</li></ul><p><strong>ASSET – Fog of war before/after:</strong> the same board with and without fog.</p>"
+    },
+    {
+      "id": "b-w6cuug",
+      "type": "heading",
+      "level": 2,
+      "text": "Leading the team"
+    },
+    {
+      "id": "b-pk7ato",
+      "type": "text",
+      "html": "<p>I led design, art and engineering through close collaboration for the whole project, owned the backlog and roadmap, and set feature priorities. I built spreadsheets that made handoffs between departments faster.</p><p>&amp;#91;Add one concrete leadership decision, for example a feature you cut to ship on time, or how you organised the team's work. One example says more than the description.\\]</p><p><strong>ASSET – Roadmap or backlog screenshot</strong>, with names blurred.</p>"
+    },
+    {
+      "id": "b-irqih8",
+      "type": "heading",
+      "level": 2,
+      "text": "Decisions and trade-offs"
+    },
+    {
+      "id": "b-4cgfeg",
+      "type": "text",
+      "html": "<ul><li><strong>One mana pool over separate resources.</strong> Harder to balance, which is why it needed simulation, but it made every turn a real choice.</li><li>&amp;#91;Add one more, ideally a cut made for the 6-month schedule.\\]</li></ul>"
+    },
+    {
+      "id": "b-f5xmha",
+      "type": "heading",
+      "level": 2,
+      "text": "Results"
+    },
+    {
+      "id": "b-u7d62p",
+      "type": "text",
+      "html": "<ul><li>Published on \\[platform\\] in \\[month, year\\].</li><li>&amp;#91;Downloads, ratings, players or event showings, if any.\\]</li></ul>"
+    },
+    {
+      "id": "b-pkwo03",
+      "type": "heading",
+      "level": 2,
+      "text": "Looking back"
+    },
+    {
+      "id": "b-l1ppbh",
+      "type": "text",
+      "html": "<p><strong>What worked:</strong> simulating the economy before building it.</p><p><strong>What I'd do differently:</strong> \\[pick what's true\\].</p><p><strong>What I learned:</strong> a single shared resource creates interesting decisions every turn, but it needs careful simulation to stay balanced; leading a 15-person team showed me that a clear roadmap is a design tool too.</p>"
+    },
+    {
+      "id": "b-kfxo5g",
+      "type": "heading",
+      "level": 2,
+      "text": "Links"
+    },
+    {
+      "id": "b-8yrbv7",
+      "type": "text",
+      "html": "<p>&amp;#91;Store or download page\\]</p>"
+    },
+    {
+      "id": "b-minybs",
+      "type": "heading",
+      "level": 2,
+      "text": "Asset checklist"
+    },
+    {
+      "id": "b-q0900w",
+      "type": "text",
+      "html": "<ol><li>Hero video of a turn with a real trade-off</li><li>Annotated turn screenshot</li><li>Card spread, one per type</li><li>Machinations diagram screenshot</li><li>Fog of war before/after</li><li>Paper prototype photo</li><li>Card catalogue screenshot</li><li>Roadmap or backlog screenshot</li><li>3–4 screenshots</li></ol>"
+    },
+    {
+      "id": "b-vipg1f",
+      "type": "heading",
+      "level": 2,
+      "text": "Facts to confirm"
+    },
+    {
+      "id": "b-htqsiw",
+      "type": "text",
+      "html": "<ul><li>The game overview, platform and release date.</li><li>The pillars and the five card types.</li><li>The fog-of-war story and what the 60% measures.</li><li>One leadership decision and one trade-off.</li></ul>"
     }
   ]
 }
