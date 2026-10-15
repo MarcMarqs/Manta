@@ -496,6 +496,24 @@ a.tag-chip:hover {
    could collaborate on, the device turns into costume.
    =========================================================================== */
 
+/* A caution and a result need hues the theme does not carry, and one hex cannot serve a
+   white page and a near-black one, so each has a pair. Both measure above 5.4:1 against
+   their own background and surface. The other two tones borrow the theme's own colours. */
+:root {
+  --caution: #8a5a00;
+  --result: #13693f;
+}
+:root[data-theme='dark'] {
+  --caution: #e8b13c;
+  --result: #45d08a;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --caution: #e8b13c;
+    --result: #45d08a;
+  }
+}
+
 :root {
   --rule: var(--border);
   --rule-strong: color-mix(in srgb, var(--border) 55%, var(--fg));

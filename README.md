@@ -47,6 +47,7 @@ Every block needs a unique `id` (unique within its page) and a `type`.
 |---|---|
 | `heading` | `level` 1–4, `text`, `number?` + `eyebrow?` for a numbered section header |
 | `text` | `html` — rich text |
+| `callout` | `tone?` (`note` \| `key` \| `caution` \| `result`), `title?`, `html` — a panel that asks the reader to stop |
 | `image` | `src`, `alt`, `caption?`, `scale?` (10–100, % of the block), `aspect?` (`1:1` \| `4:3` \| `3:2` \| `16:9` \| `21:9`) |
 | `gallery` | `layout?` (`grid` \| `carousel`), `images[]` of `{ src, alt, caption? }` |
 | `video` | `provider` (`file` \| `youtube` \| `vimeo` \| `itch`), `videoId`, `src?` (for `file`), `loop?`, `title?` |
@@ -223,7 +224,9 @@ preview on the right rendered by the site's own components, so what you see is w
   page** can start from one too, taking its title from the first `#` heading. Headings,
   prose, lists, quotes, links, pictures, tables, rules and code all come across, with
   `**bold**`, `*italic*`, `` `code` ``, `[links](/to)`, `==highlight==` and `~~strike~~`
-  inside them. Consecutive prose gathers into one text block rather than one per paragraph,
+  inside them. GitHub's alert syntax (`> [!WARNING]`, `> [!TIP]`, `> [!NOTE]`,
+  `> [!IMPORTANT]`) becomes a callout, while an ordinary quotation stays a quotation.
+  Consecutive prose gathers into one text block rather than one per paragraph,
   because a page of thirty single-paragraph blocks is miserable to edit. What Markdown
   cannot say — a chart, a project rail, a spec strip — you add afterwards. An import is one
   undoable change, so Ctrl+Z puts the page back.

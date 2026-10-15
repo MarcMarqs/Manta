@@ -270,6 +270,15 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
       ))
   }
 
+  {
+    block.type === 'callout' && (
+      <aside class={`callout tone-${block.tone ?? 'note'}`}>
+        {block.title && <p class="callout-title">{block.title}</p>}
+        <div class="rich" set:html={block.html} />
+      </aside>
+    )
+  }
+
   {block.type === 'divider' && <hr class="block-divider" />}
 
   {block.type === 'spacer' && <div class={`spacer spacer-${block.size ?? 'md'}`} />}
@@ -821,6 +830,39 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
 
   /* Highlighted text. A tint of the accent rather than a yellow felt-tip, so it belongs
      to the page; the padding is asymmetric because text sits off-centre in its line box. */
+  /* A rule down the side and a wash of the same colour: enough to stop the eye without
+     becoming a box that competes with the sections around it. The colour is the only
+     thing carrying the meaning, so it is also the title's colour. */
+  .callout {
+    padding: 16px 18px;
+    border-left: 3px solid var(--tone);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    background: color-mix(in srgb, var(--tone) 9%, var(--bg));
+  }
+
+  .callout.tone-note {
+    --tone: var(--muted);
+  }
+  .callout.tone-key {
+    --tone: var(--accent);
+  }
+  .callout.tone-caution {
+    --tone: var(--caution);
+  }
+  .callout.tone-result {
+    --tone: var(--result);
+  }
+
+  .callout-title {
+    margin: 0 0 6px;
+    font-family: var(--font-heading);
+    font-weight: 650;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--tone);
+  }
+
   /* Quotes and code arrive with imported Markdown, so the page has to have an answer
      for them. Quiet ones: a rule and an indent, and type that stays out of the way. */
   .rich :global(blockquote) {

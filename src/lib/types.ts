@@ -237,6 +237,19 @@ export type Block = BlockLayout & (
       height?: 'short' | 'medium' | 'tall';
     }
   | { id: string; type: 'button'; label: string; href: string; style?: 'primary' | 'secondary' }
+  | {
+      id: string;
+      type: 'callout';
+      /**
+       * What kind of attention it asks for, which is the only thing the colour says:
+       * 'note' is an aside, 'key' the thing to take away, 'caution' a limit or a
+       * mistake, 'result' what came of it. Absent means 'note'.
+       */
+      tone?: 'note' | 'key' | 'caution' | 'result';
+      /** An optional line above the text, in the tone's colour. */
+      title?: string;
+      html: string;
+    }
   | { id: string; type: 'divider' }
   | { id: string; type: 'spacer'; size?: 'sm' | 'md' | 'lg' }
   | { id: string; type: 'table'; caption?: string; columns: string[]; rows: string[][] }

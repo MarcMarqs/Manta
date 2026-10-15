@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
 import type { Align, Block, BlockType, BlockWidth, Project } from '../lib/types';
-import { BLOCKS, GROUPS, cloneBlock, parseDocInput, parseSheetInput, parseVideoInput, summarize } from './blocks';
+import { BLOCKS, GROUPS, TONES, cloneBlock, parseDocInput, parseSheetInput, parseVideoInput, summarize } from './blocks';
 import { api, assetUrl } from './api';
 import { ImageField, LinkInput, VideoField } from './media';
 import { PROJECTS, expanded, fileToRoute, files, newId, openView, pagePaths, projects, selectedBlock, tags, toggleExpanded, updateFile } from './store';
@@ -662,6 +662,32 @@ function BlockFields({
               onChange={(v) => onChange({ ...block, eyebrow: v || undefined })}
             />
           </Field>
+        </div>
+      );
+
+    case 'callout':
+      return (
+        <div class="stack">
+          <div class="fields">
+            <Field label="Tone" hint="The colour is the whole of what this says, so pick the one that is true." wide>
+              <Segmented
+                value={block.tone ?? 'note'}
+                options={(Object.keys(TONES) as (keyof typeof TONES)[]).map((value) => ({
+                  value,
+                  label: TONES[value],
+                }))}
+                onChange={(tone) => onChange({ ...block, tone })}
+              />
+            </Field>
+            <Field label="Title" hint="Optional. Sits above the text in the tone's colour." wide>
+              <TextInput
+                value={block.title ?? ''}
+                placeholder={TONES[block.tone ?? 'note']}
+                onChange={(v) => onChange({ ...block, title: v || undefined })}
+              />
+            </Field>
+          </div>
+          <RichText value={block.html} links={linkOptions()} onChange={(v) => onChange({ ...block, html: v })} />
         </div>
       );
 

@@ -52,6 +52,15 @@ const QUOTE = /^>\s?(.*)$/;
 const IMAGE_ONLY = /^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)$/;
 const FENCE = /^(```|~~~)(.*)$/;
 const TABLE_RULE = /^\s*\|?\s*:?-{2,}:?\s*(\|\s*:?-{2,}:?\s*)+\|?\s*$/;
+const ALERT = /^\[!(\w+)\]\s*$/;
+/** GitHub's five names, mapped onto the four kinds of attention a callout can ask for. */
+const ALERT_TONE: Record<string, 'note' | 'key' | 'caution' | 'result'> = {
+  NOTE: 'note',
+  TIP: 'result',
+  IMPORTANT: 'key',
+  WARNING: 'caution',
+  CAUTION: 'caution',
+};
 
 const cells = (row: string) =>
   row
@@ -162,6 +171,19 @@ export function blocksFromMarkdown(source: string): Imported {
         said.push(m[1]);
       }
       i--;
+      // GitHub writes an admonition as a quote whose first line names it. That is a
+      // callout, which the page already knows how to draw, rather than a quotation.
+      const alert = ALERT.exec(said[0] ?? '');
+      if (alert) {
+        flush();
+        blocks.push({
+          id: newId('b'),
+          type: 'callout',
+          tone: ALERT_TONE[alert[1].toUpperCase()] ?? 'note',
+          html: `<p>${inline(said.slice(1).join(' ').trim())}</p>`,
+        });
+        continue;
+      }
       run.push(`<blockquote><p>${inline(said.join(' ').trim())}</p></blockquote>`);
       continue;
     }

@@ -119,6 +119,12 @@ export const BLOCKS: Record<BlockType, BlockSpec> = {
       ],
     }),
   },
+  callout: {
+    label: 'Callout',
+    group: 'Text & media',
+    hint: 'A panel that asks the reader to stop',
+    create: () => ({ id: newId(), type: 'callout', tone: 'key', title: '', html: '<p></p>' }),
+  },
   pillars: {
     label: 'Pillars',
     group: 'Data',
@@ -247,6 +253,9 @@ export const BLOCKS: Record<BlockType, BlockSpec> = {
 
 export const GROUPS = ['Text & media', 'Data', 'Layout', 'Advanced'] as const;
 
+/** What each callout tone is called, in the editor and in a block's summary line. */
+export const TONES = { note: 'Note', key: 'Key point', caution: 'Caution', result: 'Result' } as const;
+
 const stripTags = (html: string) =>
   html
     .replace(/<[^>]+>/g, ' ')
@@ -262,6 +271,10 @@ export function summarize(block: Block): string {
       return [block.number, block.eyebrow, stripTags(block.text)].filter(Boolean).join(' · ');
     case 'text':
       return stripTags(block.html);
+    case 'callout':
+      return [block.tone && block.tone !== 'note' ? TONES[block.tone] : '', block.title, stripTags(block.html)]
+        .filter(Boolean)
+        .join(' · ');
     case 'image':
       return block.caption || block.alt || block.src.split('/').pop() || 'No image yet';
     case 'gallery':
