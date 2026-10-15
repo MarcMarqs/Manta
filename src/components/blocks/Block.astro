@@ -93,6 +93,25 @@ const docSrc = (b: Extract<Block, { type: 'doc' }>) => {
  */
 const pillarColumns = (count: number) => (count <= 3 ? Math.max(1, count) : count === 4 ? 2 : 3);
 
+/**
+ * How many pictures go across a gallery.
+ *
+ * `auto-fill` used to decide this, which meant a fixed 200px track and as many tracks as
+ * the column could hold: three pictures in a wide block sat at 200px each against the
+ * left edge with the rest of the row empty, as though two more were missing. The count
+ * comes from the pictures instead, so three of them are three columns and fill the width.
+ *
+ * Four across is the most that stays worth looking at. Past that the count is the one
+ * that divides the pictures evenly where there is one, and a short last row is centred
+ * where there is not.
+ */
+const galleryColumns = (count: number) => {
+  if (count <= 4) return Math.max(1, count);
+  if (count === 5) return 3;
+  for (let columns = 4; columns >= 3; columns--) if (count % columns === 0) return columns;
+  return 4;
+};
+
 const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
   ({
     youtube: `https://www.youtube-nocookie.com/embed/${b.videoId}`,
@@ -185,12 +204,12 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
           )}
         </div>
       ) : (
-        <div class="gallery">
+        <div class="gallery" style={`--cols:${galleryColumns(block.images.length)}`}>
           {block.images.map((img) => (
             <img
               src={asset(img.src)}
               srcset={preview ? undefined : srcsetFor(img.src)}
-              sizes="(max-width: 720px) 45vw, 260px"
+              sizes={`(max-width: 560px) 92vw, (max-width: 900px) 46vw, ${Math.round(1120 / galleryColumns(block.images.length))}px`}
               alt={img.alt}
               loading="lazy"
             />
@@ -529,16 +548,35 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
     color: var(--accent);
   }
 
+  /* The same arrangement as the callout boxes, for the same reason: a picture that grew
+     to fill whatever was left would make the last row a banner, and a fixed track leaves
+     a row looking half empty. `--cols` comes from the block. */
   .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    --gallery-cols: var(--cols, 3);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 12px;
   }
+
   .gallery img {
+    flex: 0 1 calc((100% - (var(--gallery-cols) - 1) * 12px) / var(--gallery-cols));
+    min-width: 150px;
     border-radius: var(--radius);
     aspect-ratio: 4 / 3;
     object-fit: cover;
-    width: 100%;
+  }
+
+  @media (max-width: 900px) {
+    .gallery {
+      --gallery-cols: min(var(--cols, 3), 2);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .gallery {
+      --gallery-cols: 1;
+    }
   }
 
   .video-file {
