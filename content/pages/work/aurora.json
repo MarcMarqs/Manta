@@ -440,6 +440,147 @@
       "id": "b-fenwpd",
       "type": "text",
       "html": "<ul><li>Solve rate before the fix in iteration case 1.</li><li>The &quot;options considered&quot; in case 1: I wrote likely alternatives; keep only the ones you actually discussed.</li><li>Playtest details: rounds, testers, ages.</li><li>Which design goals were set explicitly at the time.</li><li>Playtime, the Act II mechanics, and the tuning values, if you have them.</li><li>A second iteration case.</li></ul>"
+    },
+    {
+      "id": "b-we9wqm",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-db8p2d",
+          "type": "heading",
+          "level": 1,
+          "text": "Aurora: A Child's Journey"
+        },
+        {
+          "id": "b-t9kaij",
+          "type": "text",
+          "html": "<p><i>3D Narrative Puzzle Adventure</i></p>"
+        },
+        {
+          "id": "b-fb4sjd",
+          "type": "text",
+          "html": "<p><b><span class=\"big\">Recognition</span></b></p><p><ul><li><b>Games for Change Latin America 2020:</b> Winner - Best Game for Social Impact</li><li><b>BIG Festival 2021:</b> Finalist - Impact Category</li></ul></p>"
+        },
+        {
+          "id": "b-vzw6vy",
+          "type": "spacer",
+          "size": "sm"
+        },
+        {
+          "id": "b-wpubns",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "Role",
+            "Team Size",
+            "Engine",
+            "Platform",
+            "My Focus"
+          ],
+          "rows": [
+            [
+              "Game Designer",
+              "6",
+              "Unity Engine",
+              "PC (Steam)",
+              "Gameplayㅤ|ㅤLevel / Puzzle Designㅤ|ㅤPlaytest"
+            ]
+          ]
+        },
+        {
+          "id": "b-v34xsm",
+          "type": "spacer",
+          "size": "md"
+        }
+      ]
+    },
+    {
+      "id": "b-ncoblc",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-u7ucom",
+          "type": "heading",
+          "level": 2,
+          "text": "My Role"
+        },
+        {
+          "id": "b-2i7bx7",
+          "type": "text",
+          "html": "<p></p><ul><li><b>What I Owned:</b> The entire second act's gameplay and puzzles, the camera and control feel (with the design team), and the playtest process.</li><li><b>Hardest Problem:</b> A puzzle players couldn't see. Reframing the camera, sightlines and lighting.</li><li><b>What it Shows:</b> Designing for players who have never held a controller, teaching without text, and turning playtest observations into specific changes.</li></ul><p></p>"
+        },
+        {
+          "id": "b-jzwcwg",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "",
+            ""
+          ],
+          "rows": [
+            [
+              "Owned",
+              "Act II gameplay and puzzle design, end to end; Puzzle pacing and difficulty curve; Playtest plans, sessions and findings"
+            ],
+            [
+              "Co-Owned",
+              "The 3C (camera, character, control) with the design team; Core mechanics across the game"
+            ],
+            [
+              "Supported",
+              "Blockouts and level flow with level design, implementation with programming, narrative and art direction with the team"
+            ]
+          ]
+        },
+        {
+          "id": "b-jjuwqo",
+          "type": "spacer",
+          "size": "md"
+        }
+      ]
+    },
+    {
+      "id": "b-nkr7qu",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-jdne1o",
+          "type": "heading",
+          "level": 2,
+          "text": "The Game"
+        },
+        {
+          "id": "b-64ygcc",
+          "type": "text",
+          "html": "<p>Aurora is a short, emotional game about the impact of an environmental disaster, seen through a child's eyes.</p><p>Players explore, solve environmental puzzles and follow the story across three acts. It was made for players of all ages, including people who rarely play games.</p>"
+        },
+        {
+          "id": "b-0vk97x",
+          "type": "spacer",
+          "size": "sm"
+        },
+        {
+          "id": "b-jzrt9b",
+          "type": "gallery",
+          "images": [
+            {
+              "src": "/images/projects/ascending-flags/cover.svg",
+              "alt": ""
+            },
+            {
+              "src": "/images/projects/aurora/cover.svg",
+              "alt": ""
+            },
+            {
+              "src": "/images/projects/far-away-orbital-space/cover.svg",
+              "alt": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
