@@ -84,7 +84,13 @@
           "from": "n-sle4e2",
           "to": "n-zmhqcq"
         }
-      ]
+      ],
+      "width": "narrow"
+    },
+    {
+      "id": "b-61awor",
+      "type": "spacer",
+      "size": "sm"
     },
     {
       "id": "b-oxrupf",
@@ -143,7 +149,8 @@
           "from": "n-sle4e2",
           "to": "n-zmhqcq"
         }
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-6np7fa",
@@ -209,7 +216,8 @@
           "Players who enjoy the puzzle",
           "The skill-based version still exists where it adds the most"
         ]
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-en6dea",
@@ -301,7 +309,8 @@
       "reference": {
         "value": 28,
         "label": "Proposed even step: +28% for 76–84"
-      }
+      },
+      "width": "narrow"
     },
     {
       "id": "b-coqzh7",
@@ -339,7 +348,8 @@
           "830",
           "0.78 coins"
         ]
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-zf3uav",
@@ -365,7 +375,13 @@
           "low": 74,
           "high": 100
         }
-      ]
+      ],
+      "width": "narrow"
+    },
+    {
+      "id": "b-1e1w35",
+      "type": "spacer",
+      "size": "sm"
     },
     {
       "id": "b-n9f5hm",
@@ -392,7 +408,8 @@
           "\"84+ fodder\" was already a known tier in previous games",
           "Yes: 84 stays the anchor"
         ]
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-va2a0k",
@@ -490,7 +507,13 @@
           "from": "n-udg8f7",
           "to": "a"
         }
-      ]
+      ],
+      "width": "narrow"
+    },
+    {
+      "id": "b-md9igh",
+      "type": "spacer",
+      "size": "sm"
     },
     {
       "id": "b-l71gae",
@@ -522,7 +545,8 @@
           "Low-floor SBCs complete with fewer cards",
           "More rewards enter the game unless those targets are retuned"
         ]
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-83dysm",
@@ -583,7 +607,8 @@
           "–",
           "Only SBCs whose fodder is mostly rated 75–83"
         ]
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-iuanqa",
@@ -657,7 +682,13 @@
           "Players who already sold 76–83s to the quick-sell floor feel cheated",
           "Announce it a week ahead, ship at the start of a new season"
         ]
-      ]
+      ],
+      "width": "narrow"
+    },
+    {
+      "id": "b-pv30yp",
+      "type": "spacer",
+      "size": "sm"
     },
     {
       "id": "b-vg37rj",
@@ -688,7 +719,8 @@
           "Gallery grade distribution",
           "Unchanged, if the Gallery table is decoupled"
         ]
-      ]
+      ],
+      "width": "narrow"
     },
     {
       "id": "b-3ydopj",

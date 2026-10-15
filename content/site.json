@@ -15,8 +15,7 @@
     }
   ],
   "theme": {
-    "accent": "#607e0b",
-    "accentDark": "#c4ef4d",
+    "accent": "#8f5ad1",
     "bg": "#ffffff",
     "fg": "#1a1f24",
     "muted": "#5a646e",
@@ -34,5 +33,18 @@
     "spacing": 1,
     "fontMono": "system-ui"
   },
-  "separator": " | "
+  "separator": " | ",
+  "pageOrder": [
+    "content/pages/home.json",
+    "content/pages/about.json",
+    "content/pages/work/aurora.json",
+    "content/pages/work/wardens-rising.json",
+    "content/pages/work/gundam-requiem.json",
+    "content/pages/work/plushland-curse.json",
+    "content/pages/work/far-away-orbital-space.json",
+    "content/pages/work/ascending-flags.json",
+    "content/pages/work/fc27-teardown.json",
+    "content/pages/work/ranked-systems-analysis.json",
+    "content/pages/work/crafting-economy.json"
+  ]
 }

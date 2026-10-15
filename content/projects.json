@@ -1,5 +1,38 @@
 [
   {
+    "slug": "aurora",
+    "title": "Aurora: A Child's Journey",
+    "genre": "Narrative Puzzle Adventure",
+    "year": null,
+    "role": "Game Designer",
+    "summary": "Owned the Act II player experience, designing and refining 3C mechanics and puzzle layouts. Partnered with Level Design to iterate on pacing via playtest feedback, leading sessions that shaped the final game.",
+    "highlights": [
+      "Games for Change Latin America 2020 — Winner",
+      "BIG Festival Impact 2021 — Finalist",
+      "Co-defined the 3C: camera, character and control",
+      "Owned Act II gameplay and puzzle design end-to-end"
+    ],
+    "discipline": [
+      "mechanics-design",
+      "level-design",
+      "game-production-project-management"
+    ],
+    "engine": [
+      "unity-engine"
+    ],
+    "cover": "/images/projects/ascending-flags/cover.svg",
+    "coverVideo": null,
+    "visibility": "public",
+    "links": [
+      {
+        "label": "Steam",
+        "href": "https://store.steampowered.com/app/1438440/Aurora_A_Childs_Journey/",
+        "type": "play"
+      }
+    ],
+    "origin": "professional"
+  },
+  {
     "slug": "wardens-rising",
     "title": "Wardens Rising",
     "genre": "ARPG / Tower Defense",
@@ -27,39 +60,6 @@
       {
         "label": "Epic Games Store",
         "href": "https://store.epicgames.com/p/wardens-rising-b42f9b",
-        "type": "play"
-      }
-    ],
-    "origin": "professional"
-  },
-  {
-    "slug": "aurora",
-    "title": "Aurora: A Child's Journey",
-    "genre": "Narrative Puzzle Adventure",
-    "year": null,
-    "role": "Game Designer",
-    "summary": "Owned the Act II player experience, designing and refining 3C mechanics and puzzle layouts. Partnered with Level Design to iterate on pacing via playtest feedback, leading sessions that shaped the final game.",
-    "highlights": [
-      "Games for Change Latin America 2020 — Winner",
-      "BIG Festival Impact 2021 — Finalist",
-      "Co-defined the 3C: camera, character and control",
-      "Owned Act II gameplay and puzzle design end-to-end"
-    ],
-    "discipline": [
-      "mechanics-design",
-      "level-design",
-      "game-production-project-management"
-    ],
-    "engine": [
-      "unity-engine"
-    ],
-    "cover": "/images/projects/aurora/cover.svg",
-    "coverVideo": null,
-    "visibility": "public",
-    "links": [
-      {
-        "label": "Steam",
-        "href": "https://store.steampowered.com/app/1438440/Aurora_A_Childs_Journey/",
         "type": "play"
       }
     ],

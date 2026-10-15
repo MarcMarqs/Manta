@@ -1,362 +1,445 @@
 {
-  "title": "Aurora: A Child's Journey",
+  "title": "Aurora: A Child's Journey – Portfolio Page",
   "description": "3C, Act II gameplay and puzzle design on an award-winning narrative adventure at Luski Game Studio.",
   "image": "/images/projects/aurora/cover.svg",
   "project": "aurora",
   "blocks": [
     {
-      "id": "eyebrow",
-      "type": "text",
-      "html": "<p><strong>Luski Game Studio</strong> · 6 team</p>"
-    },
-    {
-      "id": "h1",
+      "id": "b-sp53dl",
       "type": "heading",
       "level": 1,
-      "text": "Aurora: A Child's Journey"
+      "text": "Aurora: A Child's Journey – Portfolio Page"
     },
     {
-      "id": "sub",
+      "id": "b-50f0fs",
       "type": "text",
-      "html": "<p>3D Puzzle / Narrative Adventure</p>"
+      "html": "<p><em>Page draft for the portfolio. Lines marked <strong>ASSET</strong> are things for you to find; brackets are facts to confirm. Everything else is ready to use.</em></p><p><strong>3D Narrative Puzzle Adventure</strong> · Luski Game Studio · Released on Steam, Nov 2020</p><p><strong>Owned the second act of an award-winning narrative puzzle game, from camera and controls to puzzle layouts, and the playtests that shaped it.</strong></p>"
     },
     {
-      "id": "specs",
-      "type": "specs",
-      "items": [
-        {
-          "label": "Role",
-          "value": "Game Designer"
-        },
-        {
-          "label": "Studio",
-          "value": "Luski Game Studio"
-        },
-        {
-          "label": "Team size",
-          "value": "6"
-        },
-        {
-          "label": "Engine",
-          "value": "Unity"
-        },
-        {
-          "label": "Focus",
-          "value": "3C • Puzzle • Narrative"
-        }
-      ]
-    },
-    {
-      "id": "awards",
-      "type": "text",
-      "html": "<p><strong>Recognition:</strong> Games for Change Latin America 2020 — Winner · BIG Festival Impact 2021 — Finalist. Released on Steam.</p>"
-    },
-    {
-      "id": "d1",
-      "type": "divider"
-    },
-    {
-      "id": "pillars-h",
-      "type": "heading",
-      "level": 2,
-      "text": "What guided every decision"
-    },
-    {
-      "id": "pillars",
-      "type": "pillars",
-      "items": [
-        {
-          "label": "Feel before challenge",
-          "body": "Character movement and camera responsiveness must achieve absolute mechanical precision before layout challenges can be introduced fairly."
-        },
-        {
-          "label": "Show, don't tell",
-          "body": "An all-ages story teaches through space, motion and discovery rather than text and tutorials."
-        },
-        {
-          "label": "Gentle mastery",
-          "body": "Puzzles escalate from intuition to insight without punishing failure. Curiosity is always rewarded."
-        }
-      ]
-    },
-    {
-      "id": "owned",
-      "type": "section",
-      "background": "surface",
-      "blocks": [
-        {
-          "id": "owned-h",
-          "type": "heading",
-          "level": 2,
-          "text": "What I owned, and where the team came in"
-        },
-        {
-          "id": "owned-cols",
-          "type": "columns",
-          "count": 2,
-          "columns": [
-            {
-              "id": "o1",
-              "blocks": [
-                {
-                  "id": "o1h",
-                  "type": "heading",
-                  "level": 3,
-                  "text": "What I owned"
-                },
-                {
-                  "id": "o1t",
-                  "type": "text",
-                  "html": "<ul><li>Act II gameplay and puzzle design, end-to-end</li><li>3C tuning: camera framing and control feel</li><li>Playtest plans, sessions and synthesis</li><li>Puzzle pacing and difficulty progression</li></ul>"
-                }
-              ]
-            },
-            {
-              "id": "o2",
-              "blocks": [
-                {
-                  "id": "o2h",
-                  "type": "heading",
-                  "level": 3,
-                  "text": "Team & collaboration"
-                },
-                {
-                  "id": "o2t",
-                  "type": "text",
-                  "html": "<ul><li>3C implementation: with programming</li><li>Blockout and level flow: with level design</li><li>Narrative and art direction: with the team</li><li>Audio and mood: with the wider studio</li></ul>"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "3c-h",
-      "type": "heading",
-      "level": 2,
-      "text": "Camera, character & control"
-    },
-    {
-      "id": "3c-intro",
-      "type": "text",
-      "html": "<p>In a narrative adventure, feel is the first impression. Before a puzzle can be fair or a story can land, the player has to trust how the character moves and how the camera reads space. I co-developed the 3C around clarity and comfort for all ages.</p>"
-    },
-    {
-      "id": "3c",
-      "type": "columns",
-      "count": 2,
+      "id": "b-9an1pl",
+      "type": "table",
       "columns": [
-        {
-          "id": "cam",
-          "blocks": [
-            {
-              "id": "camh",
-              "type": "heading",
-              "level": 3,
-              "text": "Camera — framing the space"
-            },
-            {
-              "id": "camt",
-              "type": "text",
-              "html": "<p>The camera is the player's narrator: it should reveal the puzzle, not fight it.</p><ul><li>Framing that hints at the next goal</li><li>Smooth, predictable follow, no motion sickness</li><li>Composed angles for story beats</li></ul>"
-            }
-          ]
-        },
-        {
-          "id": "ctrl",
-          "blocks": [
-            {
-              "id": "ctrlh",
-              "type": "heading",
-              "level": 3,
-              "text": "Character & control — movement"
-            },
-            {
-              "id": "ctrlt",
-              "type": "text",
-              "html": "<p>To accommodate an all-ages demographic, input detection must be forgiving and intuitive, so player intent translates seamlessly into action.</p><ul><li>Responsive input with gentle assists</li><li>Readable animation that telegraphs state</li><li>Fine-tuned jump and interaction tolerances</li></ul><p>Generous interaction and collision thresholds mean failure reads as a learning loop rather than mechanical friction.</p>"
-            }
-          ]
-        }
+        "Role",
+        "Team",
+        "Engine",
+        "Platform",
+        "Duration",
+        "My focus"
+      ],
+      "rows": [
+        [
+          "Game Designer",
+          "6",
+          "Unity",
+          "PC (Steam)",
+          "Feb – Nov 2020",
+          "3C · Act II gameplay · Puzzles · Playtesting"
+        ]
       ]
     },
     {
-      "id": "d2",
-      "type": "divider"
+      "id": "b-10kgxo",
+      "type": "text",
+      "html": "<p><strong>Recognition:</strong> Games for Change Latin America 2020 – Winner, Best Game for Social Impact · BIG Festival 2021 – Finalist, Impact category</p><p><strong>ASSET – Hero video (most important):</strong> a 60–90 second capture of Act II. Open with 10 seconds of the strongest visual moment, then show one puzzle being solved from start to finish. Silent with captions works fine. If you can't capture new footage, cut it from the Steam trailer.</p>"
     },
     {
-      "id": "act2-h",
+      "id": "b-xqp1y2",
       "type": "heading",
       "level": 2,
-      "text": "Designing the second act"
+      "text": "In short"
     },
     {
-      "id": "act2-intro",
+      "id": "b-dgb3wq",
       "type": "text",
-      "html": "<p>I owned the gameplay for the entire second act, designing puzzles and partnering with level design to refine blockout and flow so each space teaches the player something new.</p>"
+      "html": "<ul><li><strong>What I owned:</strong> the entire second act's gameplay and puzzles, the camera and control feel (with the design team), and the playtest process.</li><li><strong>Hardest problem:</strong> a puzzle players couldn't see. Reframing the camera, sightlines and lighting raised the solve rate to about 90% \\[from X%\\].</li><li><strong>What it shows:</strong> designing for players who have never held a controller, teaching without text, and turning playtest observations into specific changes.</li></ul>"
     },
     {
-      "id": "act2",
-      "type": "columns",
-      "count": 2,
+      "id": "b-hibvu7",
+      "type": "heading",
+      "level": 2,
+      "text": "My role"
+    },
+    {
+      "id": "b-9iq7e0",
+      "type": "table",
       "columns": [
-        {
-          "id": "a1",
-          "blocks": [
-            {
-              "id": "a1h",
-              "type": "heading",
-              "level": 3,
-              "text": "Teach by doing"
-            },
-            {
-              "id": "a1t",
-              "type": "text",
-              "html": "<p>Environmental layouts introduce mechanics in isolated, safe environments before combining them, eliminating the need for text-based tutorials. Each mechanic is introduced safely, practiced, combined with prior ideas, then mastered for an earned \"aha\" — the space is the lesson.</p>"
-            },
-            {
-              "id": "a3h",
-              "type": "heading",
-              "level": 3,
-              "text": "Gentle difficulty"
-            },
-            {
-              "id": "a3t",
-              "type": "text",
-              "html": "<p>A progression curve based on intuition-to-insight leaps, with soft fail-states and rapid retry loops that encourage experimentation over punishment.</p>"
-            }
-          ]
-        },
-        {
-          "id": "a2",
-          "blocks": [
-            {
-              "id": "a2h",
-              "type": "heading",
-              "level": 3,
-              "text": "Blockout & flow"
-            },
-            {
-              "id": "a2t",
-              "type": "text",
-              "html": "<ul><li>Iterated layouts for readability and pacing</li><li>Sightlines that guide without hand-holding</li><li>A rhythm of tension and calm across the act</li></ul>"
-            },
-            {
-              "id": "a4h",
-              "type": "heading",
-              "level": 3,
-              "text": "Narrative beats"
-            },
-            {
-              "id": "a4t",
-              "type": "text",
-              "html": "<ul><li>Gameplay paced to support story moments</li><li>Quiet spaces between challenges to breathe</li><li>Emotional payoff tied to puzzle resolution</li></ul>"
-            }
-          ]
-        }
+        "",
+        ""
+      ],
+      "rows": [
+        [
+          "**Owned**",
+          "Act II gameplay and puzzle design, end to end · puzzle pacing and difficulty curve · playtest plans, sessions and findings"
+        ],
+        [
+          "**Co-owned**",
+          "The 3C (camera, character, control) with the design team · core mechanics across the game"
+        ],
+        [
+          "**Supported**",
+          "Blockouts and level flow with level design · implementation with programming · narrative and art direction with the team"
+        ]
       ]
     },
     {
-      "id": "iter",
-      "type": "section",
-      "background": "accent",
-      "blocks": [
-        {
-          "id": "iter-h",
-          "type": "heading",
-          "level": 2,
-          "text": "Iterating from player feedback"
-        },
-        {
-          "id": "iter-intro",
-          "type": "text",
-          "html": "<p>For an all-ages adventure, playtesting is everything: what reads as obvious to a designer can stump a first-time player. One representative loop from Act II — observe, change, measure.</p>"
-        },
-        {
-          "id": "iter-cols",
-          "type": "columns",
-          "count": 3,
-          "columns": [
-            {
-              "id": "i1",
-              "blocks": [
-                {
-                  "id": "i1h",
-                  "type": "heading",
-                  "level": 3,
-                  "text": "Observed"
-                },
-                {
-                  "id": "i1t",
-                  "type": "text",
-                  "html": "<p>Playtest data highlighted a critical affordance failure in an Act II puzzle sequence. Players consistently missed a key interaction node, leading to progression dead-ends, loss of narrative momentum and early session abandonment.</p>"
-                }
-              ]
-            },
-            {
-              "id": "i2",
-              "blocks": [
-                {
-                  "id": "i2h",
-                  "type": "heading",
-                  "level": 3,
-                  "text": "Changed"
-                },
-                {
-                  "id": "i2t",
-                  "type": "text",
-                  "html": "<p>Reframed the camera hierarchy to highlight the puzzle objective, adjusted blockout sightlines together with Level Design, and integrated organic environmental lighting cues to guide the player without hand-holding.</p>"
-                }
-              ]
-            },
-            {
-              "id": "i3",
-              "blocks": [
-                {
-                  "id": "i3h",
-                  "type": "heading",
-                  "level": 3,
-                  "text": "Result"
-                },
-                {
-                  "id": "i3-stat",
-                  "type": "stats",
-                  "items": [
-                    {
-                      "value": "~90%",
-                      "label": "of playtesters solved it, after the change"
-                    }
-                  ]
-                },
-                {
-                  "id": "i3t",
-                  "type": "text",
-                  "html": "<p>Puzzle resolution rates rose to around 90% across subsequent playtest cohorts, preserving the intended \"aha!\" moment while restoring narrative pacing.</p>"
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      "id": "b-fyjzw0",
+      "type": "text",
+      "html": "<p>Being clear about this split matters: interviewers will ask what was yours, and the table answers before they do.</p>"
     },
     {
-      "id": "cta-h",
+      "id": "b-cg6pou",
       "type": "heading",
       "level": 2,
-      "text": "Want the deeper breakdown?"
+      "text": "The game"
     },
     {
-      "id": "cta-t",
+      "id": "b-6ca1o2",
       "type": "text",
-      "html": "<p>Happy to walk through the design documentation and tuning decisions behind this project.</p>"
+      "html": "<p>Aurora is a short, emotional game about the impact of an environmental disaster, seen through a child's eyes. Players explore, solve environmental puzzles and follow the story across three acts, in about \\[X\\] hours. It was made for players of all ages, including people who rarely play games.</p><p><strong>ASSET – 3–4 screenshots:</strong> one from each act, plus one Act II puzzle space. Wide shots that show the environment work best.</p>"
     },
     {
-      "id": "cta",
-      "type": "button",
-      "label": "Get in touch",
-      "href": "mailto:marcelo.rssi@hotmail.com",
-      "style": "primary"
+      "id": "b-sjey79",
+      "type": "heading",
+      "level": 2,
+      "text": "Constraints"
+    },
+    {
+      "id": "b-oj2tz9",
+      "type": "text",
+      "html": "<p>Good design pages show the limits the work was done within, because that's where the real decisions happen.</p><ul><li><strong>A team of 6</strong> with no dedicated QA, so playtesting had to be planned and run by the designers.</li><li><strong>About nine months</strong> from start to release \\[confirm\\].</li><li><strong>An all-ages audience:</strong> many players had little experience with 3D movement or camera control.</li><li><strong>No text tutorials,</strong> by choice: the story is told without words, so tutorial text would break it. \\[Confirm whether the game has any text at all.\\]</li></ul>"
+    },
+    {
+      "id": "b-vxlzv4",
+      "type": "heading",
+      "level": 2,
+      "text": "Design goals for Act II"
+    },
+    {
+      "id": "b-0gst9e",
+      "type": "text",
+      "html": "<p>The goals that guided my decisions. \\[Confirm which were set explicitly at the time and which were working principles, and say so on the page. Don't present an informal goal as a formal target.\\]</p>"
+    },
+    {
+      "id": "b-vasqrh",
+      "type": "table",
+      "columns": [
+        "Goal",
+        "How we checked it"
+      ],
+      "rows": [
+        [
+          "Every puzzle solvable without outside help",
+          "Solve rate in playtests, aim of \\[80–90%\\] or more"
+        ],
+        [
+          "No player stuck for long",
+          "Time to solve each puzzle; flag any over \\[X\\] minutes"
+        ],
+        [
+          "Each new mechanic learned without text",
+          "Watching whether testers used it correctly on first try"
+        ],
+        [
+          "The story keeps its momentum",
+          "Testers able to describe what was happening and why"
+        ],
+        [
+          "Act length fits the overall pacing",
+          "Act II playtime of about \\[X\\] minutes"
+        ]
+      ]
+    },
+    {
+      "id": "b-baan8h",
+      "type": "heading",
+      "level": 2,
+      "text": "Design pillars"
+    },
+    {
+      "id": "b-v1h0zb",
+      "type": "text",
+      "html": "<ol><li><strong>Feel before challenge.</strong> Movement and camera have to feel right before any puzzle can be fair.</li><li><strong>Show, don't tell.</strong> The game teaches through space, motion and discovery, not text.</li><li><strong>Gentle mastery.</strong> Puzzles grow from intuition to insight, and failing never punishes the player.</li></ol><p>&amp;#91;embedded content: design pillars · 3 pillars under one goal\\]</p>"
+    },
+    {
+      "id": "b-lr078o",
+      "type": "heading",
+      "level": 2,
+      "text": "1. Camera, character and control"
+    },
+    {
+      "id": "b-an4l1g",
+      "type": "text",
+      "html": "<p>In a narrative game, how it feels is the first impression. Before a puzzle can be fair or a story can land, players have to trust how the character moves and how the camera shows the space. I co-defined the 3C with the design team, and designed the camera and controls for Act II.</p>"
+    },
+    {
+      "id": "b-5slt9y",
+      "type": "heading",
+      "level": 3,
+      "text": "Camera: the player's narrator"
+    },
+    {
+      "id": "b-oeaog8",
+      "type": "text",
+      "html": "<p>The camera's job is to reveal the puzzle, not fight it.</p><ul><li><strong>Framing that hints at the goal:</strong> default angles keep the next objective in view, so the space suggests where to go.</li><li><strong>Smooth, predictable follow:</strong> no sudden snaps or fast rotation, to avoid motion sickness in players new to 3D.</li><li><strong>Composed angles for story moments:</strong> fixed or guided shots where the story needs them.</li></ul><p><strong>ASSET – Camera comparison:</strong> two screenshots or short GIFs of the same space, showing the framing before and after a change. If no &quot;before&quot; exists, a top-down sketch of camera zones in one Act II area works well.</p>"
+    },
+    {
+      "id": "b-8rhfk8",
+      "type": "heading",
+      "level": 3,
+      "text": "Character and control: forgiving by design"
+    },
+    {
+      "id": "b-g4rxmd",
+      "type": "text",
+      "html": "<p>For an all-ages audience, the controls have to turn what the player means into what the character does.</p><ul><li><strong>Generous tolerances:</strong> wider interaction ranges and forgiving collision, so near-misses count.</li><li><strong>Gentle assists:</strong> \\[for example: ledge help, coyote time, auto-alignment to interactable objects; confirm which existed\\].</li><li><strong>Readable animation:</strong> the character's pose shows clearly what state it's in and what it can do next.</li></ul><p>The aim was that failing feels like learning, never like fighting the controls.</p><p><strong>Tuning values</strong> \\[fill in if you have them; numbers show depth like nothing else\\]</p>"
+    },
+    {
+      "id": "b-504um3",
+      "type": "table",
+      "columns": [
+        "Parameter",
+        "Value",
+        "Why"
+      ],
+      "rows": [
+        [
+          "Interaction range",
+          "\\[X m\\]",
+          "\\[e.g. players approached objects at an angle\\]"
+        ],
+        [
+          "Jump forgiveness (coyote time)",
+          "\\[X s\\]",
+          "\\[e.g. young testers jumped late off edges\\]"
+        ],
+        [
+          "Camera follow delay",
+          "\\[X s\\]",
+          "\\[e.g. smooth enough to avoid motion sickness\\]"
+        ],
+        [
+          "Camera auto-recentre",
+          "\\[after X s idle\\]",
+          "\\[e.g. players forgot to move the camera\\]"
+        ]
+      ]
+    },
+    {
+      "id": "b-d8k4xo",
+      "type": "text",
+      "html": "<p><strong>ASSET – Movement GIF:</strong> 5–10 seconds of the character moving through an Act II space, ideally including a near-miss the tolerances saved.</p>"
+    },
+    {
+      "id": "b-p3j09a",
+      "type": "heading",
+      "level": 2,
+      "text": "2. Designing the second act"
+    },
+    {
+      "id": "b-iafacx",
+      "type": "text",
+      "html": "<p>I owned the gameplay of the whole second act: its structure, its puzzles, and how each space teaches the player something new. I refined the blockouts with level design so the spaces guide players without hand-holding.</p>"
+    },
+    {
+      "id": "b-2exw92",
+      "type": "heading",
+      "level": 3,
+      "text": "Structure: tension and calm"
+    },
+    {
+      "id": "b-72jzg9",
+      "type": "text",
+      "html": "<p>Act II alternates puzzle spaces with quiet moments for the story, so challenge never runs long enough to tire young players, and emotional beats land when the player has room to feel them.</p><p><strong>ASSET – Beat chart (high value, easy to make):</strong> a simple line chart of Act II from start to end. X axis: the act's spaces or minutes. Y axis: intensity (challenge or emotion). Mark each puzzle, each story beat and each new mechanic. You can draw it from memory in a spreadsheet; recruiters love this kind of chart because it shows how you think about pacing.</p>"
+    },
+    {
+      "id": "b-s2qp9k",
+      "type": "heading",
+      "level": 3,
+      "text": "Teach by doing"
+    },
+    {
+      "id": "b-a5c6mr",
+      "type": "text",
+      "html": "<p>Each mechanic follows the same four steps, so Act II needs no text tutorials:</p><ol><li><strong>Introduce</strong> it in a safe space where failure costs nothing.</li><li><strong>Practise</strong> it in a simple puzzle with one clear solution.</li><li><strong>Combine</strong> it with a mechanic the player already knows.</li><li><strong>Master</strong> it in a puzzle that needs both, for an earned &quot;aha&quot;.</li></ol><p>&amp;#91;embedded content: teach-by-doing loop · 4 steps per mechanic\\]</p><p><strong>Mechanics in Act II</strong> \\[fill in from the game\\]</p>"
+    },
+    {
+      "id": "b-tocqxz",
+      "type": "table",
+      "columns": [
+        "Mechanic",
+        "Introduced",
+        "Practised",
+        "Combined with",
+        "Mastery puzzle"
+      ],
+      "rows": [
+        [
+          "\\[Mechanic 1\\]",
+          "\\[space\\]",
+          "\\[puzzle\\]",
+          "\\[—\\]",
+          "\\[puzzle\\]"
+        ],
+        [
+          "\\[Mechanic 2\\]",
+          "\\[space\\]",
+          "\\[puzzle\\]",
+          "\\[Mechanic 1\\]",
+          "\\[puzzle\\]"
+        ],
+        [
+          "\\[Mechanic 3\\]",
+          "\\[space\\]",
+          "\\[puzzle\\]",
+          "\\[Mechanic 1 or 2\\]",
+          "\\[puzzle\\]"
+        ]
+      ]
+    },
+    {
+      "id": "b-n26kg0",
+      "type": "heading",
+      "level": 3,
+      "text": "Puzzle breakdown: \\[name of one Act II puzzle\\]"
+    },
+    {
+      "id": "b-b9b4sf",
+      "type": "text",
+      "html": "<p>One puzzle explained in depth shows more than five described briefly. Pick the one you're proudest of, ideally the one from the iteration case below.</p><ul><li><strong>What it teaches:</strong> \\[the mechanic or idea\\]</li><li><strong>What the player sees first:</strong> \\[how the space and camera frame it\\]</li><li><strong>The intended solution, step by step:</strong> \\[1, 2, 3\\]</li><li><strong>How the space guides:</strong> \\[sightlines, light, sound, object placement\\]</li><li><strong>What happens on failure:</strong> \\[soft fail, quick retry\\]</li><li><strong>The story beat it supports:</strong> \\[what it means emotionally\\]</li></ul><p><strong>ASSET – Annotated top-down map</strong> of this puzzle: player start, the key objects, the intended route, and where the camera sits. A hand sketch photographed or redrawn in Miro is perfect.</p><p><strong>ASSET – Original blockout vs final:</strong> one screenshot of each, if you still have them. Before/after images are among the most convincing things on a design page.</p>"
+    },
+    {
+      "id": "b-bw4k31",
+      "type": "heading",
+      "level": 2,
+      "text": "3. Playtesting"
+    },
+    {
+      "id": "b-bpngvz",
+      "type": "text",
+      "html": "<p>For an all-ages game, playtesting is everything: what looks obvious to a designer can stump a first-time player. I planned and ran the playtests and turned what we saw into design changes.</p><p><strong>How the tests worked</strong> \\[fill in what's true\\]</p>"
+    },
+    {
+      "id": "b-iaibk7",
+      "type": "table",
+      "columns": [
+        "",
+        ""
+      ],
+      "rows": [
+        [
+          "**Rounds**",
+          "\\[X\\] rounds across development"
+        ],
+        [
+          "**Testers per round**",
+          "\\[X\\], ages \\[X–X\\], from \\[friends, families, students, events\\]"
+        ],
+        [
+          "**Format**",
+          "\\[In person or remote\\]; players played without help while we watched"
+        ],
+        [
+          "**What we recorded**",
+          "Solve rate and time per puzzle, where players got stuck, what they said out loud, a short survey after"
+        ],
+        [
+          "**What happened next**",
+          "Findings sorted by severity, then fixed in the next build"
+        ]
+      ]
+    },
+    {
+      "id": "b-fcsy70",
+      "type": "text",
+      "html": "<p><strong>ASSET – Playtest notes:</strong> a photo or screenshot of a real notes sheet or findings table, with names blurred. Even a messy one proves the process was real.</p>"
+    },
+    {
+      "id": "b-wnsomd",
+      "type": "heading",
+      "level": 2,
+      "text": "Iteration case 1: the puzzle players couldn't see"
+    },
+    {
+      "id": "b-6v95rw",
+      "type": "text",
+      "html": "<p>&amp;#91;embedded content: iteration case 1 · problem to result\\]</p><p><strong>Problem:</strong> in one Act II puzzle, testers kept missing a key interaction point. They got stuck, lost the story's momentum, and some left the session early.</p><p><strong>Cause:</strong> the camera and sightlines pulled attention away from the object players needed, and nothing in the space pointed to it.</p><p><strong>Options considered:</strong></p><ul><li><em>Add an on-screen prompt.</em> Rejected: it breaks the no-text pillar and gives the answer away.</li><li><em>Make the object glow constantly.</em> Rejected: it removes the discovery and looks out of place in the art style.</li><li><em>Change how the space presents it.</em> Chosen: fix the problem where it started.</li></ul><p><strong>Fix:</strong> I reframed the camera to bring the objective into view, adjusted sightlines in the blockout with level design, and added lighting cues that lead the eye without spelling out the answer.</p><p><strong>Result:</strong> about 90% of testers solved the puzzle in the following rounds \\[from about X% before\\], and the &quot;aha&quot; moment stayed intact.</p><p><strong>ASSET – Before and after:</strong> two screenshots from the same camera position, before and after the change. This one image pair makes the whole case.</p>"
+    },
+    {
+      "id": "b-5shoek",
+      "type": "heading",
+      "level": 2,
+      "text": "Iteration case 2: \\[title\\]"
+    },
+    {
+      "id": "b-qp6fm2",
+      "type": "text",
+      "html": "<p>A second case makes the page much stronger, because it shows the first one wasn't luck. Some prompts to jog your memory: a control or camera problem young players had; a puzzle that was too easy or too long; a story moment testers missed; something you cut and why.</p><ul><li><strong>Problem:</strong> \\[what testers did or said\\]</li><li><strong>Cause:</strong> \\[why it happened\\]</li><li><strong>Fix:</strong> \\[what you changed\\]</li><li><strong>Result:</strong> \\[what changed in the next test\\]</li></ul>"
+    },
+    {
+      "id": "b-ueckce",
+      "type": "heading",
+      "level": 2,
+      "text": "Decisions and trade-offs"
+    },
+    {
+      "id": "b-9h0wlu",
+      "type": "text",
+      "html": "<ul><li><strong>No text tutorials.</strong> Teaching through space took far more design and testing time than a prompt would have, but it kept the story wordless and the pillars intact.</li><li><strong>Forgiving controls over precision.</strong> Generous tolerances meant puzzles could never rely on precise platforming; challenge had to come from understanding, not dexterity.</li><li>&amp;#91;Add one more if you remember it, such as something cut for scope.\\]</li></ul>"
+    },
+    {
+      "id": "b-vmdlnk",
+      "type": "heading",
+      "level": 2,
+      "text": "4. Results"
+    },
+    {
+      "id": "b-9jei1z",
+      "type": "text",
+      "html": "<ul><li>Released on Steam in November 2020.</li><li><strong>Games for Change Latin America 2020</strong> – Winner, Best Game for Social Impact.</li><li><strong>BIG Festival 2021</strong> – Finalist, Impact category.</li><li>&amp;#91;Steam reviews: X% positive from X reviews, if the numbers help.\\]</li></ul><p><strong>ASSET – Player voices:</strong> 2–3 short quotes from Steam reviews, festival judges or playtesters, ideally ones about Act II, the puzzles or how the game felt to play. Keep each to one sentence, and note the source.</p><p><strong>ASSET – Award images:</strong> the festival laurels or a photo from the event.</p>"
+    },
+    {
+      "id": "b-m691o8",
+      "type": "heading",
+      "level": 2,
+      "text": "Looking back"
+    },
+    {
+      "id": "b-xxy07l",
+      "type": "text",
+      "html": "<p><strong>What worked</strong></p><ul><li>Teaching through space instead of text kept the story intact and worked for players of all ages.</li><li>Testing with first-time players early found problems the team could no longer see.</li></ul><p><strong>What I'd do differently</strong></p><p>&amp;#91;Pick what's true; this section is a strong senior signal, because it shows you judge your own work.\\]</p><ul><li>Set measurable targets, such as solve rate and time per puzzle, before the first playtest rather than during.</li><li>Test the camera with first-time players earlier, since many later fixes were camera fixes.</li><li>&amp;#91;Your own.\\]</li></ul><p><strong>What I learned</strong></p><ul><li>For young or new players, the camera does most of the teaching.</li><li>What seems obvious to a designer often isn't; test early with people who have never seen the game.</li></ul>"
+    },
+    {
+      "id": "b-l9nt1y",
+      "type": "heading",
+      "level": 2,
+      "text": "Links"
+    },
+    {
+      "id": "b-h690pw",
+      "type": "text",
+      "html": "<p><a href=\"https://store.steampowered.com/app/1438440/Aurora_A_Childs_Journey/\">Steam page</a> · \\[Design documentation, if you can share any\\]</p>"
+    },
+    {
+      "id": "b-prmknl",
+      "type": "heading",
+      "level": 2,
+      "text": "Asset checklist"
+    },
+    {
+      "id": "b-9l5i6h",
+      "type": "text",
+      "html": "<p>In order of impact, so you know where to start:</p><ol><li>Hero video of Act II (60–90 s)</li><li>Before/after screenshots for iteration case 1</li><li>Beat chart of Act II</li><li>Annotated top-down map of one puzzle</li><li>Original blockout vs final</li><li>3–4 screenshots across the acts</li><li>Movement GIF</li><li>Camera comparison or camera zone sketch</li><li>Playtest notes sheet</li><li>2–3 player or judge quotes</li><li>Award laurels</li></ol>"
+    },
+    {
+      "id": "b-zxu5j2",
+      "type": "heading",
+      "level": 2,
+      "text": "Facts to confirm before publishing"
+    },
+    {
+      "id": "b-fenwpd",
+      "type": "text",
+      "html": "<ul><li>Solve rate before the fix in iteration case 1.</li><li>The &quot;options considered&quot; in case 1: I wrote likely alternatives; keep only the ones you actually discussed.</li><li>Playtest details: rounds, testers, ages.</li><li>Which design goals were set explicitly at the time.</li><li>Playtime, the Act II mechanics, and the tuning values, if you have them.</li><li>A second iteration case.</li></ul>"
     }
   ]
 }
