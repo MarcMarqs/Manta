@@ -47,6 +47,7 @@ Every block needs a unique `id` (unique within its page) and a `type`.
 |---|---|
 | `heading` | `level` 1–4, `text`, `number?` + `eyebrow?` for a numbered section header |
 | `text` | `html` — rich text |
+| `callout` | `tone?` (`note` \| `key` \| `caution` \| `result`), `title?`, `html` — a panel that asks the reader to stop |
 | `image` | `src`, `alt`, `caption?`, `scale?` (10–100, % of the block), `aspect?` (`1:1` \| `4:3` \| `3:2` \| `16:9` \| `21:9`) |
 | `gallery` | `layout?` (`grid` \| `carousel`), `images[]` of `{ src, alt, caption? }` |
 | `video` | `provider` (`file` \| `youtube` \| `vimeo` \| `itch`), `videoId`, `src?` (for `file`), `loop?`, `title?` |
@@ -54,13 +55,13 @@ Every block needs a unique `id` (unique within its page) and a `type`.
 | `divider` | — |
 | `spacer` | `size?` (`sm` \| `md` \| `lg`) |
 | `table` | `columns[]`, `rows[][]`, `caption?` |
-| `specs` | `items[]` of `{ label, value }` — the strip under a case-study title |
+| `specs` | `arrange?` (`row` \| `stack`), `items[]` of `{ label, value }` — the strip under a case-study title, or a one-per-line list |
 | `stats` | `items[]` of `{ value, label }` — figures set large |
 | `chart` | `variant` (`bar` \| `line`), `title?`, `note?`, `range?` `{ from, to, step? }`, `reference?` `{ value, label? }`, `series[]` of `{ name?, formula?, labels?, data? }` where a data point is `{ label, value, emphasis? }` |
-| `pillars` | `items[]` of `{ label, body }` — callout boxes for design principles |
+| `pillars` | `items[]` of `{ label, body }` — callout boxes for design principles; the row width is chosen so the boxes divide evenly (four become 2×2), and a short last row is centred |
 | `tornado` | `rows[]` of `{ label, low, high }`, `title?`, `unit?`, `lowLabel?`, `highLabel?` |
 | `flow` | `nodes[]` of `{ id, label, accent? }`, `edges[]` of `{ from, to }`, `caption?` |
-| `systemMap` | `arrange?` (`radial` \| `layered`), `nodes[]` of `{ id, label, note?, accent?, layer? }`, `links[]` of `{ from, to, label?, dashed? }`, `caption?` |
+| `systemMap` | `arrange?` (`radial` \| `layered` \| `stacked`), `nodes[]` of `{ id, label, note?, accent?, layer? }`, `links[]` of `{ from, to, label?, dashed? }`, `caption?` |
 | `radar` | `axes[]`, `series[]` of `{ name?, values[] }`, `max?`, `title?` |
 | `columns` | `count` 2–3, `columns[]` each `{ id, blocks[] }` |
 | `section` | `background?` (`none` \| `surface` \| `accent`), `arrange?` (`stack` \| `row`), `blocks[]` |
@@ -103,10 +104,18 @@ needs to be, wrapping onto the next line when it runs out of room — for a row 
 or a few small things that belong together. Use `columns` instead when you want equal
 tracks of content that stay aligned.
 
-Any block can also take `align` (`left` | `center` | `right`) and `width` (`narrow` | `normal`
-| `wide` | `full`). Wide reaches past the text column, full runs edge to edge. A full-width
-`section` becomes a coloured band whose content stays in the column. Inside sections and
-columns, wide and full fall back to normal. Every option collapses sensibly on a phone.
+Any block can also take `align` (`left` | `center` | `right`), `width` (`narrow` | `normal`
+| `wide` | `full`) and, for a narrow block, `place` (`left` | `center` | `right`). Wide
+reaches past the text column, full runs edge to edge. A full-width `section` becomes a
+coloured band whose content stays in the column. Inside sections and columns, wide and full
+fall back to normal. Every option collapses sensibly on a phone.
+
+**Align and Position are different things.** Align is the text inside a block; Position is
+where the block itself sits, and only a narrow block is small enough for that to mean
+anything — 640px inside a 1100px column leaves 460px to play with. Position shows up in the
+editor only when Width is Narrow, and defaults to centre, which is where narrow blocks have
+always sat, so nothing moves until you move it. The two combine: a block pinned left with
+its text centred is `place: left` plus `align: center`.
 
 ### Origin
 
@@ -125,7 +134,13 @@ called `primary`.
 2. Drop a cover in `public/images/projects/<slug>/`. A `coverVideo` plays over it: in the
    rail only while that card is open, in the grid only under the pointer (or when the card
    scrolls into view on a touch screen), so a page of cards doesn't run every video at once.
-3. Create `content/pages/work/<slug>.json` for its case study.
+3. **Frame it.** A card is 16:10 and a cover rarely is, so something gets cut. Under
+   **Projects → Framing** the picture is shown at the crop a card will make, and dragging
+   it sets which part survives (`coverFocus`, a CSS position like `"50% 20%"`; absent means
+   the middle). **Show all** (`coverFit: "contain"`) fits the whole picture in the frame
+   instead, on a surface-coloured background — for logo art whose corners are the point.
+   Both apply everywhere a cover appears: the rail, the grid and the next-case-study link.
+4. Create `content/pages/work/<slug>.json` for its case study.
 
 ### The running order
 
@@ -198,13 +213,32 @@ preview on the right rendered by the site's own components, so what you see is w
   at least 300px. **Reset panel sizes** (⋯ menu) restores the shipped layout, which is the
   width the preview's device sizes are drawn for. The choice is kept in the browser, like the
   theme, so it follows you rather than the site.
+- **The Pages list keeps the order you put it in.** Hover a page in the sidebar and arrows
+  appear at its right end; the first move writes the whole order into `site.json` as
+  `pageOrder`, and **A–Z** in the Pages header drops it again. A page that is not in the
+  list sorts after the ones that are, alphabetically, so adding a page never reshuffles
+  what you arranged. Only the editor reads it — visitors reach pages through the navigation
+  and the links on them.
+- **Markdown in:** **Markdown** in a page's header takes a `.md` file — dropped, chosen or
+  pasted — and turns it into blocks, either replacing the page or adding to the end. **New
+  page** can start from one too, taking its title from the first `#` heading. Headings,
+  prose, lists, quotes, links, pictures, tables, rules and code all come across, with
+  `**bold**`, `*italic*`, `` `code` ``, `[links](/to)`, `==highlight==` and `~~strike~~`
+  inside them. GitHub's alert syntax (`> [!WARNING]`, `> [!TIP]`, `> [!NOTE]`,
+  `> [!IMPORTANT]`) becomes a callout, while an ordinary quotation stays a quotation.
+  Consecutive prose gathers into one text block rather than one per paragraph,
+  because a page of thirty single-paragraph blocks is miserable to edit. What Markdown
+  cannot say — a chart, a project rail, a spec strip — you add afterwards. An import is one
+  undoable change, so Ctrl+Z puts the page back.
 - **Version history** (⋯ menu) lists every save and publish, and restores one as a new change,
   so going back is itself undoable.
 - **Unsaved work** is kept in the browser: close the tab by accident and the editor offers it
   back next time.
 - **Images** are resized to 2000px and converted to WebP in the browser, then committed to
   `public/images/uploads/` on the draft straight away, so the preview can show them. An image
-  block can be scaled and cropped to a shape; the library deletes ones nothing uses any more.
+  block can be scaled and cropped to a shape; the library deletes ones nothing uses any more,
+  taking the smaller copies with it. The library lists pictures, not those copies — an upload
+  is four files, and listing all four made three of them look like unused duplicates.
   GIFs and SVGs are kept exactly as they are, since re-encoding would freeze one and
   rasterise the other.
 
@@ -230,6 +264,15 @@ preview on the right rendered by the site's own components, so what you see is w
   link shows the page's own description and picture — a case study uses its project cover,
   anything else falls back to the site-wide image in Site & theme. All of it hangs off the
   **Site address** there, so update that when the domain changes.
+
+**Colours come in pairs.** Every colour in **Site & theme → Colors** has a Light value and
+a Dark one, the accent included: a green bright enough to glow on a near-black page
+measures 1.3:1 against white, which is a stain rather than a colour. Each accent shows what
+it measures against the background it will sit on, and a **Fix** button appears when it
+falls under 4.5:1 — it keeps the hue and saturation and moves only the lightness, as far as
+it has to and no further. A theme with no dark accent set gets one derived the same way, so
+nothing is ever unreadable by default. The text that sits on a filled accent (a button) is
+derived per theme too, which is why a pale accent gets dark text and a deep one gets white.
 
 **Settings** in the sidebar holds what belongs to you rather than to the work: theme
 (dark, the reading light theme, or follow the system), the accent that marks whatever is

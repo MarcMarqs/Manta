@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'preact/hooks';
 import type { Align, Block, BlockType, BlockWidth, Project } from '../lib/types';
-import { BLOCKS, GROUPS, cloneBlock, parseDocInput, parseSheetInput, parseVideoInput, summarize } from './blocks';
+import { BLOCKS, GROUPS, TONES, cloneBlock, parseDocInput, parseSheetInput, parseVideoInput, summarize } from './blocks';
 import { api, assetUrl } from './api';
 import { ImageField, LinkInput, VideoField } from './media';
 import { PROJECTS, expanded, fileToRoute, files, newId, openView, pagePaths, projects, selectedBlock, tags, toggleExpanded, updateFile } from './store';
@@ -515,7 +515,11 @@ const widthOf = (block: Block): BlockWidth =>
 
 function layoutLabel(block: Block): string {
   const w = widthOf(block);
-  return [w !== 'normal' && WIDTHS.find((x) => x.value === w)?.label, block.align && block.align !== 'left' && (block.align === 'center' ? 'Centered' : 'Right')]
+  return [
+    w !== 'normal' && WIDTHS.find((x) => x.value === w)?.label,
+    w === 'narrow' && block.place && block.place !== 'center' && (block.place === 'left' ? 'left' : 'right'),
+    block.align && block.align !== 'left' && (block.align === 'center' ? 'Centered' : 'Right'),
+  ]
     .filter(Boolean)
     .join(' · ');
 }
@@ -530,10 +534,12 @@ function LayoutFields({ block, depth, onChange }: { block: Block; depth: number;
   const width = widthOf(block);
   const widths = depth === 0 ? WIDTHS : WIDTHS.slice(0, 2);
 
-  const set = (patch: { align?: Align; width?: BlockWidth }) => {
+  const set = (patch: { align?: Align; width?: BlockWidth; place?: Align }) => {
     const next = { ...block, ...patch } as Block;
     if (next.align === 'left') delete next.align;
     if (next.width === 'normal' || (next.width as string) === 'content') delete next.width;
+    // Centre is the default, and a block that is no longer narrow has nowhere to be put.
+    if (next.place === 'center' || next.width !== 'narrow') delete next.place;
     onChange(next);
   };
 
@@ -553,6 +559,19 @@ function LayoutFields({ block, depth, onChange }: { block: Block; depth: number;
       <Field label="Width">
         <Segmented value={widths.some((w) => w.value === width) ? width : 'normal'} options={widths} onChange={(w) => set({ width: w })} />
       </Field>
+      {width === 'narrow' && (
+        <Field label="Position" hint="Where the block sits in the column. Align moves its text; this moves the block.">
+          <Segmented
+            value={block.place ?? 'center'}
+            options={[
+              { value: 'left' as const, label: 'Left', icon: 'placeLeft' },
+              { value: 'center' as const, label: 'Center', icon: 'placeCenter' },
+              { value: 'right' as const, label: 'Right', icon: 'placeRight' },
+            ]}
+            onChange={(place) => set({ place })}
+          />
+        </Field>
+      )}
     </div>
   );
 }
@@ -643,6 +662,32 @@ function BlockFields({
               onChange={(v) => onChange({ ...block, eyebrow: v || undefined })}
             />
           </Field>
+        </div>
+      );
+
+    case 'callout':
+      return (
+        <div class="stack">
+          <div class="fields">
+            <Field label="Tone" hint="The colour is the whole of what this says, so pick the one that is true." wide>
+              <Segmented
+                value={block.tone ?? 'note'}
+                options={(Object.keys(TONES) as (keyof typeof TONES)[]).map((value) => ({
+                  value,
+                  label: TONES[value],
+                }))}
+                onChange={(tone) => onChange({ ...block, tone })}
+              />
+            </Field>
+            <Field label="Title" hint="Optional. Sits above the text in the tone's colour." wide>
+              <TextInput
+                value={block.title ?? ''}
+                placeholder={TONES[block.tone ?? 'note']}
+                onChange={(v) => onChange({ ...block, title: v || undefined })}
+              />
+            </Field>
+          </div>
+          <RichText value={block.html} links={linkOptions()} onChange={(v) => onChange({ ...block, html: v })} />
         </div>
       );
 
@@ -1037,6 +1082,22 @@ function BlockFields({
         write(items.map((x, j) => (j === i ? { ...x, ...patch } : x)));
       return (
         <div class="stack">
+          {isSpecs && (
+            <div class="fields">
+              <Field label="Arrange" hint="Across the page, or one pair per line." wide>
+                <Segmented
+                  value={block.arrange ?? 'row'}
+                  options={[
+                    { value: 'row' as const, label: 'Side by side' },
+                    { value: 'stack' as const, label: 'One per line' },
+                  ]}
+                  onChange={(arrange) =>
+                    onChange({ ...block, arrange: arrange === 'row' ? undefined : arrange } as Block)
+                  }
+                />
+              </Field>
+            </div>
+          )}
           <div class="series">
             <div class="series-head">
               <span>{isSpecs ? 'Label' : 'Figure'}</span>
@@ -1462,16 +1523,23 @@ function BlockFields({
         onChange({ ...block, nodes: block.nodes.map((x, j) => (j === i ? { ...x, ...patch } : x)) });
       const setLink = (i: number, patch: Partial<(typeof block.links)[number]>) =>
         onChange({ ...block, links: block.links.map((x, j) => (j === i ? { ...x, ...patch } : x)) });
-      const radial = (block.arrange ?? 'radial') === 'radial';
+      const arrange = block.arrange ?? 'radial';
+      const radial = arrange === 'radial';
+      const hint = {
+        radial: 'The first node sits at the centre, the rest around it.',
+        layered: 'Nodes run left to right, in the column their layer names.',
+        stacked: 'Layers are rows down the page. A row with one node spans the width.',
+      }[arrange];
       return (
         <div class="stack">
           <div class="fields">
-            <Field label="Arrangement" hint={radial ? 'The first node sits at the centre, the rest around it.' : 'Nodes run left to right, in the column their layer names.'}>
+            <Field label="Arrangement" hint={hint} wide>
               <Segmented
-                value={block.arrange ?? 'radial'}
+                value={arrange}
                 options={[
                   { value: 'radial', label: 'Around a core' },
                   { value: 'layered', label: 'Left to right' },
+                  { value: 'stacked', label: 'Top to bottom' },
                 ]}
                 onChange={(v) => onChange({ ...block, arrange: v })}
               />
@@ -1482,20 +1550,16 @@ function BlockFields({
           </div>
 
           <div class="subsection">
-            <p class="field-hint">{radial ? 'The first node is the core.' : 'Layer 0 is the leftmost column.'}</p>
+            <p class="field-hint">
+              {radial
+                ? 'The first node is the core.'
+                : arrange === 'stacked'
+                  ? 'Layer 0 is the top row. Give three nodes the same layer to put them side by side.'
+                  : 'Layer 0 is the leftmost column.'}
+            </p>
             {block.nodes.map((node, i) => (
-              <div class="series-row wide">
-                <TextInput value={node.label} onChange={(label) => setNode(i, { label })} />
-                <TextInput value={node.note ?? ''} onChange={(note) => setNode(i, { note: note || undefined })} />
-                {radial ? (
-                  <Toggle
-                    checked={Boolean(node.accent)}
-                    label="Highlight"
-                    onChange={(accent) => setNode(i, { accent: accent || undefined })}
-                  />
-                ) : (
-                  <NumberInput integer value={node.layer ?? 0} onChange={(v) => setNode(i, { layer: v ?? 0 })} />
-                )}
+              <div class="map-row">
+                <TextInput value={node.label} placeholder="Label" onChange={(label) => setNode(i, { label })} />
                 <IconButton
                   icon="trash"
                   label="Remove"
@@ -1508,6 +1572,26 @@ function BlockFields({
                     })
                   }
                 />
+                <span class="map-row-note">
+                  <TextInput
+                    value={node.note ?? ''}
+                    placeholder="Note under the label"
+                    onChange={(note) => setNode(i, { note: note || undefined })}
+                  />
+                </span>
+                <span class="map-row-meta">
+                  {!radial && (
+                    <>
+                      <span class="muted">Layer</span>
+                      <NumberInput integer value={node.layer ?? 0} onChange={(v) => setNode(i, { layer: v ?? 0 })} />
+                    </>
+                  )}
+                  <Toggle
+                    checked={Boolean(node.accent)}
+                    label="Highlight"
+                    onChange={(accent) => setNode(i, { accent: accent || undefined })}
+                  />
+                </span>
               </div>
             ))}
             <button

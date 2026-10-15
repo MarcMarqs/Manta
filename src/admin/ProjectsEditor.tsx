@@ -1,5 +1,5 @@
 import type { Project, ProjectLink, Site } from '../lib/types';
-import { ImageField, LinkInput } from './media';
+import { CoverFraming, ImageField, LinkInput } from './media';
 import { createPage } from './PageEditor';
 import { PAGES_DIR, PROJECTS, SITE, files, openView, projects, setFiles, tags, toast, updateFile, view, type PageFile } from './store';
 import { Field, Icon, IconButton, Segmented, Select, TextArea, TextInput } from './ui';
@@ -209,6 +209,17 @@ function ProjectForm({ project, index }: { project: Project; index: number }) {
         <Field label="Cover image" wide>
           <ImageField value={project.cover} onChange={(cover) => set({ cover })} />
         </Field>
+        {project.cover && (
+          <Field label="Framing" hint="Drag the picture to choose what the cards keep." wide>
+            <CoverFraming
+              src={project.cover}
+              focus={project.coverFocus}
+              fit={project.coverFit}
+              onFocus={(coverFocus) => set({ coverFocus })}
+              onFit={(coverFit) => set({ coverFit })}
+            />
+          </Field>
+        )}
       </div>
 
       <section class="subsection">

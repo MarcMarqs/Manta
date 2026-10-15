@@ -258,13 +258,19 @@ main {
   text-align: right;
 }
 
-/* Narrow is a measure, not a position: it sits in the middle of the column whatever its
-   text does. Left against the edge it reads as a mistake beside the full-width blocks
-   above and below it, and alignment is about the text inside a block, not where the
-   block sits. */
+/* Narrow is a measure first: it sets how wide the block is, and sits in the middle of the
+   column unless told otherwise. Where it sits is its own control (Position in the editor),
+   kept apart from Align, which is about the text inside a block rather than the box — so a
+   block can be pinned left while its text stays centred. */
 .blk.w-narrow {
   max-width: 640px;
   margin-inline: auto;
+}
+.blk.w-narrow.p-left {
+  margin-inline: 0 auto;
+}
+.blk.w-narrow.p-right {
+  margin-inline: auto 0;
 }
 
 /* Wide reaches past the content column on both sides; full runs edge to edge. */
@@ -430,6 +436,11 @@ figure img,
   flex: none;
 }
 
+.next-project img.is-contain {
+  object-fit: contain;
+  background: var(--surface);
+}
+
 .next-project .eyebrow {
   color: var(--muted);
   font-size: 0.8rem;
@@ -484,6 +495,24 @@ a.tag-chip:hover {
    avatars, no comment bubbles: the moment the page claims to be a document somebody
    could collaborate on, the device turns into costume.
    =========================================================================== */
+
+/* A caution and a result need hues the theme does not carry, and one hex cannot serve a
+   white page and a near-black one, so each has a pair. Both measure above 5.4:1 against
+   their own background and surface. The other two tones borrow the theme's own colours. */
+:root {
+  --caution: #8a5a00;
+  --result: #13693f;
+}
+:root[data-theme='dark'] {
+  --caution: #e8b13c;
+  --result: #45d08a;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --caution: #e8b13c;
+    --result: #45d08a;
+  }
+}
 
 :root {
   --rule: var(--border);

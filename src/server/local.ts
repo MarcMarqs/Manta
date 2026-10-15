@@ -3,7 +3,7 @@
 import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { dirname, join, relative, sep } from 'node:path';
 import type { Backend, ContentState, FileChange, Status, Version } from './backend';
-import { isContentPath, isImagePath } from './paths';
+import { isContentPath, isImagePath, pictures } from './paths';
 
 const root = process.cwd();
 
@@ -31,8 +31,7 @@ export class LocalBackend implements Backend {
         files[p] = await readFile(join(root, p), 'utf-8');
       }),
     );
-    const images = (await walk('public/images'))
-      .filter(isImagePath)
+    const images = pictures((await walk('public/images')).filter(isImagePath), files['content/media.json'])
       .map((p) => p.replace(/^public/, ''))
       .sort();
     return { branch: 'local', files, images };

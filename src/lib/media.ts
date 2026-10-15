@@ -15,6 +15,17 @@ interface Entry {
 
 const media = manifest as Record<string, Entry>;
 
+/**
+ * A focal point is only ever two percentages.
+ *
+ * It ends up inside a style attribute, so whatever was typed into the editor is checked
+ * against that shape rather than trusted: anything else is dropped and the picture
+ * centres, which is where it sat before the setting existed.
+ */
+export function focusPoint(value: string | undefined): string | undefined {
+  return value && /^\d{1,3}% \d{1,3}%$/.test(value) ? value : undefined;
+}
+
 export const variantPath = (src: string, width: number) => src.replace(/\.(\w+)$/, `-${width}.$1`);
 
 /** `srcset` for an uploaded image, or undefined when there is only one copy. */

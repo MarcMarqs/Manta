@@ -1,5 +1,12 @@
 export interface Theme {
+  /** The accent on the light theme. */
   accent: string;
+  /**
+   * The accent on the dark theme. Absent means one derived from `accent` that can be
+   * read on the dark background — a colour bright enough for black is usually invisible
+   * on white, and the other way round.
+   */
+  accentDark?: string;
   bg: string;
   fg: string;
   muted: string;
@@ -29,6 +36,13 @@ export interface Site {
   tagline: string;
   footer: string;
   nav: { label: string; href: string }[];
+  /**
+   * The order the Pages list is kept in, as repo paths. Only the editor reads it — a
+   * visitor reaches pages through the nav and the links on them, not through this.
+   * Anything missing from the list sorts after what is in it, alphabetically, so a page
+   * added later appears without the order having to be rewritten.
+   */
+  pageOrder?: string[];
   /**
    * What goes between a project's genre, year and role. Carries its own spaces, so a
    * comma can sit tight against the word before it while a dash does not.
@@ -100,6 +114,14 @@ export interface Project {
   discipline: string[];
   engine: string[];
   cover: string;
+  /**
+   * Which part of the cover to keep when the card crops it, as a CSS position such as
+   * "50% 30%". A card is 16:10 and a picture rarely is, so something is always cut; this
+   * says what. Absent means the middle, which is what every cover did before.
+   */
+  coverFocus?: string;
+  /** 'contain' fits the whole picture in the frame instead of filling it. For logo art. */
+  coverFit?: 'cover' | 'contain';
   coverVideo: string | null;
   /** An id from the origin list. Absent means the first one. */
   origin?: ProjectOrigin;
@@ -111,10 +133,19 @@ export type Align = 'left' | 'center' | 'right';
 /** normal = the content column; wide and full reach past it (top-level blocks only). */
 export type BlockWidth = 'narrow' | 'normal' | 'wide' | 'full';
 
-/** Placement options every block can carry. Both are optional; absent means left / normal. */
+/**
+ * Placement options every block can carry. All optional; absent means left / normal /
+ * centred.
+ *
+ * `align` is about the text inside a block. `place` is about the box itself, and only
+ * means anything for a block narrower than the column it sits in — which today is
+ * `narrow`. Absent means centred, because that is where narrow blocks have always sat
+ * and nothing should move until it is asked to.
+ */
 export interface BlockLayout {
   align?: Align;
   width?: BlockWidth;
+  place?: Align;
 }
 
 /** One entry in a page's block array. Nested blocks live in `section` and `columns`. */
@@ -206,11 +237,34 @@ export type Block = BlockLayout & (
       height?: 'short' | 'medium' | 'tall';
     }
   | { id: string; type: 'button'; label: string; href: string; style?: 'primary' | 'secondary' }
+  | {
+      id: string;
+      type: 'callout';
+      /**
+       * What kind of attention it asks for, which is the only thing the colour says:
+       * 'note' is an aside, 'key' the thing to take away, 'caution' a limit or a
+       * mistake, 'result' what came of it. Absent means 'note'.
+       */
+      tone?: 'note' | 'key' | 'caution' | 'result';
+      /** An optional line above the text, in the tone's colour. */
+      title?: string;
+      html: string;
+    }
   | { id: string; type: 'divider' }
   | { id: string; type: 'spacer'; size?: 'sm' | 'md' | 'lg' }
   | { id: string; type: 'table'; caption?: string; columns: string[]; rows: string[][] }
   /** The strip under a case-study title: role, studio, team size, engine, focus. */
-  | { id: string; type: 'specs'; items: { label: string; value: string }[] }
+  | {
+      id: string;
+      type: 'specs';
+      /**
+       * 'row' is the strip: pairs across the page, wrapping when they run out of room.
+       * 'stack' is a list: one pair per line, label beside value. Absent means 'row',
+       * which is what every existing strip is.
+       */
+      arrange?: 'row' | 'stack';
+      items: { label: string; value: string }[];
+    }
   /** Figures worth stating on their own: years in industry, shipped titles, "~90% solved". */
   | { id: string; type: 'stats'; items: { value: string; label: string }[] }
   | {
@@ -271,7 +325,8 @@ export type Block = BlockLayout & (
   | {
       id: string;
       type: 'systemMap';
-      arrange?: 'radial' | 'layered';
+      /** 'stacked' runs top to bottom, each layer a row; a lone node in a row spans it. */
+      arrange?: 'radial' | 'layered' | 'stacked';
       caption?: string;
       nodes: { id: string; label: string; note?: string; accent?: boolean; layer?: number }[];
       links: { from: string; to: string; label?: string; dashed?: boolean }[];

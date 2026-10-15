@@ -15,12 +15,15 @@ import {
   busy,
   canRedo,
   canUndo,
+  clearPageOrder,
   dirtyPaths,
   fileToRoute,
   files,
   loadAll,
+  movePage,
   openView,
   pagePaths,
+  pagesAreOrdered,
   forgetUnsaved,
   recovery,
   redo,
@@ -422,22 +425,45 @@ function Sidebar({ onNewPage }: { onNewPage: () => void }) {
     </button>
   );
 
+  const pages = pagePaths.value;
   return (
     <nav class="sidebar">
       <div class="side-group">
         <div class="side-head">
           <span>Pages</span>
-          <IconButton icon="plus" label="New page" onClick={onNewPage} />
+          <span class="row">
+            {pagesAreOrdered.value && (
+              <button type="button" class="btn tiny ghost" onClick={clearPageOrder} title="Sort the list alphabetically again">
+                A–Z
+              </button>
+            )}
+            <IconButton icon="plus" label="New page" onClick={onNewPage} />
+          </span>
         </div>
-        {pagePaths.value.map((path) => {
+        {pages.map((path, i) => {
           const page = files.value[path] as PageFile;
-          return nav(
-            v.kind === 'page' && v.path === path,
-            dirty.has(path),
-            path === HOME ? 'home' : 'page',
-            page.title || 'Untitled',
-            () => openView({ kind: 'page', path }),
-            fileToRoute(path),
+          return (
+            <div class="side-row">
+              {nav(
+                v.kind === 'page' && v.path === path,
+                dirty.has(path),
+                path === HOME ? 'home' : 'page',
+                page.title || 'Untitled',
+                () => openView({ kind: 'page', path }),
+                fileToRoute(path),
+              )}
+              {/* Over the row rather than beside it: the sidebar is narrow, and a pair of
+                  buttons on every line would take the width the titles need. */}
+              <span class="side-move">
+                <IconButton icon="up" label={`Move ${page.title || 'page'} up`} disabled={i === 0} onClick={() => movePage(path, -1)} />
+                <IconButton
+                  icon="down"
+                  label={`Move ${page.title || 'page'} down`}
+                  disabled={i === pages.length - 1}
+                  onClick={() => movePage(path, 1)}
+                />
+              </span>
+            </div>
           );
         })}
       </div>

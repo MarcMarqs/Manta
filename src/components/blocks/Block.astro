@@ -23,7 +23,12 @@ const { preview, asset } = useContent(Astro.locals);
 // Blocks with a width or alignment get a wrapper carrying those classes (styled in
 // global.css). "content" is the old image-only name for normal width.
 const width = (block.width as string) === 'content' ? 'normal' : (block.width ?? 'normal');
-const layout = [width !== 'normal' && `w-${width}`, block.align && block.align !== 'left' && `a-${block.align}`]
+const layout = [
+  width !== 'normal' && `w-${width}`,
+  block.align && block.align !== 'left' && `a-${block.align}`,
+  // Only a block narrower than the column has anywhere else to be.
+  width === 'narrow' && block.place && block.place !== 'center' && `p-${block.place}`,
+]
   .filter(Boolean)
   .join(' ');
 
@@ -76,6 +81,17 @@ const docSrc = (b: Extract<Block, { type: 'doc' }>) => {
     ? `https://docs.google.com/document/d/e/${id}/pub?embedded=true`
     : `https://docs.google.com/document/d/${id}/preview`;
 };
+
+/**
+ * How many callout boxes go across.
+ *
+ * Four of them used to come out three-and-one, with the last one stretched the width of
+ * the page like a mistake. Three is the most that stays readable for prose, so the count
+ * is the one at or below three that divides the boxes most evenly: four become two rows
+ * of two rather than a row and a banner. Where nothing divides evenly — seven, ten — the
+ * short row is centred instead, which reads as a decision rather than a gap.
+ */
+const pillarColumns = (count: number) => (count <= 3 ? Math.max(1, count) : count === 4 ? 2 : 3);
 
 const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
   ({
@@ -254,6 +270,15 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
       ))
   }
 
+  {
+    block.type === 'callout' && (
+      <aside class={`callout tone-${block.tone ?? 'note'}`}>
+        {block.title && <p class="callout-title">{block.title}</p>}
+        <div class="rich" set:html={block.html} />
+      </aside>
+    )
+  }
+
   {block.type === 'divider' && <hr class="block-divider" />}
 
   {block.type === 'spacer' && <div class={`spacer spacer-${block.size ?? 'md'}`} />}
@@ -286,7 +311,7 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
 
   {
     block.type === 'specs' && (
-      <dl class="specs">
+      <dl class={`specs${block.arrange === 'stack' ? ' specs-list' : ''}`}>
         {block.items.map((item) => (
           <div>
             <dt>{item.label}</dt>
@@ -312,7 +337,7 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
 
   {
     block.type === 'pillars' && (
-      <div class="pillars">
+      <div class="pillars" style={`--cols:${pillarColumns(block.items.length)}`}>
         {block.items.map((item) => (
           <div class="pillar">
             <p class="pillar-label">{item.label}</p>
@@ -434,21 +459,38 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
   .section.bg-accent {
     background: color-mix(in srgb, var(--accent) 12%, var(--bg));
   }
-  /* Flex rather than grid: with `auto-fit` a trailing row holding fewer boxes than the
-     column count leaves a visible empty track, where flex lets a lone last box stretch
-     across the space instead. */
+/* Every box is one column wide and no wider: a box that grows to fill whatever is left
+     turns the last row into a banner that has nothing to do with the others. A short last
+     row is centred under the rest instead. `--cols` comes from the block, which picks the
+     count that divides its boxes most evenly; the queries below only ever lower it, so a
+     pair stays a pair on a phone rather than being promoted to three. */
   .pillars {
+    --pillar-cols: var(--cols, 3);
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 14px;
   }
 
   .pillar {
-    flex: 1 1 200px;
+    flex: 0 1 calc((100% - (var(--pillar-cols) - 1) * 14px) / var(--pillar-cols));
+    min-width: 180px;
     padding: 16px 18px;
     border: 1px solid var(--border);
     border-radius: var(--radius);
     background: var(--surface);
+  }
+
+  @media (max-width: 860px) {
+    .pillars {
+      --pillar-cols: min(var(--cols, 3), 2);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .pillars {
+      --pillar-cols: 1;
+    }
   }
 
   .pillar-label {
@@ -695,6 +737,31 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
     border-bottom: 1px solid var(--border);
   }
 
+  /* The list: one pair per line, the label in a column of its own so the values line up
+     down the page. A spec sheet rather than a strip — better when there are more pairs
+     than fit across, or when each one deserves its own line. */
+  .specs-list {
+    display: grid;
+    gap: 0;
+    padding: 6px 0;
+  }
+
+  .specs-list > div {
+    display: grid;
+    grid-template-columns: minmax(0, 11rem) minmax(0, 1fr);
+    gap: 2px 20px;
+    align-items: baseline;
+    padding: 10px 0;
+  }
+
+  .specs-list > div + div {
+    border-top: 1px solid var(--border);
+  }
+
+  .specs-list dt {
+    margin-bottom: 0;
+  }
+
   .specs dt {
     font-family: var(--font-heading);
     color: var(--muted);
@@ -737,6 +804,11 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
     .specs {
       gap: 14px 28px;
     }
+    /* No room for two columns; the label goes back above its value. */
+    .specs-list > div {
+      grid-template-columns: 1fr;
+      gap: 2px;
+    }
   }
 
   .spacer-sm {
@@ -758,6 +830,73 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
 
   /* Highlighted text. A tint of the accent rather than a yellow felt-tip, so it belongs
      to the page; the padding is asymmetric because text sits off-centre in its line box. */
+  /* A rule down the side and a wash of the same colour: enough to stop the eye without
+     becoming a box that competes with the sections around it. The colour is the only
+     thing carrying the meaning, so it is also the title's colour. */
+  .callout {
+    padding: 16px 18px;
+    border-left: 3px solid var(--tone);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    background: color-mix(in srgb, var(--tone) 9%, var(--bg));
+  }
+
+  .callout.tone-note {
+    --tone: var(--muted);
+  }
+  .callout.tone-key {
+    --tone: var(--accent);
+  }
+  .callout.tone-caution {
+    --tone: var(--caution);
+  }
+  .callout.tone-result {
+    --tone: var(--result);
+  }
+
+  .callout-title {
+    margin: 0 0 6px;
+    font-family: var(--font-heading);
+    font-weight: 650;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--tone);
+  }
+
+  /* Quotes and code arrive with imported Markdown, so the page has to have an answer
+     for them. Quiet ones: a rule and an indent, and type that stays out of the way. */
+  .rich :global(blockquote) {
+    margin: 0;
+    padding-left: 16px;
+    border-left: 2px solid var(--accent);
+    color: var(--muted);
+  }
+
+  .rich :global(pre) {
+    margin: 0;
+    padding: 14px 16px;
+    overflow-x: auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  .rich :global(:is(pre, code)) {
+    font-family: var(--font-mono);
+    font-size: 0.86em;
+  }
+
+  .rich :global(code) {
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: var(--surface);
+  }
+
+  .rich :global(pre code) {
+    padding: 0;
+    background: none;
+  }
+
   .rich :global(mark) {
     background: color-mix(in srgb, var(--accent) 22%, transparent);
     color: inherit;

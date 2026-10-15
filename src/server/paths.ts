@@ -33,5 +33,51 @@ const extOf = (path: string) => path.split('.').pop()?.toLowerCase() ?? '';
 
 export const imageType = (path: string) => IMAGE_TYPES[extOf(path)] ?? 'application/octet-stream';
 
+/** The uploads folder is the only place names are generated, so `-480` means a copy. */
+const VARIANT_SUFFIX = /-(\d{2,5})(\.\w+)$/;
+
+/** `…/shot-480.webp` -> `…/shot.webp`, or null when the name says nothing about a copy. */
+export const variantSource = (path: string) => {
+  if (!path.startsWith('public/images/uploads/')) return null;
+  const base = path.replace(VARIANT_SUFFIX, '$2');
+  return base === path ? null : base;
+};
+
+/** The width `…-960.webp` stands for. */
+export const variantWidth = (path: string) => {
+  const m = VARIANT_SUFFIX.exec(path);
+  return m ? Number(m[1]) : null;
+};
+
+/**
+ * Only the pictures, with the smaller copies left out.
+ *
+ * An upload becomes four files, and listing all four made the library look like it held
+ * four pictures — three of them apparently unused, because nothing points at a copy by
+ * name. Deleting one of those "spares" takes a width out from under the real picture and
+ * leaves the page asking for a file that is no longer there.
+ *
+ * The manifest is asked first, since it is the record of what was made. The name is the
+ * fallback, for an upload from before the manifest existed: a file whose name is another
+ * file's name plus a number, in the folder where names are generated, is a copy of it.
+ */
+export function pictures(paths: string[], manifestJson?: string): string[] {
+  const copies = new Set<string>();
+  try {
+    const manifest = JSON.parse(manifestJson ?? '{}') as Record<string, { sizes?: number[] }>;
+    for (const [src, entry] of Object.entries(manifest))
+      for (const width of entry.sizes ?? [])
+        copies.add(`public${src}`.replace(/\.(\w+)$/, `-${width}.$1`));
+  } catch {
+    /* An unreadable manifest just means falling back to the names. */
+  }
+  const all = new Set(paths);
+  return paths.filter((p) => {
+    if (copies.has(p)) return false;
+    const source = variantSource(p);
+    return !source || !all.has(source);
+  });
+}
+
 export const mediaType = (path: string) =>
   IMAGE_TYPES[extOf(path)] ?? VIDEO_TYPES[extOf(path)] ?? 'application/octet-stream';
