@@ -253,6 +253,11 @@ preview on the right rendered by the site's own components, so what you see is w
   which is a far smaller file than the same thing as an actual GIF. The trash button deletes
   the file itself, and refuses while any page still points at it.
 
+- **A case study is two files.** The page carries the writing; the project carries the
+  facts a reader sees at the foot of it — the cover, the tags and the buttons linking out.
+  **Page settings → Case study for** names the project and now carries an **Edit project**
+  button through to it, which is where the Links section lives; the project view has
+  always carried a button back the other way.
 - **The card at the foot of a case study** is set per page under **Page settings → Next
   case study**: the next project in the Projects order (the default), the next one in the
   same origin, a particular project, or nothing at all. Stored as `next` — a project slug,

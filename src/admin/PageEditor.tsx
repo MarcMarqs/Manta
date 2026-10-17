@@ -510,15 +510,32 @@ export function PageEditor({ path }: { path: string }) {
               </Field>
               {path.startsWith(`${PAGES_DIR}work/`) && (
                 <>
-                  <Field label="Case study for">
-                    <Select
-                      value={page.project ?? ''}
-                      options={[
-                        { value: '', label: 'No project' },
-                        ...projects.value.map((p) => ({ value: p.slug, label: p.title })),
-                      ]}
-                      onChange={(project) => set({ project: project || undefined })}
-                    />
+                  <Field
+                    label="Case study for"
+                    hint={page.project ? "The cover, tags and links at the foot come from there." : undefined}
+                  >
+                    <div class="row">
+                      <Select
+                        value={page.project ?? ''}
+                        options={[
+                          { value: '', label: 'No project' },
+                          ...projects.value.map((p) => ({ value: p.slug, label: p.title })),
+                        ]}
+                        onChange={(project) => set({ project: project || undefined })}
+                      />
+                      {/* The project view has carried a button to its case study from the
+                          start; this is the way back, from the page to the facts it shows. */}
+                      {page.project && (
+                        <button
+                          type="button"
+                          class="btn small ghost"
+                          title="Open this project's cover, tags and links"
+                          onClick={() => openView({ kind: 'projects', slug: page.project })}
+                        >
+                          Edit project <Icon name="chevron" />
+                        </button>
+                      )}
+                    </div>
                   </Field>
                   <Field label="Next case study" hint="The card at the foot of this page.">
                     <Select
