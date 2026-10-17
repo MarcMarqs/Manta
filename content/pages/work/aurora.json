@@ -510,12 +510,32 @@
               "alt": ""
             }
           ],
-          "align": "center"
+          "align": "center",
+          "fit": "contain"
         },
         {
           "id": "b-6h4l7g",
           "type": "spacer",
           "size": "md"
+        }
+      ],
+      "width": "wide"
+    },
+    {
+      "id": "b-t2gxhy",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-stgtoo",
+          "type": "heading",
+          "level": 2,
+          "text": "Looking Back"
+        },
+        {
+          "id": "b-edo4ir",
+          "type": "text",
+          "html": "<p></p><div><div><b><span class=\"big\">What Worked</span></b></div><div><ul><li>Teaching through space instead of text kept the story intact and worked for players of all ages.</li><li>Testing with first-time players early found problems the team could no longer see.</li></ul><div><br></div></div></div><div><b><span class=\"big\">What I'd do Differently</span></b></div><div><ul><li>Set measurable targets, such as solve rate and time per puzzle, before the first playtest rather than during.</li><li>Test the camera with first-time players earlier, since many later fixes were camera fixes.</li></ul><div><br></div></div><div><span class=\"big\"><b>What I Learned</b></span></div><div><ul><li>For young or new players, the camera does most of the teaching.</li><li>What seems obvious to a designer often isn't; test early with people who have never seen the game.</li></ul></div><p></p>"
         }
       ],
       "width": "wide"
