@@ -54,7 +54,7 @@ Every block needs a unique `id` (unique within its page) and a `type`.
 | `button` | `label`, `href`, `style?` (`primary` \| `secondary`) |
 | `divider` | — |
 | `spacer` | `size?` (`sm` \| `md` \| `lg`) |
-| `table` | `columns[]`, `rows[][]`, `caption?` |
+| `table` | `columns[]`, `rows[][]`, `caption?` — a cell grows as you type and keeps the line breaks you put in it |
 | `specs` | `arrange?` (`row` \| `stack`), `items[]` of `{ label, value }` — the strip under a case-study title, or a one-per-line list |
 | `stats` | `items[]` of `{ value, label }` — figures set large |
 | `chart` | `variant` (`bar` \| `line`), `title?`, `note?`, `range?` `{ from, to, step? }`, `reference?` `{ value, label? }`, `series[]` of `{ name?, formula?, labels?, data? }` where a data point is `{ label, value, emphasis? }` |

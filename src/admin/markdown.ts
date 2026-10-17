@@ -67,7 +67,9 @@ const cells = (row: string) =>
     .trim()
     .replace(/^\||\|$/g, '')
     .split('|')
-    .map((c) => c.trim());
+    // A table cell is plain text, and Markdown has no way to break a line inside one
+    // except the <br> GFM allows. That is a line break, so it arrives as one.
+    .map((c) => c.trim().replace(/<br\s*\/?>/gi, '\n'));
 
 export interface Imported {
   /** The first level-1 heading, which is what the page is called. */

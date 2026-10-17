@@ -754,6 +754,9 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
     text-align: left;
     padding: 9px 14px;
     border-bottom: 1px solid var(--border);
+    /* A cell keeps the line breaks it was written with, and still wraps on its own when
+       a line is too long for the column. */
+    white-space: pre-line;
   }
   th {
     font-family: var(--font-heading);

@@ -1879,6 +1879,35 @@ function resizeColumns(block: Extract<Block, { type: 'columns' }>, count: 2 | 3)
   return { ...block, count, columns };
 }
 
+/**
+ * A cell that grows with what is typed into it.
+ *
+ * A textarea rather than an input, so Enter starts a line instead of doing nothing, and
+ * its height is set from its own content on every change: a fixed two rows would waste
+ * the space in a table of short cells, and a scrollbar inside a cell this small is
+ * unusable. Nothing here is HTML — a cell stays the plain string it was, newlines and
+ * all, and the page renders the breaks with `white-space`.
+ */
+function Cell({ value, head, onChange }: { value: string; head?: boolean; onChange: (v: string) => void }) {
+  const fit = (el: HTMLTextAreaElement | null) => {
+    if (!el) return;
+    el.style.height = 'auto';
+    el.style.height = `${el.scrollHeight}px`;
+  };
+  return (
+    <textarea
+      class={`input cell${head ? ' head' : ''}`}
+      rows={1}
+      value={value}
+      ref={fit}
+      onInput={(e) => {
+        fit(e.target as HTMLTextAreaElement);
+        onChange((e.target as HTMLTextAreaElement).value);
+      }}
+    />
+  );
+}
+
 function TableFields({
   block,
   onChange,
@@ -1915,7 +1944,7 @@ function TableFields({
               {block.columns.map((col, c) => (
                 <th>
                   <div class="th-cell">
-                    <input class="input cell head" value={col} onInput={(e) => setHeader(c, (e.target as HTMLInputElement).value)} />
+                    <Cell head value={col} onChange={(v) => setHeader(c, v)} />
                     {block.columns.length > 1 && (
                       <IconButton icon="x" label="Remove column" onClick={() => removeColumn(c)} />
                     )}
@@ -1932,7 +1961,7 @@ function TableFields({
               <tr>
                 {row.map((cell, c) => (
                   <td>
-                    <input class="input cell" value={cell} onInput={(e) => setCell(r, c, (e.target as HTMLInputElement).value)} />
+                    <Cell value={cell} onChange={(v) => setCell(r, c, v)} />
                   </td>
                 ))}
                 <td class="narrow">
