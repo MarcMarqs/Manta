@@ -118,6 +118,30 @@
           "id": "b-dasou1",
           "type": "text",
           "html": "<p><div><b><span class=\"big\">In Short</span></b></div><ul><li><b>What I Owned:</b> The entire second act's gameplay and puzzles, the camera and control feel, and the playtest process.</li><li><b>Hardest Problem:</b> A puzzle players couldn't see. Reframing the camera, sightlines and lighting raised the solve rate to about 90% from previous 70%.</li><li><b>What it Shows:</b> Designing for players who have never held a controller, teaching without text, and turning playtest observations into specific changes.</li></ul></p>"
+        },
+        {
+          "id": "b-p80uum",
+          "type": "spacer",
+          "size": "md"
+        }
+      ],
+      "width": "wide"
+    },
+    {
+      "id": "b-8jiynk",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-llrdag",
+          "type": "heading",
+          "level": 2,
+          "text": "The Game"
+        },
+        {
+          "id": "b-xf8gz5",
+          "type": "text",
+          "html": "<p>Write something…</p>"
         }
       ],
       "width": "wide"
