@@ -47,8 +47,8 @@
           "provider": "youtube",
           "videoId": "9Xa8CDnN7Yk",
           "title": "",
-          "scale": 40,
-          "align": "center"
+          "align": "center",
+          "scale": 70
         },
         {
           "id": "b-ogf5wv",
@@ -125,8 +125,7 @@
           "type": "spacer",
           "size": "md"
         }
-      ],
-      "width": "wide"
+      ]
     },
     {
       "id": "b-8jiynk",
@@ -212,8 +211,7 @@
           "type": "spacer",
           "size": "md"
         }
-      ],
-      "width": "wide"
+      ]
     },
     {
       "id": "b-y15a3q",
@@ -300,8 +298,7 @@
           "type": "spacer",
           "size": "md"
         }
-      ],
-      "width": "wide"
+      ]
     },
     {
       "id": "b-fa7yqx",
@@ -372,8 +369,7 @@
           "type": "spacer",
           "size": "md"
         }
-      ],
-      "width": "wide"
+      ]
     },
     {
       "id": "b-jln191",
@@ -427,8 +423,7 @@
           "type": "spacer",
           "size": "md"
         }
-      ],
-      "width": "wide"
+      ]
     },
     {
       "id": "b-oursxj",
@@ -451,8 +446,7 @@
           "type": "spacer",
           "size": "md"
         }
-      ],
-      "width": "wide"
+      ]
     },
     {
       "id": "b-wnggx2",
@@ -475,8 +469,7 @@
           "type": "spacer",
           "size": "md"
         }
-      ],
-      "width": "wide"
+      ]
     },
     {
       "id": "b-tpmvvd",
@@ -519,8 +512,7 @@
           "type": "spacer",
           "size": "md"
         }
-      ],
-      "width": "wide"
+      ]
     },
     {
       "id": "b-t2gxhy",
@@ -538,8 +530,7 @@
           "type": "text",
           "html": "<p></p><div><div><b><span class=\"big\">What Worked</span></b></div><div><ul><li>Teaching through space instead of text kept the story intact and worked for players of all ages.</li><li>Testing with first-time players early found problems the team could no longer see.</li></ul><div><br></div></div></div><div><b><span class=\"big\">What I'd do Differently</span></b></div><div><ul><li>Set measurable targets, such as solve rate and time per puzzle, before the first playtest rather than during.</li><li>Test the camera with first-time players earlier, since many later fixes were camera fixes.</li></ul><div><br></div></div><div><span class=\"big\"><b>What I Learned</b></span></div><div><ul><li>For young or new players, the camera does most of the teaching.</li><li>What seems obvious to a designer often isn't; test early with people who have never seen the game.</li></ul></div><p></p>"
         }
-      ],
-      "width": "wide"
+      ]
     }
   ]
 }
