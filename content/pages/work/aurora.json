@@ -46,7 +46,9 @@
           "type": "video",
           "provider": "youtube",
           "videoId": "9Xa8CDnN7Yk",
-          "title": ""
+          "title": "",
+          "scale": 40,
+          "align": "center"
         },
         {
           "id": "b-ogf5wv",
