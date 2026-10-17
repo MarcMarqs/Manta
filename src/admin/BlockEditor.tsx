@@ -920,6 +920,38 @@ function BlockFields({
               />
             </Field>
           )}
+          <Field label={`Size · ${block.scale ?? 100}%`} hint="Of the space the block has.">
+            <input
+              type="range"
+              min="10"
+              max="100"
+              step="5"
+              value={block.scale ?? 100}
+              onInput={(e) => {
+                const scale = Number((e.target as HTMLInputElement).value);
+                // 100% is the default, so it isn't written to the file.
+                const { scale: _drop, ...rest } = block;
+                onChange(scale === 100 ? rest : { ...rest, scale });
+              }}
+            />
+          </Field>
+          <Field label="Shape" hint={block.provider === 'file' ? 'Crops the clip to fixed proportions.' : "Overrides the player's 16:9."}>
+            <Select
+              value={block.aspect ?? 'auto'}
+              options={[
+                { value: 'auto' as const, label: block.provider === 'file' ? 'As filmed' : 'Wide 16:9 (default)' },
+                { value: '1:1' as const, label: 'Square' },
+                { value: '4:3' as const, label: 'Landscape 4:3' },
+                { value: '3:2' as const, label: 'Photo 3:2' },
+                { value: '16:9' as const, label: 'Wide 16:9' },
+                { value: '21:9' as const, label: 'Cinematic 21:9' },
+              ]}
+              onChange={(aspect) => {
+                const { aspect: _drop, ...rest } = block;
+                onChange(aspect === 'auto' ? rest : { ...rest, aspect });
+              }}
+            />
+          </Field>
           <Field label="Title" hint="For screen readers." wide>
             <TextInput value={block.title ?? ''} onChange={(v) => onChange({ ...block, title: v })} />
           </Field>

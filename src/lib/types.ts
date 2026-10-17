@@ -207,6 +207,13 @@ export type Block = BlockLayout & (
       src?: string;
       /** Play on loop, silently, the way a GIF does — for short gameplay captures. */
       loop?: boolean;
+      /** Percentage of the block's width, 10-100. Absent means all of it. */
+      scale?: number;
+      /**
+       * The shape to play in. Absent means 16:9 for an embed, which is what the players
+       * expect, and the clip's own proportions for an uploaded file.
+       */
+      aspect?: 'auto' | '1:1' | '4:3' | '3:2' | '16:9' | '21:9';
       title?: string;
     }
   | {

@@ -112,6 +112,22 @@ const galleryColumns = (count: number) => {
   return 4;
 };
 
+/**
+ * Per-video size and shape, the same two controls a picture has.
+ *
+ * A video is not always the main event on a page — a ten-second loop showing one
+ * interaction wants to be a quarter of the column, not all of it — and a capture is not
+ * always 16:9. The width is a percentage of the block so it stays right at any window
+ * size, and the shape overrides the ratio the embed would otherwise assume.
+ */
+const videoStyle = (b: Extract<Block, { type: 'video' }>) =>
+  [
+    b.scale && b.scale !== 100 ? `width:${b.scale}%` : '',
+    b.aspect && b.aspect !== 'auto' ? `aspect-ratio:${b.aspect.replace(':', '/')}` : '',
+  ]
+    .filter(Boolean)
+    .join(';') || undefined;
+
 const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
   ({
     youtube: `https://www.youtube-nocookie.com/embed/${b.videoId}`,
@@ -228,8 +244,9 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
            with muted because no browser will start a clip with sound by itself. */
         block.src && (
           <video
-            class="video-file"
+            class={`video-file${block.aspect && block.aspect !== 'auto' ? ' is-cropped' : ''}`}
             src={asset(block.src)}
+            style={videoStyle(block)}
             title={block.title}
             controls
             playsinline
@@ -240,7 +257,7 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
           />
         )
       ) : (
-        <div class="embed">
+        <div class="embed" style={videoStyle(block)}>
           <iframe
             src={embedSrc(block)}
             title={block.title ?? 'Embedded video'}
@@ -596,6 +613,19 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
     width: 100%;
     border-radius: var(--radius);
     background: #000;
+  }
+
+  /* Given a shape to play in, a clip fills it the way a cropped picture does. */
+  .video-file.is-cropped {
+    object-fit: cover;
+  }
+
+  /* Narrower than the column, a video follows the block's alignment, as a picture does. */
+  .blk.a-center :global(:is(.embed, .video-file)) {
+    margin-inline: auto;
+  }
+  .blk.a-right :global(:is(.embed, .video-file)) {
+    margin-left: auto;
   }
 
   /* One image at a time. The track is a scroller with snap points rather than a
