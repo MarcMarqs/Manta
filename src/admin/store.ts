@@ -17,6 +17,14 @@ export interface PageFile {
   project?: string;
   /** false hides the floating contents list, which otherwise appears on long pages. */
   toc?: boolean;
+  /**
+   * What the foot of a case study points at. Absent is the next project in the Projects
+   * order, wrapping round at the end. 'origin' keeps to the same shelf, so professional
+   * work follows professional work. 'none' shows nothing. Anything else is a project's
+   * slug, chosen by hand — and a slug is matched before the two words above it, so a
+   * project called "none" still wins its own name.
+   */
+  next?: string;
   blocks: Block[];
 }
 

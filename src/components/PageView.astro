@@ -6,7 +6,7 @@
  */
 import BlockList from './blocks/BlockList.astro';
 import Toc from './Toc.astro';
-import { projects, tagAccent, tagLabel } from '../lib/content';
+import { originOf, useContent } from '../lib/context';
 import { focusPoint } from '../lib/media';
 import { headingAnchors, tocItems } from '../lib/toc';
 import type { Page, Project } from '../lib/types';
@@ -19,11 +19,27 @@ interface Props {
   linkOut?: boolean;
 }
 const { page, project, linkOut = true } = Astro.props;
+// Through the context rather than the built content, so the editor's preview shows the
+// tail as the draft has it: a cover uploaded but not yet published, a tag just renamed.
+const { projects, tags, tagLabel, tagAccent, asset } = useContent(Astro.locals);
 
-// After a case study, point at the next project in the same order the home page uses,
-// wrapping round at the end so there is always somewhere to go.
-const index = project ? projects.indexOf(project) : -1;
-const next = linkOut && index >= 0 && projects.length > 1 ? projects[(index + 1) % projects.length] : undefined;
+/** The one after this, in a given list, wrapping so there is always somewhere to go. */
+const after = (list: Project[]) => {
+  const index = project ? list.findIndex((p) => p.slug === project.slug) : -1;
+  return index >= 0 && list.length > 1 ? list[(index + 1) % list.length] : undefined;
+};
+
+// Chosen by hand, kept to one shelf, switched off, or left to follow the Projects order.
+const chosen = page.next ? projects.find((p) => p.slug === page.next) : undefined;
+const next = !linkOut || !project
+  ? undefined
+  : chosen
+    ? chosen
+    : page.next === 'none'
+      ? undefined
+      : page.next === 'origin'
+        ? after(projects.filter((p) => originOf(p.origin, tags.origin) === originOf(project.origin, tags.origin)))
+        : after(projects);
 const tagsOf = linkOut && project ? [...project.discipline, ...project.engine] : [];
 
 // Headings get anchors either way. Two sections are enough to be worth a list: the home
@@ -66,7 +82,7 @@ const toc = page.toc === false ? [] : tocItems(page.blocks, anchors);
     <a class="next-project" href={`/work/${next.slug}`}>
       {next.cover && (
         <img
-          src={next.cover}
+          src={asset(next.cover)}
           class={next.coverFit === 'contain' ? 'is-contain' : undefined}
           style={focusPoint(next.coverFocus) && `object-position:${focusPoint(next.coverFocus)}`}
           alt=""

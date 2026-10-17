@@ -1,10 +1,12 @@
 ---
 // Renders a page from the editor's current (unsaved) content through the same
-// components the built site uses, so the preview is exactly what will ship.
+// components the built site uses, so the preview is exactly what will ship — the whole
+// page view, not only its blocks, so a case study's tail (its links, its tags, the card
+// pointing at the next one) and the floating contents list are all there to be seen.
 import Base from '../../layouts/Base.astro';
-import BlockList from '../../components/blocks/BlockList.astro';
+import PageView from '../../components/PageView.astro';
 import type { PreviewData } from '../../lib/context';
-import type { Block } from '../../lib/types';
+import type { Page } from '../../lib/types';
 
 export const prerender = false;
 
@@ -12,17 +14,17 @@ if (Astro.request.method !== 'POST') {
   return new Response('Method not allowed', { status: 405 });
 }
 
-const body = (await Astro.request.json()) as PreviewData & {
-  path: string;
-  page: { title: string; description?: string; blocks: Block[] };
-};
+const body = (await Astro.request.json()) as PreviewData & { path: string; page: Omit<Page, 'path' | 'slug'> };
 
 Astro.locals.preview = { site: body.site, projects: body.projects, tags: body.tags };
-const { page, path } = body;
+const { path } = body;
+// The same shape a built page has, so the view below cannot tell the two apart.
+const page: Page = { ...body.page, path, slug: path.replace(/^\/+|\/+$/g, '').split('/').pop() ?? 'home' };
+const project = page.project ? body.projects.find((p) => p.slug === page.project) : undefined;
 ---
 
 <Base title={page.title || 'Untitled'} description={page.description} path={path}>
-  <BlockList blocks={page.blocks ?? []} />
+  <PageView page={page} project={project} />
 
   <style is:global>
     .pv-block {

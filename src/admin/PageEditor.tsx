@@ -509,16 +509,32 @@ export function PageEditor({ path }: { path: string }) {
                 />
               </Field>
               {path.startsWith(`${PAGES_DIR}work/`) && (
-                <Field label="Case study for">
-                  <Select
-                    value={page.project ?? ''}
-                    options={[
-                      { value: '', label: 'No project' },
-                      ...projects.value.map((p) => ({ value: p.slug, label: p.title })),
-                    ]}
-                    onChange={(project) => set({ project: project || undefined })}
-                  />
-                </Field>
+                <>
+                  <Field label="Case study for">
+                    <Select
+                      value={page.project ?? ''}
+                      options={[
+                        { value: '', label: 'No project' },
+                        ...projects.value.map((p) => ({ value: p.slug, label: p.title })),
+                      ]}
+                      onChange={(project) => set({ project: project || undefined })}
+                    />
+                  </Field>
+                  <Field label="Next case study" hint="The card at the foot of this page.">
+                    <Select
+                      value={page.next ?? ''}
+                      options={[
+                        { value: '', label: 'The next project' },
+                        { value: 'origin', label: 'The next in the same origin' },
+                        { value: 'none', label: 'Nothing — end the page here' },
+                        ...projects.value
+                          .filter((p) => p.slug !== page.project)
+                          .map((p) => ({ value: p.slug, label: `→ ${p.title}` })),
+                      ]}
+                      onChange={(next) => set({ next: next || undefined })}
+                    />
+                  </Field>
+                </>
               )}
             </div>
           </details>

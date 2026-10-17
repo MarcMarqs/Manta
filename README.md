@@ -253,6 +253,11 @@ preview on the right rendered by the site's own components, so what you see is w
   which is a far smaller file than the same thing as an actual GIF. The trash button deletes
   the file itself, and refuses while any page still points at it.
 
+- **The card at the foot of a case study** is set per page under **Page settings → Next
+  case study**: the next project in the Projects order (the default), the next one in the
+  same origin, a particular project, or nothing at all. Stored as `next` — a project slug,
+  `origin`, or `none`. A private case study never shows one.
+
 - **Contents list:** every heading gets an anchor derived from its words, so any section can
   be linked to directly. A page with two or more level-2 headings also floats a jump-to
   rail in the right margin — two is enough — with dashes at rest, labels on hover, and the
