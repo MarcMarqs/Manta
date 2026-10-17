@@ -180,6 +180,7 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
                   src={asset(img.src)}
                   srcset={preview ? undefined : srcsetFor(img.src)}
                   sizes="(max-width: 900px) 92vw, 760px"
+                  class={block.fit === 'contain' ? 'is-contain' : undefined}
                   alt={img.alt}
                   loading="lazy"
                 />
@@ -210,6 +211,7 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
               src={asset(img.src)}
               srcset={preview ? undefined : srcsetFor(img.src)}
               sizes={`(max-width: 560px) 92vw, (max-width: 900px) 46vw, ${Math.round(1120 / galleryColumns(block.images.length))}px`}
+              class={block.fit === 'contain' ? 'is-contain' : undefined}
               alt={img.alt}
               loading="lazy"
             />
@@ -565,6 +567,16 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
     border-radius: var(--radius);
     aspect-ratio: 4 / 3;
     object-fit: cover;
+  }
+
+  /* `scale-down` rather than `contain`: it shows the whole picture like contain, but
+     never draws one larger than it was made. A screenshot of text blown up to fill a
+     column is unreadable twice over — cropped at the sides and soft everywhere else.
+     The surface behind it makes the room around a small picture look intended. */
+  .gallery img.is-contain,
+  .carousel-slide img.is-contain {
+    object-fit: scale-down;
+    background: var(--surface);
   }
 
   @media (max-width: 900px) {

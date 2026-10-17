@@ -794,6 +794,24 @@ function BlockFields({
               onChange={(layout) => onChange({ ...block, layout: layout === 'grid' ? undefined : layout })}
             />
           </Field>
+          <Field
+            label="Fit"
+            hint={
+              block.fit === 'contain'
+                ? 'Each picture whole, never drawn bigger than it is. For screenshots and mixed shapes.'
+                : 'Every picture cropped to the same shape, filling its frame.'
+            }
+            wide
+          >
+            <Segmented
+              value={block.fit ?? 'cover'}
+              options={[
+                { value: 'cover' as const, label: 'Fill the frame' },
+                { value: 'contain' as const, label: 'Show all of it' },
+              ]}
+              onChange={(fit) => onChange({ ...block, fit: fit === 'cover' ? undefined : fit })}
+            />
+          </Field>
           {block.images.map((img, i) => (
             <div class="gallery-row">
               <ImageField

@@ -188,6 +188,13 @@ export type Block = BlockLayout & (
        * is identical, only the way it is laid out differs.
        */
       layout?: 'grid' | 'carousel';
+      /**
+       * 'cover' crops every picture to one shape, which is what a row of screenshots
+       * wants. 'contain' shows each one whole and never draws it larger than it is — for
+       * pictures of different shapes, or small ones that blur when stretched. Absent
+       * means 'cover', which is what every gallery did before.
+       */
+      fit?: 'cover' | 'contain';
       images: { src: string; alt: string; caption?: string }[];
     }
   | {

@@ -49,7 +49,7 @@ Every block needs a unique `id` (unique within its page) and a `type`.
 | `text` | `html` — rich text |
 | `callout` | `tone?` (`note` \| `key` \| `caution` \| `result`), `title?`, `html` — a panel that asks the reader to stop |
 | `image` | `src`, `alt`, `caption?`, `scale?` (10–100, % of the block), `aspect?` (`1:1` \| `4:3` \| `3:2` \| `16:9` \| `21:9`) |
-| `gallery` | `layout?` (`grid` \| `carousel`), `images[]` of `{ src, alt, caption? }` — a grid takes its column count from the number of pictures, up to four, and fills the width |
+| `gallery` | `layout?` (`grid` \| `carousel`), `fit?` (`cover` \| `contain`), `images[]` of `{ src, alt, caption? }` — a grid takes its column count from the number of pictures, up to four, and fills the width |
 | `video` | `provider` (`file` \| `youtube` \| `vimeo` \| `itch`), `videoId`, `src?` (for `file`), `loop?`, `title?` |
 | `button` | `label`, `href`, `style?` (`primary` \| `secondary`) |
 | `divider` | — |
