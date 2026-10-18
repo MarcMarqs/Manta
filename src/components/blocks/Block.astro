@@ -317,6 +317,26 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
     )
   }
 
+  {
+    block.type === 'formula' && (
+      <figure class="formula">
+        {block.title && <figcaption class="formula-title">{block.title}</figcaption>}
+        <div class="formula-row">
+          {block.terms.map((term, i) => (
+            <>
+              {i > 0 && <span class="formula-op" aria-hidden="true">{term.op || '\u00d7'}</span>}
+              <div class={`formula-term${term.accent ? ' is-accent' : ''}`}>
+                <span class="formula-label">{term.label}</span>
+                {term.note && <span class="formula-note">{term.note}</span>}
+              </div>
+            </>
+          ))}
+        </div>
+        {block.note && <p class="formula-aside">{block.note}</p>}
+      </figure>
+    )
+  }
+
   {block.type === 'divider' && <hr class="block-divider" />}
 
   {block.type === 'spacer' && <div class={`spacer spacer-${block.size ?? 'md'}`} />}
@@ -913,6 +933,89 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
 
   /* Highlighted text. A tint of the accent rather than a yellow felt-tip, so it belongs
      to the page; the padding is asymmetric because text sits off-centre in its line box. */
+  /* Terms in a row with their operators between them, wrapping onto the next line on a
+     narrow screen rather than shrinking into columns too thin to read. The symbols are
+     hidden from a screen reader: read aloud, "Label points multiplication sign Time left"
+     is noise, and the title above says what the formula does in words. */
+  .formula {
+    margin: 0;
+  }
+
+  .formula-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .formula-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .formula-op {
+    align-self: center;
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    color: var(--muted);
+  }
+
+  .formula-term {
+    flex: 1 1 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .formula-term.is-accent {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 10%, var(--bg));
+  }
+
+  .formula-label {
+    font-family: var(--font-heading);
+    font-weight: 650;
+    font-size: 0.95rem;
+  }
+
+  .formula-term.is-accent .formula-label {
+    color: var(--accent);
+  }
+
+  .formula-note {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  /* Narrow, the row becomes a column: one term per line at the full width, with the
+     symbol between them. Left to wrap on its own the terms come out at three different
+     widths, which reads as three different kinds of thing. */
+  @media (max-width: 620px) {
+    .formula-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .formula-op {
+      align-self: center;
+    }
+  }
+
+  .formula-aside {
+    margin: 10px 0 0;
+    padding: 8px 14px;
+    border-radius: var(--radius);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
   /* A rule down the side and a wash of the same colour: enough to stop the eye without
      becoming a box that competes with the sections around it. The colour is the only
      thing carrying the meaning, so it is also the title's colour. */

@@ -283,6 +283,19 @@ export type Block = BlockLayout & (
   | { id: string; type: 'stats'; items: { value: string; label: string }[] }
   | {
       id: string;
+      type: 'formula';
+      /** The sentence above the row, saying what the formula is for. */
+      title?: string;
+      /**
+       * The terms, in reading order. `op` is the symbol drawn *before* a term, so the
+       * first one has none; `accent` marks the term the others add up to.
+       */
+      terms: { label: string; note?: string; op?: string; accent?: boolean }[];
+      /** An aside under the row, for the condition that does not fit in a box. */
+      note?: string;
+    }
+  | {
+      id: string;
       type: 'chart';
       variant: 'bar' | 'line';
       /** Bars only: across the page, or down it with the categories on the left. */

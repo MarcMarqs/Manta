@@ -502,6 +502,9 @@ function BlockCard({
 
 // --- width & alignment ---------------------------------------------------
 
+/** What can stand between two terms of a formula. */
+const OPERATORS = ['\u00d7', '\u00f7', '+', '\u2212', '=', '\u2192'];
+
 const WIDTHS: { value: BlockWidth; label: string }[] = [
   { value: 'narrow', label: 'Narrow' },
   { value: 'normal', label: 'Normal' },
@@ -1121,6 +1124,74 @@ function BlockFields({
 
     case 'table':
       return <TableFields block={block} onChange={onChange} />;
+
+    case 'formula': {
+      const setTerm = (i: number, patch: Partial<(typeof block.terms)[number]>) =>
+        onChange({ ...block, terms: block.terms.map((t, j) => (j === i ? { ...t, ...patch } : t)) });
+      return (
+        <div class="stack">
+          <div class="fields">
+            <Field label="Title" hint="What the formula is for, in words." wide>
+              <TextInput value={block.title ?? ''} onChange={(v) => onChange({ ...block, title: v || undefined })} />
+            </Field>
+          </div>
+          <div class="subsection">
+            <p class="field-hint">
+              Each term is a box. The symbol sits before it, so the first term has none; mark the term the
+              others add up to.
+            </p>
+            {block.terms.map((term, i) => (
+              <div class="map-row">
+                <TextInput value={term.label} placeholder="Label" onChange={(label) => setTerm(i, { label })} />
+                <IconButton
+                  icon="trash"
+                  label="Remove term"
+                  tone="danger"
+                  disabled={block.terms.length <= 2}
+                  onClick={() => onChange({ ...block, terms: block.terms.filter((_, j) => j !== i) })}
+                />
+                <span class="map-row-note">
+                  <Cell
+                    value={term.note ?? ''}
+                    placeholder="What it stands for"
+                    onChange={(note) => setTerm(i, { note: note || undefined })}
+                  />
+                </span>
+                <span class="map-row-meta">
+                  {i > 0 && (
+                    <>
+                      <span class="muted">Before it</span>
+                      <Select
+                        value={term.op || '\u00d7'}
+                        options={OPERATORS.map((value) => ({ value, label: value }))}
+                        onChange={(op) => setTerm(i, { op })}
+                      />
+                    </>
+                  )}
+                  <Toggle
+                    checked={Boolean(term.accent)}
+                    label="Result"
+                    onChange={(accent) => setTerm(i, { accent: accent || undefined })}
+                  />
+                </span>
+              </div>
+            ))}
+            <button
+              type="button"
+              class="btn small ghost"
+              onClick={() => onChange({ ...block, terms: [...block.terms, { label: '', op: '\u00d7' }] })}
+            >
+              <Icon name="plus" /> Add term
+            </button>
+          </div>
+          <div class="fields">
+            <Field label="Aside" hint="A line under the row, for what does not fit in a box." wide>
+              <TextInput value={block.note ?? ''} onChange={(v) => onChange({ ...block, note: v || undefined })} />
+            </Field>
+          </div>
+        </div>
+      );
+    }
 
     case 'specs':
     case 'stats': {

@@ -71,6 +71,21 @@ export const BLOCKS: Record<BlockType, BlockSpec> = {
       ],
     }),
   },
+  formula: {
+    label: 'Formula',
+    group: 'Data',
+    hint: 'Boxes joined by \u00d7 + = \u2014 how a number is arrived at',
+    create: () => ({
+      id: newId(),
+      type: 'formula',
+      title: '',
+      terms: [
+        { label: '', note: '' },
+        { label: '', note: '', op: '\u00d7' },
+        { label: '', note: '', op: '=', accent: true },
+      ],
+    }),
+  },
   stats: {
     label: 'Figures',
     group: 'Data',
@@ -295,6 +310,13 @@ export function summarize(block: Block): string {
       const pairs = block.items.map((i) => i.label).filter(Boolean).join(' · ') || 'Empty';
       return block.arrange === 'stack' ? `${pairs} · listed` : pairs;
     }
+    case 'formula':
+      return (
+        block.terms
+          .map((t, i) => `${i && t.op ? `${t.op} ` : ''}${t.label}`)
+          .filter((x) => x.trim())
+          .join(' ') || 'Empty'
+      );
     case 'stats':
       return block.items.map((i) => i.value).filter(Boolean).join(' · ') || 'Empty';
     case 'chart': {
