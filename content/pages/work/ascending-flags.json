@@ -146,37 +146,36 @@
           "id": "b-otgtvo",
           "type": "systemMap",
           "arrange": "stacked",
-          "caption": "Every system was proven on paper before it reached Unreal",
+          "caption": "Moving, attacking and defending all draw from the same mana",
           "nodes": [
             {
               "id": "a",
-              "label": "Paper",
-              "accent": true,
-              "note": "Prototype on paper and Miro"
+              "label": "One shared mana pool",
+              "accent": true
             },
             {
               "id": "n-dg5aa4",
-              "label": "Score First",
-              "note": "Validate scoring before the rest",
+              "label": "Move",
+              "note": "Advance on the board",
               "layer": 1
             },
             {
-              "id": "n-n6q2ym",
-              "label": "Spreadsheet",
-              "note": "Balance weights and variables",
-              "layer": 2
+              "id": "n-m06sbp",
+              "label": "Attack",
+              "layer": 1,
+              "note": "Pressure the opponent"
             },
             {
-              "id": "n-17ly39",
-              "label": "Unreal",
-              "note": "Build what the paper proved",
-              "layer": 3
+              "id": "n-9co7rc",
+              "label": "Defend",
+              "layer": 1,
+              "note": "Protect what you hold"
             },
             {
-              "id": "n-h9lxfu",
-              "label": "Playtest",
-              "note": "Closed, open and live events",
-              "layer": 4
+              "id": "n-yafrr1",
+              "label": "",
+              "layer": 2,
+              "note": "spending more on one leaves less for the other two"
             }
           ],
           "links": [
@@ -185,21 +184,182 @@
               "to": "n-dg5aa4"
             },
             {
-              "from": "n-dg5aa4",
-              "to": "n-n6q2ym"
+              "from": "a",
+              "to": "n-m06sbp"
             },
             {
-              "from": "n-n6q2ym",
-              "to": "n-17ly39"
-            },
-            {
-              "from": "n-17ly39",
-              "to": "n-h9lxfu"
+              "from": "a",
+              "to": "n-9co7rc"
             }
           ]
         },
         {
           "id": "b-yidv0o",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-hee8cs",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-uc5uft",
+          "type": "heading",
+          "level": 2,
+          "text": "2. 40+ Cards Across Five Types"
+        },
+        {
+          "id": "b-pkzabc",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "Card Type",
+            "Role",
+            "Name",
+            "Description"
+          ],
+          "rows": [
+            [
+              "Terrain",
+              "Awake",
+              "Sea of Clouds",
+              "Immediately wake up the unit placed on top of it"
+            ],
+            [
+              "Unit",
+              "Fighter",
+              "Night Hunter",
+              "Invisible unit, becomes visible once attack or steal opposing flag"
+            ],
+            [
+              "Obstacle",
+              "Stopper",
+              "Vine Wall",
+              "Blocks the position of the hexegon, each 2 turns it increases its length to an adjacent hexagon"
+            ],
+            [
+              "Trap",
+              "Invisible Trap",
+              "Chemical Surprise",
+              "Invisible trap, explodes dealing instant damage and post-damage for 3 turns"
+            ],
+            [
+              "Trainer",
+              "Defensive",
+              "Golden Blessing",
+              "Wraps a unit in a golden shield that blocks any damage received, breaks when activated"
+            ]
+          ]
+        },
+        {
+          "id": "b-zuakd8",
+          "type": "text",
+          "html": "<p>I designed and documented every card, and kept the catalogue organized so art and engineering always worked from the current version. I also designed the board.</p>"
+        },
+        {
+          "id": "b-uludu1",
+          "type": "sheet",
+          "source": "file",
+          "sheetId": "",
+          "height": "medium"
+        },
+        {
+          "id": "b-9r7701",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-rb46kw",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-7x2ls4",
+          "type": "heading",
+          "level": 2,
+          "text": "3. Testing on Paper and in Simulation"
+        },
+        {
+          "id": "b-0203m1",
+          "type": "text",
+          "html": "<p>I validated the concept with paper prototypes before any engine work, then balanced it with spreadsheets and Machinations simulations of the mana economy, and used playtests to find balance problems the models missed.</p>"
+        },
+        {
+          "id": "b-0968w2",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-4sw40z",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-agayh6",
+          "type": "heading",
+          "level": 2,
+          "text": "Iteration Case: Fog of War"
+        },
+        {
+          "id": "b-m11438",
+          "type": "text",
+          "html": "<p>• <b>Problem:</b> Players could see everything and planned too far ahead removing the strategy aspect of the game.</p><p>• <b>Cause:</b> Having no way to block your vision, the player could create their strategy from turn 1 without hesitations. Player 1 almost had 100% of advantage when starting the game.</p><p>• <b>Fix:</b> I designed a fog-of-war feature that hides everything besides the player's terrains and units. Players could gain more vision by placing terrains and units in the board&nbsp;</p><p>• <b>Result:</b> This change made players create a defensive thought before actually taking actions, which reduced players frustrations in 60% and made the game more even.</p>"
+        },
+        {
+          "id": "b-7rxkub",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-753eg5",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-qom70b",
+          "type": "heading",
+          "level": 2,
+          "text": "Leading the Team"
+        },
+        {
+          "id": "b-udjtxv",
+          "type": "text",
+          "html": "<p>I led design, art and engineering through close collaboration for the whole project, owned the backlog and roadmap, and set feature priorities. I built spreadsheets that made handoffs between departments faster.</p><p>In addition leading the project from the design and project management position, I cut the amount of cards from each deck to ensure it would be delivered for the test. It increased the balancing work although the balancing pipeline was already established which had less effect when it came time to cut down the scope.</p>"
+        },
+        {
+          "id": "b-cxhsuj",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-j3ad00",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-qst1z0",
+          "type": "heading",
+          "level": 2,
+          "text": "Looking Back"
+        },
+        {
+          "id": "b-uvpa3n",
+          "type": "text",
+          "html": "<p><b>What Worked:</b> Simulating the economy before building it.</p><p><b>What I'd do Differently:</b> Create design test pipelines early in the project to ensure tests and failures can be gathered before the actual implementation inside the engine.</p><p><b>What I Learned:</b> A single shared resource creates interesting decisions every turn, but it needs careful simulation to stay balanced; leading a 15-person team showed me that a clear roadmap is a design tool too.</p>"
+        },
+        {
+          "id": "b-jpds7t",
           "type": "spacer",
           "size": "sm"
         }
