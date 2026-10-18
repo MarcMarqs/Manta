@@ -465,25 +465,20 @@
       ]
     },
     {
-      "id": "b-4djy2e",
+      "id": "b-1g4856",
       "type": "section",
       "background": "none",
       "blocks": [
         {
-          "id": "b-srnxw0",
+          "id": "b-1t5mxe",
           "type": "heading",
           "level": 2,
           "text": "7. Boss Fights"
         },
         {
-          "id": "b-h6kd5p",
+          "id": "b-3gamil",
           "type": "text",
-          "html": "<p>Bosses should test how players adapt, not just soak damage. I designed four; three were implemented.</p><p>• Built multi-phase behaviour trees in Unreal; bosses switch between melee strings and ranged attacks depending on the player's distance.</p><p>• Worked with level design on arenas, and with animation and VFX on telegraphs.</p><p><br></p><p><b>Iteration:</b> The early bosses were designed without enough thought for the different heroes, so some heroes struggled badly.</p><p>I changed attack ranges and damage and reshaped arenas with level design until each boss worked for all five. Low ranged heroes had trouble with the second boss which had a behavior of destroying the floor around it.</p><p>I balanced manually the pieces and the order in which they fall which created more opening to low ranged heroes to beat the boss solving our issue we had in previous playtests.</p>"
-        },
-        {
-          "id": "b-kffbpm",
-          "type": "spacer",
-          "size": "md"
+          "html": "<p>Bosses should test how players adapt, not just soak damage. I designed four; three were implemented.</p><p>• Built multi-phase behaviour trees in Unreal; bosses switch between melee strings and ranged attacks depending on the player's distance.</p><p>• Worked with level design on arenas, and with animation and VFX on telegraphs.</p><p><br></p><p><b>Iteration:</b> The early bosses were designed without enough thought for the different heroes, so some heroes struggled badly. I changed attack ranges and damage and reshaped arenas with level design until each boss worked for all five.</p>"
         }
       ]
     },
@@ -492,6 +487,18 @@
       "type": "section",
       "background": "none",
       "blocks": [
+        {
+          "id": "b-4djy2e",
+          "type": "section",
+          "background": "none",
+          "blocks": []
+        },
+        {
+          "id": "b-p7mlrc",
+          "type": "section",
+          "background": "none",
+          "blocks": []
+        },
         {
           "id": "b-756ag5",
           "type": "heading",
@@ -504,6 +511,17 @@
           "html": "<p><b>Problem:</b> In dense waves, too many enemies targeted the player at once. The screen became noisy and damage arrived without warning.</p><p><b>Fix:</b> A targeting cap with an aggro cooldown. Only a set number of enemies [X] can attack one player at a time; the rest go after the objectives.</p><p><b>Result:</b> Fights became readable again, and the overflow added a decision: protect yourself, or protect the base.</p>"
         },
         {
+          "id": "b-lz850v",
+          "type": "spacer",
+          "size": "sm"
+        },
+        {
+          "id": "b-8q0h6e",
+          "type": "heading",
+          "level": 3,
+          "text": "Iteration Case: The Endgame Core Defense"
+        },
+        {
           "id": "b-4vgcom",
           "type": "systemMap",
           "arrange": "layered",
@@ -512,7 +530,6 @@
             {
               "id": "a",
               "label": "Problem",
-              "accent": true,
               "note": "Enemies broke the core shields faster than players could react"
             },
             {
@@ -535,12 +552,85 @@
               "layer": 3
             }
           ],
-          "links": []
+          "links": [
+            {
+              "from": "a",
+              "to": "n-kcj24z"
+            },
+            {
+              "from": "n-kcj24z",
+              "to": "n-gyouak"
+            },
+            {
+              "from": "n-gyouak",
+              "to": "n-0bjl5f"
+            }
+          ]
+        },
+        {
+          "id": "b-hlblay",
+          "type": "text",
+          "html": "<p><b>Problem:</b> In endgame levels, players defend a core protected by power nodes. Telemetry showed that certain high-threat archetypes stripped the core's shields faster than players could react, creating an unfair difficulty spike.</p><p><b>Cause:</b> Those enemies arrived in numbers and all went straight for the nodes, with no warning.</p><p><b>Options Considered:</b> Lowering their damage, adding more defences, or slowing their spawn, was all options considered, although changing any of the options would highly impact other systems and the combat in general (most of the options was tested previously in the project which helped the team not to lose time).</p><p><br></p><p><b>Fix:</b></p><p>1. Reduced their numbers and added a shared targeting cap for node-attacking enemies.</p><p>2. Added traps and items that pull enemy focus away from the nodes.</p><p>3. Added a voice line when node threats spawn, so players can reposition in time.</p><p>Result: The next playtests showed the spike flattened and the level back to a steady defensive rhythm, moving from a failure rate of ~80% to ~40% which reduced frustration as well.</p>"
         },
         {
           "id": "b-jmmznt",
           "type": "spacer",
           "size": "md"
+        }
+      ]
+    },
+    {
+      "id": "b-v2bnfa",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-n4y4g0",
+          "type": "heading",
+          "level": 2,
+          "text": "9. Playtesting and Telemetry"
+        },
+        {
+          "id": "b-k3l65g",
+          "type": "text",
+          "html": "<p>I treated playtesting as a loop: focused test phases on specific features, new biomes and hero balance; surveys I wrote and ran; reports from external playtest agencies turned into design tasks.</p><p><b>What I Compared:</b></p>"
+        },
+        {
+          "id": "b-f1ns23",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "Source",
+            "Told Me"
+          ],
+          "rows": [
+            [
+              "Telemetry heatmaps (deaths, kills, tower placement)",
+              "Where players struggled"
+            ],
+            [
+              "Hero pick rates and session length",
+              "Which heroes and levels players avoided"
+            ],
+            [
+              "Recorded sessions",
+              "What players actually did"
+            ],
+            [
+              "Surveys",
+              "How it felt, and why"
+            ]
+          ]
+        },
+        {
+          "id": "b-sp14gt",
+          "type": "text",
+          "html": "<p>Cross-checking these let me act on what players did, not just what they said.</p><p>Across test rounds, survey scores rose about 60% from ~30% to ~50%.</p>"
+        },
+        {
+          "id": "b-w1ypbw",
+          "type": "gallery",
+          "images": []
         }
       ]
     },
@@ -553,12 +643,44 @@
           "id": "b-2xevh3",
           "type": "heading",
           "level": 2,
+          "text": "Decisions and Trade-Offs"
+        },
+        {
+          "id": "b-8pg35g",
+          "type": "text",
+          "html": "<p>• Balance through enemies, not heroes. Harder to tune, since every archetype interacts with five heroes, but it kept each hero distinct.</p><p>• Targeting cap over lower enemy counts. Fewer enemies would have fixed readability but killed the feeling of a horde; the cap kept density and added a decision.</p><p>• Data tables over custom code. Slower to set up, but it let design rebalance without waiting for engineering.</p>"
+        },
+        {
+          "id": "b-4zm5cm",
+          "type": "spacer",
+          "size": "sm"
+        },
+        {
+          "id": "b-rgmh81",
+          "type": "heading",
+          "level": 2,
+          "text": "Results"
+        },
+        {
+          "id": "b-m52ybw",
+          "type": "text",
+          "html": "<p>• 40+ waves, 3 bosses and 40+ progression pieces built and tuned in engine.</p><p>• Survey scores up about 60% and onboarding ratings up about 70% across playtest rounds.</p>"
+        },
+        {
+          "id": "b-007v6l",
+          "type": "spacer",
+          "size": "sm"
+        },
+        {
+          "id": "b-bgmvyf",
+          "type": "heading",
+          "level": 2,
           "text": "Looking Back"
         },
         {
-          "id": "b-bnv6u6",
+          "id": "b-vcu3bg",
           "type": "text",
-          "html": "<p></p><div><div><b><span class=\"big\">What Worked</span></b></div><div><ul><li>Teaching through space instead of text kept the story intact and worked for players of all ages.</li><li>Testing with first-time players early found problems the team could no longer see.</li></ul><div><br></div></div></div><div><b><span class=\"big\">What I'd do Differently</span></b></div><div><ul><li>Set measurable targets, such as solve rate and time per puzzle, before the first playtest rather than during.</li><li>Test the camera with first-time players earlier, since many later fixes were camera fixes.</li></ul><div><br></div></div><div><span class=\"big\"><b>What I Learned</b></span></div><div><ul><li>For young or new players, the camera does most of the teaching.</li><li>What seems obvious to a designer often isn't; test early with people who have never seen the game.</li></ul></div><p></p>"
+          "html": "<p><b>What Worked:</b> Planning difficulty in spreadsheets before building, and triangulating telemetry with surveys.</p><p><b>What I'd do Differently:</b>&nbsp;Design bosses against all five heroes from the start; this is a must in order to avoid mistakes and ensure the gameplay will be delivered clearly to players.</p><p><b>What I Learned:</b> with several heroes, balancing through the enemies keeps each hero's identity; telemetry shows where players struggle, surveys explain why.</p>"
         }
       ]
     }
