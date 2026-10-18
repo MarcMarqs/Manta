@@ -185,26 +185,26 @@
             },
             {
               "id": "n-dg5aa4",
-              "label": "Role",
-              "note": "What it does in a fight",
+              "label": "Score First",
+              "note": "Validate scoring before the rest",
               "layer": 1
             },
             {
               "id": "n-n6q2ym",
-              "label": "Behaviour",
-              "note": "Actions, moves and weapon use",
+              "label": "Spreadsheet",
+              "note": "Balance weights and variables",
               "layer": 2
             },
             {
               "id": "n-17ly39",
-              "label": "Clarity Pass",
-              "note": "Can players read it fast?",
+              "label": "Unreal",
+              "note": "Build what the paper proved",
               "layer": 3
             },
             {
               "id": "n-h9lxfu",
-              "label": "Document",
-              "note": "Spec for art and engineering",
+              "label": "Playtest",
+              "note": "Closed, open and live events",
               "layer": 4
             }
           ],
@@ -231,138 +231,6 @@
           "id": "b-xwpepy",
           "type": "spacer",
           "size": "sm"
-        },
-        {
-          "id": "b-icun6a",
-          "type": "heading",
-          "level": 3,
-          "text": "The Rules Every Archetype had to Meet"
-        },
-        {
-          "id": "b-pvzdae",
-          "type": "table",
-          "caption": "",
-          "columns": [
-            "Rule",
-            "Why"
-          ],
-          "rows": [
-            [
-              "Clear contrast: its own silhouette and movement",
-              "Players identify the threat instantly"
-            ],
-            [
-              "Swarm caps: a population limit for swarm enemies",
-              "Avoids visual clutter and overload"
-            ],
-            [
-              "Hit-stop by weight: impact pause scales with mass and speed",
-              "Heavy hits feel heavy, light ones stay snappy"
-            ]
-          ]
-        },
-        {
-          "id": "b-e2c3g0",
-          "type": "section",
-          "background": "none",
-          "blocks": []
-        },
-        {
-          "id": "b-i5pl79",
-          "type": "table",
-          "caption": "",
-          "columns": [
-            "Archetype",
-            "Role in a Fight",
-            "What it Tests in the Player"
-          ],
-          "rows": [
-            [
-              "Basic Melee",
-              "Baseline close-range attacker that teaches the core combat rhythm",
-              "Reading attacks, dodge timing"
-            ],
-            [
-              "Agile Assassin",
-              "Fast flanker with quick, low-telegraph strikes",
-              "Reaction speed, keeping it in view"
-            ],
-            [
-              "Area Controller",
-              "Denies space with zones or hazards, shrinking safe ground",
-              "Positioning, route choice"
-            ],
-            [
-              "Heavy Hitter",
-              "Slow, heavily telegraphed attacks that punish greed",
-              "Patience, punishing recovery windows"
-            ],
-            [
-              "Ranged Caster",
-              "Attacks from distance and stays away from the player",
-              "Closing distance, using cover"
-            ],
-            [
-              "Swarm",
-              "Weak alone, dangerous in groups; capped in number",
-              "Crowd control, area attacks"
-            ],
-            [
-              "Ambusher",
-              "Hides and strikes when the player passes",
-              "Awareness, caution in new spaces"
-            ],
-            [
-              "Vampiric",
-              "Heals itself by dealing damage",
-              "Avoiding hits, sustained pressure"
-            ],
-            [
-              "Armored Sentinel",
-              "Guards an area and blocks frontal attacks",
-              "Finding openings, choosing damage type"
-            ],
-            [
-              "Tracker",
-              "Follows the player persistently across a space",
-              "Managing pursuit, choosing when to engage"
-            ],
-            [
-              "Aggressive Hunter",
-              "Relentless pursuer with little pause between attacks",
-              "Stamina management under pressure"
-            ],
-            [
-              "Illusionist",
-              "Creates decoys or fakes to mislead the player",
-              "Reading tells, picking the real target"
-            ],
-            [
-              "Summoner",
-              "Spawns other enemies until it is dealt with",
-              "Target priority"
-            ],
-            [
-              "Manipulator",
-              "Disrupts the player with debuffs or control effects",
-              "Adapting, using counters"
-            ],
-            [
-              "Explosive",
-              "Detonates on contact or death, harming everything nearby",
-              "Spacing, using it against other enemies"
-            ]
-          ]
-        },
-        {
-          "id": "b-ilq6wi",
-          "type": "text",
-          "html": "<p>Some archetypes were later cut for animation or readability limits; mark which ones.</p>"
-        },
-        {
-          "id": "b-orne60",
-          "type": "spacer",
-          "size": "sm"
         }
       ]
     },
@@ -375,19 +243,45 @@
           "id": "b-wammft",
           "type": "heading",
           "level": 2,
-          "text": "2. A Rock-Paper-Scissors of Damage"
+          "text": "1. Recipes and scoring"
         },
         {
           "id": "b-vmavny",
           "type": "text",
-          "html": "<p>Each weapon type leans toward one of three damage types, and each enemy is strong or weak against them. For example, a slashing weapon deals extra damage to cloth enemies. Players are rewarded for switching weapons without being locked into one loadout.</p><p>• <b>Mixed Damage:</b> Every weapon deals all three damage types at different percentages, so no enemy is ever fully immune to what the player is holding.</p><p>• <b>Specialise Without Losing Flexibility:</b> Upgrades let players invest deeply in one damage type while every weapon stays useful.</p><p>• <b>Weapon Feel:</b> Types differ in reach, attack timing, stamina cost, moveset and damage.</p>"
+          "html": "<p>Recipes are randomized, so the game can't be memorized. To keep scoring fair, every recipe step has a label (type of cut, hot or cold, and so on), each label is worth a fixed number of points, and the total is multiplied by the time left. The system scales for 2, 3 or 4 players.</p>"
         },
         {
-          "id": "b-0m0kkr",
-          "type": "sheet",
-          "source": "file",
-          "sheetId": "",
-          "height": "medium"
+          "id": "b-ztfaco",
+          "type": "systemMap",
+          "arrange": "layered",
+          "caption": "Random recipes still score fairly because points come from labels",
+          "nodes": [
+            {
+              "id": "a",
+              "label": "Label Points",
+              "accent": true,
+              "note": "Fixed per step: cut, hot or cold"
+            },
+            {
+              "id": "n-ka43dk",
+              "label": "Time Left",
+              "layer": 1,
+              "note": "Multiplier from time remaining"
+            },
+            {
+              "id": "n-vjxz36",
+              "label": "Bonuses",
+              "note": "Secondary goals as multipliers",
+              "layer": 2
+            },
+            {
+              "id": "n-2bfn2d",
+              "label": "Dish Score",
+              "note": "Added up per level, scaled for 2 to 4",
+              "layer": 3
+            }
+          ],
+          "links": []
         },
         {
           "id": "b-9bx2p7",
