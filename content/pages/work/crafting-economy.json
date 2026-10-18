@@ -7,8 +7,7 @@
       "id": "title",
       "type": "heading",
       "level": 1,
-      "text": "Crafting Economy",
-      "width": "narrow"
+      "text": "Crafting Economy"
     },
     {
       "id": "b-2ut9wq",
@@ -20,21 +19,22 @@
           "type": "heading",
           "level": 2,
           "text": "Three Players, One Economy",
-          "width": "narrow"
+          "width": "narrow",
+          "place": "left"
         },
         {
           "id": "b-o3w5t3",
           "type": "text",
           "html": "<p>A three-tier crafting economy for a fantasy RPG, tested for 100 hours with casual, average and hardcore players. For all three, nothing is hoarded and nothing runs dry, and crafting asks real questions: roll or target, gamble or ward.</p>",
-          "width": "narrow"
+          "width": "narrow",
+          "place": "left"
         },
         {
           "id": "b-0mx3wb",
           "type": "spacer",
           "size": "sm"
         }
-      ],
-      "width": "narrow"
+      ]
     },
     {
       "id": "b-435jmd",
@@ -50,14 +50,14 @@
               "id": "b-d4d6wn",
               "type": "heading",
               "level": 2,
-              "text": "The Problem",
-              "width": "narrow"
+              "text": "The Problem"
             },
             {
               "id": "b-50pnj0",
               "type": "text",
               "html": "<p>Crafting economies usually break slowly. Players earn a little more than they can spend, the surplus compounds, and by the endgame drops are clutter. The opposite failure is a resource running dry and crafting stalling behind a grind wall.</p><p>My second version balanced the flows for one average player over 50 hours. Run with casual and hardcore players over 100 hours, the economy broke: once upgrades capped, the main gold sink closed, and hardcore players ended up holding 34 hours of gold income. Balanced flows weren't enough either. Recipes asked players no real questions.</p><p>So I set five goals:</p><p><ol><li><b>Every drop is worth picking up.</b> Salvage always beats selling.</li><li><b>Crafting keeps pace with play,</b> at every play speed.</li><li><b>Crafting asks real questions,</b> where both answers are reasonable.</li><li><b>Progress has a horizon, and a tail.</b> Upgrades finish late, then a cosmetic loop keeps the economy moving.</li><li><b>Hard limits are a safety net, not the design.</b></li></ol></p>",
-              "width": "narrow"
+              "width": "narrow",
+              "place": "left"
             },
             {
               "id": "b-fyouey",
@@ -149,8 +149,7 @@
           "type": "spacer",
           "size": "sm"
         }
-      ],
-      "width": "narrow"
+      ]
     },
     {
       "id": "b-yiy6lq",
@@ -284,8 +283,7 @@
           "type": "spacer",
           "size": "sm"
         }
-      ],
-      "width": "narrow"
+      ]
     },
     {
       "id": "b-h9go05",
@@ -354,8 +352,7 @@
           "type": "spacer",
           "size": "sm"
         }
-      ],
-      "width": "narrow"
+      ]
     },
     {
       "id": "b-ndj5oo",
@@ -380,8 +377,7 @@
           "type": "spacer",
           "size": "sm"
         }
-      ],
-      "width": "narrow"
+      ]
     },
     {
       "id": "b-xhrdnn",
@@ -406,8 +402,7 @@
           "type": "spacer",
           "size": "sm"
         }
-      ],
-      "width": "narrow"
+      ]
     },
     {
       "id": "b-gnz8lf",
@@ -459,8 +454,7 @@
           "type": "spacer",
           "size": "sm"
         }
-      ],
-      "width": "narrow"
+      ]
     },
     {
       "id": "b-t0v6a1",
@@ -484,8 +478,7 @@
           "type": "spacer",
           "size": "sm"
         }
-      ],
-      "width": "narrow"
+      ]
     },
     {
       "id": "b-ftgpqf",
@@ -497,7 +490,8 @@
           "type": "heading",
           "level": 2,
           "text": "Validating it in a Live Game",
-          "width": "narrow"
+          "width": "narrow",
+          "place": "left"
         },
         {
           "id": "b-ontt57",
@@ -509,8 +503,7 @@
           "type": "spacer",
           "size": "sm"
         }
-      ],
-      "width": "narrow"
+      ]
     },
     {
       "id": "b-jfga71",
@@ -534,8 +527,7 @@
           "type": "spacer",
           "size": "sm"
         }
-      ],
-      "width": "narrow"
+      ]
     },
     {
       "id": "b-w5xx7j",
@@ -557,8 +549,7 @@
           "style": "primary",
           "width": "narrow"
         }
-      ],
-      "width": "narrow"
+      ]
     }
   ],
   "image": "https://imgs.search.brave.com/2OGwlxwJySYxg-i5inNYqE41Gb-xNzjI4xDpm_fv224/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDEzMTc5/NjU4LmpwZw"
