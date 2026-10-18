@@ -1,0 +1,566 @@
+{
+  "title": "Wardens Rising",
+  "description": "3C, Act II gameplay and puzzle design on an award-winning narrative adventure at Luski Game Studio.",
+  "image": "/images/uploads/untitled-e32240.webp",
+  "blocks": [
+    {
+      "id": "b-fxtj0l",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-lipmso",
+          "type": "heading",
+          "level": 1,
+          "text": "Wardens Rising"
+        },
+        {
+          "id": "b-d4zs45",
+          "type": "text",
+          "html": "<p><i>Action RPG / Tower Defense</i></p>"
+        },
+        {
+          "id": "b-nmeyyq",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "Role",
+            "Team Size",
+            "Engine",
+            "Platform",
+            "My Focus",
+            "Modes"
+          ],
+          "rows": [
+            [
+              "Game Designer",
+              "60+",
+              "Unreal Engine 5",
+              "PC; PS5; Xbox Series X/S",
+              "Balancingㅤ|ㅤCombat Designㅤ|ㅤProgression",
+              "Single & Multiplayer"
+            ]
+          ]
+        },
+        {
+          "id": "b-wp89ai",
+          "type": "video",
+          "provider": "youtube",
+          "videoId": "I1lcwDOOni4",
+          "title": "",
+          "align": "center",
+          "scale": 70
+        },
+        {
+          "id": "b-9xzoer",
+          "type": "spacer",
+          "size": "md"
+        }
+      ]
+    },
+    {
+      "id": "b-z0vinl",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-2ycc62",
+          "type": "heading",
+          "level": 2,
+          "text": "My Role"
+        },
+        {
+          "id": "b-341gm6",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "",
+            ""
+          ],
+          "rows": [
+            [
+              "Owned",
+              "• Difficulty pacing\n• Economy and Skill-Tree Balancing\n• 40+ waves in the in-house wave tool\n• Boss design and Behavior trees\n• Tutorial refactoration\n• Documentation"
+            ],
+            [
+              "Co-Owned",
+              "• The economy system and Skill-Tree creation\n• Progression unlock tables"
+            ],
+            [
+              "Supported",
+              "• Animation, VFX, and Level Design on Bosses and Arenas\n• UI on the Skill Tree\n• Engineering on Multiplayer\n• Production on roadmap and event builds"
+            ]
+          ]
+        },
+        {
+          "id": "b-mtm5tg",
+          "type": "spacer",
+          "size": "sm"
+        },
+        {
+          "id": "b-rjtpwj",
+          "type": "text",
+          "html": "<p></p><div><b><span class=\"big\">In Short</span></b></div><ul><li><b>What I Owned:</b>&nbsp;Difficulty, economy and skill-tree balancing; every wave; boss design and behaviour; the tutorial.</li><li><b>Hardest Problem:</b>&nbsp;An endgame spike where enemies broke the core faster than players could react. Fixed with a targeting cap, counter-traps and an audio warning.</li><li><b>What it Shows:</b>&nbsp;Balancing many heroes through the enemies instead of flattening them, and making changes from telemetry, not opinion.</li></ul><p></p>"
+        },
+        {
+          "id": "b-20tnhs",
+          "type": "spacer",
+          "size": "md"
+        }
+      ]
+    },
+    {
+      "id": "b-ny6lt1",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-u6mbcr",
+          "type": "heading",
+          "level": 2,
+          "text": "Constraints & Problem Solving"
+        },
+        {
+          "id": "b-cb98jz",
+          "type": "text",
+          "html": "<p>• <b>Five very different heroes</b>, each needing to feel strong without one becoming the default pick.</p><p>• <b>Co-op had to work with the same waves</b>, independent of the player count.</p><p>• <b>Engineering time was limited</b>, so systems had to be data-driven: balance changes in tables, not code.</p><p>• <b>High enemy density</b> stressed both readability and performance.</p><p></p>"
+        },
+        {
+          "id": "b-2iubl1",
+          "type": "spacer",
+          "size": "sm"
+        },
+        {
+          "id": "b-xjr7kt",
+          "type": "heading",
+          "level": 2,
+          "text": "Design Goals"
+        },
+        {
+          "id": "b-ww480o",
+          "type": "text",
+          "html": "<p>The goals that guided my decisions.</p>"
+        },
+        {
+          "id": "b-nrg9t5",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "Goal",
+            "How We Checked It"
+          ],
+          "rows": [
+            [
+              "No hero is clearly weaker",
+              "Hero pick rates and win rates in telemetry"
+            ],
+            [
+              "Difficulty rises with clear peaks and relief",
+              "Planned curve vs death heatmaps per wave"
+            ],
+            [
+              "Money is always slightly short of what's needed",
+              "Income per stage vs cost of the defences each wave demands"
+            ],
+            [
+              "Players can read what's attacking them",
+              "Playtest surveys and recordings"
+            ],
+            [
+              "New content keeps arriving into the late game",
+              "Unlock timing vs session length and drop-off"
+            ]
+          ]
+        },
+        {
+          "id": "b-0p8aqb",
+          "type": "spacer",
+          "size": "sm"
+        },
+        {
+          "id": "b-l8xpvy",
+          "type": "heading",
+          "level": 2,
+          "text": "Design Pillars"
+        },
+        {
+          "id": "b-tspwvn",
+          "type": "systemMap",
+          "arrange": "stacked",
+          "caption": "Three pillars kept dense wave combat fair for five heroes",
+          "nodes": [
+            {
+              "id": "a",
+              "label": "Core",
+              "accent": true
+            },
+            {
+              "id": "n-8a5acq",
+              "label": "Readable Under Pressure",
+              "layer": 1,
+              "note": "Players always see what is attacking them"
+            },
+            {
+              "id": "n-ofvk5w",
+              "label": "Every Hero Viable",
+              "note": "Different playstyles, no weak choice",
+              "layer": 1
+            },
+            {
+              "id": "n-8caups",
+              "label": "Built Within Scope",
+              "note": "Balance lives in tables, not in new code",
+              "layer": 1
+            },
+            {
+              "id": "n-f7x4tn",
+              "label": "Tuned from telemetry, playtest surveys and spreadsheet models",
+              "layer": 2
+            }
+          ],
+          "links": [
+            {
+              "from": "a",
+              "to": "n-8a5acq"
+            },
+            {
+              "from": "a",
+              "to": "n-ofvk5w"
+            },
+            {
+              "from": "a",
+              "to": "n-8caups"
+            }
+          ]
+        },
+        {
+          "id": "b-mk4w1n",
+          "type": "sheet",
+          "source": "file",
+          "sheetId": "",
+          "height": "medium"
+        },
+        {
+          "id": "b-jvbxyj",
+          "type": "spacer",
+          "size": "md"
+        }
+      ]
+    },
+    {
+      "id": "b-7r06hi",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-uihk62",
+          "type": "heading",
+          "level": 2,
+          "text": "1. Balance Pipeline"
+        },
+        {
+          "id": "b-wzoghf",
+          "type": "text",
+          "html": "<p>Every number started in a spreadsheet, went through the in-house tool into Unreal, was tested in play, and came back to the spreadsheet. The spreadsheet stayed the single source of truth, so the team never had to guess which value was current.</p>"
+        },
+        {
+          "id": "b-engovr",
+          "type": "systemMap",
+          "arrange": "layered",
+          "caption": "Every balance value starts and ends in the spreadsheet",
+          "nodes": [
+            {
+              "id": "a",
+              "label": "Spreadsheet",
+              "accent": true,
+              "note": "TTK, DPS, economy source of truth"
+            },
+            {
+              "id": "n-9k8wad",
+              "label": "In-House Tool",
+              "note": "Waves, spawns and timers",
+              "layer": 1
+            },
+            {
+              "id": "n-iqmve3",
+              "label": "Unreal",
+              "note": "Data Assets and Data Tables",
+              "layer": 2
+            },
+            {
+              "id": "n-tm105x",
+              "label": "Playtest",
+              "note": "Telemetry heatmaps and surveys",
+              "layer": 3
+            }
+          ],
+          "links": [
+            {
+              "from": "a",
+              "to": "n-9k8wad"
+            },
+            {
+              "from": "n-9k8wad",
+              "to": "n-iqmve3"
+            },
+            {
+              "from": "n-iqmve3",
+              "to": "n-tm105x"
+            },
+            {
+              "from": "n-tm105x",
+              "to": "a",
+              "label": "findings update the spreadsheet, then the loop runs again"
+            }
+          ]
+        },
+        {
+          "id": "b-j3joxz",
+          "type": "sheet",
+          "source": "file",
+          "sheetId": "",
+          "height": "medium"
+        },
+        {
+          "id": "b-ygdq6y",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-hezw5t",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-5xi51u",
+          "type": "heading",
+          "level": 2,
+          "text": "2. Pacing"
+        },
+        {
+          "id": "b-44oc7d",
+          "type": "text",
+          "html": "<p>Planning difficulty before the engine. A campaign needs a clear sense of progression, and each level needs peaks of tension followed by short relief.</p><p>• Gave every enemy a <b>threat value</b>, so a wave's difficulty could be calculated before it was built.</p><p>• Mapped the difficulty curve across the campaign, with a <b>Map × Invasion</b> matrix to check the tension of every invasion on every map.</p><p>• Built each level with rising and falling waves, then created all 40+ waves in the <b>in-house wave tool</b> inside Unreal: spawn portals, compositions and timers.</p>"
+        },
+        {
+          "id": "b-vwq0vq",
+          "type": "sheet",
+          "source": "file",
+          "sheetId": "",
+          "height": "medium"
+        },
+        {
+          "id": "b-uo7pv7",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-otpkuw",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-yz70o5",
+          "type": "heading",
+          "level": 2,
+          "text": "3. Economy"
+        },
+        {
+          "id": "b-rd5n80",
+          "type": "text",
+          "html": "<p>Spending power against pressure. Tower defense works when money is always a little short of what the next wave demands.</p><p>• Balanced each wave's composition against the currency it pays out.</p><p>• Set income per stage so upgrades never outran the defences players needed.</p><p>• Built TTK and DPS models for heroes, towers and enemies, with charts that flag outliers, then moved the values into Unreal Data Assets.</p>"
+        },
+        {
+          "id": "b-nmyulq",
+          "type": "spacer",
+          "size": "md"
+        }
+      ]
+    },
+    {
+      "id": "b-9dhjxx",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-hfu5bu",
+          "type": "heading",
+          "level": 2,
+          "text": "4. Balancing Heroes Through the Enemies"
+        },
+        {
+          "id": "b-489ikr",
+          "type": "text",
+          "html": "<p>Rather than flattening the heroes until they played alike, I kept them close in power and tuned the enemy archetypes against each hero's weaknesses. Each hero faces a different version of the same wave, so players change targets mid-fight and every hero keeps its identity.</p><p>• Sorted the roster into clear combat roles (tanks, ranged, brawlers), each with its own stat template in Data Tables, so players read a threat at a glance and learn its counter.</p>"
+        },
+        {
+          "id": "b-qglaud",
+          "type": "sheet",
+          "source": "file",
+          "sheetId": "",
+          "height": "medium"
+        },
+        {
+          "id": "b-mz9sys",
+          "type": "spacer",
+          "size": "md"
+        }
+      ]
+    },
+    {
+      "id": "b-pc6ncw",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-whfpat",
+          "type": "heading",
+          "level": 2,
+          "text": "5. Progression and Content"
+        },
+        {
+          "id": "b-d1hyd7",
+          "type": "text",
+          "html": "<p>• Designed 40+ progression pieces ([30+ items, 10 perks], companions, skill-tree upgrades, tower unlocks), built on shared attribute modifiers in Data Tables so new content needed no custom code.</p><p>• Modelled levelling speed and unlock timing with curves in Sheets, then exported them to Data Tables.</p><p>• Tied key unlocks to specific stages (for example 1, 4 and 7), each introduced with a wave built to show off the new tower or trap.</p><p>• Rebalanced less-picked items and perks; later playtests showed players using a wider range.</p><p>• After playtests showed a late-game content drought, restructured the item and perk unlocks and moved tower milestones to line up with map transitions.</p>"
+        },
+        {
+          "id": "b-xw98d4",
+          "type": "sheet",
+          "source": "file",
+          "sheetId": "",
+          "height": "medium"
+        },
+        {
+          "id": "b-0e8jpn",
+          "type": "spacer",
+          "size": "md"
+        }
+      ]
+    },
+    {
+      "id": "b-6z6sk5",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-xtopj1",
+          "type": "heading",
+          "level": 2,
+          "text": "6. Tutorial"
+        },
+        {
+          "id": "b-sr9vx2",
+          "type": "text",
+          "html": "<p>I designed the tower-placement tutorial around situations players would actually meet, explained step by step, with room to try things rather than reading about mechanics in isolation. Onboarding ratings rose in playtests from 40% to 70%.</p><p><b><i><u>What was the problem and the solution??</u></i></b></p>"
+        },
+        {
+          "id": "b-az0vm2",
+          "type": "spacer",
+          "size": "md"
+        }
+      ]
+    },
+    {
+      "id": "b-4djy2e",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-srnxw0",
+          "type": "heading",
+          "level": 2,
+          "text": "7. Boss Fights"
+        },
+        {
+          "id": "b-h6kd5p",
+          "type": "text",
+          "html": "<p>Bosses should test how players adapt, not just soak damage. I designed four; three were implemented.</p><p>• Built multi-phase behaviour trees in Unreal; bosses switch between melee strings and ranged attacks depending on the player's distance.</p><p>• Worked with level design on arenas, and with animation and VFX on telegraphs.</p><p><br></p><p><b>Iteration:</b> The early bosses were designed without enough thought for the different heroes, so some heroes struggled badly.</p><p>I changed attack ranges and damage and reshaped arenas with level design until each boss worked for all five. Low ranged heroes had trouble with the second boss which had a behavior of destroying the floor around it.</p><p>I balanced manually the pieces and the order in which they fall which created more opening to low ranged heroes to beat the boss solving our issue we had in previous playtests.</p>"
+        },
+        {
+          "id": "b-kffbpm",
+          "type": "spacer",
+          "size": "md"
+        }
+      ]
+    },
+    {
+      "id": "b-tzmv91",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-756ag5",
+          "type": "heading",
+          "level": 2,
+          "text": "8. Readability"
+        },
+        {
+          "id": "b-jd2wjm",
+          "type": "text",
+          "html": "<p><b>Problem:</b> In dense waves, too many enemies targeted the player at once. The screen became noisy and damage arrived without warning.</p><p><b>Fix:</b> A targeting cap with an aggro cooldown. Only a set number of enemies [X] can attack one player at a time; the rest go after the objectives.</p><p><b>Result:</b> Fights became readable again, and the overflow added a decision: protect yourself, or protect the base.</p>"
+        },
+        {
+          "id": "b-4vgcom",
+          "type": "systemMap",
+          "arrange": "layered",
+          "caption": "Three small changes removed an unfair endgame spike",
+          "nodes": [
+            {
+              "id": "a",
+              "label": "Problem",
+              "accent": true,
+              "note": "Enemies broke the core shields faster than players could react"
+            },
+            {
+              "id": "n-kcj24z",
+              "label": "Cause",
+              "note": "Many arrived at once, all went for the nodes, with no warning",
+              "layer": 1
+            },
+            {
+              "id": "n-gyouak",
+              "label": "Fix",
+              "note": "Fewer, with a cap. Traps that pull them. Voice-line warning",
+              "layer": 2
+            },
+            {
+              "id": "n-0bjl5f",
+              "label": "Result",
+              "note": "Spike flattened in the next playtests",
+              "accent": true,
+              "layer": 3
+            }
+          ],
+          "links": []
+        },
+        {
+          "id": "b-jmmznt",
+          "type": "spacer",
+          "size": "md"
+        }
+      ]
+    },
+    {
+      "id": "b-98nbqo",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-2xevh3",
+          "type": "heading",
+          "level": 2,
+          "text": "Looking Back"
+        },
+        {
+          "id": "b-bnv6u6",
+          "type": "text",
+          "html": "<p></p><div><div><b><span class=\"big\">What Worked</span></b></div><div><ul><li>Teaching through space instead of text kept the story intact and worked for players of all ages.</li><li>Testing with first-time players early found problems the team could no longer see.</li></ul><div><br></div></div></div><div><b><span class=\"big\">What I'd do Differently</span></b></div><div><ul><li>Set measurable targets, such as solve rate and time per puzzle, before the first playtest rather than during.</li><li>Test the camera with first-time players earlier, since many later fixes were camera fixes.</li></ul><div><br></div></div><div><span class=\"big\"><b>What I Learned</b></span></div><div><ul><li>For young or new players, the camera does most of the teaching.</li><li>What seems obvious to a designer often isn't; test early with people who have never seen the game.</li></ul></div><p></p>"
+        }
+      ]
+    }
+  ]
+}
