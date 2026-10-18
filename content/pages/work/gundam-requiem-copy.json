@@ -431,33 +431,106 @@
         {
           "id": "b-bu3npx",
           "type": "systemMap",
-          "arrange": "radial",
+          "arrange": "layered",
           "caption": "Cutting one weapon type kept variety and saved enemy production",
           "nodes": [
             {
               "id": "a",
               "label": "Before: 4 Weapon Types",
-              "note": "Each type needs enemies that test it; Enemy count grows beyond the team's size; Fights interesting, scope at risk"
+              "note": "• Each type needs enemies that test it\n• Enemy count grows beyond the team's size\n• Fights interesting, scope at risk"
             },
             {
               "id": "b",
-              "label": "Feeds in"
+              "label": "After: 3 Weapon Types",
+              "accent": true,
+              "note": "• More weapons within each type\n• Fewer enemies to produce\n• Each enemy harder and more interesting",
+              "layer": 1
             }
           ],
           "links": [
             {
-              "from": "b",
-              "to": "a"
+              "from": "a",
+              "to": "b",
+              "label": "cut one type"
             }
           ]
         },
         {
           "id": "b-f5q5o5",
           "type": "text",
-          "html": "<p>I built damage calculators and a hits-to-kill matrix in spreadsheets: how many strikes each weapon needs against each archetype. It made progression predictable and showed unfair matchups before they reached the engine.</p>"
+          "html": "<p><b>Problem:</b> 4 weapon types made combat interesting, but every type needed enemies that tested it. The number of enemies the team would have to produce grew beyond what a small team could make.</p><p><b>Fix:</b> I cut one weapon type, going from 4 to 3, and added more weapons within each remaining type.</p><p><b>Result:</b> Fewer enemies to produce, and each one could be harder and more interesting, while weapon variety stayed high.</p>"
         },
         {
           "id": "b-qy8u4d",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-d82o4z",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-g8qznc",
+          "type": "heading",
+          "level": 2,
+          "text": "Other Contributions"
+        },
+        {
+          "id": "b-cksdnj",
+          "type": "text",
+          "html": "<p><b>• Climb Mechanic: </b>Designed with level design and engineering to solve level layout problems. The metric of the character and the level made it difficult to pace the combat, so we designed a inverse stamina system that could help players in combat and to build their own traversal paths solving the metric and pacing problems.</p><p><b>• Boss Fight: </b>Designed with game design, level design and engineering. ASSET: a boss concept or arena sketch.</p><p><b>• Character Creation: </b>Designed the system and its UI in Adobe XD with UI and engineering. ASSET: one Adobe XD screen.</p><p><b>• Progression and Economy: </b>Designed player and item progression and the economy.</p>"
+        },
+        {
+          "id": "b-itb2rr",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-oijjzv",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-ehmb60",
+          "type": "heading",
+          "level": 2,
+          "text": "Decisions and Trade-Offs"
+        },
+        {
+          "id": "b-zswkxi",
+          "type": "text",
+          "html": "<p><b>• Fewer weapon types, deeper enemies. </b>Less breadth in the arsenal, but a roster the team could actually build.</p><p><b>• Mixed damage over hard counters. </b>Weaker \"perfect counter\" moments, but no fight ever becomes impossible with the wrong weapon.</p><p><b>• Rules before roster. </b>Slower to start, but 15 archetypes stayed consistent and readable.</p>"
+        },
+        {
+          "id": "b-2z5yiy",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-445ptn",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-et5vy9",
+          "type": "heading",
+          "level": 2,
+          "text": "Looking Back"
+        },
+        {
+          "id": "b-2x7yjf",
+          "type": "text",
+          "html": "<p><b>What Worked: </b>Writing the enemy rules first, and modelling hits-to-kill before building fights.</p><p><b>What I'd do Differently: </b>Check content cost earlier, before designing four weapon types.</p><p><b>What I Learned: </b>In combat systems, every new option multiplies the content needed elsewhere, so scope is a design decision too.</p>"
+        },
+        {
+          "id": "b-7joh2m",
           "type": "spacer",
           "size": "sm"
         }
