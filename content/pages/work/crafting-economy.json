@@ -18,16 +18,12 @@
           "id": "b-t9o9jw",
           "type": "heading",
           "level": 2,
-          "text": "Three Players, One Economy",
-          "width": "narrow",
-          "place": "left"
+          "text": "Three Players, One Economy"
         },
         {
           "id": "b-o3w5t3",
           "type": "text",
-          "html": "<p>A three-tier crafting economy for a fantasy RPG, tested for 100 hours with casual, average and hardcore players. For all three, nothing is hoarded and nothing runs dry, and crafting asks real questions: roll or target, gamble or ward.</p>",
-          "width": "narrow",
-          "place": "left"
+          "html": "<p>A three-tier crafting economy for a fantasy RPG, tested for 100 hours with casual, average and hardcore players. For all three, nothing is hoarded and nothing runs dry, and crafting asks real questions: roll or target, gamble or ward.</p>"
         },
         {
           "id": "b-0mx3wb",
@@ -55,17 +51,14 @@
             {
               "id": "b-50pnj0",
               "type": "text",
-              "html": "<p>Crafting economies usually break slowly. Players earn a little more than they can spend, the surplus compounds, and by the endgame drops are clutter. The opposite failure is a resource running dry and crafting stalling behind a grind wall.</p><p>My second version balanced the flows for one average player over 50 hours. Run with casual and hardcore players over 100 hours, the economy broke: once upgrades capped, the main gold sink closed, and hardcore players ended up holding 34 hours of gold income. Balanced flows weren't enough either. Recipes asked players no real questions.</p><p>So I set five goals:</p><p><ol><li><b>Every drop is worth picking up.</b> Salvage always beats selling.</li><li><b>Crafting keeps pace with play,</b> at every play speed.</li><li><b>Crafting asks real questions,</b> where both answers are reasonable.</li><li><b>Progress has a horizon, and a tail.</b> Upgrades finish late, then a cosmetic loop keeps the economy moving.</li><li><b>Hard limits are a safety net, not the design.</b></li></ol></p>",
-              "width": "narrow",
-              "place": "left"
+              "html": "<p>Crafting economies usually break slowly. Players earn a little more than they can spend, the surplus compounds, and by the endgame drops are clutter. The opposite failure is a resource running dry and crafting stalling behind a grind wall.</p><p>My second version balanced the flows for one average player over 50 hours. Run with casual and hardcore players over 100 hours, the economy broke: once upgrades capped, the main gold sink closed, and hardcore players ended up holding 34 hours of gold income. Balanced flows weren't enough either. Recipes asked players no real questions.</p><p>So I set five goals:</p><p><ol><li><b>Every drop is worth picking up.</b> Salvage always beats selling.</li><li><b>Crafting keeps pace with play,</b> at every play speed.</li><li><b>Crafting asks real questions,</b> where both answers are reasonable.</li><li><b>Progress has a horizon, and a tail.</b> Upgrades finish late, then a cosmetic loop keeps the economy moving.</li><li><b>Hard limits are a safety net, not the design.</b></li></ol></p>"
             },
             {
               "id": "b-fyouey",
               "type": "spacer",
               "size": "sm"
             }
-          ],
-          "width": "narrow"
+          ]
         },
         {
           "id": "b-9ytg6q",
@@ -76,29 +69,25 @@
               "id": "b-aj4lbi",
               "type": "heading",
               "level": 2,
-              "text": "The Problem",
-              "width": "narrow"
+              "text": "The Problem"
             },
             {
               "id": "b-llykmh",
               "type": "text",
-              "html": "<p>Crafting economies usually break slowly. Players earn a little more than they can spend, the surplus compounds, and by the endgame drops are clutter. The opposite failure is a resource running dry and crafting stalling behind a grind wall.</p><p>My second version balanced the flows for one average player over 50 hours. Run with casual and hardcore players over 100 hours, the economy broke: once upgrades capped, the main gold sink closed, and hardcore players ended up holding 34 hours of gold income. Balanced flows weren't enough either. Recipes asked players no real questions.</p><p>So I set five goals:</p><p><ol><li><b>Every drop is worth picking up.</b> Salvage always beats selling.</li><li><b>Crafting keeps pace with play,</b> at every play speed.</li><li><b>Crafting asks real questions,</b> where both answers are reasonable.</li><li><b>Progress has a horizon, and a tail.</b> Upgrades finish late, then a cosmetic loop keeps the economy moving.</li><li><b>Hard limits are a safety net, not the design.</b></li></ol></p>",
-              "width": "narrow"
+              "html": "<p>Crafting economies usually break slowly. Players earn a little more than they can spend, the surplus compounds, and by the endgame drops are clutter. The opposite failure is a resource running dry and crafting stalling behind a grind wall.</p><p>My second version balanced the flows for one average player over 50 hours. Run with casual and hardcore players over 100 hours, the economy broke: once upgrades capped, the main gold sink closed, and hardcore players ended up holding 34 hours of gold income. Balanced flows weren't enough either. Recipes asked players no real questions.</p><p>So I set five goals:</p><p><ol><li><b>Every drop is worth picking up.</b> Salvage always beats selling.</li><li><b>Crafting keeps pace with play,</b> at every play speed.</li><li><b>Crafting asks real questions,</b> where both answers are reasonable.</li><li><b>Progress has a horizon, and a tail.</b> Upgrades finish late, then a cosmetic loop keeps the economy moving.</li><li><b>Hard limits are a safety net, not the design.</b></li></ol></p>"
             },
             {
               "id": "b-hwqbx5",
               "type": "spacer",
               "size": "sm"
             }
-          ],
-          "width": "narrow"
+          ]
         },
         {
           "id": "b-wi37tx",
           "type": "heading",
           "level": 2,
-          "text": "Four Resources, Four Kinds of Drain",
-          "width": "narrow"
+          "text": "Four Resources, Four Kinds of Drain"
         },
         {
           "id": "b-t2fyy7",
@@ -135,14 +124,12 @@
               "300/h, growing to a plateau of 1,245/h at 45 h",
               "Fees, wards, reforging"
             ]
-          ],
-          "width": "narrow"
+          ]
         },
         {
           "id": "b-gr0slm",
           "type": "text",
-          "html": "<p>Crafting economies usually break slowly. Players earn a little more than they can spend, the surplus compounds, and by the endgame drops are clutter. The opposite failure is a resource running dry and crafting stalling behind a grind wall.</p><p>My second version balanced the flows for one average player over 50 hours. Run with casual and hardcore players over 100 hours, the economy broke: once upgrades capped, the main gold sink closed, and hardcore players ended up holding 34 hours of gold income. Balanced flows weren't enough either. Recipes asked players no real questions.</p><p>So I set five goals:</p><p><ol><li><b>Every drop is worth picking up.</b> Salvage always beats selling.</li><li><b>Crafting keeps pace with play,</b> at every play speed.</li><li><b>Crafting asks real questions,</b> where both answers are reasonable.</li><li><b>Progress has a horizon, and a tail.</b> Upgrades finish late, then a cosmetic loop keeps the economy moving.</li><li><b>Hard limits are a safety net, not the design.</b></li></ol></p>",
-          "width": "narrow"
+          "html": "<p>Crafting economies usually break slowly. Players earn a little more than they can spend, the surplus compounds, and by the endgame drops are clutter. The opposite failure is a resource running dry and crafting stalling behind a grind wall.</p><p>My second version balanced the flows for one average player over 50 hours. Run with casual and hardcore players over 100 hours, the economy broke: once upgrades capped, the main gold sink closed, and hardcore players ended up holding 34 hours of gold income. Balanced flows weren't enough either. Recipes asked players no real questions.</p><p>So I set five goals:</p><p><ol><li><b>Every drop is worth picking up.</b> Salvage always beats selling.</li><li><b>Crafting keeps pace with play,</b> at every play speed.</li><li><b>Crafting asks real questions,</b> where both answers are reasonable.</li><li><b>Progress has a horizon, and a tail.</b> Upgrades finish late, then a cosmetic loop keeps the economy moving.</li><li><b>Hard limits are a safety net, not the design.</b></li></ol></p>"
         },
         {
           "id": "b-y8esrn",
@@ -160,14 +147,12 @@
           "id": "b-w7m96y",
           "type": "heading",
           "level": 2,
-          "text": "Two Real Choices",
-          "width": "narrow"
+          "text": "Two Real Choices"
         },
         {
           "id": "b-oz5m4h",
           "type": "text",
-          "html": "<p><b><span class=\"big\">Roll randomly, or pay to target?</span></b></p><p>A random rare craft hits the stat pair you want 1 time in 6. A targeted craft lets you choose, for the price of 5 random crafts.</p>",
-          "width": "narrow"
+          "html": "<p><b><span class=\"big\">Roll randomly, or pay to target?</span></b></p><p>A random rare craft hits the stat pair you want 1 time in 6. A targeted craft lets you choose, for the price of 5 random crafts.</p>"
         },
         {
           "id": "b-s59dyf",
@@ -190,14 +175,12 @@
               "Unlucky (90th percentile)",
               "13"
             ]
-          ],
-          "width": "narrow"
+          ]
         },
         {
           "id": "b-2rna5d",
           "type": "text",
-          "html": "<p>Targeting costs more than a typical run of luck but far less than an unlucky one. Gamblers save gold on average; planners pay a premium to remove risk.</p>",
-          "width": "narrow"
+          "html": "<p>Targeting costs more than a typical run of luck but far less than an unlucky one. Gamblers save gold on average; planners pay a premium to remove risk.</p>"
         },
         {
           "id": "b-0nq9no",
@@ -269,14 +252,12 @@
             }
           ],
           "note": "Expected gold to gain one level. Source: balance model, Upgrade Table tab.",
-          "width": "narrow",
           "direction": "horizontal"
         },
         {
           "id": "b-f1dqny",
           "type": "text",
-          "html": "<p>At +5 the gamble is 14 gold cheaper on average but can cost a level, so it's a real risk decision. From +6 the ward pays for itself, and by +9 it saves nearly 2,000 gold. Players learn when to protect an item from the numbers on screen, without a tutorial.</p>",
-          "width": "narrow"
+          "html": "<p>At +5 the gamble is 14 gold cheaper on average but can cost a level, so it's a real risk decision. From +6 the ward pays for itself, and by +9 it saves nearly 2,000 gold. Players learn when to protect an item from the numbers on screen, without a tutorial.</p>"
         },
         {
           "id": "b-uf3axc",
@@ -294,8 +275,7 @@
           "id": "b-hzbmsu",
           "type": "heading",
           "level": 2,
-          "text": "Proving it Holds for Everyone",
-          "width": "narrow"
+          "text": "Proving it Holds for Everyone"
         },
         {
           "id": "b-llsv68",
@@ -338,14 +318,12 @@
               "0.1%",
               "2.1%"
             ]
-          ],
-          "width": "narrow"
+          ]
         },
         {
           "id": "b-tc756i",
           "type": "text",
-          "html": "<p>All 9 health checks pass for every profile. The valves catch at most 2.1% of any income stream (hardcore gold, and 1.2% of casual players' materials): they're a safety net, while crafting, upgrades and wards do the real work.</p>",
-          "width": "narrow"
+          "html": "<p>All 9 health checks pass for every profile. The valves catch at most 2.1% of any income stream (hardcore gold, and 1.2% of casual players' materials): they're a safety net, while crafting, upgrades and wards do the real work.</p>"
         },
         {
           "id": "b-h0sdpk",
@@ -363,14 +341,12 @@
           "id": "b-cr0c4x",
           "type": "heading",
           "level": 2,
-          "text": "What the Player Sees",
-          "width": "narrow"
+          "text": "What the Player Sees"
         },
         {
           "id": "b-fe9gj5",
           "type": "text",
-          "html": "<p>Three UI mockups: a crafting bench comparing random and targeted rolls, an upgrade screen at +7 with a ward toggle and expected totals of 971 versus 621 gold, and a salvage screen with salvage as the default.</p><p><ol><li><b>Crafting bench</b> states the odds in plain numbers, so the choice is about risk tolerance, not hidden math.</li><li><b>Upgrade screen shows</b> the expected total to reach the next level (971 gold gambling vs. 621 warded at +7), not just this attempt's fee.</li><li><b>Salvage screen</b> makes salvage the default button, with the poor vendor price beside it.</li></ol></p>",
-          "width": "narrow"
+          "html": "<p>Three UI mockups: a crafting bench comparing random and targeted rolls, an upgrade screen at +7 with a ward toggle and expected totals of 971 versus 621 gold, and a salvage screen with salvage as the default.</p><p><ol><li><b>Crafting bench</b> states the odds in plain numbers, so the choice is about risk tolerance, not hidden math.</li><li><b>Upgrade screen shows</b> the expected total to reach the next level (971 gold gambling vs. 621 warded at +7), not just this attempt's fee.</li><li><b>Salvage screen</b> makes salvage the default button, with the poor vendor price beside it.</li></ol></p>"
         },
         {
           "id": "b-fczkwl",
@@ -388,14 +364,12 @@
           "id": "b-bofd99",
           "type": "heading",
           "level": 2,
-          "text": "Why I Built it This Way",
-          "width": "narrow"
+          "text": "Why I Built it This Way"
         },
         {
           "id": "b-76b4ru",
           "type": "text",
-          "html": "<p><b><span class=\"big\">Wards cost gold, not materials</span></b></p><div>My first wards cost Arcane Dust. That made them strictly better from +5: same Dust, less gold. Pricing them at +50% of the attempt fee means the gamble wins on average at +5 and the ward wins from +6, so the decision depends on the level and on how much risk the player will take.</div><div><br></div><div><b><span class=\"big\">Valves instead of perfect tuning</span></b></div><div>I searched for constants that kept every stockpile under 3 hours for all three profiles without valves. None existed: whichever resource limits a session, the others pile up, and each profile hits a different limit. A lossy vendor and a gold-burning reforge handle that structurally, and the model proves they stay small.</div><div><br></div><div><b><span class=\"big\">An income plateau and a Masterwork tail</span></b></div><div>Gold income that grows forever needs sinks that grow forever, which players read as inflation. Capping income growth at max-level zones lets endgame prices stay fixed, and Masterwork keeps the upgrade loop's sinks running once gear is done.</div><div><br></div><div><b><span class=\"big\">Profiles by play rate, not separate economies</span></b></div><div>Casual and hardcore players run the exact same rules, scaled by how fast they earn and progress. If an economy only works when tuned per audience, it breaks for every player in between.</div><p></p>",
-          "width": "narrow"
+          "html": "<p><b><span class=\"big\">Wards cost gold, not materials</span></b></p><div>My first wards cost Arcane Dust. That made them strictly better from +5: same Dust, less gold. Pricing them at +50% of the attempt fee means the gamble wins on average at +5 and the ward wins from +6, so the decision depends on the level and on how much risk the player will take.</div><div><br></div><div><b><span class=\"big\">Valves instead of perfect tuning</span></b></div><div>I searched for constants that kept every stockpile under 3 hours for all three profiles without valves. None existed: whichever resource limits a session, the others pile up, and each profile hits a different limit. A lossy vendor and a gold-burning reforge handle that structurally, and the model proves they stay small.</div><div><br></div><div><b><span class=\"big\">An income plateau and a Masterwork tail</span></b></div><div>Gold income that grows forever needs sinks that grow forever, which players read as inflation. Capping income growth at max-level zones lets endgame prices stay fixed, and Masterwork keeps the upgrade loop's sinks running once gear is done.</div><div><br></div><div><b><span class=\"big\">Profiles by play rate, not separate economies</span></b></div><div>Casual and hardcore players run the exact same rules, scaled by how fast they earn and progress. If an economy only works when tuned per audience, it breaks for every player in between.</div><p></p>"
         },
         {
           "id": "b-juxa3p",
@@ -413,8 +387,7 @@
           "id": "b-bkizyo",
           "type": "heading",
           "level": 2,
-          "text": "What Broke Along the Way",
-          "width": "narrow"
+          "text": "What Broke Along the Way"
         },
         {
           "id": "b-rb7cqb",
@@ -446,8 +419,7 @@
               "Dust-priced wards were strictly better from +5.",
               "Gold-priced wards: gamble wins at +5, ward from +6."
             ]
-          ],
-          "width": "narrow"
+          ]
         },
         {
           "id": "b-rsx6zm",
@@ -465,8 +437,7 @@
           "id": "b-vvzi20",
           "type": "heading",
           "level": 2,
-          "text": "Shipping It",
-          "width": "narrow"
+          "text": "Shipping It"
         },
         {
           "id": "b-h8cm2m",
@@ -514,8 +485,7 @@
           "id": "b-enxp1r",
           "type": "heading",
           "level": 2,
-          "text": "Limitations and Next Steps",
-          "width": "narrow"
+          "text": "Limitations and Next Steps"
         },
         {
           "id": "b-6typay",
@@ -538,16 +508,14 @@
           "id": "b-dpon5p",
           "type": "heading",
           "level": 2,
-          "text": "Files",
-          "width": "narrow"
+          "text": "Files"
         },
         {
           "id": "b-uh3xvx",
           "type": "button",
           "label": "Balance Model",
           "href": "/",
-          "style": "primary",
-          "width": "narrow"
+          "style": "primary"
         }
       ]
     }
