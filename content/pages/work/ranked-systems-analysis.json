@@ -453,24 +453,6 @@
       ]
     },
     {
-      "id": "b-m4q4d0",
-      "type": "spacer",
-      "size": "sm"
-    },
-    {
-      "id": "b-2fpi7u",
-      "type": "heading",
-      "level": 2,
-      "text": "Files"
-    },
-    {
-      "id": "b-dhj72s",
-      "type": "button",
-      "label": "Analysis Model",
-      "href": "https://docs.google.com/spreadsheets/d/104kd59bZ4g20xuU9mstk0rQehPliaxZb/edit?usp=sharing&ouid=101235219691024799560&rtpof=true&sd=true",
-      "style": "primary"
-    },
-    {
       "id": "b-km5z8n",
       "type": "spacer",
       "size": "sm"
