@@ -243,7 +243,7 @@
           "id": "b-wammft",
           "type": "heading",
           "level": 2,
-          "text": "1. Recipes and scoring"
+          "text": "1. Recipes and Scoring"
         },
         {
           "id": "b-vmavny",
@@ -251,37 +251,32 @@
           "html": "<p>Recipes are randomized, so the game can't be memorized. To keep scoring fair, every recipe step has a label (type of cut, hot or cold, and so on), each label is worth a fixed number of points, and the total is multiplied by the time left. The system scales for 2, 3 or 4 players.</p>"
         },
         {
-          "id": "b-ztfaco",
-          "type": "systemMap",
-          "arrange": "layered",
-          "caption": "Random recipes still score fairly because points come from labels",
-          "nodes": [
+          "id": "b-xynk18",
+          "type": "formula",
+          "title": "",
+          "terms": [
             {
-              "id": "a",
               "label": "Label Points",
-              "accent": true,
               "note": "Fixed per step: cut, hot or cold"
             },
             {
-              "id": "n-ka43dk",
               "label": "Time Left",
-              "layer": 1,
-              "note": "Multiplier from time remaining"
+              "note": "Multiplier from time remaining",
+              "op": "×"
             },
             {
-              "id": "n-vjxz36",
               "label": "Bonuses",
               "note": "Secondary goals as multipliers",
-              "layer": 2
+              "op": "×"
             },
             {
-              "id": "n-2bfn2d",
               "label": "Dish Score",
+              "op": "=",
               "note": "Added up per level, scaled for 2 to 4",
-              "layer": 3
+              "accent": true
             }
           ],
-          "links": []
+          "note": "Very fast deliveries are quietly damped"
         },
         {
           "id": "b-9bx2p7",
@@ -291,142 +286,215 @@
       ]
     },
     {
-      "id": "b-a7vk0d",
+      "id": "b-maisrd",
       "type": "section",
       "background": "none",
       "blocks": [
         {
-          "id": "b-760wvk",
+          "id": "b-zid1dg",
           "type": "heading",
           "level": 2,
-          "text": "3. Balancing"
+          "text": "Iteration Case: Scoring Nobody Understood"
         },
         {
-          "id": "b-agcqs0",
+          "id": "b-kt712z",
           "type": "text",
-          "html": "<p>I built damage calculators and a hits-to-kill matrix in spreadsheets: how many strikes each weapon needs against each archetype. It made progression predictable and showed unfair matchups before they reached the engine.</p>"
+          "html": "<p><ul><li><b>Problem:</b> Early playtesters couldn't connect what they did with the score they got.</li><li><b>Cause:</b> The score was calculated correctly but shown only as a final number, with no sign of what earned it.</li><li><b>Fix:</b> I rebalanced the score weights in a feedback spreadsheet, turned secondary objectives into visible bonus multipliers, and tied performance directly to time left.</li><li><b>Result:</b> Teams immediately saw how leftover time turned into bonus points for each dish.</li></ul></p>"
         },
         {
-          "id": "b-jb0kby",
+          "id": "b-mhhe1w",
           "type": "spacer",
           "size": "sm"
         }
       ]
     },
     {
-      "id": "b-02agtz",
+      "id": "b-zbi7yk",
       "type": "section",
       "background": "none",
       "blocks": [
         {
-          "id": "b-fbkd08",
+          "id": "b-9tyj2g",
           "type": "heading",
           "level": 2,
-          "text": "Iteration Case: Cutting a Weapon Type to Protect Scope"
+          "text": "Iteration Case: Speedrun Exploit"
         },
         {
-          "id": "b-47mz2v",
+          "id": "b-w8zjsy",
+          "type": "text",
+          "html": "<p></p><ul><li><b>Problem: </b>Players found that delivering very fast made the multiplier shoot up, so they rushed and stopped communicating, which is the opposite of the game's goal.</li><li><b>Cause: </b>The time multiplier rewarded speed with no upper limit, so rushing beat talking.</li><li><b>Options: </b>Blocking fast deliveries outright would feel like a punishment and tell players they'd found a hole. Changing the incentive was better.</li><li><b>Fix: </b>A hidden damping on very fast deliveries that players don't notice, plus a new mechanic where players fix problems around the ship during a level.</li><li><b>Result: </b>Speedrunning stopped paying off, and the repair tasks gave players new reasons to talk.</li></ul><p></p>"
+        },
+        {
+          "id": "b-i0flqi",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-tg8p40",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-1sey8w",
+          "type": "heading",
+          "level": 2,
+          "text": "2. Puzzles & Communication"
+        },
+        {
+          "id": "b-ue1scz",
+          "type": "text",
+          "html": "<p>Instead of mechanical locks, each puzzle is built around one of three human limits. Each limit becomes a reason to talk, which is the point of the game.</p>"
+        },
+        {
+          "id": "b-ap8pzq",
           "type": "systemMap",
-          "arrange": "layered",
-          "caption": "Cutting one weapon type kept variety and saved enemy production",
+          "arrange": "stacked",
+          "caption": "Each puzzle turns a human limit into a reason to talk",
           "nodes": [
             {
               "id": "a",
-              "label": "Before: 4 Weapon Types",
-              "note": "• Each type needs enemies that test it\n• Enemy count grows beyond the team's size\n• Fights interesting, scope at risk"
+              "label": "Every puzzle idea checked against all three layers",
+              "accent": true
             },
             {
               "id": "b",
-              "label": "After: 3 Weapon Types",
-              "accent": true,
-              "note": "• More weapons within each type\n• Fewer enemies to produce\n• Each enemy harder and more interesting",
-              "layer": 1
+              "label": "Describing",
+              "layer": 1,
+              "note": "Similar symbols that need precise words"
+            },
+            {
+              "id": "c",
+              "label": "Remembering",
+              "layer": 1,
+              "note": "Information passed on before it resets"
+            },
+            {
+              "id": "n-n90vov",
+              "label": "Coordinating",
+              "layer": 1,
+              "note": "Separate actions timed together by talking"
             }
           ],
           "links": [
             {
               "from": "a",
-              "to": "b",
-              "label": "cut one type"
+              "to": "b"
+            },
+            {
+              "from": "a",
+              "to": "c"
+            },
+            {
+              "from": "a",
+              "to": "n-n90vov"
             }
           ]
         },
         {
-          "id": "b-cr9p20",
+          "id": "b-gp6lfj",
           "type": "text",
-          "html": "<p><b>Problem:</b> 4 weapon types made combat interesting, but every type needed enemies that tested it. The number of enemies the team would have to produce grew beyond what a small team could make.</p><p><b>Fix:</b> I cut one weapon type, going from 4 to 3, and added more weapons within each remaining type.</p><p><b>Result:</b> Fewer enemies to produce, and each one could be harder and more interesting, while weapon variety stayed high.</p>"
+          "html": "<p>• <b>Describing:</b> Dense, similar-looking symbols that partners have to describe precisely to each other.</p><p>• <b>Remembering:</b> Information passed between players in sequence under time pressure, before it resets.</p><p>• <b>Coordinating:</b> Separated interactions that players must time together by talking, while also moving around.</p><p>I co-designed the puzzles with game and level design, and designed the difficulty progression for the recipe and icon puzzles.</p>"
         },
         {
-          "id": "b-v77hp1",
+          "id": "b-3f34be",
           "type": "spacer",
           "size": "sm"
         }
       ]
     },
     {
-      "id": "b-rwjpkw",
+      "id": "b-vd8vzu",
       "type": "section",
       "background": "none",
       "blocks": [
         {
-          "id": "b-22q0fv",
+          "id": "b-310vpd",
           "type": "heading",
           "level": 2,
-          "text": "Other Contributions"
+          "text": "3. Playtesting and UX"
         },
         {
-          "id": "b-8t0187",
+          "id": "b-x2mlst",
           "type": "text",
-          "html": "<p><b>• Climb Mechanic: </b>Designed with level design and engineering to solve level layout problems. The metric of the character and the level made it difficult to pace the combat, so we designed a inverse stamina system that could help players in combat and to build their own traversal paths solving the metric and pacing problems.</p><p><b>• Boss Fight: </b>Designed with game design, level design and engineering. ASSET: a boss concept or arena sketch.</p><p><b>• Character Creation: </b>Designed the system and its UI in Adobe XD with UI and engineering. ASSET: one Adobe XD screen.</p><p><b>• Progression and Economy: </b>Designed player and item progression and the economy.</p>"
+          "html": "<p>I ran closed and open playtests, including at live events, owned the UX process, and ran usability tests. After each delivery, I analysed the playtests and presented adjustments to the team. I also worked with art and UI on readability, and with engineering on the 3C.</p>"
         },
         {
-          "id": "b-lkkyex",
+          "id": "b-x0oc84",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "",
+            ""
+          ],
+          "rows": [
+            [
+              "Formats",
+              "Closed tests, open tests, live events"
+            ],
+            [
+              "Testers",
+              "Up to 50 testers throughout events, ranging from 17 to 55 years"
+            ],
+            [
+              "What I watched",
+              "Whether teams talked or went silent, where they got stuck, how they read the score"
+            ],
+            [
+              "What came out",
+              "Adjustments presented to the team after each delivery"
+            ]
+          ]
+        },
+        {
+          "id": "b-2qtxwo",
           "type": "spacer",
           "size": "sm"
         }
       ]
     },
     {
-      "id": "b-ttr27v",
+      "id": "b-yzgwzz",
       "type": "section",
       "background": "none",
       "blocks": [
         {
-          "id": "b-siu748",
+          "id": "b-h2hm96",
           "type": "heading",
           "level": 2,
           "text": "Decisions and Trade-Offs"
         },
         {
-          "id": "b-ikwxa0",
+          "id": "b-hk5ab6",
           "type": "text",
-          "html": "<p><b>• Fewer weapon types, deeper enemies. </b>Less breadth in the arsenal, but a roster the team could actually build.</p><p><b>• Mixed damage over hard counters. </b>Weaker \"perfect counter\" moments, but no fight ever becomes impossible with the wrong weapon.</p><p><b>• Rules before roster. </b>Slower to start, but 15 archetypes stayed consistent and readable.</p>"
+          "html": "<p>• <b>Hidden damping over a hard rule</b>. A visible speed cap would have told players they'd found a hole; quiet damping kept the game feeling fair.</p><p>• <b>Paper before engine</b>. Slower to see anything on screen, but the score and puzzles were already proven when engineering started.</p><p>• <b>Fixed label points over per-recipe scores</b>. Less hand-tuning per recipe, but every random recipe scores fairly.</p>"
         },
         {
-          "id": "b-wff3h0",
+          "id": "b-rd18vc",
           "type": "spacer",
           "size": "sm"
         }
       ]
     },
     {
-      "id": "b-x3q34n",
+      "id": "b-e3rgam",
       "type": "section",
       "background": "none",
       "blocks": [
         {
-          "id": "b-26e5mp",
+          "id": "b-61evpx",
           "type": "heading",
           "level": 2,
           "text": "Looking Back"
         },
         {
-          "id": "b-dtc2pg",
+          "id": "b-75vv9j",
           "type": "text",
-          "html": "<p><b>What Worked: </b>Writing the enemy rules first, and modelling hits-to-kill before building fights.</p><p><b>What I'd do Differently: </b>Check content cost earlier, before designing four weapon types.</p><p><b>What I Learned: </b>In combat systems, every new option multiplies the content needed elsewhere, so scope is a design decision too.</p>"
+          "html": "<p><b>What Worked:</b> Validating the score on paper first, and fixing incentives rather than blocking exploits.</p><p><b>What I'd do Differently:</b>&nbsp;Show the score breakdown from the first prototype, since it caused the first big issue.</p><p><b>What I Learned:</b> A score system is also a teaching tool; if players can't read it, it can't shape how they play. When players find an exploit, ask what it says about the incentives.</p>"
         },
         {
-          "id": "b-m91t7w",
+          "id": "b-dy7g88",
           "type": "spacer",
           "size": "sm"
         }
