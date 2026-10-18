@@ -1,0 +1,504 @@
+{
+  "title": "Far Away from Orbital Space",
+  "description": "",
+  "image": "/images/uploads/foods-cover-ea950d.webp",
+  "blocks": [
+    {
+      "id": "b-x1ktqp",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-im9ijn",
+          "type": "heading",
+          "level": 1,
+          "text": "Plushland Curse"
+        },
+        {
+          "id": "b-38h6o7",
+          "type": "text",
+          "html": "<p><i>Co-op Communication Puzzle</i></p>"
+        },
+        {
+          "id": "b-kkvaqg",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "Role",
+            "Team Size",
+            "Engine",
+            "Platform",
+            "Players",
+            "My Focus"
+          ],
+          "rows": [
+            [
+              "Game Designer",
+              "10",
+              "Unreal Engine 5",
+              "PC",
+              "2 - 4 Co-Op",
+              "Systems Designㅤ|ㅤScoringㅤ|ㅤPuzzlesㅤ|ㅤPlaytesting"
+            ]
+          ]
+        },
+        {
+          "id": "b-f9umsm",
+          "type": "video",
+          "provider": "youtube",
+          "videoId": "cWIc5QVHvSM",
+          "title": "",
+          "align": "center",
+          "scale": 70
+        },
+        {
+          "id": "b-0qq3b7",
+          "type": "spacer",
+          "size": "md"
+        }
+      ]
+    },
+    {
+      "id": "b-a6gj8p",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-3fpqed",
+          "type": "heading",
+          "level": 2,
+          "text": "My Role"
+        },
+        {
+          "id": "b-o7j7kv",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "",
+            ""
+          ],
+          "rows": [
+            [
+              "Owned",
+              "• Paper and Miro Prototypes\n• Recipe System\n• Score System\n• Difficulty Progression for Recipe and Icon Puzzles\n• UX Process and Usability Tests"
+            ],
+            [
+              "Co-Owned",
+              "• Puzzle Sesign (with Game and Level Design)\n• Player Mechanics and Interactions"
+            ],
+            [
+              "Supported",
+              "• Readability with Art and UI\n• 3C with Design"
+            ]
+          ]
+        },
+        {
+          "id": "b-56wewj",
+          "type": "spacer",
+          "size": "sm"
+        },
+        {
+          "id": "b-n79bax",
+          "type": "text",
+          "html": "<p></p><div><b><span class=\"big\">In Short</span></b></div><div><ul><li><b>What I Owned: </b>Paper prototypes, the randomized recipe system, the score system, puzzle difficulty progression, and UX and usability tests.</li><li><b>Hardest Problems: </b>First, players couldn't read the score; then, they found a speedrun exploit that stopped them talking. Each needed a different kind of fix.</li><li><b>What it Shows: </b>Systems validated on paper before engine work, and fixing incentives instead of just blocking exploits.</li></ul></div><p></p>"
+        },
+        {
+          "id": "b-a3nrzk",
+          "type": "spacer",
+          "size": "md"
+        }
+      ]
+    },
+    {
+      "id": "b-jdvgur",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-b3zt8j",
+          "type": "heading",
+          "level": 2,
+          "text": "Constraints & Problem Solving"
+        },
+        {
+          "id": "b-ixknk3",
+          "type": "text",
+          "html": "<p>• <b>Communication Games Overwhelm Easily:</b> Too much information and players shout over each other; too little and the game is trivial.</p><p>• <b>Random recipes</b> had to stay fair and comparable between runs.</p><p>• <b>2, 3 or 4 players</b> had to get a balanced challenge from the same levels.</p><p>• <b>A small team</b>, so engine time was precious and systems had to be right before building.</p><p></p>"
+        },
+        {
+          "id": "b-cxakp2",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-n36si4",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-3az6pq",
+          "type": "heading",
+          "level": 2,
+          "text": "Design Pillars"
+        },
+        {
+          "id": "b-hchzvu",
+          "type": "text",
+          "html": "<p>1. <b>Talking is the Mechanic</b>. Every system should make players need each other.</p><p>2. <b>Hard to Say, not Hard to do</b>. Challenge comes from describing, remembering and coordinating, not from dexterity.</p><p>3. <b>The Score Teaches</b>. Players should see how their play turns into points.</p>"
+        },
+        {
+          "id": "b-a7bp67",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-zt1t3o",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-hotqeg",
+          "type": "heading",
+          "level": 2,
+          "text": "How I Worked: Paper First"
+        },
+        {
+          "id": "b-6aq53z",
+          "type": "text",
+          "html": "<p>I mapped and tested every system interaction on paper and in Miro before anything was built in Unreal. The score was validated first, because every other system feeds into it.</p>"
+        },
+        {
+          "id": "b-n2e0fq",
+          "type": "systemMap",
+          "arrange": "layered",
+          "caption": "Every system was proven on paper before it reached Unreal",
+          "nodes": [
+            {
+              "id": "a",
+              "label": "Paper",
+              "accent": true,
+              "note": "Prototype on paper and Miro"
+            },
+            {
+              "id": "n-dg5aa4",
+              "label": "Score First",
+              "note": "Validate scoring before the rest",
+              "layer": 1
+            },
+            {
+              "id": "n-n6q2ym",
+              "label": "Spreadsheet",
+              "note": "Balance weights and variables",
+              "layer": 2
+            },
+            {
+              "id": "n-17ly39",
+              "label": "Unreal",
+              "note": "Build what the paper proved",
+              "layer": 3
+            },
+            {
+              "id": "n-h9lxfu",
+              "label": "Playtest",
+              "note": "Closed, open and live events",
+              "layer": 4
+            }
+          ],
+          "links": [
+            {
+              "from": "a",
+              "to": "n-dg5aa4"
+            },
+            {
+              "from": "n-dg5aa4",
+              "to": "n-n6q2ym"
+            },
+            {
+              "from": "n-n6q2ym",
+              "to": "n-17ly39"
+            },
+            {
+              "from": "n-17ly39",
+              "to": "n-h9lxfu"
+            }
+          ]
+        },
+        {
+          "id": "b-xwpepy",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-gbptxr",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-wammft",
+          "type": "heading",
+          "level": 2,
+          "text": "1. Recipes and Scoring"
+        },
+        {
+          "id": "b-vmavny",
+          "type": "text",
+          "html": "<p>Recipes are randomized, so the game can't be memorized. To keep scoring fair, every recipe step has a label (type of cut, hot or cold, and so on), each label is worth a fixed number of points, and the total is multiplied by the time left. The system scales for 2, 3 or 4 players.</p>"
+        },
+        {
+          "id": "b-xynk18",
+          "type": "formula",
+          "title": "",
+          "terms": [
+            {
+              "label": "Label Points",
+              "note": "Fixed per step: cut, hot or cold"
+            },
+            {
+              "label": "Time Left",
+              "note": "Multiplier from time remaining",
+              "op": "×"
+            },
+            {
+              "label": "Bonuses",
+              "note": "Secondary goals as multipliers",
+              "op": "×"
+            },
+            {
+              "label": "Dish Score",
+              "op": "=",
+              "note": "Added up per level, scaled for 2 to 4",
+              "accent": true
+            }
+          ],
+          "note": "Very fast deliveries are quietly damped"
+        },
+        {
+          "id": "b-9bx2p7",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-maisrd",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-zid1dg",
+          "type": "heading",
+          "level": 2,
+          "text": "Iteration Case: Scoring Nobody Understood"
+        },
+        {
+          "id": "b-kt712z",
+          "type": "text",
+          "html": "<p><ul><li><b>Problem:</b> Early playtesters couldn't connect what they did with the score they got.</li><li><b>Cause:</b> The score was calculated correctly but shown only as a final number, with no sign of what earned it.</li><li><b>Fix:</b> I rebalanced the score weights in a feedback spreadsheet, turned secondary objectives into visible bonus multipliers, and tied performance directly to time left.</li><li><b>Result:</b> Teams immediately saw how leftover time turned into bonus points for each dish.</li></ul></p>"
+        },
+        {
+          "id": "b-mhhe1w",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-zbi7yk",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-9tyj2g",
+          "type": "heading",
+          "level": 2,
+          "text": "Iteration Case: Speedrun Exploit"
+        },
+        {
+          "id": "b-w8zjsy",
+          "type": "text",
+          "html": "<p></p><ul><li><b>Problem: </b>Players found that delivering very fast made the multiplier shoot up, so they rushed and stopped communicating, which is the opposite of the game's goal.</li><li><b>Cause: </b>The time multiplier rewarded speed with no upper limit, so rushing beat talking.</li><li><b>Options: </b>Blocking fast deliveries outright would feel like a punishment and tell players they'd found a hole. Changing the incentive was better.</li><li><b>Fix: </b>A hidden damping on very fast deliveries that players don't notice, plus a new mechanic where players fix problems around the ship during a level.</li><li><b>Result: </b>Speedrunning stopped paying off, and the repair tasks gave players new reasons to talk.</li></ul><p></p>"
+        },
+        {
+          "id": "b-i0flqi",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-tg8p40",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-1sey8w",
+          "type": "heading",
+          "level": 2,
+          "text": "2. Puzzles & Communication"
+        },
+        {
+          "id": "b-ue1scz",
+          "type": "text",
+          "html": "<p>Instead of mechanical locks, each puzzle is built around one of three human limits. Each limit becomes a reason to talk, which is the point of the game.</p>"
+        },
+        {
+          "id": "b-ap8pzq",
+          "type": "systemMap",
+          "arrange": "stacked",
+          "caption": "Each puzzle turns a human limit into a reason to talk",
+          "nodes": [
+            {
+              "id": "a",
+              "label": "Every puzzle idea checked against all three layers",
+              "accent": true
+            },
+            {
+              "id": "b",
+              "label": "Describing",
+              "layer": 1,
+              "note": "Similar symbols that need precise words"
+            },
+            {
+              "id": "c",
+              "label": "Remembering",
+              "layer": 1,
+              "note": "Information passed on before it resets"
+            },
+            {
+              "id": "n-n90vov",
+              "label": "Coordinating",
+              "layer": 1,
+              "note": "Separate actions timed together by talking"
+            }
+          ],
+          "links": [
+            {
+              "from": "a",
+              "to": "b"
+            },
+            {
+              "from": "a",
+              "to": "c"
+            },
+            {
+              "from": "a",
+              "to": "n-n90vov"
+            }
+          ]
+        },
+        {
+          "id": "b-gp6lfj",
+          "type": "text",
+          "html": "<p>• <b>Describing:</b> Dense, similar-looking symbols that partners have to describe precisely to each other.</p><p>• <b>Remembering:</b> Information passed between players in sequence under time pressure, before it resets.</p><p>• <b>Coordinating:</b> Separated interactions that players must time together by talking, while also moving around.</p><p>I co-designed the puzzles with game and level design, and designed the difficulty progression for the recipe and icon puzzles.</p>"
+        },
+        {
+          "id": "b-3f34be",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-vd8vzu",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-310vpd",
+          "type": "heading",
+          "level": 2,
+          "text": "3. Playtesting and UX"
+        },
+        {
+          "id": "b-x2mlst",
+          "type": "text",
+          "html": "<p>I ran closed and open playtests, including at live events, owned the UX process, and ran usability tests. After each delivery, I analysed the playtests and presented adjustments to the team. I also worked with art and UI on readability, and with engineering on the 3C.</p>"
+        },
+        {
+          "id": "b-x0oc84",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "",
+            ""
+          ],
+          "rows": [
+            [
+              "Formats",
+              "Closed tests, open tests, live events"
+            ],
+            [
+              "Testers",
+              "Up to 50 testers throughout events, ranging from 17 to 55 years"
+            ],
+            [
+              "What I watched",
+              "Whether teams talked or went silent, where they got stuck, how they read the score"
+            ],
+            [
+              "What came out",
+              "Adjustments presented to the team after each delivery"
+            ]
+          ]
+        },
+        {
+          "id": "b-2qtxwo",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-yzgwzz",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-h2hm96",
+          "type": "heading",
+          "level": 2,
+          "text": "Decisions and Trade-Offs"
+        },
+        {
+          "id": "b-hk5ab6",
+          "type": "text",
+          "html": "<p>• <b>Hidden damping over a hard rule</b>. A visible speed cap would have told players they'd found a hole; quiet damping kept the game feeling fair.</p><p>• <b>Paper before engine</b>. Slower to see anything on screen, but the score and puzzles were already proven when engineering started.</p><p>• <b>Fixed label points over per-recipe scores</b>. Less hand-tuning per recipe, but every random recipe scores fairly.</p>"
+        },
+        {
+          "id": "b-rd18vc",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-e3rgam",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-61evpx",
+          "type": "heading",
+          "level": 2,
+          "text": "Looking Back"
+        },
+        {
+          "id": "b-75vv9j",
+          "type": "text",
+          "html": "<p><b>What Worked:</b> Validating the score on paper first, and fixing incentives rather than blocking exploits.</p><p><b>What I'd do Differently:</b>&nbsp;Show the score breakdown from the first prototype, since it caused the first big issue.</p><p><b>What I Learned:</b> A score system is also a teaching tool; if players can't read it, it can't shape how they play. When players find an exploit, ask what it says about the incentives.</p>"
+        },
+        {
+          "id": "b-dy7g88",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    }
+  ]
+}

@@ -1,275 +1,369 @@
 {
-  "title": "Ascending Flags – Portfolio Page",
-  "description": "Economy architecture, a 40+ card catalog and cross-discipline leadership on a competitive card game at Scary Noodles.",
-  "image": "/images/projects/placeholder/cover.svg",
-  "project": "ascending-flags",
+  "title": "Ascending Flags",
+  "description": "",
+  "image": "/images/uploads/f12d206a-9d90-4ba9-ae6e-3d93db095eb3-6f5d04.webp",
   "blocks": [
     {
-      "id": "b-nai5a7",
-      "type": "heading",
-      "level": 1,
-      "text": "Ascending Flags – Portfolio Page"
-    },
-    {
-      "id": "b-eq57wp",
-      "type": "text",
-      "html": "<p><em>Page draft for the portfolio. Lines marked <strong>ASSET</strong> are things for you to find; brackets are facts to confirm. This project had no Wix page, so it needs the most input from you.</em></p><p><strong>Card Game</strong> · Scary Noodles · Published · Apr – Sep 2023</p><p><strong>Conceived and led a published card game where movement, attack and defence all compete for one shared pool of mana.</strong></p>"
-    },
-    {
-      "id": "b-d09te0",
-      "type": "table",
-      "columns": [
-        "Role",
-        "Team",
-        "Engine",
-        "Platform",
-        "Duration",
-        "My focus"
-      ],
-      "rows": [
-        [
-          "Game Designer, concept and design lead",
-          "15",
-          "Unity",
-          "\\[Platform\\]",
-          "6 months",
-          "Systems · Economy · Cards · Team lead"
-        ]
+      "id": "b-103owl",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-2ps43k",
+          "type": "heading",
+          "level": 1,
+          "text": "Ascending Flags"
+        },
+        {
+          "id": "b-9tk7j0",
+          "type": "text",
+          "html": "<p><i>Card Game</i></p>"
+        },
+        {
+          "id": "b-aytow5",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "Role",
+            "Team Size",
+            "Engine",
+            "Platform",
+            "My Focus"
+          ],
+          "rows": [
+            [
+              "Design Lead and Project Manager",
+              "17",
+              "Unity Engine",
+              "PC",
+              "Systems Designㅤ|ㅤEconomy Designㅤ|ㅤContentㅤ|ㅤProject Manager"
+            ]
+          ]
+        },
+        {
+          "id": "b-xhuurx",
+          "type": "video",
+          "provider": "youtube",
+          "videoId": "RV5xRaSwPEk",
+          "title": "",
+          "align": "center",
+          "scale": 70
+        },
+        {
+          "id": "b-id964b",
+          "type": "spacer",
+          "size": "md"
+        }
       ]
     },
     {
-      "id": "b-stojkl",
-      "type": "text",
-      "html": "<p><strong>At a glance:</strong> 40+ cards · 5 card types · 1 shared mana pool · balanced with Machinations simulations</p><p><strong>ASSET – Hero video (most important):</strong> 45–60 seconds of a match, ideally one turn where a player has to choose between moving, attacking and defending with the same mana.</p>"
-    },
-    {
-      "id": "b-0e1830",
-      "type": "heading",
-      "level": 2,
-      "text": "In short"
-    },
-    {
-      "id": "b-ajg426",
-      "type": "text",
-      "html": "<ul><li><strong>What I owned:</strong> the concept, the core systems (cards, economy, mana, combat), all 40+ cards and the board, and the backlog and roadmap for a 15-person team.</li><li><strong>Hardest problem:</strong> \\[fog of war, or another: confirm\\].</li><li><strong>What it shows:</strong> leading a project from idea to release, and an economy built to force a real choice every turn.</li></ul>"
-    },
-    {
-      "id": "b-w6vku2",
-      "type": "heading",
-      "level": 2,
-      "text": "My role"
-    },
-    {
-      "id": "b-nsou1c",
-      "type": "table",
-      "columns": [
-        "",
-        ""
-      ],
-      "rows": [
-        [
-          "**Owned**",
-          "Concept and paper prototypes · card, economy, mana and combat systems · 40+ cards and the board · balancing spreadsheets and simulations · backlog, roadmap and priorities"
-        ],
-        [
-          "**Led**",
-          "Design, art and engineering through the whole project"
-        ],
-        [
-          "**Supported**",
-          "\\[Anything others owned that you helped with\\]"
-        ]
+      "id": "b-s6ne0w",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-k7cvjw",
+          "type": "heading",
+          "level": 2,
+          "text": "My Role"
+        },
+        {
+          "id": "b-8l4joq",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "",
+            ""
+          ],
+          "rows": [
+            [
+              "Owned",
+              "• Concept and Paper Prototypes\n• Card, Economy, Mana and Combat Systems\n• 40+ Cards and the Board\n• Balancing Spreadsheets and Simulations\n• Backlog, Roadmap and Priorities"
+            ],
+            [
+              "Led",
+              "• Design, Art and Engineering through the whole project"
+            ]
+          ]
+        },
+        {
+          "id": "b-6ji67m",
+          "type": "spacer",
+          "size": "sm"
+        },
+        {
+          "id": "b-6uc3yn",
+          "type": "text",
+          "html": "<p></p><div><b><span class=\"big\">In Short</span></b></div><div><ul><li><b>What I Owned: </b>The concept, the core systems (cards, economy, mana, combat), all 40+ cards and the board, and the backlog and roadmap for a 15-person team.</li><li><b>Hardest Problem: </b>Fog of War, it came difficult to balance the rule of the fog of war with the amount of different behavior from the cards.</li><li><b>What it Shows: </b>Leading a project from idea to release, and an economy built to force a real choice every turn.</li></ul></div><p></p>"
+        },
+        {
+          "id": "b-68q6iw",
+          "type": "spacer",
+          "size": "md"
+        }
       ]
     },
     {
-      "id": "b-3f94if",
-      "type": "heading",
-      "level": 2,
-      "text": "The game"
-    },
-    {
-      "id": "b-hfx5sg",
-      "type": "text",
-      "html": "<p>&amp;#91;Two or three sentences: what players do, the goal of a match, and how a turn works. For example: who plays (1v1?), what &quot;ascending flags&quot; means in the rules, and how a match is won.\\]</p><p><strong>ASSET – 3–4 screenshots:</strong> the board mid-match, a hand of cards, a card close-up, and the fog of war in action.</p>"
-    },
-    {
-      "id": "b-n6rwma",
-      "type": "heading",
-      "level": 2,
-      "text": "Constraints"
-    },
-    {
-      "id": "b-d3kt87",
-      "type": "text",
-      "html": "<ul><li><strong>Six months</strong> from concept to release.</li><li><strong>A 15-person team</strong> across design, art and engineering, which I led as a side project alongside my other work.</li><li>&amp;#91;Any other: budget, platform, a jam or publisher brief?\\]</li></ul>"
-    },
-    {
-      "id": "b-xgsg50",
-      "type": "heading",
-      "level": 2,
-      "text": "Design pillars"
-    },
-    {
-      "id": "b-5w1ykj",
-      "type": "text",
-      "html": "<p>&amp;#91;Replace with your own, or confirm these:\\]</p><ol><li><strong>Every turn is a trade-off.</strong> One resource for everything means no free actions.</li><li><strong>Readable at a glance.</strong> Players understand a card's role from its type and layout.</li><li><strong>Easy to learn, deep to master.</strong> \\[Confirm.\\]</li></ol>"
-    },
-    {
-      "id": "b-632o3n",
-      "type": "heading",
-      "level": 2,
-      "text": "1. One pool of mana for everything"
-    },
-    {
-      "id": "b-1lkfls",
-      "type": "text",
-      "html": "<p>Many card games give separate resources for different actions. Here, moving, attacking and defending all draw from the same mana pool, so every turn is a trade-off: spending to advance leaves less to protect yourself.</p><p>&amp;#91;embedded content: mana economy · one pool, three uses\\]</p><p><strong>Example turn</strong> \\[fill in from the game\\]: &quot;With \\[X\\] mana, a player can \\[move two spaces and attack once\\] or \\[defend fully and move once\\]. Neither is right every time; it depends on \\[the board state\\].&quot;</p><p><strong>ASSET – Annotated turn:</strong> a screenshot of one turn with callouts showing the choice the player faces.</p>"
-    },
-    {
-      "id": "b-hznfq3",
-      "type": "heading",
-      "level": 2,
-      "text": "2. 40+ cards across five types"
-    },
-    {
-      "id": "b-6106od",
-      "type": "table",
-      "columns": [
-        "Card type",
-        "Role",
-        "Example card"
-      ],
-      "rows": [
-        [
-          "\\[Type 1\\]",
-          "\\[What it does\\]",
-          "\\[Card name and effect\\]"
-        ],
-        [
-          "\\[Type 2\\]",
-          "",
-          ""
-        ],
-        [
-          "\\[Type 3\\]",
-          "",
-          ""
-        ],
-        [
-          "\\[Type 4\\]",
-          "",
-          ""
-        ],
-        [
-          "\\[Type 5\\]",
-          "",
-          ""
-        ]
+      "id": "b-2hcufq",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-ztgply",
+          "type": "heading",
+          "level": 2,
+          "text": "Design Pillars"
+        },
+        {
+          "id": "b-s2gfzb",
+          "type": "text",
+          "html": "<p>1. <b>Every turn is a trade-off</b>. One resource for everything means no free actions.</p><p>2. <b>Readable at a glance</b>. Players understand a card's role from its type and layout.</p><p>3. <b>Easy to learn, deep to master</b>.</p>"
+        },
+        {
+          "id": "b-5fexab",
+          "type": "spacer",
+          "size": "sm"
+        }
       ]
     },
     {
-      "id": "b-evh31g",
-      "type": "text",
-      "html": "<p>I designed and documented every card, and kept the catalogue organized so art and engineering always worked from the current version. I also designed the board.</p><p><strong>ASSET – Card spread:</strong> 5 cards side by side, one of each type. <strong>ASSET – Card catalogue screenshot:</strong> your spreadsheet or document listing the cards.</p>"
+      "id": "b-z4ytuv",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-jja6yy",
+          "type": "heading",
+          "level": 2,
+          "text": "1. One Pool of Mana for Everything"
+        },
+        {
+          "id": "b-eq4yuu",
+          "type": "text",
+          "html": "<p>Many card games give separate resources for different actions. Here, moving, attacking and defending all draw from the same mana pool, so every turn is a trade-off: spending to advance leaves less to protect yourself.</p>"
+        },
+        {
+          "id": "b-otgtvo",
+          "type": "systemMap",
+          "arrange": "stacked",
+          "caption": "Moving, attacking and defending all draw from the same mana",
+          "nodes": [
+            {
+              "id": "a",
+              "label": "One shared mana pool",
+              "accent": true
+            },
+            {
+              "id": "n-dg5aa4",
+              "label": "Move",
+              "note": "Advance on the board",
+              "layer": 1
+            },
+            {
+              "id": "n-m06sbp",
+              "label": "Attack",
+              "layer": 1,
+              "note": "Pressure the opponent"
+            },
+            {
+              "id": "n-9co7rc",
+              "label": "Defend",
+              "layer": 1,
+              "note": "Protect what you hold"
+            },
+            {
+              "id": "n-yafrr1",
+              "label": "",
+              "layer": 2,
+              "note": "spending more on one leaves less for the other two"
+            }
+          ],
+          "links": [
+            {
+              "from": "a",
+              "to": "n-dg5aa4"
+            },
+            {
+              "from": "a",
+              "to": "n-m06sbp"
+            },
+            {
+              "from": "a",
+              "to": "n-9co7rc"
+            }
+          ]
+        },
+        {
+          "id": "b-yidv0o",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
     },
     {
-      "id": "b-ki2val",
-      "type": "heading",
-      "level": 2,
-      "text": "3. Testing on paper and in simulation"
+      "id": "b-hee8cs",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-uc5uft",
+          "type": "heading",
+          "level": 2,
+          "text": "2. 40+ Cards Across Five Types"
+        },
+        {
+          "id": "b-pkzabc",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "Card Type",
+            "Role",
+            "Name",
+            "Description"
+          ],
+          "rows": [
+            [
+              "Terrain",
+              "Awake",
+              "Sea of Clouds",
+              "Immediately wake up the unit placed on top of it"
+            ],
+            [
+              "Unit",
+              "Fighter",
+              "Night Hunter",
+              "Invisible unit, becomes visible once attack or steal opposing flag"
+            ],
+            [
+              "Obstacle",
+              "Stopper",
+              "Vine Wall",
+              "Blocks the position of the hexegon, each 2 turns it increases its length to an adjacent hexagon"
+            ],
+            [
+              "Trap",
+              "Invisible Trap",
+              "Chemical Surprise",
+              "Invisible trap, explodes dealing instant damage and post-damage for 3 turns"
+            ],
+            [
+              "Trainer",
+              "Defensive",
+              "Golden Blessing",
+              "Wraps a unit in a golden shield that blocks any damage received, breaks when activated"
+            ]
+          ]
+        },
+        {
+          "id": "b-zuakd8",
+          "type": "text",
+          "html": "<p>I designed and documented every card, and kept the catalogue organized so art and engineering always worked from the current version. I also designed the board.</p>"
+        },
+        {
+          "id": "b-uludu1",
+          "type": "sheet",
+          "source": "file",
+          "sheetId": "",
+          "height": "medium"
+        },
+        {
+          "id": "b-9r7701",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
     },
     {
-      "id": "b-sowbcl",
-      "type": "text",
-      "html": "<p>I validated the concept with paper prototypes before any engine work, then balanced it with spreadsheets and Machinations simulations of the mana economy, and used playtests to find balance problems the models missed.</p><p><strong>ASSET – Paper prototype photo</strong> and a <strong>Machinations diagram screenshot</strong>. A Machinations diagram is rare in portfolios and shows systems thinking at once.</p>"
+      "id": "b-rb46kw",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-7x2ls4",
+          "type": "heading",
+          "level": 2,
+          "text": "3. Testing on Paper and in Simulation"
+        },
+        {
+          "id": "b-0203m1",
+          "type": "text",
+          "html": "<p>I validated the concept with paper prototypes before any engine work, then balanced it with spreadsheets and Machinations simulations of the mana economy, and used playtests to find balance problems the models missed.</p>"
+        },
+        {
+          "id": "b-0968w2",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
     },
     {
-      "id": "b-d5h9ps",
-      "type": "heading",
-      "level": 2,
-      "text": "Iteration case: fog of war"
+      "id": "b-4sw40z",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-agayh6",
+          "type": "heading",
+          "level": 2,
+          "text": "Iteration Case: Fog of War"
+        },
+        {
+          "id": "b-m11438",
+          "type": "text",
+          "html": "<p>• <b>Problem:</b> Players could see everything and planned too far ahead removing the strategy aspect of the game.</p><p>• <b>Cause:</b> Having no way to block your vision, the player could create their strategy from turn 1 without hesitations. Player 1 almost had 100% of advantage when starting the game.</p><p>• <b>Fix:</b> I designed a fog-of-war feature that hides everything besides the player's terrains and units. Players could gain more vision by placing terrains and units in the board&nbsp;</p><p>• <b>Result:</b> This change made players create a defensive thought before actually taking actions, which reduced players frustrations in 60% and made the game more even.</p>"
+        },
+        {
+          "id": "b-7rxkub",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
     },
     {
-      "id": "b-46tnfa",
-      "type": "text",
-      "html": "<p>Your master CV says fog of war improved the experience by 60%. That's a strong claim, so the page needs the story behind it.</p><ul><li><strong>Problem:</strong> \\[what wasn't working in playtests: for example, players could see everything and planned too far ahead, or matches felt solved early\\]</li><li><strong>Cause:</strong> \\[why\\]</li><li><strong>Fix:</strong> I designed a fog-of-war feature that \\[what it hides or reveals, and how players uncover it\\].</li><li><strong>Result:</strong> \\[what changed, and what the 60% measures: survey scores between rounds? If you can't say how it was measured, describe the change without the number.\\]</li></ul><p><strong>ASSET – Fog of war before/after:</strong> the same board with and without fog.</p>"
+      "id": "b-753eg5",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-qom70b",
+          "type": "heading",
+          "level": 2,
+          "text": "Leading the Team"
+        },
+        {
+          "id": "b-udjtxv",
+          "type": "text",
+          "html": "<p>I led design, art and engineering through close collaboration for the whole project, owned the backlog and roadmap, and set feature priorities. I built spreadsheets that made handoffs between departments faster.</p><p>In addition leading the project from the design and project management position, I cut the amount of cards from each deck to ensure it would be delivered for the test. It increased the balancing work although the balancing pipeline was already established which had less effect when it came time to cut down the scope.</p>"
+        },
+        {
+          "id": "b-cxhsuj",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
     },
     {
-      "id": "b-w6cuug",
-      "type": "heading",
-      "level": 2,
-      "text": "Leading the team"
-    },
-    {
-      "id": "b-pk7ato",
-      "type": "text",
-      "html": "<p>I led design, art and engineering through close collaboration for the whole project, owned the backlog and roadmap, and set feature priorities. I built spreadsheets that made handoffs between departments faster.</p><p>&amp;#91;Add one concrete leadership decision, for example a feature you cut to ship on time, or how you organised the team's work. One example says more than the description.\\]</p><p><strong>ASSET – Roadmap or backlog screenshot</strong>, with names blurred.</p>"
-    },
-    {
-      "id": "b-irqih8",
-      "type": "heading",
-      "level": 2,
-      "text": "Decisions and trade-offs"
-    },
-    {
-      "id": "b-4cgfeg",
-      "type": "text",
-      "html": "<ul><li><strong>One mana pool over separate resources.</strong> Harder to balance, which is why it needed simulation, but it made every turn a real choice.</li><li>&amp;#91;Add one more, ideally a cut made for the 6-month schedule.\\]</li></ul>"
-    },
-    {
-      "id": "b-f5xmha",
-      "type": "heading",
-      "level": 2,
-      "text": "Results"
-    },
-    {
-      "id": "b-u7d62p",
-      "type": "text",
-      "html": "<ul><li>Published on \\[platform\\] in \\[month, year\\].</li><li>&amp;#91;Downloads, ratings, players or event showings, if any.\\]</li></ul>"
-    },
-    {
-      "id": "b-pkwo03",
-      "type": "heading",
-      "level": 2,
-      "text": "Looking back"
-    },
-    {
-      "id": "b-l1ppbh",
-      "type": "text",
-      "html": "<p><strong>What worked:</strong> simulating the economy before building it.</p><p><strong>What I'd do differently:</strong> \\[pick what's true\\].</p><p><strong>What I learned:</strong> a single shared resource creates interesting decisions every turn, but it needs careful simulation to stay balanced; leading a 15-person team showed me that a clear roadmap is a design tool too.</p>"
-    },
-    {
-      "id": "b-kfxo5g",
-      "type": "heading",
-      "level": 2,
-      "text": "Links"
-    },
-    {
-      "id": "b-8yrbv7",
-      "type": "text",
-      "html": "<p>&amp;#91;Store or download page\\]</p>"
-    },
-    {
-      "id": "b-minybs",
-      "type": "heading",
-      "level": 2,
-      "text": "Asset checklist"
-    },
-    {
-      "id": "b-q0900w",
-      "type": "text",
-      "html": "<ol><li>Hero video of a turn with a real trade-off</li><li>Annotated turn screenshot</li><li>Card spread, one per type</li><li>Machinations diagram screenshot</li><li>Fog of war before/after</li><li>Paper prototype photo</li><li>Card catalogue screenshot</li><li>Roadmap or backlog screenshot</li><li>3–4 screenshots</li></ol>"
-    },
-    {
-      "id": "b-vipg1f",
-      "type": "heading",
-      "level": 2,
-      "text": "Facts to confirm"
-    },
-    {
-      "id": "b-htqsiw",
-      "type": "text",
-      "html": "<ul><li>The game overview, platform and release date.</li><li>The pillars and the five card types.</li><li>The fog-of-war story and what the 60% measures.</li><li>One leadership decision and one trade-off.</li></ul>"
+      "id": "b-j3ad00",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-qst1z0",
+          "type": "heading",
+          "level": 2,
+          "text": "Looking Back"
+        },
+        {
+          "id": "b-uvpa3n",
+          "type": "text",
+          "html": "<p><b>What Worked:</b> Simulating the economy before building it.</p><p><b>What I'd do Differently:</b> Create design test pipelines early in the project to ensure tests and failures can be gathered before the actual implementation inside the engine.</p><p><b>What I Learned:</b> A single shared resource creates interesting decisions every turn, but it needs careful simulation to stay balanced; leading a 15-person team showed me that a clear roadmap is a design tool too.</p>"
+        },
+        {
+          "id": "b-jpds7t",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
     }
   ]
 }
