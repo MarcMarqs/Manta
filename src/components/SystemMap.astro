@@ -44,17 +44,20 @@ function wrap(text: string, max: number, maxLines: number): string[] {
     }
   }
   if (line) lines.push(line);
-  // What will not fit joins the last line rather than vanishing: a note that silently
-  // disappeared would be worse than one that runs a little long.
-  return lines.length > maxLines
-    ? [...lines.slice(0, maxLines - 1), lines.slice(maxLines - 1).join(' ')]
-    : lines;
+  // Past the limit the rest is dropped rather than crammed onto the last line, which is
+  // what used to push a long note out through the side of its box. A label has two lines
+  // because it is a name; a note has as many as it was given.
+  return lines.slice(0, maxLines);
 }
 
 interface NodeText {
   label: string[];
   note: string[];
+  /** The note was written as a list, so it reads as one: markers, and ranged left. */
+  bulleted: boolean;
 }
+
+const BULLET = /^[-*\u2022]\s+/;
 
 /**
  * What fits in a box this wide.
@@ -62,11 +65,22 @@ interface NodeText {
  * Both strings are wrapped to the box rather than measured into it: a note used to be
  * drawn as one unbroken line, so a sentence longer than the widest box simply ran out
  * of it and across the diagram.
+ *
+ * A note is written line by line. A line starting with a dash or a bullet makes the
+ * whole note a list, which is ranged left and marked, because a centred list is not one.
  */
-const textFor = (n: { label: string; note?: string }, w: number): NodeText => ({
-  label: wrap(n.label, Math.max(6, Math.floor((w - PAD_X) / CHAR)), 2),
-  note: n.note ? wrap(n.note, Math.max(8, Math.floor((w - PAD_X) / NOTE_CHAR)), 3) : [],
-});
+function textFor(n: { label: string; note?: string }, w: number): NodeText {
+  const written = (n.note ?? '').split('\n').map((l) => l.trim()).filter(Boolean);
+  const bulleted = written.some((l) => BULLET.test(l));
+  const room = Math.max(8, Math.floor((w - PAD_X) / NOTE_CHAR));
+  const note = written.flatMap((l) => {
+    const body = l.replace(BULLET, '');
+    // A wrapped bullet keeps its following lines clear of the marker.
+    const lines = wrap(body, bulleted ? room - 2 : room, 6);
+    return lines.map((text, i) => (bulleted ? `${i === 0 ? '\u2022 ' : '  '}${text}` : text));
+  });
+  return { label: wrap(n.label, Math.max(6, Math.floor((w - PAD_X) / CHAR)), 2), note, bulleted };
+}
 
 const heightFor = (t: NodeText) =>
   PAD_Y * 2 + t.label.length * LINE + (t.note.length ? NOTE_GAP + t.note.length * NOTE_LINE : 0);
@@ -370,9 +384,10 @@ const gridId = `grid-${Math.random().toString(36).slice(2, 8)}`;
             {p.note.map((line, i) => (
               <text
                 class="map-note"
-                x={p.w / 2}
+                x={p.bulleted ? PAD_X / 2 : p.w / 2}
                 y={textTop(p) + p.label.length * LINE + NOTE_GAP + NOTE_LINE * (i + 1) - 3}
-                text-anchor="middle"
+                text-anchor={p.bulleted ? 'start' : 'middle'}
+                xml:space="preserve"
               >
                 {line}
               </text>

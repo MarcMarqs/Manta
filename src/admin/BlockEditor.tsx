@@ -1623,9 +1623,11 @@ function BlockFields({
                   }
                 />
                 <span class="map-row-note">
-                  <TextInput
+                  {/* A textarea, because a note is often a short list and Enter should
+                      start the next item rather than do nothing. */}
+                  <Cell
                     value={node.note ?? ''}
-                    placeholder="Note under the label"
+                    placeholder="Note under the label. One line each; start a line with - for a list."
                     onChange={(note) => setNode(i, { note: note || undefined })}
                   />
                 </span>
@@ -1938,7 +1940,17 @@ function resizeColumns(block: Extract<Block, { type: 'columns' }>, count: 2 | 3)
  * unusable. Nothing here is HTML — a cell stays the plain string it was, newlines and
  * all, and the page renders the breaks with `white-space`.
  */
-function Cell({ value, head, onChange }: { value: string; head?: boolean; onChange: (v: string) => void }) {
+function Cell({
+  value,
+  head,
+  placeholder,
+  onChange,
+}: {
+  value: string;
+  head?: boolean;
+  placeholder?: string;
+  onChange: (v: string) => void;
+}) {
   const fit = (el: HTMLTextAreaElement | null) => {
     if (!el) return;
     el.style.height = 'auto';
@@ -1949,6 +1961,7 @@ function Cell({ value, head, onChange }: { value: string; head?: boolean; onChan
       class={`input cell${head ? ' head' : ''}`}
       rows={1}
       value={value}
+      placeholder={placeholder}
       ref={fit}
       onInput={(e) => {
         fit(e.target as HTMLTextAreaElement);
