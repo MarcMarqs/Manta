@@ -1684,6 +1684,16 @@ form.tag-row {
   min-width: 0;
 }
 
+/* The way through to a case study, under the slug that names its address. */
+.study-link {
+  align-self: flex-start;
+  margin-top: 4px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 /* A swatch with its contrast reading underneath. */
 .color-cell {
   display: flex;

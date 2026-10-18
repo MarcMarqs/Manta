@@ -1,7 +1,23 @@
 import type { Project, ProjectLink, Site } from '../lib/types';
 import { CoverFraming, ImageField, LinkInput } from './media';
 import { createPage } from './PageEditor';
-import { PAGES_DIR, PROJECTS, SITE, files, openView, projects, setFiles, tags, toast, updateFile, view, type PageFile } from './store';
+import {
+  HOME,
+  PAGES_DIR,
+  PROJECTS,
+  SITE,
+  fileToRoute,
+  files,
+  openView,
+  pagePaths,
+  projects,
+  setFiles,
+  tags,
+  toast,
+  updateFile,
+  view,
+  type PageFile,
+} from './store';
 import { Field, Icon, IconButton, Segmented, Select, TextArea, TextInput } from './ui';
 
 const caseStudyPath = (slug: string) => `${PAGES_DIR}work/${slug}.json`;
@@ -95,8 +111,23 @@ function ProjectForm({ project, index }: { project: Project; index: number }) {
   const set = (patch: Partial<Project>) =>
     updateFile<Project[]>(PROJECTS, (list) => list.map((p, i) => (i === index ? { ...p, ...patch } : p)));
 
-  const study = caseStudyPath(project.slug);
-  const hasStudy = study in files.value;
+  /**
+   * The page that says it is this project's case study, wherever it happens to live.
+   *
+   * It used to be found by its address alone — content/pages/work/<slug>.json — so a
+   * page that had been duplicated, renamed, or written at an address of its own was
+   * invisible here even while it carried this project's name in its own settings. The
+   * page's own `project` field is the link; the conventional address is only a fallback,
+   * for a page from before that field existed.
+   */
+  const study =
+    pagePaths.value.find((p) => (files.value[p] as PageFile | undefined)?.project === project.slug) ??
+    (caseStudyPath(project.slug) in files.value ? caseStudyPath(project.slug) : undefined);
+  const hasStudy = Boolean(study);
+  /** Pages that belong to no project yet, offered as a case study for this one. */
+  const unclaimed = pagePaths.value.filter(
+    (p) => p !== HOME && !(files.value[p] as PageFile | undefined)?.project,
+  );
 
   /** Renaming the slug also moves the case-study page so the two stay linked. */
   const setSlug = (raw: string) => {
@@ -104,7 +135,12 @@ function ProjectForm({ project, index }: { project: Project; index: number }) {
     const nextFiles = { ...files.value };
     nextFiles[PROJECTS] = all.map((p, i) => (i === index ? { ...p, slug } : p));
     const target = caseStudyPath(slug);
-    if (hasStudy && slug && !(target in nextFiles)) {
+    // A page sitting where the convention puts it moves with the slug, so its address
+    // keeps matching. One deliberately kept elsewhere stays where it was put; only the
+    // name it points at changes.
+    if (study && slug && study !== caseStudyPath(project.slug)) {
+      nextFiles[study] = { ...(nextFiles[study] as PageFile), project: slug };
+    } else if (study && slug && !(target in nextFiles)) {
       nextFiles[target] = { ...(nextFiles[study] as PageFile), project: slug };
       delete nextFiles[study];
     }
@@ -164,8 +200,20 @@ function ProjectForm({ project, index }: { project: Project; index: number }) {
         <Field label="Title">
           <TextInput value={project.title} onChange={(title) => set({ title })} />
         </Field>
-        <Field label="URL slug" hint={`Case study lives at /work/${project.slug}`}>
+        <Field
+          label="URL slug"
+          hint={hasStudy ? undefined : `A case study here would live at /work/${project.slug}`}
+        >
           <TextInput value={project.slug} onChange={setSlug} />
+          {hasStudy && (
+            <button
+              type="button"
+              class="btn tiny ghost study-link"
+              onClick={() => openView({ kind: 'page', path: study! })}
+            >
+              <Icon name="page" /> {fileToRoute(study!)}
+            </button>
+          )}
         </Field>
         <Field label="Genre">
           <TextInput value={project.genre} onChange={(genre) => set({ genre })} />
@@ -257,17 +305,43 @@ function ProjectForm({ project, index }: { project: Project; index: number }) {
       <section class="subsection">
         <h3>Case study</h3>
         {hasStudy ? (
-          <button type="button" class="btn" onClick={() => openView({ kind: 'page', path: study })}>
-            <Icon name="page" /> Edit case-study page
-          </button>
+          <div class="row">
+            <button type="button" class="btn" onClick={() => openView({ kind: 'page', path: study! })}>
+              <Icon name="page" /> Edit {fileToRoute(study!)}
+            </button>
+            <button
+              type="button"
+              class="btn ghost small"
+              title="Leave the page in place, but stop it being this project's case study"
+              onClick={() => updateFile<PageFile>(study!, ({ project: _gone, ...rest }) => rest, { coalesce: false })}
+            >
+              Unlink
+            </button>
+          </div>
         ) : (
-          <button
-            type="button"
-            class="btn"
-            onClick={() => createPage(`/work/${project.slug}`, project.title, 'caseStudy', { project: project.slug })}
-          >
-            <Icon name="plus" /> Create case-study page
-          </button>
+          <div class="stack">
+            <button
+              type="button"
+              class="btn"
+              onClick={() => createPage(`/work/${project.slug}`, project.title, 'caseStudy', { project: project.slug })}
+            >
+              <Icon name="plus" /> Create case-study page
+            </button>
+            {unclaimed.length > 0 && (
+              <Field label="… or point at a page you already have" wide>
+                <Select
+                  value=""
+                  options={[
+                    { value: '', label: 'Choose a page…' },
+                    ...unclaimed.map((p) => ({ value: p, label: `${(files.value[p] as PageFile).title} · ${fileToRoute(p)}` })),
+                  ]}
+                  onChange={(path) =>
+                    path && updateFile<PageFile>(path, (page) => ({ ...page, project: project.slug }), { coalesce: false })
+                  }
+                />
+              </Field>
+            )}
+          </div>
         )}
       </section>
     </div>
