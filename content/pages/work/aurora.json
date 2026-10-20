@@ -362,7 +362,7 @@
         {
           "id": "b-n722dn",
           "type": "text",
-          "html": "<p><b>What it Teaches:</b>&nbsp;It teaches the player a new control and complements \\[the mechanic or idea\\]</p><p><b>What the Player Sees First:</b>&nbsp;A quick cutscene indicating their challenge by framing at the monster and how to solve it using the flashlight.</p><p><b>The Intended Solution, Step by Step:<br></b>1. Learn to maneuver the boat and to direction the flashlight.<br>2. Listen to where the monster spawned.<br>3. Move to the spotlights while direction the flashlight at the monster.&nbsp;</p><p><b>How the Space Guides:</b> It uses spotlights to guide the direction the player should go.</p><p><b>What Happens on Failure:</b> The player return to the initial spawn point to try it again.</p>"
+          "html": "<p><b>What it Teaches:</b>&nbsp;Players learn to steer the boat and direct the flashlight, using sound cues to locate the monster and spotlights to guide their movement.</p><p><b>What the Player Sees First:</b>&nbsp;A quick cutscene indicating their challenge by framing at the monster and how to solve it using the flashlight.</p><p><b>The Intended Solution, Step by Step:<br></b>1. Learn to steer the boat and direct the flashlight.<br>2. Listen to where the monster spawned.<br>3. Move toward the spotlights while directing the flashlight at the monster.</p><p><b>How the Space Guides:</b> It uses spotlights to guide the direction the player should go.</p><p><b>What Happens on Failure:</b> The player return to the initial spawn point to try it again.</p>"
         },
         {
           "id": "b-xz9g8x",

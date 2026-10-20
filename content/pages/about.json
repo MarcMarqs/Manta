@@ -23,9 +23,7 @@
           "type": "spacer",
           "size": "sm"
         }
-      ],
-      "width": "narrow",
-      "place": "left"
+      ]
     },
     {
       "id": "b-v3t5ay",
@@ -44,26 +42,20 @@
           "value": "Miro - ClickUp - Jira - Confluence - Microsoft Office"
         }
       ],
-      "arrange": "stack",
-      "width": "narrow",
-      "place": "left"
-    },
-    {
-      "id": "b-ga6pxx",
-      "type": "spacer",
-      "size": "md"
+      "arrange": "stack"
     },
     {
       "id": "b-rgpjob",
       "type": "section",
       "background": "none",
+      "blocks": [],
+      "arrange": "row"
+    },
+    {
+      "id": "b-85nrgv",
+      "type": "section",
+      "background": "none",
       "blocks": [
-        {
-          "id": "b-9vuy9f",
-          "type": "heading",
-          "level": 2,
-          "text": "Let's design something players remember"
-        },
         {
           "id": "b-rur74m",
           "type": "button",
@@ -81,6 +73,7 @@
           "style": "primary"
         }
       ],
+      "arrange": "row",
       "width": "narrow",
       "place": "left"
     }
