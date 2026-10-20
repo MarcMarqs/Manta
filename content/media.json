@@ -128,5 +128,12 @@
       960,
       1440
     ]
+  },
+  "/images/uploads/16x9-overwatch-image1600w-46a438.webp": {
+    "w": 1600,
+    "sizes": [
+      480,
+      960
+    ]
   }
 }
