@@ -16,7 +16,8 @@
         {
           "id": "b-ip8w2s",
           "type": "text",
-          "html": "<p>Six years in, I've worked from both ends of a game: balancing individual combat frames and enemy waves, and keeping cross-discipline teams aligned on what we're building. At Big Moxi, a co-development studio, I've owned combat, encounters and game modes on licensed projects for external IP holders, and balanced difficulty and economy on Wardens Rising. Alongside that, I co-founded Luski Game Studio, where we shipped Aurora: A Child's Journey, winner at Games for Change Latin America 2020.</p><p>I like owning features end to end: defining what a system should make players do and feel, building it, testing it, and changing it until it works. I also lead and mentor designers, and I care about leaving behind documentation and processes the rest of the team can use.</p>"
+          "html": "<p>Senior Game Designer specialising in combat, systems and economy. Based in Brazil, working remotely with teams in Europe and North America.</p><p>For six years I’ve worked on both ends of a game: tuning individual enemy waves and damage curves, and keeping engineering, art and animation aligned on what we’re actually building. At Big Moxi, a co-development studio, I’ve owned combat, encounters and game modes for external IP holders, and led difficulty and economy balancing on Wardens Rising (PC, PS5, Xbox Series X|S).</p><p>Before that I co-founded Luski Game Studio, where we shipped Aurora: A Child’s Journey, winner of Best Game for Social Impact at Games for Change Latin America 2020.</p><p>I like owning a feature end to end: deciding what it should make players do and feel, modelling it before it reaches the engine, and changing it until playtests and telemetry agree. I also mentor designers onboarded and mentored junior designers at Big Moxi and at Mentorias Game Brasil.</p><p>Build the documentation and pipelines the rest of the team works from the spreadsheet-to-Data Asset balance pipeline used across the project and worked as Game Producer assisting and owning projects in addition to its design.</p>",
+          "gap": "airy"
         },
         {
           "id": "b-vagqrp",
@@ -26,30 +27,156 @@
       ]
     },
     {
-      "id": "b-v3t5ay",
-      "type": "specs",
-      "items": [
-        {
-          "label": "Education",
-          "value": "Postgraduation in Game Design and Project Management"
-        },
-        {
-          "label": "Engines",
-          "value": "Unreal & Unity Engine"
-        },
-        {
-          "label": "Management Tools",
-          "value": "Miro - ClickUp - Jira - Confluence - Microsoft Office"
-        }
-      ],
-      "arrange": "stack"
-    },
-    {
-      "id": "b-rgpjob",
+      "id": "b-qc6m9e",
       "type": "section",
       "background": "none",
-      "blocks": [],
-      "arrange": "row"
+      "blocks": [
+        {
+          "id": "b-3q9fug",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "Years",
+            "Company",
+            "Role",
+            "Highlights"
+          ],
+          "rows": [
+            [
+              "2023 - Now",
+              "Big Moxi",
+              "Game Designer & Project Manager",
+              "Wardens Rising, Gundam: Requiem for Vengeance, (others under NDA)"
+            ],
+            [
+              "2020 - 2025",
+              "Luski Game Studio",
+              "Co-Founder & Game Designer",
+              "Aurora: A Child’s Journey (Steam, 2020), (others not launched)"
+            ]
+          ]
+        },
+        {
+          "id": "b-ys5hhr",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-ukvqiy",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-9xtx6i",
+          "type": "heading",
+          "level": 2,
+          "text": "What I Bring"
+        },
+        {
+          "id": "b-5hh9eg",
+          "type": "text",
+          "html": "<p><ul><li><b>Combat &amp; Encounters:</b> Enemy archetypes, boss behaviour trees, wave pacing</li><li><b>Systems &amp; Economy:</b> TTK/DPS models, progression curves, sinks and faucets, Machinations</li><li><b>Data-Driven Tuning:</b> Telemetry, heatmaps, surveys, A/B-style live tests</li><li><b>Production:</b> Roadmaps, backlog, cross-discipline dependencies, external partner approvals</li></ul></p>"
+        },
+        {
+          "id": "b-1bydzy",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-8mcjv3",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-pife3s",
+          "type": "heading",
+          "level": 2,
+          "text": "Tools"
+        },
+        {
+          "id": "b-vnm8nw",
+          "type": "pillars",
+          "items": [
+            {
+              "label": "Unreal Engine 5",
+              "body": "Data Assets/Tables; Behavior Trees; Balancing; UEFN"
+            },
+            {
+              "label": "Unity Engine",
+              "body": "Tables; Balancing"
+            },
+            {
+              "label": "Project Management",
+              "body": "Google Sheets/Excel; Jira; Confluence; ClickUp; Miro"
+            }
+          ]
+        },
+        {
+          "id": "b-uavwyy",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-8dipeq",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-m2ltqe",
+          "type": "heading",
+          "level": 2,
+          "text": "Education"
+        },
+        {
+          "id": "b-smve7m",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "Degree",
+            "Field",
+            "Institution",
+            "Year"
+          ],
+          "rows": [
+            [
+              "Postgraduate",
+              "Game Design & Project Management",
+              "George Brown College (Toronto)",
+              "2023"
+            ],
+            [
+              "Bachelor",
+              "Game Design",
+              "Universidade Anhembi Morumbi",
+              "2021"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b-dmw2o6",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-3v34ms",
+          "type": "heading",
+          "level": 2,
+          "text": "Contact"
+        },
+        {
+          "id": "b-c5hv5o",
+          "type": "text",
+          "html": "<p>Open to Remote / Hybrid / In-Person Game Designer roles (EU/NA)</p>"
+        }
+      ]
     },
     {
       "id": "b-85nrgv",
