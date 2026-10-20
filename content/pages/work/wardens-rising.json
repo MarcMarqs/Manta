@@ -234,13 +234,6 @@
           ]
         },
         {
-          "id": "b-mk4w1n",
-          "type": "sheet",
-          "source": "file",
-          "sheetId": "",
-          "height": "medium"
-        },
-        {
           "id": "b-jvbxyj",
           "type": "spacer",
           "size": "md"
@@ -315,13 +308,6 @@
           ]
         },
         {
-          "id": "b-j3joxz",
-          "type": "sheet",
-          "source": "file",
-          "sheetId": "",
-          "height": "medium"
-        },
-        {
           "id": "b-ygdq6y",
           "type": "spacer",
           "size": "sm"
@@ -343,13 +329,6 @@
           "id": "b-44oc7d",
           "type": "text",
           "html": "<p>Planning difficulty before the engine. A campaign needs a clear sense of progression, and each level needs peaks of tension followed by short relief.</p><p>• Gave every enemy a <b>threat value</b>, so a wave's difficulty could be calculated before it was built.</p><p>• Mapped the difficulty curve across the campaign, with a <b>Map × Invasion</b> matrix to check the tension of every invasion on every map.</p><p>• Built each level with rising and falling waves, then created all 40+ waves in the <b>in-house wave tool</b> inside Unreal: spawn portals, compositions and timers.</p>"
-        },
-        {
-          "id": "b-vwq0vq",
-          "type": "sheet",
-          "source": "file",
-          "sheetId": "",
-          "height": "medium"
         },
         {
           "id": "b-uo7pv7",
@@ -398,13 +377,6 @@
           "html": "<p>Rather than flattening the heroes until they played alike, I kept them close in power and tuned the enemy archetypes against each hero's weaknesses. Each hero faces a different version of the same wave, so players change targets mid-fight and every hero keeps its identity.</p><p>• Sorted the roster into clear combat roles (tanks, ranged, brawlers), each with its own stat template in Data Tables, so players read a threat at a glance and learn its counter.</p>"
         },
         {
-          "id": "b-qglaud",
-          "type": "sheet",
-          "source": "file",
-          "sheetId": "",
-          "height": "medium"
-        },
-        {
           "id": "b-mz9sys",
           "type": "spacer",
           "size": "md"
@@ -426,13 +398,6 @@
           "id": "b-d1hyd7",
           "type": "text",
           "html": "<p>• Designed 40+ progression pieces ([30+ items, 10 perks], companions, skill-tree upgrades, tower unlocks), built on shared attribute modifiers in Data Tables so new content needed no custom code.</p><p>• Modelled levelling speed and unlock timing with curves in Sheets, then exported them to Data Tables.</p><p>• Tied key unlocks to specific stages (for example 1, 4 and 7), each introduced with a wave built to show off the new tower or trap.</p><p>• Rebalanced less-picked items and perks; later playtests showed players using a wider range.</p><p>• After playtests showed a late-game content drought, restructured the item and perk unlocks and moved tower milestones to line up with map transitions.</p>"
-        },
-        {
-          "id": "b-xw98d4",
-          "type": "sheet",
-          "source": "file",
-          "sheetId": "",
-          "height": "medium"
         },
         {
           "id": "b-0e8jpn",
