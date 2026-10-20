@@ -1,5 +1,7 @@
 import type { ComponentChildren } from 'preact';
 import { useEffect, useRef, useState } from 'preact/hooks';
+import { READABLE, contrast } from '../lib/color';
+import { site } from './store';
 
 // --- icons (16px, stroke = currentColor) ---------------------------------
 
@@ -39,6 +41,7 @@ const paths: Record<string, string> = {
   olist: 'M6.5 4h7M6.5 8h7M6.5 12h7M2.5 3l1-.5V6M2.5 10.5c0-1.5 2-1.5 2 0 0 .8-2 1.5-2 2.5h2',
   clear: 'M3 13h10M6 3h7M9.5 3L7 11M4 5l6 6',
   highlight: 'M2.5 13.5h11M4.5 10.5l5.5-5.5 2 2-5.5 5.5h-2zM9.5 3.5l1-1 2 2-1 1',
+  textColour: 'M3 11.5L6.5 2.5l3.5 9M4.3 9h4.4M2.5 14h11',
   bigger: 'M2 11.5L5 3l3 8.5M3 9h4M10 11.5V6M8 7.5L10 5.5l2 2',
   alignLeft: 'M2.5 4h11M2.5 8h7M2.5 12h9',
   alignCenter: 'M2.5 4h11M4.5 8h7M3.5 12h9',
@@ -420,6 +423,51 @@ function wordAround(root: HTMLElement, caret: Range): Range | null {
  *
  * A selection already wrapped end to end is unwrapped instead, so each button toggles.
  */
+/**
+ * Puts a colour on the selected text, or takes one off.
+ *
+ * `execCommand` does the applying, because a selection that starts mid-word, crosses a
+ * link and ends inside a bold run is a problem browsers have already solved and I have
+ * not. `styleWithCSS` is asked for first so it writes a span with a style rather than a
+ * <font> tag, which is deprecated and carries no other meaning.
+ *
+ * Taking a colour off is done by hand: there is no command for "remove only the colour",
+ * and removeFormat would take the bold and the links with it. Every element inside the
+ * selection that carries this property loses it, and one left with no style at all is
+ * unwrapped, so the markup does not silt up with empty spans.
+ */
+function paintSelection(root: HTMLElement, property: 'color' | 'backgroundColor', value: string | null) {
+  const selection = getSelection();
+  if (!selection || !selection.rangeCount) return;
+  const range = selection.getRangeAt(0);
+  if (!root.contains(range.commonAncestorContainer)) return;
+  if (range.collapsed) {
+    const word = wordAround(root, range);
+    if (!word) return;
+    selection.removeAllRanges();
+    selection.addRange(word);
+  }
+
+  if (value) {
+    try {
+      document.execCommand('styleWithCSS', false, 'true');
+    } catch {
+      /* Not every engine admits to this one; the fallback is a <font> tag, which still
+         renders the right colour. */
+    }
+    document.execCommand(property === 'color' ? 'foreColor' : 'hiliteColor', false, value);
+    return;
+  }
+
+  const current = selection.getRangeAt(0);
+  for (const el of [...root.querySelectorAll<HTMLElement>('*')]) {
+    if (!current.intersectsNode(el) || !el.style[property]) continue;
+    el.style[property] = '';
+    if (!el.getAttribute('style')) el.removeAttribute('style');
+    if (el.tagName === 'SPAN' && !el.attributes.length) el.replaceWith(...el.childNodes);
+  }
+}
+
 function wrapSelection(
   root: HTMLElement,
   tag: string,
@@ -513,6 +561,13 @@ export function RichText({
     emit();
   };
 
+  const paint = (property: 'color' | 'backgroundColor', value: string | null) => {
+    if (!ref.current) return;
+    ref.current.focus();
+    paintSelection(ref.current, property, value);
+    emit();
+  };
+
   const wrap = (tag: string, className: string | undefined, match: (el: HTMLElement) => boolean) => {
     if (!ref.current) return;
     ref.current.focus();
@@ -563,7 +618,21 @@ export function RichText({
       <div class="richtext-toolbar" onMouseDown={(e) => e.preventDefault()}>
         <IconButton icon="bold" label="Bold" onClick={() => exec('bold')} />
         <IconButton icon="italic" label="Italic" onClick={() => exec('italic')} />
+        <ColourButton
+          icon="textColour"
+          label="Text colour"
+          against="page"
+          onPick={(hex) => paint('color', hex)}
+          onClear={() => paint('color', null)}
+        />
         <IconButton icon="highlight" label="Highlight" active={on.mark} onClick={() => wrap('mark', undefined, IS_MARK)} />
+        <ColourButton
+          icon="chevron"
+          label="Highlight colour"
+          against="text"
+          onPick={(hex) => paint('backgroundColor', hex)}
+          onClear={() => paint('backgroundColor', null)}
+        />
         <IconButton icon="bigger" label="Bigger text" active={on.big} onClick={() => wrap('span', 'big', IS_BIG)} />
         <IconButton icon="link" label="Link" onClick={openLink} />
         <IconButton icon="list" label="Bullet list" onClick={() => exec('insertUnorderedList')} />
@@ -591,6 +660,95 @@ export function RichText({
         }}
       />
     </div>
+  );
+}
+
+/**
+ * A colour for the selected text, chosen freely.
+ *
+ * The site stores one hex, and a page is read on a white background and a near-black
+ * one, so a colour that sings on one can disappear on the other. Rather than refuse the
+ * choice, the picker says what it measures against both: the numbers are there to be
+ * read, and ignored when the colour matters more than the contrast.
+ *
+ * `onMouseDown` is prevented throughout, because losing the selection to the button is
+ * the same as having nothing to colour.
+ */
+function ColourButton({
+  icon,
+  label,
+  against,
+  onPick,
+  onClear,
+}: {
+  icon: string;
+  label: string;
+  /** 'page' measures the colour on the page; 'text' measures the page's text on it. */
+  against: 'page' | 'text';
+  onPick: (hex: string) => void;
+  onClear: () => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const [hex, setHex] = useState('#8f5ad1');
+  const theme = site.value?.theme;
+  // Coloured text is read against the page; a highlight is the thing text is read on,
+  // so the pair to measure is the other way round.
+  const reading = (bg: string | undefined, fg: string | undefined) =>
+    against === 'page' ? contrast(hex, bg ?? '#ffffff') : contrast(fg ?? '#1a1f24', hex);
+  const onLight = reading(theme?.bg, theme?.fg);
+  const onDark = reading(theme?.bgDark, theme?.fgDark);
+
+  return (
+    <span class="colour-btn">
+      <IconButton icon={icon} label={label} active={open} onClick={() => setOpen(!open)} />
+      {open && (
+        <div class="colour-pop" onMouseDown={(e) => e.preventDefault()}>
+          <div class="row">
+            <input
+              type="color"
+              value={hex}
+              onInput={(e) => setHex((e.target as HTMLInputElement).value)}
+            />
+            <input
+              class="input mono small"
+              value={hex}
+              spellcheck={false}
+              onInput={(e) => setHex((e.target as HTMLInputElement).value)}
+            />
+          </div>
+          <p class="colour-reading">
+            <span class={onLight >= READABLE ? 'ok' : 'low'}>
+              <Icon name="sun" /> {onLight.toFixed(1)}:1
+            </span>
+            <span class={onDark >= READABLE ? 'ok' : 'low'}>
+              <Icon name="moon" /> {onDark.toFixed(1)}:1
+            </span>
+          </p>
+          <div class="row">
+            <button
+              type="button"
+              class="btn small primary"
+              onClick={() => {
+                onPick(hex);
+                setOpen(false);
+              }}
+            >
+              Apply
+            </button>
+            <button
+              type="button"
+              class="btn small ghost"
+              onClick={() => {
+                onClear();
+                setOpen(false);
+              }}
+            >
+              None
+            </button>
+          </div>
+        </div>
+      )}
+    </span>
   );
 }
 

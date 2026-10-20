@@ -220,6 +220,12 @@ preview on the right rendered by the site's own components, so what you see is w
   list sorts after the ones that are, alphabetically, so adding a page never reshuffles
   what you arranged. Only the editor reads it — visitors reach pages through the navigation
   and the links on them.
+- **Colouring text while you write:** the toolbar carries **Text colour** and **Highlight
+  colour**, each a free picker. The popover shows what the colour measures against the
+  light theme and the dark one — a coloured word against the page it sits on, a highlight
+  against the text that sits on it — so a choice that disappears in one theme says so
+  before it ships. The numbers inform, they do not refuse; **None** takes the colour off
+  again without touching the bold, links or anything else in the selection.
 - **Markdown in:** **Markdown** in a page's header takes a `.md` file — dropped, chosen or
   pasted — and turns it into blocks, either replacing the page or adding to the end. **New
   page** can start from one too, taking its title from the first `#` heading. Headings,

@@ -1684,6 +1684,58 @@ form.tag-row {
   min-width: 0;
 }
 
+/* The colour picker hangs off its button in the toolbar. */
+.colour-btn {
+  position: relative;
+  display: inline-flex;
+}
+
+.colour-pop {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  width: 190px;
+  border: 1px solid var(--e-border);
+  border-radius: var(--e-r-md);
+  background: var(--e-panel);
+  box-shadow: 0 10px 30px rgb(0 0 0 / 0.35);
+}
+
+.colour-pop input[type='color'] {
+  width: 34px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid var(--e-border);
+  border-radius: var(--e-r-sm);
+  background: none;
+}
+
+.colour-reading {
+  display: flex;
+  gap: 12px;
+  margin: 0;
+  font-size: var(--e-t-xs);
+}
+
+.colour-reading span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.colour-reading .ok {
+  color: var(--e-muted);
+}
+
+.colour-reading .low {
+  color: var(--e-danger);
+}
+
 /* The way through to a case study, under the slug that names its address. */
 .study-link {
   align-self: flex-start;
