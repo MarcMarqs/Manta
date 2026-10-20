@@ -1,49 +1,16 @@
 [
   {
-    "slug": "aurora",
-    "title": "Aurora: A Child's Journey",
-    "genre": "Narrative Puzzle Adventure",
-    "year": null,
-    "role": "Game Designer",
-    "summary": "Owned the Act II player experience, designing and refining 3C mechanics and puzzle layouts. Partnered with Level Design to iterate on pacing via playtest feedback, leading sessions that shaped the final game.",
-    "highlights": [
-      "Games for Change Latin America 2020 — Winner",
-      "BIG Festival Impact 2021 — Finalist",
-      "Co-defined the 3C: camera, character and control",
-      "Owned Act II gameplay and puzzle design end-to-end"
-    ],
-    "discipline": [
-      "mechanics-design",
-      "level-design",
-      "game-production-project-management"
-    ],
-    "engine": [
-      "unity-engine"
-    ],
-    "cover": "/images/uploads/maxresdefault-1665c1.webp",
-    "coverVideo": null,
-    "visibility": "public",
-    "links": [
-      {
-        "label": "Steam",
-        "href": "https://store.steampowered.com/app/1438440/Aurora_A_Childs_Journey/",
-        "type": "play"
-      }
-    ],
-    "origin": "professional"
-  },
-  {
     "slug": "wardens-rising",
     "title": "Wardens Rising",
     "genre": "ARPG / Tower Defense | Game Designer",
     "year": null,
     "role": "Game Designer",
-    "summary": "Drove combat and systems design at the core of the game. Balanced high-density wave combat using playtest telemetry, authored 30+ progression assets and economy features, and co-directed boss encounters alongside multidisciplinary teams.",
+    "summary": "Owned difficulty, economy and boss design on a 60+ person co-op title, tuning wave combat for five distinct heroes through telemetry.",
     "highlights": [
-      "Built TTK/DPS models in Sheets, then ported them into Unreal Data Assets",
-      "Designed the behaviour trees for 4 major boss encounters",
-      "Architected an AI targeting-cap and aggro-cooldown system to restore combat readability",
-      "Shaped horde spawning and the difficulty curve from telemetry heatmaps"
+      "Built 40+ waves and 40+ progression pieces, all tuned in engine",
+      "Designed 4 multi-phase bosses with behaviour trees in Unreal",
+      "Cut an endgame failure rate from ~80% to ~40% with a targeting cap, counter-traps and audio warnings",
+      "Ran a spreadsheet-to-Data Asset pipeline so balance changes needed no code"
     ],
     "discipline": [
       "systems-design",
@@ -63,6 +30,32 @@
         "type": "play"
       }
     ],
+    "origin": "professional"
+  },
+  {
+    "slug": "gundam-requiem",
+    "title": "Gundam: Requiem for Vengeance",
+    "genre": "Fortnite Game Mode | Game Designer",
+    "year": null,
+    "role": "Game Designer",
+    "summary": "UEFN couldn’t let players pilot a mech, so I made earning it the game. Teams contest objectives to win the mech, then choose which part of the map it reshapes.",
+    "highlights": [
+      "Pitched and documented the mode through approval rounds with an external IP partner",
+      "Owned combat balance, UI/HUD and usability testing",
+      "Coordinated art, animation and engineering on the activation cutscene"
+    ],
+    "discipline": [
+      "systems-design",
+      "user-experience",
+      "game-production-project-management"
+    ],
+    "engine": [
+      "uefn-unreal-fortnite"
+    ],
+    "cover": "/images/uploads/gundam-ca46cc.webp",
+    "coverVideo": null,
+    "visibility": "public",
+    "links": [],
     "origin": "professional"
   },
   {
@@ -104,25 +97,36 @@
     "origin": "personal"
   },
   {
-    "slug": "gundam-requiem",
-    "title": "Gundam: Requiem for Vengeance",
-    "genre": "Fortnite Game Mode | Game Designer",
+    "slug": "aurora",
+    "title": "Aurora: A Child's Journey",
+    "genre": "Narrative Puzzle Adventure",
     "year": null,
     "role": "Game Designer",
-    "summary": "Designed and pitched the mode for an external IP partner, turning a UEFN limit on vehicle control into the competitive hook: teams contest objectives to earn the mech, then choose which part of the map it reshapes.",
-    "highlights": [],
+    "summary": "Owned Act II end to end on a wordless, all-ages adventure, teaching every mechanic through space, camera and light rather than text.",
+    "highlights": [
+      "Winner, Best Game for Social Impact, Games for Change Latin America 2020; BIG Festival 2021 finalist",
+      "Co-defined the 3C and ran 8 playtest rounds with players aged 8 to 67",
+      "Raised a key puzzle’s solve rate from ~70% to ~90% by reframing camera and sightlines",
+      "93% positive on Steam"
+    ],
     "discipline": [
-      "systems-design",
-      "user-experience",
+      "mechanics-design",
+      "level-design",
       "game-production-project-management"
     ],
     "engine": [
-      "uefn-unreal-fortnite"
+      "unity-engine"
     ],
-    "cover": "/images/uploads/gundam-ca46cc.webp",
+    "cover": "/images/uploads/maxresdefault-1665c1.webp",
     "coverVideo": null,
     "visibility": "public",
-    "links": [],
+    "links": [
+      {
+        "label": "Steam",
+        "href": "https://store.steampowered.com/app/1438440/Aurora_A_Childs_Journey/",
+        "type": "play"
+      }
+    ],
     "origin": "professional"
   },
   {
