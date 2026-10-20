@@ -15,7 +15,7 @@
     }
   ],
   "theme": {
-    "accent": "#8f5ad1",
+    "accent": "#b80000",
     "bg": "#d4d4d4",
     "fg": "#1a1f24",
     "muted": "#5a646e",
@@ -31,7 +31,8 @@
     "radius": "0px",
     "maxWidth": "1100px",
     "spacing": 1,
-    "fontMono": "system-ui"
+    "fontMono": "system-ui",
+    "accentDark": "#ff4d4d"
   },
   "separator": " | ",
   "pageOrder": [
