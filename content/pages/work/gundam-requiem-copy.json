@@ -1,0 +1,540 @@
+{
+  "title": "Plushland Curse",
+  "description": "3C, Act II gameplay and puzzle design on an award-winning narrative adventure at Luski Game Studio.",
+  "image": "/images/uploads/plush-cover-04b9f6.webp",
+  "blocks": [
+    {
+      "id": "b-3huxlh",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-qv4cxj",
+          "type": "heading",
+          "level": 1,
+          "text": "Plushland Curse"
+        },
+        {
+          "id": "b-iwy80c",
+          "type": "text",
+          "html": "<p><i>Souls-like / Action-Adventure</i></p>"
+        },
+        {
+          "id": "b-fztwe6",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "Role",
+            "Team Size",
+            "Engine",
+            "Platform",
+            "My Focus"
+          ],
+          "rows": [
+            [
+              "Game Designer",
+              "10",
+              "Unreal Engine 5",
+              "PC",
+              "Systems Designㅤ|ㅤCombat Designㅤ|ㅤBalancing"
+            ]
+          ]
+        },
+        {
+          "id": "b-wacsqh",
+          "type": "video",
+          "provider": "youtube",
+          "videoId": "bednKc1dZtA",
+          "title": "",
+          "align": "center",
+          "scale": 70
+        },
+        {
+          "id": "b-rchkng",
+          "type": "spacer",
+          "size": "md"
+        }
+      ]
+    },
+    {
+      "id": "b-f6f0ur",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-w8wpzw",
+          "type": "heading",
+          "level": 2,
+          "text": "My Role"
+        },
+        {
+          "id": "b-1vikzu",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "",
+            ""
+          ],
+          "rows": [
+            [
+              "Owned",
+              "• Weapon System: Types, Every Weapon, Damage Matrix\n• Around 10 Enemy Archetypes and their Behaviour\n• Enemy Design Rules\n• Player and Item Progression, Economy\n• Balancing Spreadsheets"
+            ],
+            [
+              "Co-Owned",
+              "• 3C\n• Stamina Mechanic"
+            ],
+            [
+              "Supported",
+              "• Climb Mechanic and a Boss Fight (with Level Design and Engineering)\n• Character Creation UI (with UI and Engineering)"
+            ]
+          ]
+        },
+        {
+          "id": "b-ujsrjo",
+          "type": "spacer",
+          "size": "sm"
+        },
+        {
+          "id": "b-byyfkg",
+          "type": "text",
+          "html": "<p></p><div><b><span class=\"big\">In Short</span></b></div><ul><li><b>• What I Owned: </b>The weapon system and damage types, around 10 enemy archetypes, progression and the economy, and the balancing spreadsheets.</li><li><b>• Hardest Problem: </b>Four weapon types made the team's enemy production too big for its size. Cutting one type kept the variety and saved the scope.</li><li><b>• What it Shows: </b>Combat systems built from rules, and treating scope as a design decision.</li></ul><p></p>"
+        },
+        {
+          "id": "b-owabhd",
+          "type": "spacer",
+          "size": "md"
+        }
+      ]
+    },
+    {
+      "id": "b-83mvqe",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-b2mwir",
+          "type": "heading",
+          "level": 2,
+          "text": "Constraints & Problem Solving"
+        },
+        {
+          "id": "b-98scfh",
+          "type": "text",
+          "html": "<p>• <b>A small team</b>, so every enemy, weapon and animation had a real production cost.</p><p>• <b>Souls-Like Expectations:</b> fights need to be hard but fair, and readable enough that players blame themselves, not the game.</p><p>• <b>Toy-themed enemies</b> had unusual silhouettes and physics-driven movement, which made readability harder.</p><p></p>"
+        },
+        {
+          "id": "b-03jnh9",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-d5nhk8",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-vkca8g",
+          "type": "heading",
+          "level": 2,
+          "text": "Design Pillars"
+        },
+        {
+          "id": "b-oznhw7",
+          "type": "text",
+          "html": "<p>1. <b>Readable at a glance</b>. Players identify an enemy's type and threat from its silhouette and movement.</p><p>2. <b>The right weapon matters</b>, but never locks you out. Switching weapons is rewarded; sticking with one is never a dead end.</p><p>3. <b>Hard but fair</b>. Difficulty comes from learning patterns, not from hidden numbers.</p>"
+        },
+        {
+          "id": "b-vfyazk",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-taa3ie",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-7rbb8a",
+          "type": "heading",
+          "level": 2,
+          "text": "1. Enemies"
+        },
+        {
+          "id": "b-ph80on",
+          "type": "text",
+          "html": "<p>The goal was enemies that read clearly at a glance and play differently from each other, using odd toy silhouettes and physics-driven movement. With 15 archetypes on a small team, I set the rules before designing any enemy, so every new one fit the same standard.</p>"
+        },
+        {
+          "id": "b-8s48z3",
+          "type": "systemMap",
+          "arrange": "layered",
+          "caption": "Rules came first, so 15 archetypes stayed in scope",
+          "nodes": [
+            {
+              "id": "a",
+              "label": "Rules First",
+              "accent": true,
+              "note": "Shared standard for every enemy"
+            },
+            {
+              "id": "n-dg5aa4",
+              "label": "Role",
+              "note": "What it does in a fight",
+              "layer": 1
+            },
+            {
+              "id": "n-n6q2ym",
+              "label": "Behaviour",
+              "note": "Actions, moves and weapon use",
+              "layer": 2
+            },
+            {
+              "id": "n-17ly39",
+              "label": "Clarity Pass",
+              "note": "Can players read it fast?",
+              "layer": 3
+            },
+            {
+              "id": "n-h9lxfu",
+              "label": "Document",
+              "note": "Spec for art and engineering",
+              "layer": 4
+            }
+          ],
+          "links": [
+            {
+              "from": "a",
+              "to": "n-dg5aa4"
+            },
+            {
+              "from": "n-dg5aa4",
+              "to": "n-n6q2ym"
+            },
+            {
+              "from": "n-n6q2ym",
+              "to": "n-17ly39"
+            },
+            {
+              "from": "n-17ly39",
+              "to": "n-h9lxfu"
+            }
+          ]
+        },
+        {
+          "id": "b-9i2exs",
+          "type": "spacer",
+          "size": "sm"
+        },
+        {
+          "id": "b-q96z6m",
+          "type": "heading",
+          "level": 3,
+          "text": "The Rules Every Archetype had to Meet"
+        },
+        {
+          "id": "b-57gbhf",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "Rule",
+            "Why"
+          ],
+          "rows": [
+            [
+              "Clear contrast: its own silhouette and movement",
+              "Players identify the threat instantly"
+            ],
+            [
+              "Swarm caps: a population limit for swarm enemies",
+              "Avoids visual clutter and overload"
+            ],
+            [
+              "Hit-stop by weight: impact pause scales with mass and speed",
+              "Heavy hits feel heavy, light ones stay snappy"
+            ]
+          ]
+        },
+        {
+          "id": "b-8gk8w0",
+          "type": "section",
+          "background": "none",
+          "blocks": []
+        },
+        {
+          "id": "b-e5yr74",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "Archetype",
+            "Role in a Fight",
+            "What it Tests in the Player"
+          ],
+          "rows": [
+            [
+              "Basic Melee",
+              "Baseline close-range attacker that teaches the core combat rhythm",
+              "Reading attacks, dodge timing"
+            ],
+            [
+              "Agile Assassin",
+              "Fast flanker with quick, low-telegraph strikes",
+              "Reaction speed, keeping it in view"
+            ],
+            [
+              "Area Controller",
+              "Denies space with zones or hazards, shrinking safe ground",
+              "Positioning, route choice"
+            ],
+            [
+              "Heavy Hitter",
+              "Slow, heavily telegraphed attacks that punish greed",
+              "Patience, punishing recovery windows"
+            ],
+            [
+              "Ranged Caster",
+              "Attacks from distance and stays away from the player",
+              "Closing distance, using cover"
+            ],
+            [
+              "Swarm",
+              "Weak alone, dangerous in groups; capped in number",
+              "Crowd control, area attacks"
+            ],
+            [
+              "Ambusher",
+              "Hides and strikes when the player passes",
+              "Awareness, caution in new spaces"
+            ],
+            [
+              "Vampiric",
+              "Heals itself by dealing damage",
+              "Avoiding hits, sustained pressure"
+            ],
+            [
+              "Armored Sentinel",
+              "Guards an area and blocks frontal attacks",
+              "Finding openings, choosing damage type"
+            ],
+            [
+              "Tracker",
+              "Follows the player persistently across a space",
+              "Managing pursuit, choosing when to engage"
+            ],
+            [
+              "Aggressive Hunter",
+              "Relentless pursuer with little pause between attacks",
+              "Stamina management under pressure"
+            ],
+            [
+              "Illusionist",
+              "Creates decoys or fakes to mislead the player",
+              "Reading tells, picking the real target"
+            ],
+            [
+              "Summoner",
+              "Spawns other enemies until it is dealt with",
+              "Target priority"
+            ],
+            [
+              "Manipulator",
+              "Disrupts the player with debuffs or control effects",
+              "Adapting, using counters"
+            ],
+            [
+              "Explosive",
+              "Detonates on contact or death, harming everything nearby",
+              "Spacing, using it against other enemies"
+            ]
+          ]
+        },
+        {
+          "id": "b-fvmyvy",
+          "type": "text",
+          "html": "<p>Some archetypes were later cut for animation or readability limits; mark which ones.</p>"
+        },
+        {
+          "id": "b-bphbdz",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-mfzoci",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-f9jpqp",
+          "type": "heading",
+          "level": 2,
+          "text": "2. A Rock-Paper-Scissors of Damage"
+        },
+        {
+          "id": "b-z2mi14",
+          "type": "text",
+          "html": "<p>Each weapon type leans toward one of three damage types, and each enemy is strong or weak against them. For example, a slashing weapon deals extra damage to cloth enemies. Players are rewarded for switching weapons without being locked into one loadout.</p><p>• <b>Mixed Damage:</b> Every weapon deals all three damage types at different percentages, so no enemy is ever fully immune to what the player is holding.</p><p>• <b>Specialise Without Losing Flexibility:</b> Upgrades let players invest deeply in one damage type while every weapon stays useful.</p><p>• <b>Weapon Feel:</b> Types differ in reach, attack timing, stamina cost, moveset and damage.</p>"
+        },
+        {
+          "id": "b-vrjt1o",
+          "type": "sheet",
+          "source": "file",
+          "sheetId": "",
+          "height": "medium"
+        },
+        {
+          "id": "b-u8y8mn",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-e5ccz5",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-y50bdu",
+          "type": "heading",
+          "level": 2,
+          "text": "3. Balancing"
+        },
+        {
+          "id": "b-u1qh9t",
+          "type": "text",
+          "html": "<p>I built damage calculators and a hits-to-kill matrix in spreadsheets: how many strikes each weapon needs against each archetype. It made progression predictable and showed unfair matchups before they reached the engine.</p>"
+        },
+        {
+          "id": "b-h5sl2k",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-7m2heh",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-g8tp1a",
+          "type": "heading",
+          "level": 2,
+          "text": "Iteration Case: Cutting a Weapon Type to Protect Scope"
+        },
+        {
+          "id": "b-bu3npx",
+          "type": "systemMap",
+          "arrange": "layered",
+          "caption": "Cutting one weapon type kept variety and saved enemy production",
+          "nodes": [
+            {
+              "id": "a",
+              "label": "Before: 4 Weapon Types",
+              "note": "• Each type needs enemies that test it\n• Enemy count grows beyond the team's size\n• Fights interesting, scope at risk"
+            },
+            {
+              "id": "b",
+              "label": "After: 3 Weapon Types",
+              "accent": true,
+              "note": "• More weapons within each type\n• Fewer enemies to produce\n• Each enemy harder and more interesting",
+              "layer": 1
+            }
+          ],
+          "links": [
+            {
+              "from": "a",
+              "to": "b",
+              "label": "cut one type"
+            }
+          ]
+        },
+        {
+          "id": "b-f5q5o5",
+          "type": "text",
+          "html": "<p><b>Problem:</b> 4 weapon types made combat interesting, but every type needed enemies that tested it. The number of enemies the team would have to produce grew beyond what a small team could make.</p><p><b>Fix:</b> I cut one weapon type, going from 4 to 3, and added more weapons within each remaining type.</p><p><b>Result:</b> Fewer enemies to produce, and each one could be harder and more interesting, while weapon variety stayed high.</p>"
+        },
+        {
+          "id": "b-qy8u4d",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-d82o4z",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-g8qznc",
+          "type": "heading",
+          "level": 2,
+          "text": "Other Contributions"
+        },
+        {
+          "id": "b-cksdnj",
+          "type": "text",
+          "html": "<p><b>• Climb Mechanic: </b>Designed with level design and engineering to solve level layout problems. The metric of the character and the level made it difficult to pace the combat, so we designed a inverse stamina system that could help players in combat and to build their own traversal paths solving the metric and pacing problems.</p><p><b>• Boss Fight: </b>Designed with game design, level design and engineering. ASSET: a boss concept or arena sketch.</p><p><b>• Character Creation: </b>Designed the system and its UI in Adobe XD with UI and engineering. ASSET: one Adobe XD screen.</p><p><b>• Progression and Economy: </b>Designed player and item progression and the economy.</p>"
+        },
+        {
+          "id": "b-itb2rr",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-oijjzv",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-ehmb60",
+          "type": "heading",
+          "level": 2,
+          "text": "Decisions and Trade-Offs"
+        },
+        {
+          "id": "b-zswkxi",
+          "type": "text",
+          "html": "<p><b>• Fewer weapon types, deeper enemies. </b>Less breadth in the arsenal, but a roster the team could actually build.</p><p><b>• Mixed damage over hard counters. </b>Weaker \"perfect counter\" moments, but no fight ever becomes impossible with the wrong weapon.</p><p><b>• Rules before roster. </b>Slower to start, but 15 archetypes stayed consistent and readable.</p>"
+        },
+        {
+          "id": "b-2z5yiy",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-445ptn",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-et5vy9",
+          "type": "heading",
+          "level": 2,
+          "text": "Looking Back"
+        },
+        {
+          "id": "b-2x7yjf",
+          "type": "text",
+          "html": "<p><b>What Worked: </b>Writing the enemy rules first, and modelling hits-to-kill before building fights.</p><p><b>What I'd do Differently: </b>Check content cost earlier, before designing four weapon types.</p><p><b>What I Learned: </b>In combat systems, every new option multiplies the content needed elsewhere, so scope is a design decision too.</p>"
+        },
+        {
+          "id": "b-7joh2m",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    }
+  ]
+}
