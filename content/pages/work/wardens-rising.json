@@ -54,7 +54,7 @@
         {
           "id": "b-9xzoer",
           "type": "spacer",
-          "size": "md"
+          "size": "sm"
         }
       ]
     },
@@ -101,7 +101,7 @@
         {
           "id": "b-20tnhs",
           "type": "spacer",
-          "size": "md"
+          "size": "sm"
         }
       ]
     },
@@ -144,26 +144,26 @@
           "rows": [
             [
               "No hero is clearly weaker",
-              "Hero pick rates and win rates in telemetry",
-              "[e.g. pick-rate spread X–Y%, down from A–B%]"
+              "Hero pick rates and win rates in telemetry with in-house tool",
+              "The pick-rate spread 50%, down from 25-35%, every new tester picked a new hero, never duplicated"
             ],
             [
               "Difficulty rises with clear peaks and relief",
-              "Planned curve vs death heatmaps per wave",
-              "[result]"
+              "Planned curve vs. death heatmaps per wave",
+              "Comparing the plan vs. result, we achieved a remarkable 80% success rate balancing the difficulty and waves, seen by the heatmaps and surveys"
             ],
             [
               "Currency is always slightly short of what's needed",
-              "Souls and Victory Points earned vs spent, per map",
+              "Souls and Victory Points earned vs spent (per map)",
               "Campaign ends with a ~1,300 VP surplus out of 23,500 earned (~6%)"
             ],
             [
-              "Players can read what's attacking them",
+              "Players have clear knowledge of what's attacking them",
               "Playtest surveys and recordings",
-              "[result]"
+              "~65% of the players had no issue while playing and identifying the danger (seen by the death heatmap and surveys) "
             ],
             [
-              "Players hit the level cap at the end, not before",
+              "Players hit the level cap by the end and not before",
               "Simulated Souls per invasion vs the level curve",
               "Level 30 reached at the final boss"
             ]
@@ -233,7 +233,7 @@
         {
           "id": "b-jvbxyj",
           "type": "spacer",
-          "size": "md"
+          "size": "sm"
         }
       ]
     },
@@ -325,7 +325,15 @@
         {
           "id": "b-44oc7d",
           "type": "text",
-          "html": "<p>Planning difficulty before the engine. A campaign needs a clear sense of progression, and each level needs peaks of tension followed by short relief.</p><p>• Gave every enemy a <b>threat value</b>, so a wave's difficulty could be calculated before it was built.</p><p>• Mapped the difficulty curve across the campaign, with a <b>Map × Invasion</b> matrix to check the tension of every invasion on every map.</p><p>• Built each level with rising and falling waves, then created all 40+ waves in the <b>in-house wave tool</b> inside Unreal: spawn portals, compositions and timers.</p>"
+          "html": "<p>A campaign needs a clear sense of progression, and each level needs peaks of tension followed by short relief. I planned difficulty before anything reached the engine.</p><p><ul><li>Gave each of the 17 enemy types a <b>Danger Level</b>, so a wave's difficulty, and what it pays out, could be calculated before it was built.</li><li>Mapped the difficulty curve across the campaign with a <b>Map * Invasion</b>&nbsp;matrix to check the tension of every invasion on every map.</li><li>Built each level with rising and failing waves, then created all 40+ waves in the <b>in-house wave tool</b>: spawn portals, compositions, and timers.</li></ul></p>"
+        },
+        {
+          "id": "b-vznjj8",
+          "type": "sheet",
+          "source": "file",
+          "sheetId": "17AmLLtet92lOAq8DaLgIoI_FPo7_6EVAqURGteR3Swk",
+          "height": "medium",
+          "gid": "1307238717"
         },
         {
           "id": "b-uo7pv7",
@@ -348,12 +356,38 @@
         {
           "id": "b-rd5n80",
           "type": "text",
-          "html": "<p>Spending power against pressure. Tower defense works when money is always a little short of what the next wave demands.</p><p>• Balanced each wave's composition against the currency it pays out.</p><p>• Set income per stage so upgrades never outran the defences players needed.</p><p>• Built TTK and DPS models for heroes, towers and enemies, with charts that flag outliers, then moved the values into Unreal Data Assets.</p>"
+          "html": "<p>Wardens Rising runs two economies, and both work on the same rule: <b>spending power stays slightly behind what the game asks of the player.</b></p><p><b><br></b></p><p><b><span class=\"big\">Souls (in-run levelling)</span></b></p><p><ul><li>Every enemy pays Souls in proportion to its <b>Danger Level</b>. Elites pay more per point of danger than regular enemies, so killing dangerous enemy always feels worth it.</li><li>I simulated every invasion in the Forest region wave-by-wave, enemy-by-enemy, to get the Souls each one pays. Later regions were projected from the same curve, then checked in players.</li><li>The level curve is tuned so players <b>reach the level cap of 30 at the final boss</b>, with the three region bosses as milestones along the way.</li></ul></p>"
+        },
+        {
+          "id": "b-7nczv5",
+          "type": "sheet",
+          "source": "file",
+          "sheetId": "17AmLLtet92lOAq8DaLgIoI_FPo7_6EVAqURGteR3Swk",
+          "height": "medium",
+          "gid": "1831419755"
         },
         {
           "id": "b-nmyulq",
           "type": "spacer",
-          "size": "md"
+          "size": "sm"
+        },
+        {
+          "id": "b-0m6vlf",
+          "type": "text",
+          "html": "<p><b><span class=\"big\">Victory Points (between runs)</span></b></p><p><ul><li>Players earn Victory Points for each map cleared, rising from 300 on the first maps to 1,400 on the last.</li><li>They spend them on four perk slots (18,000 VP in total) and on unlocking 20 items and 20 specs (4,200 VP).</li><li>Across the campaign, players earn 23,500 VP against 22,220 VP of sinks, finishing with a small surplus of about 1,300. That is enough to feel rewarded, not enough to buy everything early.</li></ul></p>"
+        },
+        {
+          "id": "b-ztjrya",
+          "type": "sheet",
+          "source": "file",
+          "sheetId": "17AmLLtet92lOAq8DaLgIoI_FPo7_6EVAqURGteR3Swk",
+          "height": "medium",
+          "gid": "2014154823"
+        },
+        {
+          "id": "b-7cmdmf",
+          "type": "spacer",
+          "size": "sm"
         }
       ]
     },
@@ -371,12 +405,12 @@
         {
           "id": "b-489ikr",
           "type": "text",
-          "html": "<p>Rather than flattening the heroes until they played alike, I kept them close in power and tuned the enemy archetypes against each hero's weaknesses. Each hero faces a different version of the same wave, so players change targets mid-fight and every hero keeps its identity.</p><p>• Sorted the roster into clear combat roles (tanks, ranged, brawlers), each with its own stat template in Data Tables, so players read a threat at a glance and learn its counter.</p>"
+          "html": "<p>Flattening five heroes until they played alike would have been the easy fix. Instead, I kept them close in raw power and tuned enemy archetypes against each hero's weaknesses, so each hero faces a different version of the same wave and players switch targets mid-fight.</p><p>I sorted the roster into readable combat roles (tanks, ranged, brawlers), each with its own stat template in Data Tables, so players can read a threat at a glance and learn its counter.</p>"
         },
         {
           "id": "b-mz9sys",
           "type": "spacer",
-          "size": "md"
+          "size": "sm"
         }
       ]
     },
@@ -394,12 +428,12 @@
         {
           "id": "b-d1hyd7",
           "type": "text",
-          "html": "<p>• Designed 40+ progression pieces ([30+ items, 10 perks], companions, skill-tree upgrades, tower unlocks), built on shared attribute modifiers in Data Tables so new content needed no custom code.</p><p>• Modelled levelling speed and unlock timing with curves in Sheets, then exported them to Data Tables.</p><p>• Tied key unlocks to specific stages (for example 1, 4 and 7), each introduced with a wave built to show off the new tower or trap.</p><p>• Rebalanced less-picked items and perks; later playtests showed players using a wider range.</p><p>• After playtests showed a late-game content drought, restructured the item and perk unlocks and moved tower milestones to line up with map transitions.</p>"
+          "html": "<p><ul><li>Designed 40 progression pieces, <b>20 items and 20 specs</b>, plus companions, skill-tree upgrades and tower unlocks, all built on shared attribute modifiers in Data Tables, so new content needed no custom code.</li><li>Modelled levelling speed and unlock timing as curves in Sheets, then exported them to Data Tables. Items and specs unlock between levels 3 and 9, so new options keep arriving through the first half of the campaign.</li><li>Tied key unlocks to specific stages (1, 4 and 7), each introduced by a wave built to show off the new tower or trap.</li><li>When playtests showed a late-game content drought, restructured item and spec unlocks and moved tower milestones to line up with map transitions.</li><li>Rebalanced under-picked items and specs; later playtests showed players using a wider range [add numbers if you have them].</li></ul></p>"
         },
         {
           "id": "b-0e8jpn",
           "type": "spacer",
-          "size": "md"
+          "size": "sm"
         }
       ]
     },
@@ -417,12 +451,12 @@
         {
           "id": "b-sr9vx2",
           "type": "text",
-          "html": "<p>I designed the tower-placement tutorial around situations players would actually meet, explained step by step, with room to try things rather than reading about mechanics in isolation. Onboarding ratings rose in playtests from 40% to 70%.</p><p><b><i><u>What was the problem and the solution??</u></i></b></p>"
+          "html": "<p><b><span class=\"big\">1. Problem</span></b></p><p>The original tutorial the explained tower placement as isolated steps not in a real scenario, using text panels&nbsp; front-loaded every mechanic. In playtests, only 40% of players rated onboarding positively, and describe the behaviour as click-to-do not to understand which made them fail in the following invasions and maps creating also frustration.</p><p><b><span class=\"big\">2. Cause</span></b></p><p>Players learned the mechanics out of context, so they couldn't connect them to the situations the game actually threw at them.</p><p><b><span class=\"big\">3. Fix</span></b></p><p>I rebuilt the tutorial around 2 real scenarios players meet in the first levels, each taught step by step with room to experiment: Players built in both sides of the map, each introducing unique and important enemies which deactivated or destroyed their towers, common enemies that would appear in the next map throughout the rest of the game.</p><p><b><span class=\"big\">4. Result</span></b></p><p>Positive onboarding ratings rose from 40% to 70% across playtest rounds. Surveys from players who played previously and the new tutorial indicated they could understand mechanics they had understood before and could increase their knowledge of the game mechanics.</p>"
         },
         {
           "id": "b-az0vm2",
           "type": "spacer",
-          "size": "md"
+          "size": "sm"
         }
       ]
     },
@@ -440,7 +474,12 @@
         {
           "id": "b-3gamil",
           "type": "text",
-          "html": "<p>Bosses should test how players adapt, not just soak damage. I designed four; three were implemented.</p><p>• Built multi-phase behaviour trees in Unreal; bosses switch between melee strings and ranged attacks depending on the player's distance.</p><p>• Worked with level design on arenas, and with animation and VFX on telegraphs.</p><p><br></p><p><b>Iteration:</b> The early bosses were designed without enough thought for the different heroes, so some heroes struggled badly. I changed attack ranges and damage and reshaped arenas with level design until each boss worked for all five.</p>"
+          "html": "<p>Bosses should test how players adapt, not just soak damage. I designed four; three were implemented.</p><p>• Built multi-phase behaviour trees in Unreal; bosses switch between melee strings and ranged attacks depending on the player's distance.</p><p>• Worked with level design on arenas, and with animation and VFX on telegraphs.</p><p><b>Iteration:</b> The early bosses were designed without enough thought for the different heroes, so some heroes struggled badly. I changed attack ranges and damage and reshaped arenas with level design until each boss worked for all five.</p>"
+        },
+        {
+          "id": "b-e7aqiy",
+          "type": "spacer",
+          "size": "sm"
         }
       ]
     },
@@ -470,7 +509,7 @@
         {
           "id": "b-jd2wjm",
           "type": "text",
-          "html": "<p><b>Problem:</b> In dense waves, too many enemies targeted the player at once. The screen became noisy and damage arrived without warning.</p><p><b>Fix:</b> A targeting cap with an aggro cooldown. Only a set number of enemies [X] can attack one player at a time; the rest go after the objectives.</p><p><b>Result:</b> Fights became readable again, and the overflow added a decision: protect yourself, or protect the base.</p>"
+          "html": "<p><b>Problem: </b>In dense waves, too many enemies targeted the player at once. The screen became noisy and damage arrived without warning.</p><p><b>Fix: </b>A targeting cap with an aggro cooldown. Only 3 enemies can attack one player at a time; the rest go for the objectives.</p><p><b>Result: </b>Fights became readable again, and the overflow added a decision: protect yourself, or protect the base.</p>"
         },
         {
           "id": "b-lz850v",
@@ -532,12 +571,12 @@
         {
           "id": "b-hlblay",
           "type": "text",
-          "html": "<p><b>Problem:</b> In endgame levels, players defend a core protected by power nodes. Telemetry showed that certain high-threat archetypes stripped the core's shields faster than players could react, creating an unfair difficulty spike.</p><p><b>Cause:</b> Those enemies arrived in numbers and all went straight for the nodes, with no warning.</p><p><b>Options Considered:</b> Lowering their damage, adding more defences, or slowing their spawn, was all options considered, although changing any of the options would highly impact other systems and the combat in general (most of the options was tested previously in the project which helped the team not to lose time).</p><p><br></p><p><b>Fix:</b></p><p>1. Reduced their numbers and added a shared targeting cap for node-attacking enemies.</p><p>2. Added traps and items that pull enemy focus away from the nodes.</p><p>3. Added a voice line when node threats spawn, so players can reposition in time.</p><p>Result: The next playtests showed the spike flattened and the level back to a steady defensive rhythm, moving from a failure rate of ~80% to ~40% which reduced frustration as well.</p>"
+          "html": "<p><b>Problem:</b> In endgame levels, players defend a core protected by power nodes. Telemetry showed that certain high-danger archetypes stripped the core's shields faster than players could react, creating an unfair difficulty spike.</p><p><b>Cause: </b>Those enemies arrived in numbers and all went straight for the nodes, with no warning.</p><p><br></p><p><b><span class=\"big\">Options Considered</span></b></p><p></p><ul><li><b>Lower their damage. </b>Rejected: it would weaken those archetypes everywhere else in the game.</li><li><b>Add more defences. </b>Rejected: it would inflate the economy and shift every other level's balance.</li><li><b>Slow their spawn rate. </b>Rejected: earlier tests showed it drained the endgame of pressure.</li><li><b>Change how they behave and warn the player. </b>Chosen: it fixed the spike without touching the wider combat balance.</li></ul><p></p><p>We had tested most of these earlier in the project, so the team could rule them out quickly.</p><p><br></p><p><b><span class=\"big\">Fix</span></b></p><p><ol><li>Reduced their numbers and added a shared targeting cap for node-attacking enemies.</li><li>Added traps and items that pull enemy focus away from the nodes.</li><li>Added a voice line when node threats spawn, so players can reposition in time.</li></ol><div><br></div></p><p><b><span class=\"big\">Result</span></b></p><p>In the next playtests the failure rate on that level fell from ~80% to ~40%, and the level returned to a steady defensive rhythm.</p>"
         },
         {
           "id": "b-jmmznt",
           "type": "spacer",
-          "size": "md"
+          "size": "sm"
         }
       ]
     },
@@ -555,7 +594,7 @@
         {
           "id": "b-k3l65g",
           "type": "text",
-          "html": "<p>I treated playtesting as a loop: focused test phases on specific features, new biomes and hero balance; surveys I wrote and ran; reports from external playtest agencies turned into design tasks.</p><p><b>What I Compared:</b></p>"
+          "html": "<p>I treated playtesting as a loop: focused test phases on specific features, new biomes and hero balance; surveys I wrote and ran; and reports from external playtest agencies turned into design tasks.</p>"
         },
         {
           "id": "b-f1ns23",
@@ -587,12 +626,12 @@
         {
           "id": "b-sp14gt",
           "type": "text",
-          "html": "<p>Cross-checking these let me act on what players did, not just what they said.</p><p>Across test rounds, survey scores rose about 60% from ~30% to ~50%.</p>"
+          "html": "<p>Cross-checking these let me act on what players did, not just what they said. Across test rounds, positive survey scores rose from ~30% to ~50%.</p>"
         },
         {
-          "id": "b-w1ypbw",
-          "type": "gallery",
-          "images": []
+          "id": "b-zuey6e",
+          "type": "spacer",
+          "size": "sm"
         }
       ]
     },
@@ -610,7 +649,7 @@
         {
           "id": "b-8pg35g",
           "type": "text",
-          "html": "<p>• Balance through enemies, not heroes. Harder to tune, since every archetype interacts with five heroes, but it kept each hero distinct.</p><p>• Targeting cap over lower enemy counts. Fewer enemies would have fixed readability but killed the feeling of a horde; the cap kept density and added a decision.</p><p>• Data tables over custom code. Slower to set up, but it let design rebalance without waiting for engineering.</p>"
+          "html": "<p><ul><li><b>Balance through enemies, not heroes.</b> Harder to tune, since every archetype interacts with five heroes, but it kept each hero distinct.</li><li><b>Targeting cap over lower enemy counts.</b> Fewer enemies would have fixed readability but killed the feeling of a horde; the cap kept density and added a decision.</li><li><b>Data Tables over custom code.</b> Slower to set up, but it let design rebalance without waiting for engineering.</li><li><b>Simulate one region in full, project the rest.</b> Modelling every wave of every region would have taken weeks. Simulating the Forest in detail set the curve, and playtests checked the projected regions.</li><li><b>Scope call,</b> cut the fourth boss to protect polish on the other three.</li></ul></p>"
         },
         {
           "id": "b-4zm5cm",
@@ -626,7 +665,7 @@
         {
           "id": "b-m52ybw",
           "type": "text",
-          "html": "<p>• 40+ waves, 3 bosses and 40+ progression pieces built and tuned in engine.</p><p>• Survey scores up about 60% and onboarding ratings up about 70% across playtest rounds.</p>"
+          "html": "<p><ul><li>40+ waves, 3 bosses and 40 progression pieces built and tuned in engine.</li><li>Level cap reached at the final boss; campaign economy ends with a ~6% Victory Points surplus.</li><li>Endgame core-defense failure rate cut from ~80% to ~40%.</li><li>Positive survey scores up from ~30% to ~50%; positive onboarding ratings up from 40% to 70%.</li></ul></p>"
         },
         {
           "id": "b-007v6l",
@@ -642,7 +681,7 @@
         {
           "id": "b-vcu3bg",
           "type": "text",
-          "html": "<p><b>What Worked:</b> Planning difficulty in spreadsheets before building, and triangulating telemetry with surveys.</p><p><b>What I'd do Differently:</b>&nbsp;Design bosses against all five heroes from the start; this is a must in order to avoid mistakes and ensure the gameplay will be delivered clearly to players.</p><p><b>What I Learned:</b> with several heroes, balancing through the enemies keeps each hero's identity; telemetry shows where players struggle, surveys explain why.</p>"
+          "html": "<p><b>What Worked:</b>&nbsp;Planning difficulty and both economies in spreadsheets before building, and cross-checking telemetry against surveys.</p><p><b>What I'd do Differently:</b>&nbsp;Test every boss design against all five heroes from the first draft. Fixing it late cost 3 weeks of rework across design, level design and animation.</p><p><b>What I Learned:</b>&nbsp;With several heroes, balancing through the enemies keeps each hero's identity. Telemetry shows where players struggle; surveys explain why.</p>"
         }
       ]
     }
