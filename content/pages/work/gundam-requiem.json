@@ -25,18 +25,18 @@
           "caption": "",
           "columns": [
             "Role",
-            "Team Size",
+            "Studio",
+            "Team",
             "Engine",
-            "Platform",
-            "My Focus"
+            "Platform"
           ],
           "rows": [
             [
-              "Game Designer",
+              "Game Designer - Project Manager",
+              "Big Moxi - Bandai Namco",
               "10",
               "UEFN",
-              "Fortnite",
-              "Mode Designㅤ|ㅤBalancingㅤ|ㅤUI/UX Designㅤ|ㅤProject Manager"
+              "Fortnite"
             ]
           ]
         },
@@ -52,7 +52,7 @@
         {
           "id": "b-dvodki",
           "type": "spacer",
-          "size": "md"
+          "size": "sm"
         }
       ]
     },
@@ -68,27 +68,23 @@
           "text": "My Role"
         },
         {
-          "id": "b-ejids6",
-          "type": "table",
-          "caption": "",
-          "columns": [
-            "",
-            ""
+          "id": "b-wq1h6i",
+          "type": "specs",
+          "items": [
+            {
+              "label": "Owned",
+              "value": "• Mode concept and pitch documents\n• Combat balance\n• UI and HUD design\n• Usability tests\n• Project management"
+            },
+            {
+              "label": "Co-Owned",
+              "value": "• Combat pacing and map features (with level design)\n• Cutscene documentation and storyboard (with concept art)"
+            },
+            {
+              "label": "Supported",
+              "value": "• Team production: documentation, presentations, progress reports\n• Animation, art and engineering on the cutscene"
+            }
           ],
-          "rows": [
-            [
-              "Owned",
-              "• Mode Concept and Pitch Documents\n• Combat Balance\n• UI and HUD Design\n• Usability Tests\n• Project Management"
-            ],
-            [
-              "Co-Owned",
-              "• Combat Pacing and Map Features (with Level Design) \n• Cutscene Documentation and Storyboard (with Concept Art)"
-            ],
-            [
-              "Supported",
-              "• Production for the Team: documentation, presentations, progress reports\n• Animation, Art and Engineering on the Cutscene"
-            ]
-          ]
+          "arrange": "stack"
         },
         {
           "id": "b-x3eosu",
@@ -98,12 +94,12 @@
         {
           "id": "b-s7vdd4",
           "type": "text",
-          "html": "<p></p><div><b><span class=\"big\">In Short</span></b></div><ul><li><b>What I Did:</b> Designed and pitched the mode with the IP partner, managed combat design and balance, designed the UI from scratch, ran usability tests, and supported production.</li><li><b>Hardest Problem:</b> UEFN didn't allow players to pilot a mech, which the brief depended on.</li><li><b>What it Shows:</b> Turning a technical limit into a design strength, and keeping an external partner aligned through documentation.</li></ul><p></p>"
+          "html": "<p></p><div><b><span class=\"big\">In Short</span></b></div><ul><li><b>What I Did:</b>&nbsp;The mode concept and pitch to the IP partner, combat balance, the UI/HUD and usability testing, plus production support for a 10-person team.</li><li><b>Hardest Problem:</b>&nbsp;UEFN didn't let players pilot a mech, and the brief depended on one. I made earning the mech the match itself.</li><li><b>What it Shows:</b>&nbsp;Turning a technical limit into the core hook, and keeping an external partner aligned through clear documentation.</li></ul><p></p>"
         },
         {
           "id": "b-f7stzh",
           "type": "spacer",
-          "size": "md"
+          "size": "sm"
         }
       ]
     },
@@ -121,7 +117,7 @@
         {
           "id": "b-4iwz3s",
           "type": "text",
-          "html": "<p>At the time, UEFN only let players control their own Fortnite character. Piloting a custom vehicle such as a mech wasn't possible, and the brief seemed to depend on it.<div>There were three obvious responses, and two were dead ends:</div></p>"
+          "html": "<p>The partner's brief asked for [a mech-centred competitive mode / players to feel the mech's scale]. At the time, UEFN only let players control their own Fortnite character, so piloting a custom vehicle such as a mech wasn't possible.</p><p>There were three obvious responses, and two were dead ends:</p><p></p>"
         },
         {
           "id": "b-iz5gc5",
@@ -129,16 +125,16 @@
           "caption": "",
           "columns": [
             "Option",
-            "Why Not"
+            "Verdict"
           ],
           "rows": [
             [
               "Wait for UEFN to support it",
-              "No date, and the partner had a schedule"
+              "Rejected: no date, and the partner had a schedule"
             ],
             [
               "Fake piloting with scripted movement",
-              "Would feel stiff and break the power fantasy"
+              "Rejected: it would feel stiff and break the power fantasy"
             ],
             [
               "Make earning the mech the game",
@@ -167,7 +163,7 @@
         {
           "id": "b-0kwabe",
           "type": "text",
-          "html": "<p>1. <b>The mech is a reward</b>, not a vehicle. Players fight to earn its power, and that fight is the match.</p><p>2. <b>Big moments change the map</b>. A mech strike should matter for the rest of the match, not just look good.</p><p>3. <b>Clear in the chaos</b>. Players always know the objective, who's winning and where the mech will strike.</p>"
+          "html": "<p>1. <b>The mech is a reward, not a vehicle. </b>Players fight to earn its power, and that fight is the match.</p><p>2. <b>Big moments change the map. </b>A mech strike should matter for the rest of the match, not just look good.</p><p>3. <b>Clear in the chaos. </b>Players always know the objective, who's winning and where the mech will strike.</p>"
         },
         {
           "id": "b-rpux2b",
@@ -249,7 +245,14 @@
         {
           "id": "b-63iqoi",
           "type": "text",
-          "html": "<p><b><span class=\"big\">Why it Works</span></b></p><p>• <b>The limit drives the match</b>. Teams must keep contesting objectives to earn the mech, so the constraint creates the action instead of slowing it.</p><p>• <b>Decisions that change the map</b>. The winning team chooses where the mech strikes, changing routes and fights from then on.</p><p>• <b>The power fantasy survives</b>. The activation sequence rewards the capture and shows the mech at full scale, with no piloting needed.</p>"
+          "html": "<p><b><span class=\"big\">Why it Works</span></b></p><p><ul><li><b>The limit drives the match.</b> Teams must keep contesting objectives to earn the mech, so the constraint creates the action instead of slowing it.</li><li><b>Decisions that change the map.</b> The winning team chooses where the mech strikes, changing routes and fights from then on.</li><li><b>The power fantasy survives.</b> The activation sequence rewards the capture and shows the mech at full scale, with no piloting needed.</li></ul></p>"
+        },
+        {
+          "id": "b-gqsxbr",
+          "type": "image",
+          "src": "/images/uploads/gd-04-a96e0b.webp",
+          "alt": "",
+          "caption": ""
         },
         {
           "id": "b-7tnpzn",
@@ -270,9 +273,9 @@
           "text": "What I Did"
         },
         {
-          "id": "b-et38u5",
+          "id": "b-d6fpvg",
           "type": "text",
-          "html": "<p><b><span class=\"big\">Pitch and Partnership</span></b></p><p>I wrote and pitched the mode's design documents to the external IP partner, keeping the brand's needs and the design pillars aligned through approval rounds. With a partner, documentation is how a design survives: every change had to be clear enough to approve without a meeting.</p><p><br></p><p><b><span class=\"big\">Combat and Level Design</span></b></p><p>I managed combat design and balanced the mode, and worked with level design on pacing, engagement routes and implementing gameplay features in the map.</p><p><br></p><p><b><span class=\"big\">Activation Cutscene</span></b></p><p>I wrote the cutscene's documentation and storyboard with concept artists, and coordinated animation, art and engineering to connect it to live gameplay without breaking the match's flow.</p><p><br></p><p><b><span class=\"big\">UI and HUD</span></b></p><p>I designed the UI and HUD from scratch with engineering, aiming to keep players oriented and objectives clear during heavy combat: who holds which point, how close each team is to the mech, and where it will strike.</p><p><br></p><p><b><span class=\"big\">Usability Tests and Production</span></b></p><p>I ran usability tests to make the mode clearer to players, and kept the team aligned with documentation, presentations and progress reports.</p>"
+          "html": "<p><ul><li><b>Pitch and Partnership:</b> I wrote the pitch and design documents and took them through 5+ approval rounds with the IP partner, keeping the brand's needs and the design pillars aligned. With an external partner, documentation is how a design survives: every change had to be clear enough to approve without a meeting.</li><li><b>Combat and Level Design:</b> I owned combat balance [e.g. weapon loadouts, capture times, respawn rules] and worked with level design on pacing, engagement routes and the [N] preset strike zones.</li><li><b>Activation Cutscene:</b> I wrote the cutscene documentation and storyboard with concept art, then coordinated animation, art and engineering so the cutscene hands back to live gameplay without breaking the match's flow.</li><li><b>UI and HUD:</b> I designed the UI and HUD from scratch with engineering to answer three questions at a glance during heavy combat: who holds each point, how close each team is to the mech, and where it will strike.</li><li><b>Usability Tests and Production:</b> I ran 4 usability test rounds with 10 players each, and kept the team aligned through documentation, presentations and progress reports.</li></ul></p>"
         },
         {
           "id": "b-ug21dk",
@@ -295,7 +298,7 @@
         {
           "id": "b-6eti7r",
           "type": "text",
-          "html": "<p>• <b>Problem:</b> Players didn't know which team was close to earning the mech.</p><p>• <b>Cause: Why:</b> It was missing a clear indication on the gameplay in general, diegetic or on HUD since players were focused on the shooting aspect of the gameplay.</p><p>• <b>Fix:</b> I remade the UI to keep its layout similar to Fortnite and Gundam pushing the values and shapes to make sure players had the information when and where they needed without compromising their gameplay.</p><p>• <b>Result:</b> Players had the knowledge of the game's score making them even change their strategy when the time and score were near to achieve the mech.</p>"
+          "html": "<p><ul><li><b>Problem:</b> In usability tests, players couldn't tell which team was close to earning the mech. [e.g. Asked mid-match, X of Y testers couldn't say who was leading.] The mech arrived as a surprise instead of a climax.</li><li><b>Cause:</b> Players were focused on shooting, and the score lived only in a small HUD element they never looked at. Nothing in the world signalled that the mech was getting close.</li></ul><div><b><br></b></div><div><b><span class=\"big\">Options Considered:</span></b></div><div><ul><li><b>Bigger score numbers.</b> Rejected: still easy to miss mid-fight, and it cluttered the screen.</li><li><b>Frequent announcer callouts.</b> Rejected: it would become noise over a long match.</li><li><b>Redesign the score display around Fortnite's own HUD</b> conventions, with cues that escalate near the threshold. Chosen.</li></ul><div><br></div></div><div><b>Fix:</b> I rebuilt the score UI to match the layout Fortnite players already know, with Gundam-styled shapes and colours. The display grows more prominent as a team nears the mech, and a world-space marker on the strike zone.</div><div><b><br></b></div><div><b>Result:</b> Players began changing strategy as the score neared the threshold, either pushing to close it out or swarming the leader's points to deny them. In the next tests, 7 of 10 testers could name the leading team.</div></p>"
         },
         {
           "id": "b-z3s7e2",
@@ -318,7 +321,7 @@
         {
           "id": "b-6vbdsa",
           "type": "text",
-          "html": "<p>• <b>Earned mech over fake piloting.</b> Players never steer the mech, which some fans might expect, but the mode gained a clear goal and kept its power fantasy.</p><p>• <b>Preset strike zones over free targeting.</b></p>"
+          "html": "<p></p><ul><li><b>Earned mech over fake piloting.</b> Players never steer the mech, which some fans may expect, but the mode gained a clear goal and kept its power fantasy.</li><li><b>Preset strike zones over free targeting.</b> Free targeting would have given players more control, but every possible strike would have needed to look good, stay balanced and run within UEFN's limits. [N] hand-built zones meant each strike reliably opened new routes, and level design could test every outcome.</li><li>Scope call, a short cutscene ~50s so the match never stalls.</li></ul><p></p>"
         },
         {
           "id": "b-riw731",
@@ -334,7 +337,7 @@
         {
           "id": "b-kin4m7",
           "type": "text",
-          "html": "<p><b>What Worked:</b> Turning the engine limit into the match's goal.</p><p><b>What I'd do Differently:</b>&nbsp;Prototype the strike zones before writing the cutscene, this took the team some time to align with the concept art, animation, and level design team.</p><p><b>What I Learned:</b> An engine limit can become the best idea in the design if you ask what it makes players do; with an external partner, clear documentation is the design.</p>"
+          "html": "<p><b>What Worked:</b>&nbsp;Turning the engine limit into the match's goal.</p><p><b>What I'd do Differently:</b>&nbsp;Prototype the strike zones before writing the cutscene. Building the cutscene first meant re-aligning concept art, animation and level design when the zones changed, which cost almost 2 weeks.</p><p><b>What I Learned:</b>&nbsp;An engine limit can become the best idea in the design if you ask what it makes players do. With an external partner, clear documentation is the design.</p>"
         }
       ]
     }
