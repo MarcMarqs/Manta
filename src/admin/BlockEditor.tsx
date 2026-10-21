@@ -1038,8 +1038,27 @@ function BlockFields({
             sheetId={block.sheetId}
             source={block.source}
             value={block.gid}
-            onChange={(gid) => onChange({ ...block, gid })}
+            onChange={(gid) => onChange({ ...block, gid, only: gid ? block.only : undefined })}
           />
+          {block.source === 'file' && (
+            <Field
+              label="How much of it"
+              hint={
+                !block.gid
+                  ? 'Choose a tab above first: there is nothing to show by itself yet.'
+                  : block.only
+                    ? 'That tab on its own, as a plain grid. No strip along the bottom, and nothing naming the other tabs.'
+                    : 'The whole file, with the strip along the bottom to move between tabs.'
+              }
+              wide
+            >
+              <Toggle
+                checked={Boolean(block.only && block.gid)}
+                label="Show only this tab"
+                onChange={(only) => onChange({ ...block, only: only || undefined })}
+              />
+            </Field>
+          )}
           <Field label="Caption" hint="Says what the reader is looking at." wide>
             <TextInput value={block.caption ?? ''} onChange={(v) => onChange({ ...block, caption: v || undefined })} />
           </Field>
@@ -1231,10 +1250,13 @@ function BlockFields({
                   value={isSpecs ? item.label : item.value}
                   onChange={(v) => edit(i, isSpecs ? { label: v } : { value: v })}
                 />
-                <TextInput
-                  value={isSpecs ? item.value : item.label}
-                  onChange={(v) => edit(i, isSpecs ? { value: v } : { label: v })}
-                />
+                {/* A value grows to the lines it is given: a credit list or a date range
+                    reads better broken than run together. A figure's caption stays one line. */}
+                {isSpecs ? (
+                  <Cell value={item.value} onChange={(v) => edit(i, { value: v })} />
+                ) : (
+                  <TextInput value={item.label} onChange={(v) => edit(i, { label: v })} />
+                )}
                 <IconButton
                   icon="trash"
                   label="Remove"

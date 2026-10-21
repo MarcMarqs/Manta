@@ -229,6 +229,12 @@ export type Block = BlockLayout & (
       sheetId: string;
       /** Which tab, as the gid from its address. Absent means whichever opens first. */
       gid?: string;
+      /**
+       * Show that one tab by itself, with no strip along the bottom to reach the others.
+       * Needs a tab chosen: there is no "only" without a which. The file's own sharing is
+       * unchanged, so this decides what the page offers, not what the file permits.
+       */
+      only?: boolean;
       /** Names the frame for screen readers, which otherwise announce only "iframe". */
       title?: string;
       caption?: string;

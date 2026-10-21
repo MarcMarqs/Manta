@@ -374,10 +374,29 @@ The tab is stored as a `gid` and carried in the address fragment, because that i
 Sheets reads: a `?gid=` query is accepted and then ignored, landing the reader on the
 first tab however carefully it was set.
 
+**Show only this tab** gives the reader that one tab and no way through the frame to the
+rest. The file view normally carries the whole workbook, strip along the bottom and all;
+with this on, the block embeds the single sheet as a plain grid, and the page Google
+serves names no other tab. It needs a tab chosen first -- there is no "only" without a
+which -- and the published grid is already single, so the switch appears for the file
+view alone.
+
+What it does not do is change the file. Anyone who has the spreadsheet's own address
+still opens all of it, because that is the sharing you set in Google and not something a
+page can take back. If the other tabs must stay unseen by anyone who comes looking, keep
+them in a different file.
+
 Either way the sheet is served by Google, inside a frame: it keeps its own light
 appearance and will not follow the site's dark theme. A sheet embedded on a private case
 study is still only as private as its own sharing — the password on the page does not
 reach inside the frame.
+
+## A spec strip that breaks its lines
+
+A value in the **Spec strip** keeps the lines it was given: press Enter in the value field
+and the break survives onto the page, in the strip and in the one-per-line arrangement
+alike. A role with two halves, a date range, two studios -- they read better stacked than
+run together with a slash. Labels stay single-line, which is what a label is.
 
 ## Picking tags out
 

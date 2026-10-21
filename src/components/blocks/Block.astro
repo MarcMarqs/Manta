@@ -68,6 +68,12 @@ const sheetSrc = (b: Extract<Block, { type: 'sheet' }>) => {
     if (gid) params.set('gid', gid);
     return `https://docs.google.com/spreadsheets/d/e/${id}/pubhtml?${params}`;
   }
+  // One tab by itself. /htmlembed renders a single sheet as plain HTML with no strip
+  // along the bottom, and the page it serves names no other tab -- the other gids that
+  // /preview carries are simply not in it. It needs the gid: single=true with nothing to
+  // be single about answers "page not found", so the whole file is the fallback rather
+  // than a broken frame.
+  if (b.only && gid) return `https://docs.google.com/spreadsheets/d/${id}/htmlembed?gid=${gid}&single=true`;
   // The tab goes in the fragment, not the query. /preview reads location.hash to pick
   // which sheet to load and ignores ?gid= entirely, so a query there silently lands the
   // reader on the first tab however carefully the gid was set.
@@ -878,6 +884,9 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
   .specs dd {
     margin: 0;
     font-weight: 500;
+    /* Written on two lines, read on two lines. pre-line keeps the breaks that were typed
+       and still collapses the stray spaces around them. */
+    white-space: pre-line;
   }
 
   .stats {
