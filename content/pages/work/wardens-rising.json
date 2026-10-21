@@ -75,41 +75,18 @@
           "items": [
             {
               "label": "Owned",
-              "value": "Difficulty pacing across the campaing"
+              "value": "· Difficulty pacing across the campaing\n· Souls and Victory Points economies\n· Skill-tree balancing\n· All 40+ waves in the in-house wave tool\n· Boss design and behaviour trees\n· Tutorial redesign\n· Balance documentation"
             },
             {
-              "label": "Studio",
-              "value": ""
+              "label": "Co-Owned",
+              "value": "· Economy and skill-tree structure\n· Progression unlock tables"
             },
             {
-              "label": "Engine",
-              "value": ""
+              "label": "Supported",
+              "value": "· Animation, VFX and level design on bosses and arenas\n· UI on the skill tree\n· Engineering on multiplayer\n· Production on roadmap and event builds"
             }
           ],
           "arrange": "stack"
-        },
-        {
-          "id": "b-341gm6",
-          "type": "table",
-          "caption": "",
-          "columns": [
-            "",
-            ""
-          ],
-          "rows": [
-            [
-              "Owned",
-              "• Difficulty pacing\n• Economy and Skill-Tree Balancing\n• 40+ waves in the in-house wave tool\n• Boss design and Behavior trees\n• Tutorial refactoration\n• Documentation"
-            ],
-            [
-              "Co-Owned",
-              "• The economy system and Skill-Tree creation\n• Progression unlock tables"
-            ],
-            [
-              "Supported",
-              "• Animation, VFX, and Level Design on Bosses and Arenas\n• UI on the Skill Tree\n• Engineering on Multiplayer\n• Production on roadmap and event builds"
-            ]
-          ]
         },
         {
           "id": "b-mtm5tg",
@@ -119,7 +96,7 @@
         {
           "id": "b-rjtpwj",
           "type": "text",
-          "html": "<p></p><div><b><span class=\"big\">In Short</span></b></div><ul><li><b>What I Owned:</b>&nbsp;Difficulty, economy and skill-tree balancing; every wave; boss design and behaviour; the tutorial.</li><li><b>Hardest Problem:</b>&nbsp;An endgame spike where enemies broke the core faster than players could react. Fixed with a targeting cap, counter-traps and an audio warning.</li><li><b>What it Shows:</b>&nbsp;Balancing many heroes through the enemies instead of flattening them, and making changes from telemetry, not opinion.</li></ul><p></p>"
+          "html": "<p></p><div><b><span class=\"big\">In Short</span></b></div><ul><li><b>What I Owned:</b>&nbsp;Difficulty, both economies (in-run Souls and between-run Victory Points), skill-tree balance, every wave, boss design and behaviour, and the tutorial.</li><li><b>Hardest Problem:</b>&nbsp;An endgame spike where enemies stripped the core's shields faster than players could react. A targeting cap, counter-traps and an audio warning cut the failure rate from ~80% to ~40%.</li><li><b>What it Shows:</b>&nbsp;Keeping five heroes distinct by balancing through the enemies, and making changes from models and telemetry rather than opinion.</li></ul><p></p>"
         },
         {
           "id": "b-20tnhs",
@@ -142,7 +119,7 @@
         {
           "id": "b-cb98jz",
           "type": "text",
-          "html": "<p>• <b>Five very different heroes</b>, each needing to feel strong without one becoming the default pick.</p><p>• <b>Co-op had to work with the same waves</b>, independent of the player count.</p><p>• <b>Engineering time was limited</b>, so systems had to be data-driven: balance changes in tables, not code.</p><p>• <b>High enemy density</b> stressed both readability and performance.</p><p></p>"
+          "html": "<p>• <b>Five very different heroes, </b>each needing to feel strong without one becoming the default pick</p><p>• <b>Co-op had to work with the same waves, </b>whatever the player count.</p><p>• <b>Engineering time was limited, </b>so systems had to be data-driven: balance changes in tables, not code.</p><p>• <b>High enemy density </b>stressed both readability and performance.</p><p></p>"
         },
         {
           "id": "b-2iubl1",
@@ -156,38 +133,39 @@
           "text": "Design Goals"
         },
         {
-          "id": "b-ww480o",
-          "type": "text",
-          "html": "<p>The goals that guided my decisions.</p>"
-        },
-        {
           "id": "b-nrg9t5",
           "type": "table",
           "caption": "",
           "columns": [
             "Goal",
-            "How We Checked It"
+            "How We Checked It",
+            "Result\n"
           ],
           "rows": [
             [
               "No hero is clearly weaker",
-              "Hero pick rates and win rates in telemetry"
+              "Hero pick rates and win rates in telemetry",
+              "[e.g. pick-rate spread X–Y%, down from A–B%]"
             ],
             [
               "Difficulty rises with clear peaks and relief",
-              "Planned curve vs death heatmaps per wave"
+              "Planned curve vs death heatmaps per wave",
+              "[result]"
             ],
             [
-              "Money is always slightly short of what's needed",
-              "Income per stage vs cost of the defences each wave demands"
+              "Currency is always slightly short of what's needed",
+              "Souls and Victory Points earned vs spent, per map",
+              "Campaign ends with a ~1,300 VP surplus out of 23,500 earned (~6%)"
             ],
             [
               "Players can read what's attacking them",
-              "Playtest surveys and recordings"
+              "Playtest surveys and recordings",
+              "[result]"
             ],
             [
-              "New content keeps arriving into the late game",
-              "Unlock timing vs session length and drop-off"
+              "Players hit the level cap at the end, not before",
+              "Simulated Souls per invasion vs the level curve",
+              "Level 30 reached at the final boss"
             ]
           ]
         },
