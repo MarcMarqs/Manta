@@ -516,7 +516,38 @@
         {
           "id": "b-u1qh9t",
           "type": "text",
-          "html": "<p>All combat actions draw from one battery of <b>200 stamina</b>: a dodge costs 25, a second of sprinting costs 30, and each weapon sets its own attack costs.</p><p>Heavy attacks are priced with a single coefficient, Interest:</p><p><span style=\"background-color: rgb(210, 96, 96);\">Heavy Cost = Light Cost * Heavy Multiplier * Interest</span></p>"
+          "html": "<p>All combat actions draw from one battery of <b>200 stamina</b>: a dodge costs 25, a second of sprinting costs 30, and each weapon sets its own attack costs.</p><p>Heavy attacks are priced with a single coefficient, Interest:</p><p><span style=\"background-color: rgb(210, 96, 96);\">Heavy Cost = Light Cost * Heavy Multiplier * Interest</span></p><p><br></p><p>Because heavy damage only scales by the Heavy Multiplier, Interest is exactly how much less stamina-efficient a heavy is than a light. At 1.52, a heavy deals its damage at 52% more stamina per point. At 1.20, the premium is only 20%. Interest is the price of burst, and it's set per weapon class.</p>"
+        },
+        {
+          "id": "b-s47j1t",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "Weapon Class",
+            "Light Attacks per Charge",
+            "Heavy Attacks per Charge",
+            "Heavy Premium (Interest)"
+          ],
+          "rows": [
+            [
+              "A (Light / Cheap)",
+              "4.3",
+              "2.5",
+              "1.45 - 1.52"
+            ],
+            [
+              "B / C (Heavy / Committed)",
+              "2.4",
+              "1.4",
+              "1.20 - 1.25"
+            ],
+            [
+              "D / E (Mid)",
+              "3.2 - 3.3",
+              "1.6 - 1.9",
+              "1.40 - 1.48"
+            ]
+          ]
         },
         {
           "id": "b-h5sl2k",
