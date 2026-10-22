@@ -1020,6 +1020,42 @@ input[type='range'] {
   line-height: 1.45;
 }
 
+/* Code and formula, matching what Block.astro draws on the page. A formula is not set
+   in the code face on purpose: monospace says "type this in", italic serif says "these
+   are quantities", and a damage equation is the second thing rather than the first. */
+.richtext-body code {
+  font-family: var(--e-font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 0.88em;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--e-surface);
+}
+
+.richtext-body .math {
+  font-family: Cambria, 'Times New Roman', Georgia, serif;
+  font-style: italic;
+  font-size: 1.06em;
+  letter-spacing: 0.01em;
+}
+
+/* The colour a button would apply, as a bar beneath its icon. */
+.colour-swatch {
+  position: relative;
+  display: inline-flex;
+}
+
+.colour-swatch::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  bottom: 3px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--swatch);
+  pointer-events: none;
+}
+
 /* --- block list --- */
 
 .block-list {

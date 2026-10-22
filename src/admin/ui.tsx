@@ -43,6 +43,7 @@ const paths: Record<string, string> = {
   highlight: 'M2.5 13.5h11M4.5 10.5l5.5-5.5 2 2-5.5 5.5h-2zM9.5 3.5l1-1 2 2-1 1',
   textColour: 'M3 11.5L6.5 2.5l3.5 9M4.3 9h4.4M2.5 14h11',
   bigger: 'M2 11.5L5 3l3 8.5M3 9h4M10 11.5V6M8 7.5L10 5.5l2 2',
+  math: 'M2.5 4.5h5l-3 7M9 5.5l4 5M13 5.5l-4 5M2.5 13.5h3',
   alignLeft: 'M2.5 4h11M2.5 8h7M2.5 12h9',
   alignCenter: 'M2.5 4h11M4.5 8h7M3.5 12h9',
   alignRight: 'M2.5 4h11M6.5 8h7M4.5 12h9',
@@ -327,8 +328,22 @@ export interface LinkOption {
   href: string;
 }
 
-const IS_MARK = (el: HTMLElement) => el.tagName === 'MARK';
-const IS_BIG = (el: HTMLElement) => el.classList.contains('big');
+/**
+ * The toggles, and how to tell the selection already has one.
+ *
+ * Kept as a list rather than four booleans threaded through three places: adding one
+ * used to mean editing the state shape, the selectionchange reader and the handler that
+ * runs after a wrap, which is how a toggle ends up lighting for one of them and not the
+ * others.
+ */
+const TOGGLES = {
+  mark: { tag: 'mark', className: undefined as string | undefined, is: (el: HTMLElement) => el.tagName === 'MARK' },
+  big: { tag: 'span', className: 'big', is: (el: HTMLElement) => el.classList.contains('big') },
+  code: { tag: 'code', className: undefined as string | undefined, is: (el: HTMLElement) => el.tagName === 'CODE' },
+  math: { tag: 'span', className: 'math', is: (el: HTMLElement) => el.classList.contains('math') },
+};
+type ToggleName = keyof typeof TOGGLES;
+const NONE_ON = { mark: false, big: false, code: false, math: false };
 
 /** The nearest ancestor of a node that the test accepts, stopping at the editor itself. */
 function enclosing(node: Node, root: HTMLElement, match: (el: HTMLElement) => boolean) {
@@ -526,10 +541,17 @@ export function RichText({
   const ref = useRef<HTMLDivElement>(null);
   const savedRange = useRef<Range | null>(null);
   const [linking, setLinking] = useState<{ href: string; text: string } | null>(null);
-  const [on, setOn] = useState({ mark: false, big: false });
+  const [on, setOn] = useState<Record<ToggleName, boolean>>(NONE_ON);
 
-  // The two toggles light up for the text the caret is in, so pressing one visibly
-  // does something even where the formatting itself is quiet.
+  // The toggles light up for the text the caret is in, so pressing one visibly does
+  // something even where the formatting itself is quiet.
+  const readToggles = (root: HTMLElement, node: Node) =>
+    setOn(
+      Object.fromEntries(
+        Object.entries(TOGGLES).map(([name, t]) => [name, !!enclosing(node, root, t.is)]),
+      ) as Record<ToggleName, boolean>,
+    );
+
   useEffect(() => {
     const read = () => {
       const root = ref.current;
@@ -537,7 +559,7 @@ export function RichText({
       if (!root || !selection || !selection.rangeCount) return;
       const node = selection.getRangeAt(0).commonAncestorContainer;
       if (!root.contains(node)) return;
-      setOn({ mark: !!enclosing(node, root, IS_MARK), big: !!enclosing(node, root, IS_BIG) });
+      readToggles(root, node);
     };
     document.addEventListener('selectionchange', read);
     return () => document.removeEventListener('selectionchange', read);
@@ -568,14 +590,13 @@ export function RichText({
     emit();
   };
 
-  const wrap = (tag: string, className: string | undefined, match: (el: HTMLElement) => boolean) => {
-    if (!ref.current) return;
-    ref.current.focus();
-    wrapSelection(ref.current, tag, className, match);
-    setOn({
-      mark: !!enclosing(getSelection()?.getRangeAt(0).commonAncestorContainer ?? ref.current, ref.current, IS_MARK),
-      big: !!enclosing(getSelection()?.getRangeAt(0).commonAncestorContainer ?? ref.current, ref.current, IS_BIG),
-    });
+  const toggle = (name: ToggleName) => {
+    const root = ref.current;
+    if (!root) return;
+    const { tag, className, is } = TOGGLES[name];
+    root.focus();
+    wrapSelection(root, tag, className, is);
+    readToggles(root, getSelection()?.getRangeAt(0).commonAncestorContainer ?? root);
     emit();
   };
 
@@ -625,15 +646,17 @@ export function RichText({
           onPick={(hex) => paint('color', hex)}
           onClear={() => paint('color', null)}
         />
-        <IconButton icon="highlight" label="Highlight" active={on.mark} onClick={() => wrap('mark', undefined, IS_MARK)} />
+        <IconButton icon="highlight" label="Highlight" active={on.mark} onClick={() => toggle('mark')} />
         <ColourButton
-          icon="chevron"
+          icon="highlight"
           label="Highlight colour"
           against="text"
           onPick={(hex) => paint('backgroundColor', hex)}
           onClear={() => paint('backgroundColor', null)}
         />
-        <IconButton icon="bigger" label="Bigger text" active={on.big} onClick={() => wrap('span', 'big', IS_BIG)} />
+        <IconButton icon="code" label="Code" active={on.code} onClick={() => toggle('code')} />
+        <IconButton icon="math" label="Formula" active={on.math} onClick={() => toggle('math')} />
+        <IconButton icon="bigger" label="Bigger text" active={on.big} onClick={() => toggle('big')} />
         <IconButton icon="link" label="Link" onClick={openLink} />
         <IconButton icon="list" label="Bullet list" onClick={() => exec('insertUnorderedList')} />
         <IconButton icon="olist" label="Numbered list" onClick={() => exec('insertOrderedList')} />
@@ -698,9 +721,14 @@ function ColourButton({
   const onLight = reading(theme?.bg, theme?.fg);
   const onDark = reading(theme?.bgDark, theme?.fgDark);
 
+  // A bar of the colour under the icon. Two of these sit in the toolbar and an icon
+  // alone did not say which was which, nor what either was set to: a row of grey glyphs
+  // reads as formatting in general rather than as a colour waiting to be chosen.
   return (
     <span class="colour-btn">
-      <IconButton icon={icon} label={label} active={open} onClick={() => setOpen(!open)} />
+      <span class="colour-swatch" style={`--swatch:${hex}`}>
+        <IconButton icon={icon} label={label} active={open} onClick={() => setOpen(!open)} />
+      </span>
       {open && (
         <div class="colour-pop" onMouseDown={(e) => e.preventDefault()}>
           <div class="row">

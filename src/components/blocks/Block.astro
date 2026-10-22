@@ -1098,6 +1098,16 @@ const embedSrc = (b: Extract<Block, { type: 'video' }>) =>
     padding: 0.1em 0.2em 0.02em;
   }
 
+  /* A formula inside a sentence. Set in a serif italic rather than the code face: the
+     two look alike from a distance and mean different things, and a line like
+     "Heavy = Light x Multiplier" is a quantity to be read, not a string to be typed. */
+  .rich :global(.math) {
+    font-family: Cambria, 'Times New Roman', Georgia, serif;
+    font-style: italic;
+    font-size: 1.06em;
+    letter-spacing: 0.01em;
+  }
+
   /* A raised passage: the line it sits in has to grow with it, or it crowds the line above. */
   .rich :global(.big) {
     font-size: 1.18em;
