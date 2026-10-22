@@ -250,7 +250,7 @@
         {
           "id": "b-ph80on",
           "type": "text",
-          "html": "<p>Every weapon runs through the same three steps, so a new weapon is a row in a table, not new code.</p><p><br></p><p><ol><li><b>Level scaling:</b> <mark>Leveled Damage = Base Damage * (Weapon Level / 10 / 1)</mark></li><li><b>Material split:</b> each weapon converts a share of its damage into Cut (strong against plush) and Impact (strong against plastic). Effective damage is the leveled damage plus the matching share.</li><li><b>Heavy attacks:</b> <mark>Heavy Damage = Light Damage * Heavy Multiplier</mark></li></ol></p>"
+          "html": "<p>Every weapon runs through the same three steps, so a new weapon is a row in a table, not new code.</p><p><br></p><p></p><ol><li><b>Level scaling:</b> <code><span class=\"math\">Leveled Damage = Base Damage * (Weapon Level / 10 / 1)</span></code></li><li><b>Material split:</b> each weapon converts a share of its damage into Cut (strong against plush) and Impact (strong against plastic). Effective damage is the leveled damage plus the matching share.</li><li><b>Heavy attacks:</b> <span class=\"math\"><code>Heavy Damage = Light Damage * Heavy Multiplier</code></span></li></ol><p></p>"
         },
         {
           "id": "b-arh9po",
@@ -516,7 +516,7 @@
         {
           "id": "b-u1qh9t",
           "type": "text",
-          "html": "<p>All combat actions draw from one battery of <b>200 stamina</b>: a dodge costs 25, a second of sprinting costs 30, and each weapon sets its own attack costs.</p><p>Heavy attacks are priced with a single coefficient, Interest:</p><p><span style=\"background-color: rgb(210, 96, 96);\">Heavy Cost = Light Cost * Heavy Multiplier * Interest</span></p><p><br></p><p>Because heavy damage only scales by the Heavy Multiplier, Interest is exactly how much less stamina-efficient a heavy is than a light. At 1.52, a heavy deals its damage at 52% more stamina per point. At 1.20, the premium is only 20%. Interest is the price of burst, and it's set per weapon class.</p>"
+          "html": "<p>All combat actions draw from one battery of <b>200 stamina</b>: a dodge costs 25, a second of sprinting costs 30, and each weapon sets its own attack costs.</p><p>Heavy attacks are priced with a single coefficient, Interest:</p><p><code><span class=\"math\">Heavy Cost = Light Cost * Heavy Multiplier * Interest</span></code></p><p><br></p><p>Because heavy damage only scales by the Heavy Multiplier, Interest is exactly how much less stamina-efficient a heavy is than a light. At 1.52, a heavy deals its damage at 52% more stamina per point. At 1.20, the premium is only 20%. Interest is the price of burst, and it's set per weapon class.</p>"
         },
         {
           "id": "b-s47j1t",
@@ -550,6 +550,14 @@
           ]
         },
         {
+          "id": "b-28ecsp",
+          "type": "sheet",
+          "source": "file",
+          "sheetId": "1nrn_Xw4B_lxcAcZz5l3CEKWURYriUSIu67kp1TQ7_dM",
+          "height": "medium",
+          "gid": "303510068"
+        },
+        {
           "id": "b-h5sl2k",
           "type": "spacer",
           "size": "sm"
@@ -565,42 +573,62 @@
           "id": "b-g8tp1a",
           "type": "heading",
           "level": 2,
-          "text": "Iteration Case: Cutting a Weapon Type to Protect Scope"
-        },
-        {
-          "id": "b-bu3npx",
-          "type": "systemMap",
-          "arrange": "layered",
-          "caption": "Cutting one weapon type kept variety and saved enemy production",
-          "nodes": [
-            {
-              "id": "a",
-              "label": "Before: 4 Weapon Types",
-              "note": "• Each type needs enemies that test it\n• Enemy count grows beyond the team's size\n• Fights interesting, scope at risk"
-            },
-            {
-              "id": "b",
-              "label": "After: 3 Weapon Types",
-              "accent": true,
-              "note": "• More weapons within each type\n• Fewer enemies to produce\n• Each enemy harder and more interesting",
-              "layer": 1
-            }
-          ],
-          "links": [
-            {
-              "from": "a",
-              "to": "b",
-              "label": "cut one type"
-            }
-          ]
+          "text": "4. Hit-to-Kill Model"
         },
         {
           "id": "b-f5q5o5",
           "type": "text",
-          "html": "<p><b>Problem:</b> 4 weapon types made combat interesting, but every type needed enemies that tested it. The number of enemies the team would have to produce grew beyond what a small team could make.</p><p><b>Fix:</b> I cut one weapon type, going from 4 to 3, and added more weapons within each remaining type.</p><p><b>Result:</b> Fewer enemies to produce, and each one could be harder and more interesting, while weapon variety stayed high.</p>"
+          "html": "<p>Damage numbers only matter as hits. For every weapon and enemy, I converted damage into hits to kill and stamina to kill, which is how players actually feel the balance.</p>"
         },
         {
           "id": "b-qy8u4d",
+          "type": "spacer",
+          "size": "sm"
+        },
+        {
+          "id": "b-nisimv",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "Weapon",
+            "vs Plush Goblin (46 HP)",
+            "vs Plastic Goblin (70 HP)"
+          ],
+          "rows": [
+            [
+              "Rambo",
+              "4 light / 4 heavy",
+              "5 light / 5 heavy"
+            ],
+            [
+              "Mushroom Pencil",
+              "4 / 4",
+              "5 / 4"
+            ],
+            [
+              "Megazord Sword",
+              "2 / 2",
+              "4 / 3"
+            ],
+            [
+              "Chapolin Hammer",
+              "3 / 2",
+              "3 / 2"
+            ],
+            [
+              "Pencil",
+              "3 / 2",
+              "5 / 4"
+            ],
+            [
+              "Separated Scissors",
+              "2 / 2",
+              "5 / 4"
+            ]
+          ]
+        },
+        {
+          "id": "b-ir3rz0",
           "type": "spacer",
           "size": "sm"
         }
@@ -615,15 +643,171 @@
           "id": "b-g8qznc",
           "type": "heading",
           "level": 2,
-          "text": "Other Contributions"
+          "text": "5. Fifteen Enemies, One Standard"
         },
         {
           "id": "b-cksdnj",
           "type": "text",
-          "html": "<p><b>• Climb Mechanic: </b>Designed with level design and engineering to solve level layout problems. The metric of the character and the level made it difficult to pace the combat, so we designed a inverse stamina system that could help players in combat and to build their own traversal paths solving the metric and pacing problems.</p><p><b>• Boss Fight: </b>Designed with game design, level design and engineering. ASSET: a boss concept or arena sketch.</p><p><b>• Character Creation: </b>Designed the system and its UI in Adobe XD with UI and engineering. ASSET: one Adobe XD screen.</p><p><b>• Progression and Economy: </b>Designed player and item progression and the economy.</p>"
+          "html": "<p><ul><li><b>Material reads at a glance.</b> Plush enemies are soft, stitched and fuzzy; plastic enemies are glossy, jointed and hard-edged. Players should know which weapon to bring before the first hit.</li><li><b>Every attack is telegraphed.</b> Wind-ups are longer than the dodge window, and paired with a sound cue, so a hit taken is a mistake the player can see.</li><li><b>One job per enemy.</b> Each archetype tests one skill: dodging, spacing, target priority, stamina management or weapon choice. Two enemies that test the same skill have to differ in material or pressure.</li><li><b>Punish windows match the stamina economy.</b> After a committed attack, each enemy leaves a window long enough for at least one light attack, and big attacks leave room for a heavy.</li><li><b>Fits a hit-count band.</b> Enemy HP is tuned to a target number of hits with the right weapon (fodder 2–3, standard 3–5, elite 6–10), so the hit-to-kill model can check every enemy.</li></ul></p><p>Fair in a group. Every enemy has a role in a pack, and a shared aggro cap stops more than two from attacking the player at once.</p>"
         },
         {
           "id": "b-itb2rr",
+          "type": "spacer",
+          "size": "sm"
+        },
+        {
+          "id": "b-4x42ye",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "#",
+            "Archetype",
+            "Material",
+            "HP",
+            "Weak to",
+            "Tier",
+            "Role in Combat"
+          ],
+          "rows": [
+            [
+              "1",
+              "Green Goblin",
+              "Plush",
+              "46",
+              "Cut",
+              "Standard",
+              "Basic melee. Teaches the dodge and the light-attack punish."
+            ],
+            [
+              "2",
+              "Purple Goblin",
+              "Plastic",
+              "70",
+              "Impact",
+              "Standard",
+              "The Green Goblin in a hard shell. Teaches that material decides weapon choice."
+            ],
+            [
+              "3",
+              "Lint Mite",
+              "Plush",
+              "15",
+              "Cut",
+              "Fodder",
+              "Fast, weak swarmer that comes in groups of 4 - 6. Tests sweeping attacks and stamina discipline."
+            ],
+            [
+              "4",
+              "Toy Soldier",
+              "Plastic",
+              "55",
+              "Impact",
+              "Standard",
+              "Ranged rifleman that keeps its distance. Teaches closing gaps and target priority."
+            ],
+            [
+              "5",
+              "Wind-Up Mouse",
+              "Plastic",
+              "30",
+              "Impact",
+              "Fodder",
+              "Charges in a straight line until its key runs down, then stops briefly. Teaches sidestepping and timing."
+            ],
+            [
+              "6",
+              "Rag Doll",
+              "Plush",
+              "60",
+              "Cut",
+              "Standard",
+              "Floppy, erratic melee with off-beat timing. Teaches reading animation instead of rhythm."
+            ],
+            [
+              "7",
+              "Jack-in-the-Box",
+              "Plastic",
+              "50",
+              "Impact",
+              "Standard",
+              "Hides in its box and springs out when the player gets close. Teaches baiting an attack before committing."
+            ],
+            [
+              "8",
+              "Patchwork Bear",
+              "Plush",
+              "140",
+              "Cut",
+              "Elite",
+              "Slow tank with long combos. Tests stamina management in a drawn-out fight."
+            ],
+            [
+              "9",
+              "Building-Block Golem",
+              "Plastic",
+              "160",
+              "Impact",
+              "Elite",
+              "Loses a block with each heavy hit, getting faster as it shrinks. Rewards heavy attacks."
+            ],
+            [
+              "10",
+              "Pincushion",
+              "Plush",
+              "50",
+              "Cut",
+              "Standard",
+              "Fires needles from range, and punishes attacks from the front with a spike burst. Teaches flanking."
+            ],
+            [
+              "11",
+              "Marionette",
+              "Plush",
+              "45",
+              "Cut",
+              "Standard",
+              "Moves only while its strings are attached; cutting them stuns it. Rewards cut weapons with a second use."
+            ],
+            [
+              "12",
+              "Bobblehead",
+              "Plastic",
+              "40",
+              "Impact",
+              "Fodder",
+              "Its head wobbles when hit, briefly confusing nearby enemies. Teaches crowd control through positioning."
+            ],
+            [
+              "13",
+              "Music-Box Dancer",
+              "Plastic",
+              "65",
+              "Impact",
+              "Standard",
+              "Spins in timed circles while its music plays. Teaches listening for the attack rhythm."
+            ],
+            [
+              "14",
+              "Sock Puppet",
+              "Plush",
+              "35",
+              "Cut",
+              "Fodder",
+              "Grabs and holds the player, draining stamina until they mash free. Teaches staying out of reach."
+            ],
+            [
+              "15",
+              "Stuffing Shaman",
+              "Plush",
+              "75",
+              "Cut",
+              "Elite",
+              "Support caster that re-stitches nearby plush enemies. Teaches target priority in mixed packs."
+            ]
+          ]
+        },
+        {
+          "id": "b-0vh2n8",
           "type": "spacer",
           "size": "sm"
         }
@@ -638,12 +822,12 @@
           "id": "b-ehmb60",
           "type": "heading",
           "level": 2,
-          "text": "Decisions and Trade-Offs"
+          "text": "Iteration Case: Heavy Attacks That Didn't Pay"
         },
         {
           "id": "b-zswkxi",
           "type": "text",
-          "html": "<p><b>• Fewer weapon types, deeper enemies. </b>Less breadth in the arsenal, but a roster the team could actually build.</p><p><b>• Mixed damage over hard counters. </b>Weaker \"perfect counter\" moments, but no fight ever becomes impossible with the wrong weapon.</p><p><b>• Rules before roster. </b>Slower to start, but 15 archetypes stayed consistent and readable.</p>"
+          "html": "<b>Problem: </b>The hit-to-kill model showed heavy attacks were often a trap. In 5 of the 12 weapon-and-enemy matchups, a heavy attack killed in the same number of hits as a light one while costing about 1.7× the stamina. No matchup made a heavy cheaper per kill.<div><b><br></b></div><div><b>Cause: </b>The model's own check was measuring the wrong thing. It compared the light-to-heavy ratio against Interest alone, but the cost formula multiplies by the Heavy Multiplier too, so every weapon failed the check by design. Meanwhile, the Heavy Multipliers (1.10–1.42) were too small to save a hit on low-HP enemies.</div><div><br></div><div><b><span class=\"big\">Options Considered:</span></b></div><div><ul><li><b>Lower heavy costs across the board.</b> Rejected: heavies would replace lights, and stamina management would disappear.</li><li><b>Raise every Heavy Multiplier.</b> Rejected: heavies would trivialise high-HP enemies.</li><li><b>Fix the check, then tune heavies by breakpoint.</b> Chosen: measure stamina per kill instead of a ratio, and give each heavy a hit-count breakpoint where it saves a hit on the enemies it's meant for.</li></ul><div><br></div></div><div><b>Fix:</b> Heavy Multipliers raised on class A weapons so heavies cross the 3-hit breakpoint on plush enemies. Heavies gained a stagger so they pay off against plastic even without saving a hit.</div><div><br></div><div><b>Result:</b> Heavies now save at least one hit in 6 of 12 matchups, and playtesters used them 50% of the time.</div>"
         },
         {
           "id": "b-2z5yiy",
@@ -661,17 +845,32 @@
           "id": "b-et5vy9",
           "type": "heading",
           "level": 2,
-          "text": "Looking Back"
+          "text": "Decisions and Trade-Offs"
         },
         {
           "id": "b-2x7yjf",
           "type": "text",
-          "html": "<p><b>What Worked: </b>Writing the enemy rules first, and modelling hits-to-kill before building fights.</p><p><b>What I'd do Differently: </b>Check content cost earlier, before designing four weapon types.</p><p><b>What I Learned: </b>In combat systems, every new option multiplies the content needed elsewhere, so scope is a design decision too.</p>"
+          "html": "<p><b>One shared formula over hand-tuned weapons.</b> Less freedom per weapon, but every number can be traced and a new weapon is a single row.</p><p><b>Two materials over a full damage-type system. </b>Shallower than elemental systems, but readable at a glance in a toy world, and it still forces a weapon choice.</p><p><b>Stamina as a battery, not regeneration.</b>&nbsp;Batteries make stamina a resource players plan around, at the cost of a slower pace.</p>"
         },
         {
           "id": "b-7joh2m",
           "type": "spacer",
           "size": "sm"
+        },
+        {
+          "id": "b-z0rzvu",
+          "type": "text",
+          "html": "<p><b><span class=\"big\">Results</span></b></p><p><ul><li>6 weapons across 5 classes and 15 enemy archetypes, all driven by one damage formula and one stamina model.</li><li>A hit-to-kill and stamina-per-kill model covering every weapon-and-enemy matchup.</li></ul></p>"
+        },
+        {
+          "id": "b-ppngpn",
+          "type": "spacer",
+          "size": "sm"
+        },
+        {
+          "id": "b-cnm7u2",
+          "type": "text",
+          "html": "<p><b><span class=\"big\">Looking Back</span></b></p><p><b>What Worked:</b> Modelling hits and stamina per kill, not raw damage. It's what players feel, and it caught the heavy-attack problem before playtests did.</p><p><b>What I'd Do Differently:</b> Define each balance check in player terms (hits, stamina per kill) from the start, rather than as abstract ratios.</p><p><b>What I Learned:</b> In a stamina game, every damage number is also a price. Balance the price, and the damage follows.</p>"
         }
       ]
     }
