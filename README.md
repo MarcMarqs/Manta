@@ -225,7 +225,16 @@ preview on the right rendered by the site's own components, so what you see is w
   light theme and the dark one — a coloured word against the page it sits on, a highlight
   against the text that sits on it — so a choice that disappears in one theme says so
   before it ships. The numbers inform, they do not refuse; **None** takes the colour off
-  again without touching the bold, links or anything else in the selection.
+  again without touching the bold, links or anything else in the selection. Each of the
+  two carries a bar of the colour it would apply, under its icon, so which is which and
+  what either is set to can be seen without opening them.
+- **Code and formulas:** two more toggles in the same toolbar. **Code** sets the selection
+  in the monospace face with a tinted box, for a key, a command, a field name -- the thing
+  someone would type. **Formula** sets it in a serif italic, for a quantity someone would
+  read: `Heavy Cost = Light Cost x Heavy Multiplier`. They are deliberately not the same
+  treatment, because the two look alike from a distance and mean different things, and a
+  damage equation is not a string to be pasted into a console. Both light up when the
+  caret is inside one, and pressing again takes it off.
 - **Markdown in:** **Markdown** in a page's header takes a `.md` file — dropped, chosen or
   pasted — and turns it into blocks, either replacing the page or adding to the end. **New
   page** can start from one too, taking its title from the first `#` heading. Headings,
