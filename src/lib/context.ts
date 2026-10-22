@@ -1,5 +1,5 @@
 import type { Project, Site, Tags } from './types';
-import { orderProjects, projects, site, tags } from './content';
+import { caseStudyHref, orderProjects, projects, site, tags } from './content';
 
 /** Unsaved editor content, posted to /admin/preview so it renders through the real components. */
 export interface PreviewData {
@@ -36,6 +36,16 @@ export function useContent(locals: App.Locals) {
     tagLabel: (id: string) => [...t.discipline, ...t.engine].find((x) => x.id === id)?.label ?? id,
     /** Whether a tag is one of the marked ones. */
     tagAccent: (id: string) => Boolean([...t.discipline, ...t.engine].find((x) => x.id === id)?.accent),
+    /**
+     * Where a project's case study is. The built site reads it off the pages themselves,
+     * so a page named differently from its project is still found.
+     *
+     * The preview is sent the projects but not the pages, so there is nothing there to
+     * read it from and it falls back to the old convention. That is the right trade:
+     * inside the preview these links are not followed anyway, and the alternative is
+     * shipping every page's path to the browser to decide the href of a card.
+     */
+    caseStudy: (slug: string) => (preview ? `/work/${slug}` : (caseStudyHref(slug) ?? `/work/${slug}`)),
     /**
      * Files uploaded in the editor exist on the draft branch but not in the running
      * build yet, so the preview fetches them through the API instead.

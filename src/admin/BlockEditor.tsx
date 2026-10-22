@@ -51,12 +51,17 @@ const linkOptions = () => {
   const pages = pagePaths.value.map((path) => ({
     label: (files.value[path] as { title?: string }).title || fileToRoute(path),
     href: fileToRoute(path),
+    project: (files.value[path] as { project?: string }).project,
   }));
   const known = new Set(pages.map((p) => p.href));
+  const linked = new Set(pages.map((p) => p.project).filter(Boolean));
+  // A project is offered as a case study to be written only when it has no page at all.
+  // A project whose page is named something else is already in the list above under its
+  // own title, and offering /work/<slug> besides would be offering an address that 404s.
   const missing = projects.value
     .map((p) => ({ label: `${p.title} (case study)`, href: `/work/${p.slug}` }))
-    .filter((p) => !known.has(p.href));
-  return [...pages, ...missing];
+    .filter((p) => !known.has(p.href) && !linked.has(p.href.replace('/work/', '')));
+  return [...pages.map(({ label, href }) => ({ label, href })), ...missing];
 };
 
 /**

@@ -66,6 +66,30 @@ const pageVisibility = (page: Page) => (page.project ? (visibilityOf.get(page.pr
 export const pages: Page[] = allPages.filter((page) => pageVisibility(page) === 'public');
 
 /**
+ * Where a project's case study is, by project slug.
+ *
+ * A link used to be built as /work/<slug> wherever one was wanted, which is a guess
+ * dressed as an address: it is right only while the page file happens to be named after
+ * the project. Two pages were not -- a page kept its old filename after the project was
+ * renamed -- and their cards pointed at 404s on the live site while the pages themselves
+ * answered perfectly well at the addresses they actually had.
+ *
+ * The page says which project it belongs to, so that is what is read first. The old
+ * convention stays as a fallback for the pages that never set it, and a project with no
+ * page at all gets nothing rather than a link into a 404.
+ */
+const studyPaths = new Map<string, string>();
+for (const page of allPages) if (page.project) studyPaths.set(page.project, page.path);
+for (const project of allProjects) {
+  if (studyPaths.has(project.slug)) continue;
+  const byName = allPages.find((page) => page.path === `/work/${project.slug}`);
+  if (byName) studyPaths.set(project.slug, byName.path);
+}
+
+/** The address of a project's case study, or nothing if it has none. */
+export const caseStudyHref = (slug: string) => studyPaths.get(slug);
+
+/**
  * Case studies for private projects, by project slug. These are built as one dynamic
  * route rather than prerendered: a prerendered page is a file on the asset server, and
  * a file cannot ask for a password.

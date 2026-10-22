@@ -21,7 +21,7 @@ interface Props {
 const { page, project, linkOut = true } = Astro.props;
 // Through the context rather than the built content, so the editor's preview shows the
 // tail as the draft has it: a cover uploaded but not yet published, a tag just renamed.
-const { projects, tags, tagLabel, tagAccent, asset } = useContent(Astro.locals);
+const { projects, tags, tagLabel, tagAccent, asset, caseStudy } = useContent(Astro.locals);
 
 /** The one after this, in a given list, wrapping so there is always somewhere to go. */
 const after = (list: Project[]) => {
@@ -79,7 +79,7 @@ const toc = page.toc === false ? [] : tocItems(page.blocks, anchors);
 
 {
   next && (
-    <a class="next-project" href={`/work/${next.slug}`}>
+    <a class="next-project" href={caseStudy(next.slug)}>
       {next.cover && (
         <img
           src={asset(next.cover)}
