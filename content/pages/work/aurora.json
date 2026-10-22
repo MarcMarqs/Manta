@@ -26,18 +26,18 @@
           "caption": "",
           "columns": [
             "Role",
-            "Team Size",
+            "Studio",
+            "Team",
             "Engine",
-            "Platform",
-            "My Focus"
+            "Platform"
           ],
           "rows": [
             [
-              "Game Designer",
+              "Co-founder & Game Designer",
+              "Luski Game Studio",
               "6",
-              "Unity Engine",
-              "PC (Steam)",
-              "Gameplayㅤ|ㅤLevel / Puzzle Designㅤ|ㅤPlaytest"
+              "Unity",
+              "PC (Steam)"
             ]
           ]
         },
@@ -49,6 +49,11 @@
           "title": "",
           "align": "center",
           "scale": 70
+        },
+        {
+          "id": "b-h6scsm",
+          "type": "spacer",
+          "size": "sm"
         },
         {
           "id": "b-ogf5wv",
@@ -72,7 +77,7 @@
         {
           "id": "b-x2rk81",
           "type": "spacer",
-          "size": "md"
+          "size": "sm"
         }
       ]
     },
@@ -88,27 +93,27 @@
           "text": "My Role"
         },
         {
-          "id": "b-pdao11",
-          "type": "table",
-          "caption": "",
-          "columns": [
-            "",
-            ""
+          "id": "b-3hx26p",
+          "type": "specs",
+          "items": [
+            {
+              "label": "Owned",
+              "value": "· Act II gameplay and puzzle design, end to end\n· Puzzle pacing and difficulty curve\n· Playtest plans, sessions and findings"
+            },
+            {
+              "label": "Co-Owned",
+              "value": "· The 3C (camera, character, control)\n· Core mechanics across the game"
+            },
+            {
+              "label": "Led",
+              "value": "· Studio direction and scope decisions as co-founder\n· The playtest programme\n· Feature priorities with the other founders"
+            },
+            {
+              "label": "Supported",
+              "value": "· Blockouts and level flow with level design\n· Implementation with programming\n· Narrative and art direction with the team"
+            }
           ],
-          "rows": [
-            [
-              "Owned",
-              "• Act II gameplay and puzzle design, end to end\n• Puzzle pacing and difficulty curve\n• Playtest plans, sessions and findings"
-            ],
-            [
-              "Co-Owned",
-              "• The 3C (camera, character, control)\n• Core mechanics across the game"
-            ],
-            [
-              "Supported",
-              "• Blockouts and level flow with level design\n• Implementation with programming\n• Narrative and art direction with the team"
-            ]
-          ]
+          "arrange": "stack"
         },
         {
           "id": "b-4vpomo",
@@ -118,12 +123,12 @@
         {
           "id": "b-dasou1",
           "type": "text",
-          "html": "<p><div><b><span class=\"big\">In Short</span></b></div><ul><li><b>What I Owned:</b> The entire second act's gameplay and puzzles, the camera and control feel, and the playtest process.</li><li><b>Hardest Problem:</b> A puzzle players couldn't see. Reframing the camera, sightlines and lighting raised the solve rate to about 90% from previous 70%.</li><li><b>What it Shows:</b> Designing for players who have never held a controller, teaching without text, and turning playtest observations into specific changes.</li></ul></p>"
+          "html": "<p></p><div><b><span class=\"big\">In Short</span></b></div><ul><li><b>What I Owned:</b>&nbsp;Act II gameplay and puzzles end to end, Act II camera and controls, and the playtest process. I also co-defined the 3C for the whole game.</li><li><b>Hardest Problem:</b>&nbsp;A puzzle players couldn't see. Reframing the camera, sightlines and lighting raised its solve rate from ~70% to ~90%.</li><li><b>What it Shows:</b>&nbsp;Designing for players who have never held a controller, teaching without text, and turning playtest observations into specific changes.</li></ul><p></p>"
         },
         {
           "id": "b-p80uum",
           "type": "spacer",
-          "size": "md"
+          "size": "sm"
         }
       ]
     },
@@ -141,7 +146,7 @@
         {
           "id": "b-xf8gz5",
           "type": "text",
-          "html": "<p>Good design pages show the limits the work was done within, because that's where the real decisions happen.</p><p><ul><li><b>A team of 6 with no dedicated QA</b>, so playtesting had to be planned and run by the designers.</li><li><b>About nine months</b> from start to release.</li><li><b>An All-Ages Audience:</b> many players had little experience with 3D movement or camera control.</li><li><b>No text tutorials</b>, by choice: the story is told without words, so tutorial text would break it.</li></ul></p>"
+          "html": "<p><ul><li><b>A team of 6 with no dedicated QA,</b> so the designers planned and ran playtesting themselves.</li><li><b>About nine months</b> from start to release.</li><li><b>An all-ages audience:</b> many players had little experience with 3D movement or camera control.</li><li><b>No text tutorials, by choice:</b> the story is told without words, so tutorial text would break it.</li></ul></p><p></p>"
         },
         {
           "id": "b-nhp2z5",
@@ -155,38 +160,39 @@
           "text": "Design Goals (for Act II)"
         },
         {
-          "id": "b-8ru625",
-          "type": "text",
-          "html": "<p>The goals that guided my decisions.</p>"
-        },
-        {
           "id": "b-pn3nei",
           "type": "table",
           "caption": "",
           "columns": [
             "Goal",
-            "How We Checked It"
+            "How We Checked It",
+            "Result"
           ],
           "rows": [
             [
               "Every puzzle solvable without outside help",
-              "Solve rate in playtests, aim of 80–90%"
+              "Solve rate in playtests, aim of 80–90%",
+              "All Act II puzzles at 85%+ by the final round"
             ],
             [
               "No player stuck for long",
-              "Time to solve each puzzle"
+              "Time to solve each puzzle",
+              "Median under 3 min per puzzle"
             ],
             [
-              "Each new mechanic learned without text",
-              "Watching whether testers used it correctly on first try"
+              "Each mechanic learned without text",
+              "Watching whether testers used it correctly on first try",
+              "Players got throughout most sections without getting stuck "
             ],
             [
               "The story keeps its momentum",
-              "Testers able to describe what was happening and why"
+              "Testers able to describe what was happening and why",
+              "The design was made so that important narrative elements wasn't shown in tense moments"
             ],
             [
               "Act length fits the overall pacing",
-              "Act II playtime smaller than Act I and III"
+              "Act II playtime smaller than Act I and III",
+              "Reduced 20% compared to other acts"
             ]
           ]
         },
@@ -204,12 +210,12 @@
         {
           "id": "b-ssy0e5",
           "type": "text",
-          "html": "<p><ol><li><b>Feel Before Challenge:</b> Movement and camera have to feel right before any puzzle can be fair.</li><li><b>Show, Don't Tell:</b> The game teaches through space, motion and discovery, not text.</li><li><b>Gentle Mastery:</b> Puzzles grow from intuition to insight, and failing never punishes the player.</li></ol></p>"
+          "html": "<p></p><ol><li><b>Feel Before Challenge: </b>movement and camera have to feel right before any puzzle can be fair.</li><li><b>Show, Don't Tell: </b>the game teaches through space, motion and discovery, not text.</li><li><b>Gentle Mastery: </b>puzzles grow from intuition to insight, and failing never punishes the player.</li></ol><p></p>"
         },
         {
           "id": "b-5xqdlw",
           "type": "spacer",
-          "size": "md"
+          "size": "sm"
         }
       ]
     },
@@ -274,29 +280,29 @@
             [
               "Interaction Range",
               "2.7m",
-              "players approached objects at an exact angle"
+              "Testers missed objects unless they approached at an exact angle"
             ],
             [
               "Jump Forgiveness (Coyote Time)",
               "0.47s",
-              "non-gamers testers jumped late off edges"
+              "Non-gamer testers jumped late off edges"
             ],
             [
               "Camera Follow Delay",
               "0.25s",
-              "smooth enough to avoid motion sickness"
+              "Smooth enough to avoid motion sickness"
             ],
             [
               "Camera Auto-Recentre",
               "After 2s in idle",
-              "players forgot to move the camera"
+              "Players forgot to move the camera"
             ]
           ]
         },
         {
           "id": "b-1e99ck",
           "type": "spacer",
-          "size": "md"
+          "size": "sm"
         }
       ]
     },
@@ -330,7 +336,7 @@
         {
           "id": "b-5c915l",
           "type": "text",
-          "html": "<p>Act II alternates puzzle spaces with quiet moments for the story, so challenge never runs long enough to tire young players, and emotional beats land when the player has room to feel them.</p>"
+          "html": "<p>Act II alternates puzzle spaces with quiet story moments, so challenge never runs long enough to tire young players, and emotional beats land when the player has room to feel them.</p>"
         },
         {
           "id": "b-1ind7g",
@@ -362,12 +368,12 @@
         {
           "id": "b-n722dn",
           "type": "text",
-          "html": "<p><b>What it Teaches:</b>&nbsp;Players learn to steer the boat and direct the flashlight, using sound cues to locate the monster and spotlights to guide their movement.</p><p><b>What the Player Sees First:</b>&nbsp;A quick cutscene indicating their challenge by framing at the monster and how to solve it using the flashlight.</p><p><b>The Intended Solution, Step by Step:<br></b>1. Learn to steer the boat and direct the flashlight.<br>2. Listen to where the monster spawned.<br>3. Move toward the spotlights while directing the flashlight at the monster.</p><p><b>How the Space Guides:</b> It uses spotlights to guide the direction the player should go.</p><p><b>What Happens on Failure:</b> The player return to the initial spawn point to try it again.</p>"
+          "html": "<p><b>What it Teaches:</b>&nbsp;Steering the boat while aiming the flashlight, using sound to locate the monster and spotlights to find the way.</p><p><b>What the Player Sees First:</b>&nbsp;A short cutscene frames the monster and shows the flashlight driving it back, so players know both the threat and the tool before they take control.</p><p><br></p><p><b>Intended Solution:</b><br><ol style=\"\"><li style=\"\">Steer the boat and aim the flashlight.</li><li style=\"\">Listen for where the monster appears.</li><li style=\"\">Keep the light on the monster while steering toward the next spotlight.</li></ol><div><br></div></p><p><b>How the Space Guides: </b>Spotlights mark the safe route, so the path is always visible without any text.</p><p><b>On Failure: </b>The player returns to the start of the section with no other penalty, in line with the Gentle Mastery pillar.</p>"
         },
         {
           "id": "b-xz9g8x",
           "type": "spacer",
-          "size": "md"
+          "size": "sm"
         }
       ]
     },
@@ -402,7 +408,7 @@
             ],
             [
               "Testers Per Round",
-              "8, ages 8 - 67, from friends, families, students, events"
+              "~8, ages 8–67, from friends, families, students and events"
             ],
             [
               "Format",
@@ -410,7 +416,7 @@
             ],
             [
               "What We Recorded",
-              "Solve rate and time per puzzle, where players got stuck, what they said out loud, a short survey after"
+              "Solve rate and time per puzzle, where players got stuck, what they said out loud, a short survey afterwards"
             ],
             [
               "What Happened Next",
@@ -421,7 +427,7 @@
         {
           "id": "b-1sgt9q",
           "type": "spacer",
-          "size": "md"
+          "size": "sm"
         }
       ]
     },
@@ -439,12 +445,12 @@
         {
           "id": "b-x3qskr",
           "type": "text",
-          "html": "<p><b>Problem:</b> In one Act II puzzle, testers kept missing a key interaction point. They got stuck, lost the story's momentum, and some left the session early.</p><p><b>Cause:</b> The camera and sightlines pulled attention away from the object players needed, and nothing in the space pointed to it.</p><p><br></p><p><b>Options Considered:</b></p><p><b>Add an On-Screen Prompt:</b> Rejected: <i>It breaks the no-text pillar and gives the answer away.</i></p><p><b>Make the Object Glow Constantly:</b> Rejected: <i>It removes the discovery and looks out of place in the art style.</i></p><p><b>Change How the Space Presents it:</b> Chosen: <i>Fix the problem where it started.</i></p><p><i><br></i></p><p><b>Fix:</b> I reframed the camera to bring the objective into view, adjusted sightlines in the blockout with level design, and added lighting cues that lead the eye without spelling out the answer.</p><p><b>Result:</b> About 90% of testers solved the puzzle, and the \"aha\" moment stayed intact.</p>"
+          "html": "<p><b>Problem:</b>&nbsp;In one Act II puzzle, testers kept missing a key interaction point. Only ~70% solved it; the rest got stuck, lost the story's momentum, and some left the session early.</p><p><b>Cause:</b>&nbsp;The camera and sightlines pulled attention away from the object players needed, and nothing in the space pointed to it.</p><p><br></p><p><b>Options Considered:</b></p><p><ul><li><b>Add an on-screen prompt. Rejected: </b>it breaks the no-text pillar and gives the answer away.</li><li><b>Make the object glow constantly. </b>Rejected: it removes the discovery and looks out of place in the art style.</li><li><b>Change how the space presents it. </b>Chosen: it fixes the problem where it started.</li></ul></p><p><i><br></i></p><p><b>Fix:</b>&nbsp;I reframed the camera to bring the objective into view, adjusted sightlines in the blockout with level design, and added lighting cues that lead the eye without spelling out the answer.</p><p><b>Result:</b>&nbsp;The solve rate rose from ~70% to ~90%, and the \"aha\" moment stayed intact.</p>"
         },
         {
           "id": "b-3ee3w5",
           "type": "spacer",
-          "size": "md"
+          "size": "sm"
         }
       ]
     },
@@ -462,7 +468,7 @@
         {
           "id": "b-hns1u3",
           "type": "text",
-          "html": "<p><ul><li><b>No Text Tutorials:</b> Teaching through space took far more design and testing time than a prompt would have, but it kept the story wordless and the pillars intact.</li><li><b>Forgiving Controls Over Precision:</b> Generous tolerances meant puzzles could never rely on precise platforming; challenge had to come from understanding, not dexterity.</li></ul></p>"
+          "html": "<p></p><ul><li><b>No Text Tutorials:</b>&nbsp;Teaching through space took far more design and testing time than a prompt would have, but it kept the story wordless and the pillars intact.</li><li><b>Forgiving Controls Over Precision:</b>&nbsp;Generous tolerances meant puzzles could never rely on precise platforming; challenge had to come from understanding, not dexterity.</li></ul><p></p>"
         },
         {
           "id": "b-wk8dhb",
@@ -485,7 +491,7 @@
         {
           "id": "b-zozsc5",
           "type": "text",
-          "html": "<p></p><div><ul><li>Released on Steam in November 2020.</li><li>Games for Change Latin America 2020 – Winner, Best Game for Social Impact.</li><li>BIG Festival 2021 – Finalist, Impact category.</li><li><b>Steam Reviews:</b> 93% Positive.</li></ul></div><p></p>"
+          "html": "<p></p><div><ul><li>Released on Steam, November 2020 - 93% positive reviews</li><li>Winner, Best Game for Social Impact, Games for Change Latin America 2020</li><li>Finalist, Impact category, BIG Festival 2021</li><li>Act II puzzles reached 80% solve rates without outside help by the final playtest round</li></ul></div><p></p>"
         },
         {
           "id": "b-y0wrqy",
@@ -510,7 +516,7 @@
         {
           "id": "b-6h4l7g",
           "type": "spacer",
-          "size": "md"
+          "size": "sm"
         }
       ]
     },
@@ -528,7 +534,7 @@
         {
           "id": "b-edo4ir",
           "type": "text",
-          "html": "<p></p><div><div><b><span class=\"big\">What Worked</span></b></div><div><ul><li>Teaching through space instead of text kept the story intact and worked for players of all ages.</li><li>Testing with first-time players early found problems the team could no longer see.</li></ul><div><br></div></div></div><div><b><span class=\"big\">What I'd do Differently</span></b></div><div><ul><li>Set measurable targets, such as solve rate and time per puzzle, before the first playtest rather than during.</li><li>Test the camera with first-time players earlier, since many later fixes were camera fixes.</li></ul><div><br></div></div><div><span class=\"big\"><b>What I Learned</b></span></div><div><ul><li>For young or new players, the camera does most of the teaching.</li><li>What seems obvious to a designer often isn't; test early with people who have never seen the game.</li></ul></div><p></p>"
+          "html": "<p></p><div><div><b><span class=\"big\">What Worked</span></b></div><div><ul><li>Teaching through space instead of text kept the story intact and worked for players of all ages.</li><li>Testing early with first-time players found problems the team could no longer see.</li></ul><div><br></div></div></div><div><b><span class=\"big\">What I'd do Differently</span></b></div><div><ul><li>Set measurable targets, such as solve rate and time per puzzle, before the first playtest rather than during.</li><li>Test the camera with first-time players earlier, since many later fixes were camera fixes.</li></ul><div><br></div></div><div><span class=\"big\"><b>What I Learned</b></span></div><div><ul><li>For young or new players, the camera does most of the teaching.</li><li>What seems obvious to a designer often isn't; test early with people who have never seen the game.</li></ul></div><p></p>"
         }
       ]
     }
