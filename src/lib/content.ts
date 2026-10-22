@@ -90,6 +90,33 @@ for (const project of allProjects) {
 export const caseStudyHref = (slug: string) => studyPaths.get(slug);
 
 /**
+ * The second address a case study answers on: /work/<project slug>.
+ *
+ * Linking a page to its project fixed the links, but not the address. /work/plushland-curse
+ * is the obvious thing to type for a project called plushland-curse, and it was still
+ * nothing -- the page is plushland.json, and a page is reached by its filename. Typing a
+ * project's own name into the bar and getting "Page not found" is a broken site however
+ * correct the cards are.
+ *
+ * So the page answers there too, as the same page rather than a copy: the canonical in
+ * Base.astro keeps pointing at the page's own path, so search engines are told which of
+ * the two is the address and the other is a way in.
+ *
+ * Only for a project whose page is somewhere else. Where the filename already matches,
+ * the page is that address, and asking for it twice would be a route collision.
+ */
+export const caseStudyAliases: { alias: string; page: Page }[] = allProjects.flatMap((project) => {
+  const path = studyPaths.get(project.slug);
+  const alias = `/work/${project.slug}`;
+  if (!path || path === alias) return [];
+  const page = pages.find((p) => p.path === path);
+  // A private case study is not served from here at all, and a page already living at
+  // the alias would be asked for twice.
+  if (!page || pages.some((p) => p.path === alias)) return [];
+  return [{ alias, page }];
+});
+
+/**
  * Case studies for private projects, by project slug. These are built as one dynamic
  * route rather than prerendered: a prerendered page is a file on the asset server, and
  * a file cannot ask for a password.

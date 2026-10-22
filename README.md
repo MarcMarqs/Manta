@@ -390,6 +390,23 @@ serves names no other tab. It needs a tab chosen first -- there is no "only" wit
 which -- and the published grid is already single, so the switch appears for the file
 view alone.
 
+## Where a case study lives
+
+A project and its case study are joined by a `project` field in the page file, not by the
+page being named after the project. The editor sets it when you create a case study from a
+project, and **Projects -> the project -> point at a page you already have** sets it for a
+page that already exists. Every link to a case study -- the cards, the rail, the next-case-
+study card at the foot of one -- reads that field, so a page named anything at all is still
+found.
+
+A case study also answers on `/work/<project slug>`, whatever its file is called, because
+that is the obvious thing to type and to paste into a message. The page's own path stays
+the canonical one, so the two addresses are one page rather than two copies.
+
+Worth knowing: an editor tab left open from before a deploy still holds the content it
+loaded. Saving from it writes that older copy back, which can quietly undo a field someone
+else changed in between -- reload the editor after a deploy before saving old work.
+
 What it does not do is change the file. Anyone who has the spreadsheet's own address
 still opens all of it, because that is the sharing you set in Google and not something a
 page can take back. If the other tabs must stay unseen by anyone who comes looking, keep

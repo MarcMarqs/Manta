@@ -1,16 +1,25 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageView from '../components/PageView.astro';
-import { pages, projects, site } from '../lib/content';
+import { caseStudyAliases, pages, projects, site } from '../lib/content';
 
 // One route for the whole site: every public page in content/pages/ becomes a page.
 // home.json is the root, work/dunes.json is /work/dunes, and so on. Private and
 // drafted case studies are not here; see content.ts.
+//
+// A case study whose file is not named after its project answers on the project's
+// address as well, so /work/<project> is never a dead end for someone who typed it.
 export function getStaticPaths() {
-  return pages.map((page) => ({
-    params: { slug: page.path === '/' ? undefined : page.path.slice(1) },
-    props: { page },
-  }));
+  return [
+    ...pages.map((page) => ({
+      params: { slug: page.path === '/' ? undefined : page.path.slice(1) },
+      props: { page },
+    })),
+    ...caseStudyAliases.map(({ alias, page }) => ({
+      params: { slug: alias.slice(1) },
+      props: { page },
+    })),
+  ];
 }
 
 const { page } = Astro.props;
