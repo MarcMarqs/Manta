@@ -2,14 +2,14 @@
   {
     "slug": "wardens-rising",
     "title": "Wardens Rising",
-    "genre": "ARPG / Tower Defense | Game Designer",
+    "genre": "ARPG / Tower Defense ",
     "year": null,
     "role": "Game Designer",
     "summary": "Owned difficulty, economy and boss design on a 60+ person co-op title, tuning wave combat for five distinct heroes through telemetry.",
     "highlights": [
       "Built 40+ waves and 40+ progression pieces, all tuned in engine",
       "Designed 4 multi-phase bosses with behaviour trees in Unreal",
-      "Cut an endgame failure rate from ~80% to ~40% with a targeting cap, counter-traps and audio warnings",
+      "Cut an endgame failure rate from ~80% to ~40% with a targeting cap, counter-traps and audio",
       "Ran a spreadsheet-to-Data Asset pipeline so balance changes needed no code"
     ],
     "discipline": [
