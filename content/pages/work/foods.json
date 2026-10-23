@@ -26,20 +26,18 @@
           "caption": "",
           "columns": [
             "Role",
-            "Team Size",
-            "Engine",
+            "Studio",
+            "Team",
             "Platform",
-            "Players",
-            "My Focus"
+            "Players"
           ],
           "rows": [
             [
-              "Game Designer",
+              "System Designer",
+              "Luski Game Studio",
               "10",
-              "Unreal Engine 5",
               "PC",
-              "2 - 4 Co-Op",
-              "Systems Designㅤ|ㅤScoringㅤ|ㅤPuzzlesㅤ|ㅤPlaytesting"
+              "2 - 4 Co-Op"
             ]
           ]
         },
@@ -71,27 +69,23 @@
           "text": "My Role"
         },
         {
-          "id": "b-o7j7kv",
-          "type": "table",
-          "caption": "",
-          "columns": [
-            "",
-            ""
+          "id": "b-5ykvp8",
+          "type": "specs",
+          "items": [
+            {
+              "label": "Owned",
+              "value": "· The scoring formula\n· Star tiers and phase-pass rules\n· Golden Fork reward\n· World 1 score simulation\n· Balance documentation"
+            },
+            {
+              "label": "Studio",
+              "value": "· Recipe and phase design with level design"
+            },
+            {
+              "label": "Engine",
+              "value": "· UI creation on the results screen\n· Engineering on score implementation"
+            }
           ],
-          "rows": [
-            [
-              "Owned",
-              "• Paper and Miro Prototypes\n• Recipe System\n• Score System\n• Difficulty Progression for Recipe and Icon Puzzles\n• UX Process and Usability Tests"
-            ],
-            [
-              "Co-Owned",
-              "• Puzzle Sesign (with Game and Level Design)\n• Player Mechanics and Interactions"
-            ],
-            [
-              "Supported",
-              "• Readability with Art and UI\n• 3C with Design"
-            ]
-          ]
+          "arrange": "stack"
         },
         {
           "id": "b-56wewj",
@@ -101,7 +95,7 @@
         {
           "id": "b-n79bax",
           "type": "text",
-          "html": "<p></p><div><b><span class=\"big\">In Short</span></b></div><div><ul><li><b>What I Owned: </b>Paper prototypes, the randomized recipe system, the score system, puzzle difficulty progression, and UX and usability tests.</li><li><b>Hardest Problems: </b>First, players couldn't read the score; then, they found a speedrun exploit that stopped them talking. Each needed a different kind of fix.</li><li><b>What it Shows: </b>Systems validated on paper before engine work, and fixing incentives instead of just blocking exploits.</li></ul></div><p></p>"
+          "html": "<p></p><div><b><span class=\"big\">In Short</span></b></div><div><ul><li><b>What I Owned: </b>The system that turns a delivered dish into a score, a star rating and a pass or fail for the next phase.</li><li><b>Hardest Problems: </b>The model showed that speed barely affected the score and the top reward was out of reach: every perfect order scored ★★★, and no player could ever earn the Golden Fork.</li><li><b>What it Shows: </b>Designing a scoring system from first principles and using simulation to check that the stars actually separate good play from great play.</li></ul></div><p></p>"
         },
         {
           "id": "b-a3nrzk",
@@ -124,7 +118,7 @@
         {
           "id": "b-ixknk3",
           "type": "text",
-          "html": "<p>• <b>Communication Games Overwhelm Easily:</b> Too much information and players shout over each other; too little and the game is trivial.</p><p>• <b>Random recipes</b> had to stay fair and comparable between runs.</p><p>• <b>2, 3 or 4 players</b> had to get a balanced challenge from the same levels.</p><p>• <b>A small team</b>, so engine time was precious and systems had to be right before building.</p><p></p>"
+          "html": "<p><ul><li><b>One score has to judge accuracy and speed,</b> across recipes of very different size and length.</li><li><b>Stars gate progression, </b>so a tier threshold is also a difficulty setting.</li><li><b>Every recipe needs the same star rules, </b>without hand-tuning each phase.</li></ul></p><p></p>"
         },
         {
           "id": "b-cxakp2",
@@ -145,12 +139,61 @@
           "text": "Design Pillars"
         },
         {
-          "id": "b-hchzvu",
-          "type": "text",
-          "html": "<p>1. <b>Talking is the Mechanic</b>. Every system should make players need each other.</p><p>2. <b>Hard to Say, not Hard to do</b>. Challenge comes from describing, remembering and coordinating, not from dexterity.</p><p>3. <b>The Score Teaches</b>. Players should see how their play turns into points.</p>"
+          "id": "b-x54o8g",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "Goal",
+            "How I Checked It"
+          ],
+          "rows": [
+            [
+              "Accuracy matters most",
+              "Share of the score that comes from correct ingredients"
+            ],
+            [
+              "Speed is rewarded, not required",
+              "Score difference between a fast and a late perfect order"
+            ],
+            [
+              "Stars mean the same thing on every recipe",
+              "Thresholds set as a % of each phase's maximum"
+            ],
+            [
+              "A wrong main ingredient can't pass",
+              "Score of an order with the primary missing"
+            ],
+            [
+              "The top reward is hard but reachable",
+              "Score needed for the Golden Fork vs the best realistic delivery"
+            ]
+          ]
         },
         {
           "id": "b-a7bp67",
+          "type": "spacer",
+          "size": "sm"
+        }
+      ]
+    },
+    {
+      "id": "b-dpjg1a",
+      "type": "section",
+      "background": "none",
+      "blocks": [
+        {
+          "id": "b-1cvl7c",
+          "type": "heading",
+          "level": 2,
+          "text": "Design Pillars"
+        },
+        {
+          "id": "b-792qho",
+          "type": "text",
+          "html": "<p></p><ol><li><b>Right Before Fast:</b> A correct dish always beats a fast, wrong one.</li><li><b>Fair Across Recipes:</b> A two-ingredient snack and a five-course dish are judged on the same scale.</li><li><b>Mastery Has a Trophy:</b> The best players get a reward the rest can see and chase.</li></ol><p></p>"
+        },
+        {
+          "id": "b-wbkotk",
           "type": "spacer",
           "size": "sm"
         }
@@ -244,40 +287,68 @@
           "id": "b-wammft",
           "type": "heading",
           "level": 2,
-          "text": "1. Recipes and Scoring"
+          "text": "1. Scoring a Dish"
         },
         {
           "id": "b-vmavny",
           "type": "text",
-          "html": "<p>Recipes are randomized, so the game can't be memorized. To keep scoring fair, every recipe step has a label (type of cut, hot or cold, and so on), each label is worth a fixed number of points, and the total is multiplied by the time left. The system scales for 2, 3 or 4 players.</p>"
+          "html": "<p>Each ingredient is scored on what the player got right, then scaled by how much it matters to the recipe.</p><p><code style=\"color: rgb(250, 110, 110); font-weight: bold;\">Type Value = (Ingredient + Shape + State) × Weight × Quantity</code></p>"
         },
         {
-          "id": "b-xynk18",
-          "type": "formula",
-          "title": "",
-          "terms": [
-            {
-              "label": "Label Points",
-              "note": "Fixed per step: cut, hot or cold"
-            },
-            {
-              "label": "Time Left",
-              "note": "Multiplier from time remaining",
-              "op": "×"
-            },
-            {
-              "label": "Bonuses",
-              "note": "Secondary goals as multipliers",
-              "op": "×"
-            },
-            {
-              "label": "Dish Score",
-              "op": "=",
-              "note": "Added up per level, scaled for 2 to 4",
-              "accent": true
-            }
+          "id": "b-y5pdrr",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "Axis",
+            "What it Checks",
+            "Primary (Main)",
+            "Secondary (Topping)"
           ],
-          "note": "Very fast deliveries are quietly damped"
+          "rows": [
+            [
+              "Ingredient",
+              "The right ingredient",
+              "2,000",
+              "750"
+            ],
+            [
+              "Shape",
+              "The right cut or format",
+              "0",
+              "250"
+            ],
+            [
+              "State",
+              "The right state, e.g. cooked",
+              "0 - 40",
+              "0 - 40"
+            ],
+            [
+              "Weight",
+              "How much this ingredient matters",
+              "x1 - 10",
+              "x1 - 10"
+            ],
+            [
+              "Quantity",
+              "How many the recipe needs",
+              "1 - 5",
+              "1 - 5"
+            ]
+          ]
+        },
+        {
+          "id": "b-oqrxj0",
+          "type": "text",
+          "html": "<p>The <span style=\"font-weight: bold;\">Phase Base</span> is the primary and secondary values added together. Players then earn an <span style=\"font-weight: bold;\">Order Bonus</span> for a 100% correct dish and a <span style=\"font-weight: bold;\">Time Bonus</span> for the time left on the clock.</p><p><span style=\"color: rgb(250, 110, 110); font-weight: bold;\"><code>Final Score = Phase Base + Order Bonus + Time Bonus</code></span></p><p>Because the main ingredient is worth half the dish, an order with the wrong primary can never reach a passing grade.</p>"
+        },
+        {
+          "id": "b-3vm3av",
+          "type": "sheet",
+          "source": "file",
+          "sheetId": "1emay3wnJ4YmshKu7J8i51iLl7vpS0AlV_xu8J50NPkg",
+          "height": "medium",
+          "gid": "1444584704"
         },
         {
           "id": "b-9bx2p7",
@@ -295,12 +366,57 @@
           "id": "b-zid1dg",
           "type": "heading",
           "level": 2,
-          "text": "Iteration Case: Scoring Nobody Understood"
+          "text": "2. Star Tiers"
         },
         {
           "id": "b-kt712z",
           "type": "text",
-          "html": "<p><ul><li><b>Problem:</b> Early playtesters couldn't connect what they did with the score they got.</li><li><b>Cause:</b> The score was calculated correctly but shown only as a final number, with no sign of what earned it.</li><li><b>Fix:</b> I rebalanced the score weights in a feedback spreadsheet, turned secondary objectives into visible bonus multipliers, and tied performance directly to time left.</li><li><b>Result:</b> Teams immediately saw how leftover time turned into bonus points for each dish.</li></ul></p>"
+          "html": "<p>Stars are set as a share of each phase's maximum score, so the same rules work for every recipe whatever its size.</p>"
+        },
+        {
+          "id": "b-gubg6t",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "Tier",
+            "Threshold",
+            "Passes the Phase?",
+            "Meaning4"
+          ],
+          "rows": [
+            [
+              "★",
+              "40% of max",
+              "No",
+              "A dish was served, but not well enough to advance"
+            ],
+            [
+              "★★",
+              "65%",
+              "Yes",
+              "Solid: guarantees the next phase"
+            ],
+            [
+              "★★★",
+              "85%",
+              "Yes",
+              "High accuracy"
+            ],
+            [
+              "🏆 Golden Fork",
+              "100%",
+              "Yes",
+              "Perfect order at top speed. Grants a cosmetic reward"
+            ]
+          ]
+        },
+        {
+          "id": "b-1blt2b",
+          "type": "sheet",
+          "source": "file",
+          "sheetId": "1emay3wnJ4YmshKu7J8i51iLl7vpS0AlV_xu8J50NPkg",
+          "height": "medium",
+          "gid": "1824047694"
         },
         {
           "id": "b-mhhe1w",
@@ -318,12 +434,67 @@
           "id": "b-9tyj2g",
           "type": "heading",
           "level": 2,
-          "text": "Iteration Case: Speedrun Exploit"
+          "text": "3. Simulating World 1"
         },
         {
           "id": "b-w8zjsy",
           "type": "text",
-          "html": "<p></p><ul><li><b>Problem: </b>Players found that delivering very fast made the multiplier shoot up, so they rushed and stopped communicating, which is the opposite of the game's goal.</li><li><b>Cause: </b>The time multiplier rewarded speed with no upper limit, so rushing beat talking.</li><li><b>Options: </b>Blocking fast deliveries outright would feel like a punishment and tell players they'd found a hole. Changing the incentive was better.</li><li><b>Fix: </b>A hidden damping on very fast deliveries that players don't notice, plus a new mechanic where players fix problems around the ship during a level.</li><li><b>Result: </b>Speedrunning stopped paying off, and the repair tasks gave players new reasons to talk.</li></ul><p></p>"
+          "html": "<p>I ran all five World 1 phases through the model with realistic delivery times, to check how the tiers behave before any playtest.</p>"
+        },
+        {
+          "id": "b-iqz9bc",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "Phase",
+            "Phase Base",
+            "Phase Time",
+            "Delivered At",
+            "Score vs. Max",
+            "Tier"
+          ],
+          "rows": [
+            [
+              "1 - 1",
+              "4,000",
+              "120 s",
+              "80 s",
+              "99.95%",
+              "★★★"
+            ],
+            [
+              "1 - 2",
+              "1,950",
+              "90 s",
+              "55 s",
+              "99.94%",
+              "★★★"
+            ],
+            [
+              "1 - 3",
+              "4,480",
+              "270 s",
+              "210 s",
+              "99.89%",
+              "★★★"
+            ],
+            [
+              "1 - 4",
+              "5,140",
+              "150 s",
+              "110 s",
+              "99.95%",
+              "★★★"
+            ],
+            [
+              "1 - 5",
+              "2,700",
+              "340 s",
+              "250 s",
+              "99.79%",
+              "★★★"
+            ]
+          ]
         },
         {
           "id": "b-i0flqi",
@@ -341,62 +512,66 @@
           "id": "b-1sey8w",
           "type": "heading",
           "level": 2,
-          "text": "2. Puzzles & Communication"
+          "text": "Iteration Case"
         },
         {
           "id": "b-ue1scz",
           "type": "text",
-          "html": "<p>Instead of mechanical locks, each puzzle is built around one of three human limits. Each limit becomes a reason to talk, which is the point of the game.</p>"
+          "html": "<p><span style=\"font-weight: bold;\">Problem:</span> In the World 1 simulation, every perfect order landed at about 99.9% of the maximum, so ★★★ and nothing more. No delivery time could reach the Golden Fork.</p><p><span style=\"font-weight: bold;\">Cause:</span> Two parts of the formula worked against each other.</p><p></p><ul><li><span style=\"font-weight: bold;\">The Time Bonus was too Small to Matter:</span> At 0.025 points per second left, the most time could ever add was 2–9 points on a 2,000–5,000 point dish. A fast, perfect order and a last-second one scored almost the same.</li><li><span style=\"font-weight: bold;\">The Golden Fork Assumed a Full Clock:</span> The maximum score counted every second of the phase as unused, so it required delivering at 0 seconds, which is impossible.</li></ul><div><br></div><div><span style=\"font-weight: bold;\">Options Considered:</span></div><div><ul><li><span style=\"font-weight: bold;\">Raise the Bonus Rate.</span> Rejected: even the top of its range (0.5) adds only about 4%, and the bonus would still scale with phase length instead of recipe size.</li><li><span style=\"font-weight: bold;\">Lower the Golden Fork to 99%.</span> Rejected: it would hide the problem; speed still wouldn't matter.</li><li><span style=\"font-weight: bold;\">Make the Time Bonus a share of the dish, and set the Golden Fork at a par time.</span> Chosen.</li></ul><div><br></div></div><div><span style=\"font-weight: bold;\">Fix:</span> The Time Bonus becomes a pool worth 25% of the Phase Base, paid out in proportion to the time left. The Golden Fork is the score of a perfect order delivered at par time, set at half the phase clock.</div><div><br></div><div><span style=\"color: rgb(250, 110, 110); font-weight: bold;\"><code>Time Bonus = 25% × Phase Base × (Time Left ÷ Phase Time) Golden Fork = Phase Base + Order Bonus + Time Bonus at par</code></span></div><div><span style=\"color: rgb(250, 110, 110); font-weight: bold;\"><code><br></code></span></div><div><span style=\"font-weight: bold;\"><span class=\"big\">Result (Simulated):</span></span></div><p></p>"
         },
         {
-          "id": "b-ap8pzq",
-          "type": "systemMap",
-          "arrange": "stacked",
-          "caption": "Each puzzle turns a human limit into a reason to talk",
-          "nodes": [
-            {
-              "id": "a",
-              "label": "Every puzzle idea checked against all three layers",
-              "accent": true
-            },
-            {
-              "id": "b",
-              "label": "Describing",
-              "layer": 1,
-              "note": "Similar symbols that need precise words"
-            },
-            {
-              "id": "c",
-              "label": "Remembering",
-              "layer": 1,
-              "note": "Information passed on before it resets"
-            },
-            {
-              "id": "n-n90vov",
-              "label": "Coordinating",
-              "layer": 1,
-              "note": "Separate actions timed together by talking"
-            }
+          "id": "b-zavabc",
+          "type": "table",
+          "caption": "",
+          "columns": [
+            "Phase",
+            "Golden Fork",
+            "Perfect, Realistic Time",
+            "Perfect, Last Second",
+            "Small Mistake (Loses Order Bonus), Realistic Time"
           ],
-          "links": [
-            {
-              "from": "a",
-              "to": "b"
-            },
-            {
-              "from": "a",
-              "to": "c"
-            },
-            {
-              "from": "a",
-              "to": "n-n90vov"
-            }
+          "rows": [
+            [
+              "1 - 1",
+              "4,800",
+              "96.5%",
+              "89.6%",
+              "90.3%"
+            ],
+            [
+              "1 - 2",
+              "2,494",
+              "97.8%",
+              "90.2%",
+              "85.8%"
+            ],
+            [
+              "1 - 3",
+              "5,340",
+              "94.2%",
+              "89.5%",
+              "88.6%"
+            ],
+            [
+              "1 - 4",
+              "6,082",
+              "95.1%",
+              "89.4%",
+              "90.1%"
+            ],
+            [
+              "1 - 5",
+              "3,338",
+              "95.2%",
+              "89.9%",
+              "86.3%"
+            ]
           ]
         },
         {
-          "id": "b-gp6lfj",
+          "id": "b-dd9oj4",
           "type": "text",
-          "html": "<p>• <b>Describing:</b> Dense, similar-looking symbols that partners have to describe precisely to each other.</p><p>• <b>Remembering:</b> Information passed between players in sequence under time pressure, before it resets.</p><p>• <b>Coordinating:</b> Separated interactions that players must time together by talking, while also moving around.</p><p>I co-designed the puzzles with game and level design, and designed the difficulty progression for the recipe and icon puzzles.</p>"
+          "html": "<p>Speed now matters: perfect orders range from about 89% to 98% depending on how fast they arrive, and the Golden Fork is earned by beating par time. Accuracy still comes first: a slow perfect order still clears ★★★, and an order missing its main ingredient still can't pass.</p>"
         },
         {
           "id": "b-3f34be",
@@ -414,7 +589,7 @@
           "id": "b-310vpd",
           "type": "heading",
           "level": 2,
-          "text": "3. Playtesting and UX"
+          "text": "4. Playtesting and UX"
         },
         {
           "id": "b-x2mlst",
@@ -469,10 +644,26 @@
         {
           "id": "b-hk5ab6",
           "type": "text",
-          "html": "<p>• <b>Hidden damping over a hard rule</b>. A visible speed cap would have told players they'd found a hole; quiet damping kept the game feeling fair.</p><p>• <b>Paper before engine</b>. Slower to see anything on screen, but the score and puzzles were already proven when engineering started.</p><p>• <b>Fixed label points over per-recipe scores</b>. Less hand-tuning per recipe, but every random recipe scores fairly.</p>"
+          "html": "<p><ul><li><span style=\"font-weight: bold;\">Stars as a % of max over fixed scores</span>. Every recipe uses the same thresholds, at the cost of players not comparing raw scores across phases.</li><li><span style=\"font-weight: bold;\">Primary worth half the dish</span>. It makes the main ingredient a hard gate, though a perfect side dish can't rescue a wrong main.</li><li><span style=\"font-weight: bold;\">A par time for the Golden Fork</span>. It gives top players a clear target, but par times need tuning per phase in playtests.</li></ul></p>"
         },
         {
           "id": "b-rd18vc",
+          "type": "spacer",
+          "size": "sm"
+        },
+        {
+          "id": "b-6edsqp",
+          "type": "heading",
+          "level": 2,
+          "text": "Results"
+        },
+        {
+          "id": "b-1mca4x",
+          "type": "text",
+          "html": "<p><ul><li>One scoring formula and one set of star rules covering every recipe in World 1.</li><li>A simulation that caught an unreachable top reward and a Time Bonus too small to matter, before playtests.</li></ul></p>"
+        },
+        {
+          "id": "b-vqf5se",
           "type": "spacer",
           "size": "sm"
         }
@@ -492,7 +683,15 @@
         {
           "id": "b-75vv9j",
           "type": "text",
-          "html": "<p><b>What Worked:</b> Validating the score on paper first, and fixing incentives rather than blocking exploits.</p><p><b>What I'd do Differently:</b>&nbsp;Show the score breakdown from the first prototype, since it caused the first big issue.</p><p><b>What I Learned:</b> A score system is also a teaching tool; if players can't read it, it can't shape how they play. When players find an exploit, ask what it says about the incentives.</p>"
+          "html": "<p><span style=\"font-weight: 700;\">What Worked: </span>Defining stars as a share of each phase's maximum, which made five very different recipes comparable.</p><p><span style=\"font-weight: 700;\">What I'd Do Differently: </span>Simulate the extremes (fastest, slowest and wrong orders) from the start, not only realistic deliveries. The time-bonus issue only shows when you compare them.</p><p><span style=\"font-weight: 700;\">What I Learned: </span>A bonus that's too small doesn't make a game easier; it makes a whole skill invisible.</p>"
+        },
+        {
+          "id": "b-5g4a3f",
+          "type": "sheet",
+          "source": "file",
+          "sheetId": "1emay3wnJ4YmshKu7J8i51iLl7vpS0AlV_xu8J50NPkg",
+          "height": "medium",
+          "gid": "1437126626"
         },
         {
           "id": "b-dy7g88",
